@@ -1962,7 +1962,7 @@ ui <- shinydashboard::dashboardPage(
         }
         
       } else {
-        bnet <- readRDS('MiDNE/DATA/networks/bipartite/DRUGBANK_bipartiteNet.RDS' )
+        bnet <- readRDS('MiDNE/DATA/networks/bipartite/FDA_active_DRUGBANK_bnet.RDS' )
       }
       
       return(bnet)
@@ -5487,7 +5487,9 @@ ui <- shinydashboard::dashboardPage(
            
             DT::datatable(bnetwork(),
                           extensions = 'Buttons',
-                          options = list(dom = "Blfrtip",
+                          options = list(
+                                         search = list(regex = TRUE, caseInsensitive = TRUE),
+                                         dom = "Blfrtip",
                                          buttons = list("copy",
                                                         list(extend = 'csv',   filename =  paste("MiDNE", input$select_data_orig, 'table',sep = "_")),
                                                         list(extend = 'excel', filename =  paste("MiDNE", input$select_data_orig, 'table',sep = "_"))
