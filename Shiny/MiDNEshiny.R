@@ -2669,7 +2669,7 @@ ui <- shinydashboard::dashboardPage(
                                         id_name = 'id', interactive = FALSE, wo_legend = FALSE) +
         ggplot2::ggtitle(paste(method, emb)) +
         ggplot2::xlab(paste0(input$dr_method, x_lab)) +  ggplot2::ylab( paste0(input$dr_method, y_lab)) +
-        ggplot2::theme(text = ggplot2::element_text(family="Times New Roman"),
+        ggplot2::theme(text = ggplot2::element_text(family="LMRoman10"),
                        plot.title = ggplot2::element_text(size = 16, hjust = 0.5, face = 'bold'),
                        axis.title.x = ggplot2::element_text(size = 10),
                        axis.title.y = ggplot2::element_text(size = 10))
@@ -2957,7 +2957,7 @@ ui <- shinydashboard::dashboardPage(
                                         interactive = FALSE, wo_legend = FALSE) +
         ggplot2::ggtitle(title()) +
         ggplot2::xlab(paste0(input$dr_method, '1')) +  ggplot2::ylab( paste0(input$dr_method, '2')) +
-        ggplot2::theme(text = ggplot2::element_text(family="Times New Roman"),
+        ggplot2::theme(text = ggplot2::element_text(family="LMRoman10"),
                        plot.title = ggplot2::element_text(size = 16, hjust = 0.5, face = 'bold'),
                        axis.title.x = ggplot2::element_text(size = 10),
                        axis.title.y = ggplot2::element_text(size = 10))
@@ -3587,7 +3587,10 @@ ui <- shinydashboard::dashboardPage(
           
           progress$inc(1, detail = paste("Network constructed!"))
           
-          if (is.list(net)){
+          print(net)
+          print(is.list(net))
+          
+          if (!is_tibble(net)){
             for (net_name in names(net)){
               print(net_name)
               print(net[[net_name]])
@@ -5189,13 +5192,15 @@ ui <- shinydashboard::dashboardPage(
                     )
                 }
                 
-                
-                
-                
-                
-                
                 dr_plot1 <- dr_plot1 %>%
                   plotly::layout(
+                    showlegend = TRUE,
+                    legend = list(
+                      orientation = 'h',
+                      y = -0.3,
+                      font = list(size = 10)
+                    ),
+                    margin = list(b = 100),
                     dragmode = "select",
                     font = list(family = "LMRoman10", color = "black"),
                     title = list(text = paste(method, emb), font = list(family = "LMRoman10", color = "black", size = 20)),
@@ -5210,14 +5215,14 @@ ui <- shinydashboard::dashboardPage(
                 
                 
                 s <- input$data_orig_table_rows_selected
-                #print(s)
+                print(paste('selected updated: ', s))
                 if (length(s)) {
                   dr_plot1 <- dr_plot1 %>%
                     plotly::add_trace(data = data_orig[s, , drop = FALSE],
                                       x = ~x, y = ~y, type = 'scatter',
                                       mode = "markers", color = 'red',
-                                      marker = list(size = 20)) %>%
-                    plotly::layout(showlegend = FALSE)
+                                      marker = list(size = 20)) #%>%
+                    #plotly::layout(showlegend = FALSE)
                 }
                 
                 dr_plot1 <- dr_plot1 %>%
