@@ -3587,8 +3587,6 @@ ui <- shinydashboard::dashboardPage(
           
           progress$inc(1, detail = paste("Network constructed!"))
           
-          print(net)
-          print(is.list(net))
           
           if (!is_tibble(net)){
             for (net_name in names(net)){
