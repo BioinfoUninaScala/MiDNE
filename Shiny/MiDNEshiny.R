@@ -158,7 +158,7 @@ ui <- shinydashboard::dashboardPage(
                                                                                     label = shiny::h4(shiny::span('Load the example dataset', style = "font-weight: bold")),
                                                                                     choices = c('Yes', 'No'), selected = 'No'),
                                                                 shiny::conditionalPanel(
-                                                                  condition = 'drug_example_opt == "No"',
+                                                                  condition = 'input.drug_example_opt == "No"',
                                                                   shiny::fileInput(inputId = "drug_files",
                                                                                    label = shiny::h4(shiny::span("Select one or more files", style = "font-weight: bold")),
                                                                                    multiple = TRUE),
@@ -1936,9 +1936,10 @@ ui <- shinydashboard::dashboardPage(
     #################### load BIPARTITE networks #####################
     
     bnetwork <- shiny::eventReactive(input$load_bnet_button, {
-      req(input$bnet_file)
+      
       
       if (input$bNet_example_opt == 'No'){
+        req(input$bnet_file)
         inFiles <- input$bnet_file
         if (is.null(inFiles)){
           return(NULL)
@@ -2113,6 +2114,31 @@ ui <- shinydashboard::dashboardPage(
                              text = paste(multiplex_type,' Multiplex Omics Network created. <br/> Now press <b> "Next" </b> in the top left-hand corner to continue'), html = TRUE)
       return(multiplex)
     })
+    multiplex_network <- shiny::eventReactive(input$gen_multiplex_btn, {
+      print('Generating the multiplex network...')
+      net_list <- if (!is.null(g_net_list())) g_net_list() else l_net_list()
+      
+      if(input$weightMultiplex == 'YES'){
+        multiplex <- MoNETA::create_multiplex(net_list, weighted = TRUE)
+        multiplex_type <- 'Weighted'
+        if(input$pruneMultiplex == 'YES'){
+          if (!is.numeric(input$pruneMultiplex_th)) {
+            shinyalert::shinyalert(title = 'Error', text = 'The threshold must be a real number.',closeOnClickOutside = TRUE,type = 'error')
+            return(NULL)
+          }
+          multiplex <- MoNETA::prune_multiplex_network(multiplex, input$pruneMultiplex_th)
+        }else{
+          multiplex <- multiplex
+        }
+      }else{
+        multiplex <- MoNETA::create_multiplex(net_list, weighted = FALSE)
+        multiplex_type <- 'Unweighted'
+      }
+      
+      shinyalert::shinyalert(title = 'Success', type = 'success',closeOnClickOutside = TRUE,
+                             text = paste(multiplex_type,' Multiplex Omics Network created. <br/> Now press <b> "Next" </b> in the top left-hand corner to continue'), html = TRUE)
+      return(multiplex)
+    })
     
     
     ##############################################################################
@@ -2132,10 +2158,22 @@ ui <- shinydashboard::dashboardPage(
       }
     })
     
+    # multiplex_drug_network <- shiny::reactive({
+    #   print('Generating the multiplex drug network...')
+    #   if (!is.null(g_dnet_list()) | !is.null(l_dnet_list())) {
+    #     net_list <- if (!is.null(g_dnet_list())) g_dnet_list() else l_dnet_list()
+    #     multiplex <- MoNETA::create_multiplex(net_list, weighted = FALSE)
+    #     multiplex_type <- 'Unweighted'
+    #   }
+    #   print('drug network as multiplex created')
+    #   return(multiplex)
+    # })
+    
+    
     multiplex_drug_network <- shiny::eventReactive(input$gen_multiplex_drug_btn, {
       print('Generating the multiplex drug network...')
       net_list <- if (!is.null(g_dnet_list())) g_dnet_list() else l_dnet_list()
-      
+
       if(input$drug_weightMultiplex == 'YES'){
         multiplex <- MoNETA::create_multiplex(net_list, weighted = TRUE)
         multiplex_type <- 'Weighted'
@@ -2152,7 +2190,7 @@ ui <- shinydashboard::dashboardPage(
         multiplex <- MoNETA::create_multiplex(net_list, weighted = FALSE)
         multiplex_type <- 'Unweighted'
       }
-      
+
       shinyalert::shinyalert(title = 'Success', type = 'success',closeOnClickOutside = TRUE,
                              text = paste(multiplex_type,' Multiplex Drug Network created. <br/> Now press <b> "Next" </b> in the top left-hand corner to continue'), html = TRUE)
       return(multiplex)
@@ -2185,8 +2223,9 @@ ui <- shinydashboard::dashboardPage(
         
         bnet <- bnetwork()
         colnames(bnet) <- c('source', 'target', 'weight')
-        f_bnet <- bnet %>% filter(source %in% omics_multiplex$source, 
-                                  tolower(target) %in% drug_multiplex$source)
+        bnet$target <- tolower(bnet$target)
+        f_bnet <- bnet %>% filter(source %in% base::union(omics_multiplex$source, omics_multiplex$target), 
+                                  target %in% drug_multiplex$source)
         
         if (sum(is.na(omics_tau_list())) != 1) {
           if (sum(unlist(omics_tau_list())) != 1) {
@@ -2293,7 +2332,7 @@ ui <- shinydashboard::dashboardPage(
             'Transition layers matrix (drugs network)' = drugs_trans_mat
           )
           
-          fake_nodes <- drug_multiplex[stringr::str_detect(drug_multiplex[[3]], 'fk_'), 3][[1]]
+          virtual_nodes <- drug_multiplex[stringr::str_detect(drug_multiplex[[3]], 'v_'), 3][[1]]
           rwr_simMat_list <- gen_sim_mat_MH(
             
             network1 =  omics_multiplex, 
@@ -2321,12 +2360,12 @@ ui <- shinydashboard::dashboardPage(
             weighted_multiplex_2 = FALSE, 
             
             aggregation_method = 'Sum', get_completeRWRmat = FALSE,
-            no_seed_nodes = fake_nodes,
+            no_seed_nodes = virtual_nodes,
             cores = input$cores_rwr)
           
           pre_rwr_simMat <- rwr_simMat_list$RWRMH_sim_mat
           
-          nofk_rwr_simMat <- pre_rwr_simMat[!(rownames(pre_rwr_simMat) %in% fake_nodes),]
+          nofk_rwr_simMat <- pre_rwr_simMat[!(rownames(pre_rwr_simMat) %in% virtual_nodes),]
           rwr_simMat <-  t(t(nofk_rwr_simMat)/colSums(nofk_rwr_simMat))
          
         }
@@ -3141,7 +3180,7 @@ ui <- shinydashboard::dashboardPage(
       #if (!is.null( multiplex_drug_network() )) {
       #  drug_multiplex <- multiplex_drug_network()
       #  all_drugs <- sort(base::union(drug_multiplex[[2]], drug_multiplex[[3]]))
-      #  drugs <- all_drugs[!stringr::str_detect(all_drugs, 'fk_')]
+      #  drugs <- all_drugs[!stringr::str_detect(all_drugs, 'v_')]
       #}else{
       message('Running drug approach')
       
@@ -3441,7 +3480,7 @@ ui <- shinydashboard::dashboardPage(
                             shiny::h2(shiny::span("Omics matrices Intersection", style = "font-weight: bold")),
                             shiny::radioButtons(inputId = 'intersect_opt',
                                                 label = shiny::h4(shiny::span('Do you want to intersect omics matrices by features?', style = "font-weight: bold")),
-                                                choices = c('YES', 'NO'), selected = 'YES'
+                                                choices = c('YES', 'NO'), selected = 'NO'
                             ),
                             shiny::hr(),
                             shiny::actionButton(inputId = 'intersect_btn', label = 'Submit')
@@ -3736,7 +3775,7 @@ ui <- shinydashboard::dashboardPage(
               animation = TRUE
             )
             
-            if (input[[paste0('drug_type_', x)]] == "Fake Nodes"){
+            if (input[[paste0('drug_type_', x)]] == "Virtual Nodes"){
               dist <- NULL
               cpu <- NULL
             }else{
@@ -3808,11 +3847,11 @@ ui <- shinydashboard::dashboardPage(
                                           selectInput(
                                             inputId = paste0('drug_type_', x),
                                             label = "Select a drug network type ",
-                                            #choices =  c("Mechanism of action", "SMILES", "Fake Nodes"),
-                                            choices =  "Fake Nodes",selected = "Fake Nodes"
+                                            #choices =  c("Mechanism of action", "SMILES", "Virtual Nodes"),
+                                            choices =  "Virtual Nodes",selected = "Virtual Nodes"
                                           ),
                                           shiny::conditionalPanel(
-                                            condition = paste0('input.drug_type_', x, '!="Fake Nodes"'),
+                                            condition = paste0('input.drug_type_', x, '!="Virtual Nodes"'),
                                             selectInput(
                                               inputId = paste0('distance_measure_', x),
                                               label = paste("Select a network inference method for ", x),

@@ -253,7 +253,7 @@ post_hoc_analysis_2 <- function(cont_table, fisher_p, rows, correction_method){
 }
 
 fisher_test_post_hoc <- function(matrix, cpu, rows, correction_method){
-  # matrix = (samples x features)  
+  # matrix = ( features x samples)  
   library(doSNOW)
   cl <- snow::makeCluster(cpu)
   registerDoSNOW(cl)
@@ -269,7 +269,7 @@ fisher_test_post_hoc <- function(matrix, cpu, rows, correction_method){
                      .options.snow=opts)  %dopar% {
                        vector <- c(rep(NA, nrow(matrix)))
                        for (j in i:nrow(matrix)) {
-                         cont_table <- table(matrix[i, ], matrix[j, ])
+                         cont_table <- table(matrix[i, , drop = FALSE], matrix[j, ,drop = FALSE])
                          # Perform Fisher's exact test
                          fisher_p  <- fisher.test(cont_table)$p.value
                          vector[j] <- ifelse(fisher_p < 0.05, post_hoc_analysis_2(cont_table, fisher_p, rows, correction_method), 0)
@@ -277,6 +277,7 @@ fisher_test_post_hoc <- function(matrix, cpu, rows, correction_method){
                        output_list[[i]] <- vector
                        
                      }
+  
   close(pb)
   stopCluster(cl)
   

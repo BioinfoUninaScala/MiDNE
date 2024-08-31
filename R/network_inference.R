@@ -40,7 +40,7 @@ omics_network_inference <- function(omics_matrix, omics_type = NULL, inference_m
       cometh <- fisher_test_post_hoc(matrix = meth_Mat, cpu = cpu, rows = 4, correction_method = correction_method )
       cometh1 <- as.matrix(cometh)
       cometh2 <- ifelse(cometh1 == -Inf, 0, cometh1)
-      colnames(cometh2) <- rownames(cometh2) <- colnames(omics_matrix)
+      colnames(cometh2) <- rownames(cometh2) <- rownames(omics_matrix)
       network <- get_adjList(cometh2)
        
       result <- network %>% mutate_if(is.factor, as.character)
@@ -78,10 +78,10 @@ omics_network_inference <- function(omics_matrix, omics_type = NULL, inference_m
 
 
 drug_network_inference <- function(drug_input, drug_type, dist, cpu){
-  if (drug_type == "Fake Nodes"){
+  if (drug_type == "Virtual Nodes"){
       colnames(drug_input)[1] <- 'source'
       f_drug_table <- drug_input %>% as_tibble(.) %>% unique() %>% arrange(source) %>%
-                                     mutate(dest = paste0('fk_', 1:nrow(drug_input)),
+                                     mutate(dest = paste0('v_', 1:nrow(drug_input)),
                                             weight = rep(1, nrow(drug_input)))
       return(f_drug_table)
   }

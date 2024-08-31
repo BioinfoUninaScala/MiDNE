@@ -1,1796 +1,1796 @@
-source,dest,weight
-Abacavir,fk_1,1
-Abaloparatide,fk_2,1
-Abarelix,fk_3,1
-Abatacept,fk_4,1
-Abciximab,fk_5,1
-Abemaciclib,fk_6,1
-Abiraterone,fk_7,1
-Acalabrutinib,fk_8,1
-Acamprosate,fk_9,1
-Acarbose,fk_10,1
-Acebutolol,fk_11,1
-Aceclofenac,fk_12,1
-Acemetacin,fk_13,1
-Acenocoumarol,fk_14,1
-Acetaminophen,fk_15,1
-Acetazolamide,fk_16,1
-Acetohexamide,fk_17,1
-Acetohydroxamic acid,fk_18,1
-Acetophenazine,fk_19,1
-Acetyl sulfisoxazole,fk_20,1
-Acetylcysteine,fk_21,1
-Acetyldigitoxin,fk_22,1
-Acetylsalicylic acid,fk_23,1
-Acitretin,fk_24,1
-Aclidinium,fk_25,1
-Acrivastine,fk_26,1
-Acyclovir,fk_27,1
-Adalimumab,fk_28,1
-Adapalene,fk_29,1
-Adefovir dipivoxil,fk_30,1
-Adenosine,fk_31,1
-Adenosine phosphate,fk_32,1
-Afamelanotide,fk_33,1
-Afatinib,fk_34,1
-Aflibercept,fk_35,1
-Agkistrodon piscivorus antivenin,fk_36,1
-Agomelatine,fk_37,1
-Ajmaline,fk_38,1
-Albendazole,fk_39,1
-Albiglutide,fk_40,1
-Albutrepenonacog alfa,fk_41,1
-Alclofenac,fk_42,1
-Alclometasone,fk_43,1
-Aldesleukin,fk_44,1
-Alectinib,fk_45,1
-Alefacept,fk_46,1
-Alemtuzumab,fk_47,1
-Alendronic acid,fk_48,1
-Alfacalcidol,fk_49,1
-Alfentanil,fk_50,1
-Alfuzosin,fk_51,1
-Alglucosidase alfa,fk_52,1
-Alimemazine,fk_53,1
-Alirocumab,fk_54,1
-Aliskiren,fk_55,1
-Alitretinoin,fk_56,1
-Allopurinol,fk_57,1
-Almitrine,fk_58,1
-Alogliptin,fk_59,1
-Alosetron,fk_60,1
-Alpelisib,fk_61,1
-Alpha-1-proteinase inhibitor,fk_62,1
-Alprazolam,fk_63,1
-Alprostadil,fk_64,1
-Alteplase,fk_65,1
-Alverine,fk_66,1
-Alvimopan,fk_67,1
-Amantadine,fk_68,1
-Ambenonium,fk_69,1
-Ambrisentan,fk_70,1
-Amcinonide,fk_71,1
-Amifampridine,fk_72,1
-Amifostine,fk_73,1
-Amikacin,fk_74,1
-Amiloride,fk_75,1
-Aminocaproic acid,fk_76,1
-Aminoglutethimide,fk_77,1
-Aminolevulinic acid,fk_78,1
-Aminophylline,fk_79,1
-Amiodarone,fk_80,1
-Amisulpride,fk_81,1
-Amitriptyline,fk_82,1
-Amlodipine,fk_83,1
-Amobarbital,fk_84,1
-Amoxapine,fk_85,1
-Amphetamine,fk_86,1
-Ampicillin,fk_87,1
-Amprenavir,fk_88,1
-Amrinone,fk_89,1
-Amsacrine,fk_90,1
-Amyl Nitrite,fk_91,1
-Amylocaine,fk_92,1
-Anagrelide,fk_93,1
-Anakinra,fk_94,1
-Anastrozole,fk_95,1
-Ancestim,fk_96,1
-Andexanet alfa,fk_97,1
-Angiotensin II,fk_98,1
-Anidulafungin,fk_99,1
-Anileridine,fk_100,1
-Anisindione,fk_101,1
-Anisotropine methylbromide,fk_102,1
-Anistreplase,fk_103,1
-Antazoline,fk_104,1
-Anthralin,fk_105,1
-Anthrax immune globulin human,fk_106,1
-Anti-inhibitor coagulant complex,fk_107,1
-"Antihemophilic factor (recombinant), PEGylated",fk_108,1
-Antihemophilic factor human,fk_109,1
-"Antihemophilic factor, human recombinant",fk_110,1
-Antithrombin Alfa,fk_111,1
-Antithymocyte immunoglobulin (rabbit),fk_112,1
-Apalutamide,fk_113,1
-Apixaban,fk_114,1
-Apomorphine,fk_115,1
-Apraclonidine,fk_116,1
-Apremilast,fk_117,1
-Aprepitant,fk_118,1
-Arbutamine,fk_119,1
-Arbutin,fk_120,1
-Ardeparin,fk_121,1
-Arformoterol,fk_122,1
-Argatroban,fk_123,1
-Aripiprazole,fk_124,1
-Aripiprazole lauroxil,fk_125,1
-Armodafinil,fk_126,1
-Arsenic trioxide,fk_127,1
-Artesunate,fk_128,1
-Asenapine,fk_129,1
-Asfotase alfa,fk_130,1
-Asparagine,fk_131,1
-Astemizole,fk_132,1
-Asunaprevir,fk_133,1
-Atazanavir,fk_134,1
-Atenolol,fk_135,1
-Atezolizumab,fk_136,1
-Atomoxetine,fk_137,1
-Atorvastatin,fk_138,1
-Atosiban,fk_139,1
-Atovaquone,fk_140,1
-Atracurium besylate,fk_141,1
-Atropine,fk_142,1
-Auranofin,fk_143,1
-Avanafil,fk_144,1
-Avatrombopag,fk_145,1
-Avelumab,fk_146,1
-Avibactam,fk_147,1
-Axicabtagene ciloleucel,fk_148,1
-Axitinib,fk_149,1
-Azacitidine,fk_150,1
-Azatadine,fk_151,1
-Azelaic acid,fk_152,1
-Azelastine,fk_153,1
-Azilsartan medoxomil,fk_154,1
-Azlocillin,fk_155,1
-Aztreonam,fk_156,1
-Bacampicillin,fk_157,1
-Bacitracin,fk_158,1
-Baclofen,fk_159,1
-Balsalazide,fk_160,1
-Baricitinib,fk_161,1
-Basiliximab,fk_162,1
-Bazedoxifene,fk_163,1
-Becaplermin,fk_164,1
-Beclomethasone dipropionate,fk_165,1
-Bedaquiline,fk_166,1
-Belatacept,fk_167,1
-Belimumab,fk_168,1
-Belinostat,fk_169,1
-Bemiparin,fk_170,1
-Bempedoic acid,fk_171,1
-Benazepril,fk_172,1
-Bendroflumethiazide,fk_173,1
-Benralizumab,fk_174,1
-Benserazide,fk_175,1
-Benzatropine,fk_176,1
-Benzocaine,fk_177,1
-Benzphetamine,fk_178,1
-Benzthiazide,fk_179,1
-Benzylpenicilloyl polylysine,fk_180,1
-Bepotastine,fk_181,1
-Bepridil,fk_182,1
-Besifloxacin,fk_183,1
-Betahistine,fk_184,1
-Betamethasone,fk_185,1
-Betaxolol,fk_186,1
-Betazole,fk_187,1
-Bethanechol,fk_188,1
-Bethanidine,fk_189,1
-Betrixaban,fk_190,1
-Bevacizumab,fk_191,1
-Bexarotene,fk_192,1
-Bezafibrate,fk_193,1
-Bezlotoxumab,fk_194,1
-Bicalutamide,fk_195,1
-Bictegravir,fk_196,1
-Bifonazole,fk_197,1
-Bilastine,fk_198,1
-Bimatoprost,fk_199,1
-Binimetinib,fk_200,1
-Bioallethrin,fk_201,1
-Biperiden,fk_202,1
-Bisoprolol,fk_203,1
-Bivalirudin,fk_204,1
-Blinatumomab,fk_205,1
-Boceprevir,fk_206,1
-Bortezomib,fk_207,1
-Bosentan,fk_208,1
-Bosutinib,fk_209,1
-Botulinum toxin type A,fk_210,1
-Botulinum toxin type B,fk_211,1
-Brentuximab vedotin,fk_212,1
-Bretylium,fk_213,1
-Brexanolone,fk_214,1
-Brexpiprazole,fk_215,1
-Brigatinib,fk_216,1
-Brimonidine,fk_217,1
-Brinzolamide,fk_218,1
-Brivaracetam,fk_219,1
-Brivudine,fk_220,1
-Brolucizumab,fk_221,1
-Bromazepam,fk_222,1
-Bromfenac,fk_223,1
-Bromocriptine,fk_224,1
-Bromodiphenhydramine,fk_225,1
-Brompheniramine,fk_226,1
-Buclizine,fk_227,1
-Budesonide,fk_228,1
-Bufexamac,fk_229,1
-Bumetanide,fk_230,1
-Bupivacaine,fk_231,1
-Buprenorphine,fk_232,1
-Bupropion,fk_233,1
-Burosumab,fk_234,1
-Buserelin,fk_235,1
-Buspirone,fk_236,1
-Butabarbital,fk_237,1
-Butalbital,fk_238,1
-Butamben,fk_239,1
-Butenafine,fk_240,1
-Butobarbital,fk_241,1
-Butorphanol,fk_242,1
-Butriptyline,fk_243,1
-Butylscopolamine,fk_244,1
-Cabazitaxel,fk_245,1
-Cabergoline,fk_246,1
-Cabozantinib,fk_247,1
-Caffeine,fk_248,1
-Calcifediol,fk_249,1
-Calcitriol,fk_250,1
-Calcium Phosphate,fk_251,1
-Calcium carbimide,fk_252,1
-Calcium citrate,fk_253,1
-Calcium phosphate dihydrate,fk_254,1
-Camphor,fk_255,1
-Canagliflozin,fk_256,1
-Canakinumab,fk_257,1
-Candesartan cilexetil,fk_258,1
-Cangrelor,fk_259,1
-Cannabidiol,fk_260,1
-Capecitabine,fk_261,1
-Capmatinib,fk_262,1
-Capreomycin,fk_263,1
-Capromab pendetide,fk_264,1
-Capsaicin,fk_265,1
-Capsicum oleoresin,fk_266,1
-Captopril,fk_267,1
-Carbamazepine,fk_268,1
-Carbamoylcholine,fk_269,1
-Carbenicillin,fk_270,1
-Carbetocin,fk_271,1
-Carbidopa,fk_272,1
-Carbimazole,fk_273,1
-Carbinoxamine,fk_274,1
-Carbon monoxide,fk_275,1
-Carboprost tromethamine,fk_276,1
-Carfilzomib,fk_277,1
-Carglumic acid,fk_278,1
-Carindacillin,fk_279,1
-Cariprazine,fk_280,1
-Carmustine,fk_281,1
-Carprofen,fk_282,1
-Carteolol,fk_283,1
-Carvedilol,fk_284,1
-Caspofungin,fk_285,1
-Castor oil,fk_286,1
-Catridecacog,fk_287,1
-Catumaxomab,fk_288,1
-Cefaclor,fk_289,1
-Cefadroxil,fk_290,1
-Cefalotin,fk_291,1
-Cefamandole,fk_292,1
-Cefapirin,fk_293,1
-Cefazolin,fk_294,1
-Cefdinir,fk_295,1
-Cefditoren,fk_296,1
-Cefepime,fk_297,1
-Cefiderocol,fk_298,1
-Cefixime,fk_299,1
-Cefmenoxime,fk_300,1
-Cefmetazole,fk_301,1
-Cefonicid,fk_302,1
-Cefoperazone,fk_303,1
-Ceforanide,fk_304,1
-Cefotaxime,fk_305,1
-Cefotetan,fk_306,1
-Cefotiam,fk_307,1
-Cefoxitin,fk_308,1
-Cefpiramide,fk_309,1
-Cefpodoxime,fk_310,1
-Cefprozil,fk_311,1
-Cefradine,fk_312,1
-Ceftazidime,fk_313,1
-Ceftibuten,fk_314,1
-Ceftizoxime,fk_315,1
-Ceftolozane,fk_316,1
-Ceftriaxone,fk_317,1
-Cefuroxime,fk_318,1
-Celecoxib,fk_319,1
-Celiprolol,fk_320,1
-Cemiplimab,fk_321,1
-Cephalexin,fk_322,1
-Cephaloglycin,fk_323,1
-Ceritinib,fk_324,1
-Cerivastatin,fk_325,1
-Certolizumab pegol,fk_326,1
-Ceruletide,fk_327,1
-Cetirizine,fk_328,1
-Cetrorelix,fk_329,1
-Cetuximab,fk_330,1
-Cevimeline,fk_331,1
-Chlorcyclizine,fk_332,1
-Chlordiazepoxide,fk_333,1
-Chlormerodrin,fk_334,1
-Chlormezanone,fk_335,1
-Chloroprocaine,fk_336,1
-Chlorothiazide,fk_337,1
-Chlorpheniramine,fk_338,1
-Chlorpromazine,fk_339,1
-Chlorpropamide,fk_340,1
-Chlorprothixene,fk_341,1
-Chlortetracycline,fk_342,1
-Chlorthalidone,fk_343,1
-Chlorzoxazone,fk_344,1
-Cholecalciferol,fk_345,1
-Choriogonadotropin alfa,fk_346,1
-Chorionic Gonadotropin (Human),fk_347,1
-Chromic chloride,fk_348,1
-Chymopapain,fk_349,1
-Ciclesonide,fk_350,1
-Ciclopirox,fk_351,1
-Cidofovir,fk_352,1
-Cilastatin,fk_353,1
-Cilazapril,fk_354,1
-Cilostazol,fk_355,1
-Cimetidine,fk_356,1
-Cinacalcet,fk_357,1
-Cinchocaine,fk_358,1
-Cinnarizine,fk_359,1
-Cinoxacin,fk_360,1
-Ciprofloxacin,fk_361,1
-Cisapride,fk_362,1
-Cisatracurium,fk_363,1
-Citalopram,fk_364,1
-Citric acid,fk_365,1
-Cladribine,fk_366,1
-Clarithromycin,fk_367,1
-Clemastine,fk_368,1
-Clenbuterol,fk_369,1
-Clidinium,fk_370,1
-Clindamycin,fk_371,1
-Clobazam,fk_372,1
-Clobetasol propionate,fk_373,1
-Clobetasone,fk_374,1
-Clocortolone,fk_375,1
-Clodronic acid,fk_376,1
-Clofarabine,fk_377,1
-Clofedanol,fk_378,1
-Clofibrate,fk_379,1
-Clomifene,fk_380,1
-Clomipramine,fk_381,1
-Clonazepam,fk_382,1
-Clonidine,fk_383,1
-Clopidogrel,fk_384,1
-Clorazepic acid,fk_385,1
-Clotiazepam,fk_386,1
-Clotrimazole,fk_387,1
-Cloxacillin,fk_388,1
-Clozapine,fk_389,1
-Coagulation Factor IX (Recombinant),fk_390,1
-Coagulation Factor IX Human,fk_391,1
-Coagulation factor VII human,fk_392,1
-Cobimetinib,fk_393,1
-Cocaine,fk_394,1
-Codeine,fk_395,1
-Colchicine,fk_396,1
-Conestat alfa,fk_397,1
-Conivaptan,fk_398,1
-Conjugated estrogens,fk_399,1
-Copanlisib,fk_400,1
-Corifollitropin alfa,fk_401,1
-Corticorelin ovine triflutate,fk_402,1
-Corticotropin,fk_403,1
-Cortisone acetate,fk_404,1
-Creatine,fk_405,1
-Crizanlizumab,fk_406,1
-Crizotinib,fk_407,1
-Crofelemer,fk_408,1
-Crotalus adamanteus antivenin,fk_409,1
-Cryptenamine,fk_410,1
-Cyanocobalamin,fk_411,1
-Cyclacillin,fk_412,1
-Cyclizine,fk_413,1
-Cyclobenzaprine,fk_414,1
-Cyclopentolate,fk_415,1
-Cycloserine,fk_416,1
-Cyclosporine,fk_417,1
-Cyclothiazide,fk_418,1
-Cycrimine,fk_419,1
-Cyproheptadine,fk_420,1
-Cyproterone acetate,fk_421,1
-Cytarabine,fk_422,1
-DL-Methylephedrine,fk_423,1
-Dabigatran etexilate,fk_424,1
-Dabrafenib,fk_425,1
-Daclatasvir,fk_426,1
-Dacomitinib,fk_427,1
-Dalfampridine,fk_428,1
-Dalfopristin,fk_429,1
-Dalteparin,fk_430,1
-Damoctocog alfa pegol,fk_431,1
-Danaparoid,fk_432,1
-Danazol,fk_433,1
-Dantrolene,fk_434,1
-Dapagliflozin,fk_435,1
-Dapiprazole,fk_436,1
-Dapsone,fk_437,1
-Darbepoetin alfa,fk_438,1
-Darifenacin,fk_439,1
-Darolutamide,fk_440,1
-Darunavir,fk_441,1
-Dasabuvir,fk_442,1
-Dasatinib,fk_443,1
-Daunorubicin,fk_444,1
-Debrisoquine,fk_445,1
-Decamethonium,fk_446,1
-Decitabine,fk_447,1
-Degarelix,fk_448,1
-Delafloxacin,fk_449,1
-Delavirdine,fk_450,1
-Demecarium,fk_451,1
-Denileukin diftitox,fk_452,1
-Denosumab,fk_453,1
-Dequalinium,fk_454,1
-Deserpidine,fk_455,1
-Desflurane,fk_456,1
-Desipramine,fk_457,1
-Deslanoside,fk_458,1
-Desloratadine,fk_459,1
-Desmopressin,fk_460,1
-Desogestrel,fk_461,1
-Desonide,fk_462,1
-Desoximetasone,fk_463,1
-Desvenlafaxine,fk_464,1
-Deutetrabenazine,fk_465,1
-Dexamethasone,fk_466,1
-Dexamethasone acetate,fk_467,1
-Dexbrompheniramine,fk_468,1
-Dexchlorpheniramine maleate,fk_469,1
-Dexfenfluramine,fk_470,1
-Dexibuprofen,fk_471,1
-Dexlansoprazole,fk_472,1
-Dexmedetomidine,fk_473,1
-Dexmethylphenidate,fk_474,1
-Dexrazoxane,fk_475,1
-Dextroamphetamine,fk_476,1
-Dextromethorphan,fk_477,1
-Dextropropoxyphene,fk_478,1
-Dextrothyroxine,fk_479,1
-Dezocine,fk_480,1
-Diamorphine,fk_481,1
-Diazepam,fk_482,1
-Diazoxide,fk_483,1
-Dibotermin alfa,fk_484,1
-Dichloroacetic acid,fk_485,1
-Dichlorobenzyl alcohol,fk_486,1
-Diclofenac,fk_487,1
-Diclofenamide,fk_488,1
-Dicloxacillin,fk_489,1
-Dicoumarol,fk_490,1
-Dicyclomine,fk_491,1
-Didanosine,fk_492,1
-Dienestrol,fk_493,1
-Dienogest,fk_494,1
-Diethylcarbamazine,fk_495,1
-Diethylpropion,fk_496,1
-Diethylstilbestrol,fk_497,1
-Diflorasone,fk_498,1
-Diflunisal,fk_499,1
-Difluocortolone,fk_500,1
-Difluprednate,fk_501,1
-Digitoxin,fk_502,1
-Digoxin,fk_503,1
-Dihydro-alpha-ergocryptine,fk_504,1
-Dihydroergocornine,fk_505,1
-Dihydroergocristine,fk_506,1
-Dihydroergotamine,fk_507,1
-Dihydrotachysterol,fk_508,1
-Diltiazem,fk_509,1
-Dimenhydrinate,fk_510,1
-Dimethyl fumarate,fk_511,1
-Dimetindene,fk_512,1
-Dinoprost tromethamine,fk_513,1
-Dinoprostone,fk_514,1
-Diphemanil,fk_515,1
-Diphenhydramine,fk_516,1
-Diphenidol,fk_517,1
-Diphenoxylate,fk_518,1
-Diphenylpyraline,fk_519,1
-Dipivefrin,fk_520,1
-Dipyridamole,fk_521,1
-Disopyramide,fk_522,1
-Disulfiram,fk_523,1
-Dobutamine,fk_524,1
-Docetaxel,fk_525,1
-Doconexent,fk_526,1
-Docosanol,fk_527,1
-Dofetilide,fk_528,1
-Dolasetron,fk_529,1
-Dolutegravir,fk_530,1
-Domperidone,fk_531,1
-Donepezil,fk_532,1
-Dopamine,fk_533,1
-Doripenem,fk_534,1
-Dorzolamide,fk_535,1
-Dosulepin,fk_536,1
-Dotatate gallium Ga-68,fk_537,1
-Doxacurium,fk_538,1
-Doxapram,fk_539,1
-Doxazosin,fk_540,1
-Doxepin,fk_541,1
-Doxorubicin,fk_542,1
-Doxylamine,fk_543,1
-Dronabinol,fk_544,1
-Dronedarone,fk_545,1
-Droperidol,fk_546,1
-Drospirenone,fk_547,1
-Drotaverine,fk_548,1
-Drotrecogin alfa,fk_549,1
-Droxidopa,fk_550,1
-Dulaglutide,fk_551,1
-Duloxetine,fk_552,1
-Dupilumab,fk_553,1
-Durvalumab,fk_554,1
-Dutasteride,fk_555,1
-Duvelisib,fk_556,1
-Dyclonine,fk_557,1
-Dydrogesterone,fk_558,1
-Dyphylline,fk_559,1
-Ecallantide,fk_560,1
-Echothiophate,fk_561,1
-Econazole,fk_562,1
-Eculizumab,fk_563,1
-Edotreotide gallium Ga-68,fk_564,1
-Edoxaban,fk_565,1
-Edoxudine,fk_566,1
-Edrophonium,fk_567,1
-Efalizumab,fk_568,1
-Efavirenz,fk_569,1
-Efinaconazole,fk_570,1
-Eflornithine,fk_571,1
-Efmoroctocog alfa,fk_572,1
-Elbasvir,fk_573,1
-Eletriptan,fk_574,1
-Elexacaftor,fk_575,1
-Eliglustat,fk_576,1
-Elotuzumab,fk_577,1
-Eluxadoline,fk_578,1
-Elvitegravir,fk_579,1
-Emapalumab,fk_580,1
-Emedastine,fk_581,1
-Emicizumab,fk_582,1
-Empagliflozin,fk_583,1
-Emtricitabine,fk_584,1
-Enalapril,fk_585,1
-Enalaprilat,fk_586,1
-Enasidenib,fk_587,1
-Encainide,fk_588,1
-Encorafenib,fk_589,1
-Enflurane,fk_590,1
-Enfuvirtide,fk_591,1
-Enoxacin,fk_592,1
-Enoxaparin,fk_593,1
-Enoximone,fk_594,1
-Enprofylline,fk_595,1
-Entacapone,fk_596,1
-Entrectinib,fk_597,1
-Enzalutamide,fk_598,1
-Ephedrine,fk_599,1
-Epicriptine,fk_600,1
-Epinastine,fk_601,1
-Epinephrine,fk_602,1
-Eplerenone,fk_603,1
-Epoprostenol,fk_604,1
-Eprosartan,fk_605,1
-Eptifibatide,fk_606,1
-Eptinezumab,fk_607,1
-Equine Botulinum Neurotoxin A Immune FAB2,fk_608,1
-Equine Botulinum Neurotoxin B Immune FAB2,fk_609,1
-Equine Botulinum Neurotoxin C Immune FAB2,fk_610,1
-Equine Botulinum Neurotoxin D Immune FAB2,fk_611,1
-Equine Botulinum Neurotoxin E Immune FAB2,fk_612,1
-Equine Botulinum Neurotoxin F Immune FAB2,fk_613,1
-Equine Botulinum Neurotoxin G Immune FAB2,fk_614,1
-Eravacycline,fk_615,1
-Erdafitinib,fk_616,1
-Ergocalciferol,fk_617,1
-Ergoloid mesylate,fk_618,1
-Ergometrine,fk_619,1
-Ergotamine,fk_620,1
-Erlotinib,fk_621,1
-Ertapenem,fk_622,1
-Ertugliflozin,fk_623,1
-Erythrityl tetranitrate,fk_624,1
-Erythropoietin,fk_625,1
-Escitalopram,fk_626,1
-Eslicarbazepine,fk_627,1
-Eslicarbazepine acetate,fk_628,1
-Esmolol,fk_629,1
-Esomeprazole,fk_630,1
-Estazolam,fk_631,1
-Estradiol,fk_632,1
-Estradiol acetate,fk_633,1
-Estradiol benzoate,fk_634,1
-Estradiol cypionate,fk_635,1
-Estradiol dienanthate,fk_636,1
-Estradiol valerate,fk_637,1
-Estramustine,fk_638,1
-Estriol,fk_639,1
-Estrone,fk_640,1
-Estrone sulfate,fk_641,1
-Eszopiclone,fk_642,1
-Etacrynic acid,fk_643,1
-Etafedrine,fk_644,1
-Etanercept,fk_645,1
-Etelcalcetide,fk_646,1
-Ethambutol,fk_647,1
-Ethanol,fk_648,1
-Ethchlorvynol,fk_649,1
-Ethinamate,fk_650,1
-Ethinylestradiol,fk_651,1
-Ethionamide,fk_652,1
-Ethosuximide,fk_653,1
-Ethotoin,fk_654,1
-Ethynodiol diacetate,fk_655,1
-Etodolac,fk_656,1
-Etomidate,fk_657,1
-Etonogestrel,fk_658,1
-Etoposide,fk_659,1
-Etoricoxib,fk_660,1
-Everolimus,fk_661,1
-Exemestane,fk_662,1
-Exenatide,fk_663,1
-Ezetimibe,fk_664,1
-Famciclovir,fk_665,1
-Famotidine,fk_666,1
-Favipiravir,fk_667,1
-Febuxostat,fk_668,1
-Fedratinib,fk_669,1
-Felbamate,fk_670,1
-Felodipine,fk_671,1
-Fenfluramine,fk_672,1
-Fenofibrate,fk_673,1
-Fenofibric acid,fk_674,1
-Fenoldopam,fk_675,1
-Fenoprofen,fk_676,1
-Fenoterol,fk_677,1
-Fentanyl,fk_678,1
-Ferric cation,fk_679,1
-Ferric pyrophosphate citrate,fk_680,1
-Ferrous sulfate anhydrous,fk_681,1
-Fesoterodine,fk_682,1
-Fexofenadine,fk_683,1
-Fidaxomicin,fk_684,1
-Filgrastim,fk_685,1
-Finafloxacin,fk_686,1
-Finasteride,fk_687,1
-Fingolimod,fk_688,1
-Fish oil,fk_689,1
-Flavoxate,fk_690,1
-Flecainide,fk_691,1
-Flibanserin,fk_692,1
-Florbetaben (18F),fk_693,1
-Florbetapir (18F),fk_694,1
-Flortaucipir F-18,fk_695,1
-Floxuridine,fk_696,1
-Fluciclovine (18F),fk_697,1
-Flucloxacillin,fk_698,1
-Fluconazole,fk_699,1
-Fludarabine,fk_700,1
-Fludrocortisone,fk_701,1
-Flumazenil,fk_702,1
-Flumethasone,fk_703,1
-Flunarizine,fk_704,1
-Flunisolide,fk_705,1
-Flunitrazepam,fk_706,1
-Fluocinolone acetonide,fk_707,1
-Fluocinonide,fk_708,1
-Fluorometholone,fk_709,1
-Fluorouracil,fk_710,1
-Fluoxetine,fk_711,1
-Fluoxymesterone,fk_712,1
-Flupentixol,fk_713,1
-Fluphenazine,fk_714,1
-Flurandrenolide,fk_715,1
-Flurazepam,fk_716,1
-Flurbiprofen,fk_717,1
-Fluspirilene,fk_718,1
-Flutamide,fk_719,1
-Flutemetamol (18F),fk_720,1
-Fluticasone,fk_721,1
-Fluticasone furoate,fk_722,1
-Fluticasone propionate,fk_723,1
-Fluvastatin,fk_724,1
-Fluvoxamine,fk_725,1
-Follitropin,fk_726,1
-Fomepizole,fk_727,1
-Fomivirsen,fk_728,1
-Fondaparinux,fk_729,1
-Foreskin fibroblast (neonatal),fk_730,1
-Foreskin keratinocyte (neonatal),fk_731,1
-Formoterol,fk_732,1
-Fosamprenavir,fk_733,1
-Foscarnet,fk_734,1
-Fosfomycin,fk_735,1
-Fosinopril,fk_736,1
-Fosnetupitant,fk_737,1
-Fosphenytoin,fk_738,1
-Fospropofol,fk_739,1
-Fostamatinib,fk_740,1
-Framycetin,fk_741,1
-Fremanezumab,fk_742,1
-Frovatriptan,fk_743,1
-Fulvestrant,fk_744,1
-Furosemide,fk_745,1
-Fusidic acid,fk_746,1
-Gabapentin,fk_747,1
-Galantamine,fk_748,1
-Galcanezumab,fk_749,1
-Gallamine triethiodide,fk_750,1
-Gallium nitrate,fk_751,1
-Galsulfase,fk_752,1
-Ganciclovir,fk_753,1
-Ganirelix,fk_754,1
-Gatifloxacin,fk_755,1
-Gefitinib,fk_756,1
-Gemcitabine,fk_757,1
-Gemeprost,fk_758,1
-Gemfibrozil,fk_759,1
-Gemifloxacin,fk_760,1
-Gemtuzumab ozogamicin,fk_761,1
-Gentamicin,fk_762,1
-Gilteritinib,fk_763,1
-Glasdegib,fk_764,1
-Glecaprevir,fk_765,1
-Gliclazide,fk_766,1
-Glimepiride,fk_767,1
-Glipizide,fk_768,1
-Gliquidone,fk_769,1
-Glucagon,fk_770,1
-Glucosamine,fk_771,1
-Glutethimide,fk_772,1
-Glyburide,fk_773,1
-Glycerin,fk_774,1
-Glycol salicylate,fk_775,1
-Glycopyrronium,fk_776,1
-Glycyrrhizic acid,fk_777,1
-Glymidine,fk_778,1
-Golimumab,fk_779,1
-Golodirsen,fk_780,1
-Gonadorelin,fk_781,1
-Goserelin,fk_782,1
-Granisetron,fk_783,1
-Grazoprevir,fk_784,1
-Grepafloxacin,fk_785,1
-Griseofulvin,fk_786,1
-Guanabenz,fk_787,1
-Guanadrel,fk_788,1
-Guanethidine,fk_789,1
-Guanfacine,fk_790,1
-Guanidine,fk_791,1
-Guselkumab,fk_792,1
-Halazepam,fk_793,1
-Halofantrine,fk_794,1
-Haloperidol,fk_795,1
-Halothane,fk_796,1
-Heparin,fk_797,1
-Hetacillin,fk_798,1
-Hexachlorophene,fk_799,1
-Hexafluronium,fk_800,1
-Hexocyclium,fk_801,1
-Hexylcaine,fk_802,1
-Histamine,fk_803,1
-Histrelin,fk_804,1
-Homatropine,fk_805,1
-Homatropine methylbromide,fk_806,1
-Human C1-esterase inhibitor,fk_807,1
-Human Rho(D) immune globulin,fk_808,1
-Human calcitonin,fk_809,1
-Human immunoglobulin G,fk_810,1
-Human interferon beta,fk_811,1
-Human thrombin,fk_812,1
-Hyaluronic acid,fk_813,1
-Hydralazine,fk_814,1
-Hydrochlorothiazide,fk_815,1
-Hydrocodone,fk_816,1
-Hydrocortamate,fk_817,1
-Hydrocortisone,fk_818,1
-Hydrocortisone acetate,fk_819,1
-Hydrocortisone butyrate,fk_820,1
-Hydrocortisone cypionate,fk_821,1
-Hydrocortisone phosphate,fk_822,1
-Hydrocortisone probutate,fk_823,1
-Hydrocortisone valerate,fk_824,1
-Hydroflumethiazide,fk_825,1
-Hydromorphone,fk_826,1
-Hydroquinone,fk_827,1
-Hydroxocobalamin,fk_828,1
-Hydroxychloroquine,fk_829,1
-Hydroxyurea,fk_830,1
-Hydroxyzine,fk_831,1
-Hyoscyamine,fk_832,1
-Ibandronate,fk_833,1
-Ibritumomab tiuxetan,fk_834,1
-Ibrutinib,fk_835,1
-Ibuprofen,fk_836,1
-Ibutilide,fk_837,1
-Icatibant,fk_838,1
-Icosapent,fk_839,1
-Idarubicin,fk_840,1
-Idelalisib,fk_841,1
-Ifenprodil,fk_842,1
-Iloperidone,fk_843,1
-Iloprost,fk_844,1
-Imatinib,fk_845,1
-Imipenem,fk_846,1
-Imipramine,fk_847,1
-Imiquimod,fk_848,1
-Indacaterol,fk_849,1
-Indapamide,fk_850,1
-Indecainide,fk_851,1
-Indinavir,fk_852,1
-Indomethacin,fk_853,1
-Inebilizumab,fk_854,1
-Infliximab,fk_855,1
-Inositol nicotinate,fk_856,1
-Inotuzumab ozogamicin,fk_857,1
-Insulin aspart,fk_858,1
-Insulin degludec,fk_859,1
-Insulin detemir,fk_860,1
-Insulin glargine,fk_861,1
-Insulin glulisine,fk_862,1
-Insulin human,fk_863,1
-Insulin lispro,fk_864,1
-Insulin pork,fk_865,1
-Interferon alfa-2a,fk_866,1
-Interferon alfa-2b,fk_867,1
-Interferon alfa-n1,fk_868,1
-Interferon alfa-n3,fk_869,1
-Interferon alfacon-1,fk_870,1
-Interferon beta-1a,fk_871,1
-Interferon beta-1b,fk_872,1
-Interferon gamma-1b,fk_873,1
-Iodine,fk_874,1
-Iopodic acid,fk_875,1
-Ipilimumab,fk_876,1
-Ipratropium,fk_877,1
-Irbesartan,fk_878,1
-Irinotecan,fk_879,1
-Iron Dextran,fk_880,1
-Isavuconazole,fk_881,1
-Isocarboxazid,fk_882,1
-Isoetharine,fk_883,1
-Isoflurane,fk_884,1
-Isoflurophate,fk_885,1
-Isometheptene,fk_886,1
-Isoniazid,fk_887,1
-Isoprenaline,fk_888,1
-Isopropamide,fk_889,1
-Isosorbide dinitrate,fk_890,1
-Isosorbide mononitrate,fk_891,1
-Isradipine,fk_892,1
-Istradefylline,fk_893,1
-Itraconazole,fk_894,1
-Ivacaftor,fk_895,1
-Ivermectin,fk_896,1
-Ivosidenib,fk_897,1
-Ixabepilone,fk_898,1
-Ixekizumab,fk_899,1
-Kanamycin,fk_900,1
-Ketamine,fk_901,1
-Ketazolam,fk_902,1
-Ketoconazole,fk_903,1
-Ketoprofen,fk_904,1
-Ketorolac,fk_905,1
-Ketotifen,fk_906,1
-Labetalol,fk_907,1
-Lacidipine,fk_908,1
-Lamivudine,fk_909,1
-Lamotrigine,fk_910,1
-Lanadelumab,fk_911,1
-Lansoprazole,fk_912,1
-Lapatinib,fk_913,1
-Larotrectinib,fk_914,1
-Lasmiditan,fk_915,1
-Lasofoxifene,fk_916,1
-Latamoxef,fk_917,1
-Latanoprost,fk_918,1
-Latanoprostene bunod,fk_919,1
-Ledipasvir,fk_920,1
-Lefamulin,fk_921,1
-Leflunomide,fk_922,1
-Lemborexant,fk_923,1
-Lenalidomide,fk_924,1
-Lenograstim,fk_925,1
-Lenvatinib,fk_926,1
-Lepirudin,fk_927,1
-Lercanidipine,fk_928,1
-Lesinurad,fk_929,1
-Letermovir,fk_930,1
-Letrozole,fk_931,1
-Leuprolide,fk_932,1
-Levacetylmethadol,fk_933,1
-Levallorphan,fk_934,1
-Levamisole,fk_935,1
-Levetiracetam,fk_936,1
-Levobetaxolol,fk_937,1
-Levobunolol,fk_938,1
-Levobupivacaine,fk_939,1
-Levocabastine,fk_940,1
-Levocetirizine,fk_941,1
-Levodopa,fk_942,1
-Levofloxacin,fk_943,1
-Levomenthol,fk_944,1
-Levomilnacipran,fk_945,1
-Levonordefrin,fk_946,1
-Levonorgestrel,fk_947,1
-Levorphanol,fk_948,1
-Levosalbutamol,fk_949,1
-Levosimendan,fk_950,1
-Levothyroxine,fk_951,1
-Lidocaine,fk_952,1
-Lifitegrast,fk_953,1
-Linaclotide,fk_954,1
-Linagliptin,fk_955,1
-Lincomycin,fk_956,1
-Lindane,fk_957,1
-Liothyronine,fk_958,1
-Liotrix,fk_959,1
-Lipegfilgrastim,fk_960,1
-Liraglutide,fk_961,1
-Lisinopril,fk_962,1
-Lisuride,fk_963,1
-Lixisenatide,fk_964,1
-Lofexidine,fk_965,1
-Lomefloxacin,fk_966,1
-Lomitapide,fk_967,1
-Lonoctocog alfa,fk_968,1
-Loperamide,fk_969,1
-Lopinavir,fk_970,1
-Loracarbef,fk_971,1
-Loratadine,fk_972,1
-Lorazepam,fk_973,1
-Lorlatinib,fk_974,1
-Lormetazepam,fk_975,1
-Lornoxicam,fk_976,1
-Lorpiprazole,fk_977,1
-Losartan,fk_978,1
-Loteprednol etabonate,fk_979,1
-Lovastatin,fk_980,1
-Loxapine,fk_981,1
-Loxoprofen,fk_982,1
-Lubiprostone,fk_983,1
-Luliconazole,fk_984,1
-Lumacaftor,fk_985,1
-Lumateperone,fk_986,1
-Lumiracoxib,fk_987,1
-Lurasidone,fk_988,1
-Lusutrombopag,fk_989,1
-Lutetium Lu 177 dotatate,fk_990,1
-Lutropin alfa,fk_991,1
-Lyme disease vaccine (recombinant OspA),fk_992,1
-Lymecycline,fk_993,1
-Lypressin,fk_994,1
-Macitentan,fk_995,1
-Magnesium sulfate,fk_996,1
-Malathion,fk_997,1
-Manidipine,fk_998,1
-Maprotiline,fk_999,1
-Maraviroc,fk_1000,1
-Masoprocol,fk_1001,1
-Mazindol,fk_1002,1
-Mebendazole,fk_1003,1
-Mecamylamine,fk_1004,1
-Mecasermin,fk_1005,1
-Mecasermin rinfabate,fk_1006,1
-Meclizine,fk_1007,1
-Meclofenamic acid,fk_1008,1
-Mecobalamin,fk_1009,1
-Medrogestone,fk_1010,1
-Medroxyprogesterone acetate,fk_1011,1
-Medrysone,fk_1012,1
-Mefenamic acid,fk_1013,1
-Megestrol acetate,fk_1014,1
-Melatonin,fk_1015,1
-Meloxicam,fk_1016,1
-Memantine,fk_1017,1
-Menadione,fk_1018,1
-Menotropins,fk_1019,1
-Menthyl salicylate,fk_1020,1
-Mepenzolate,fk_1021,1
-Meperidine,fk_1022,1
-Mephentermine,fk_1023,1
-Mephenytoin,fk_1024,1
-Mepivacaine,fk_1025,1
-Mepolizumab,fk_1026,1
-Meprobamate,fk_1027,1
-Mepyramine,fk_1028,1
-Mercaptopurine,fk_1029,1
-Meropenem,fk_1030,1
-Mesalazine,fk_1031,1
-Mesoridazine,fk_1032,1
-Mestranol,fk_1033,1
-Metamfetamine,fk_1034,1
-Metaraminol,fk_1035,1
-Metformin,fk_1036,1
-Methacholine,fk_1037,1
-Methadone,fk_1038,1
-Methantheline,fk_1039,1
-Methazolamide,fk_1040,1
-Methdilazine,fk_1041,1
-Methimazole,fk_1042,1
-Methohexital,fk_1043,1
-Methotrexate,fk_1044,1
-Methotrimeprazine,fk_1045,1
-Methoxamine,fk_1046,1
-Methoxy polyethylene glycol-epoetin beta,fk_1047,1
-Methoxyflurane,fk_1048,1
-Methscopolamine bromide,fk_1049,1
-Methsuximide,fk_1050,1
-Methyldopa,fk_1051,1
-Methylene blue,fk_1052,1
-Methylergometrine,fk_1053,1
-Methylnaltrexone,fk_1054,1
-Methylphenidate,fk_1055,1
-Methylphenobarbital,fk_1056,1
-Methylprednisolone,fk_1057,1
-Methyltestosterone,fk_1058,1
-Methyprylon,fk_1059,1
-Methysergide,fk_1060,1
-Meticillin,fk_1061,1
-Metipranolol,fk_1062,1
-Metixene,fk_1063,1
-Metoclopramide,fk_1064,1
-Metocurine,fk_1065,1
-Metocurine iodide,fk_1066,1
-Metolazone,fk_1067,1
-Metoprolol,fk_1068,1
-Metreleptin,fk_1069,1
-Metronidazole,fk_1070,1
-Metyrapone,fk_1071,1
-Metyrosine,fk_1072,1
-Mexiletine,fk_1073,1
-Mezlocillin,fk_1074,1
-Micafungin,fk_1075,1
-Miconazole,fk_1076,1
-Midazolam,fk_1077,1
-Midodrine,fk_1078,1
-Midostaurin,fk_1079,1
-Mifamurtide,fk_1080,1
-Mifepristone,fk_1081,1
-Miglitol,fk_1082,1
-Miglustat,fk_1083,1
-Milnacipran,fk_1084,1
-Milrinone,fk_1085,1
-Minaprine,fk_1086,1
-Minocycline,fk_1087,1
-Minoxidil,fk_1088,1
-Mirabegron,fk_1089,1
-Mirtazapine,fk_1090,1
-Misoprostol,fk_1091,1
-Mitotane,fk_1092,1
-Mitoxantrone,fk_1093,1
-Mivacurium,fk_1094,1
-Moclobemide,fk_1095,1
-Modafinil,fk_1096,1
-Moexipril,fk_1097,1
-Mogamulizumab,fk_1098,1
-Molindone,fk_1099,1
-Mometasone furoate,fk_1100,1
-Montelukast,fk_1101,1
-Moricizine,fk_1102,1
-Moroctocog alfa,fk_1103,1
-Morphine,fk_1104,1
-Moxetumomab pasudotox,fk_1105,1
-Moxidectin,fk_1106,1
-Moxifloxacin,fk_1107,1
-Moxisylyte,fk_1108,1
-Moxonidine,fk_1109,1
-Mupirocin,fk_1110,1
-Muromonab,fk_1111,1
-Mycophenolate mofetil,fk_1112,1
-Mycophenolic acid,fk_1113,1
-Nabilone,fk_1114,1
-Nabumetone,fk_1115,1
-Nadolol,fk_1116,1
-Nadroparin,fk_1117,1
-Nafarelin,fk_1118,1
-Nafcillin,fk_1119,1
-Naftifine,fk_1120,1
-Nalbuphine,fk_1121,1
-Naldemedine,fk_1122,1
-Nalmefene,fk_1123,1
-Naloxegol,fk_1124,1
-Naloxone,fk_1125,1
-Naltrexone,fk_1126,1
-Nandrolone decanoate,fk_1127,1
-Nandrolone phenpropionate,fk_1128,1
-Naphazoline,fk_1129,1
-Naproxen,fk_1130,1
-Naratriptan,fk_1131,1
-Natalizumab,fk_1132,1
-Nateglinide,fk_1133,1
-Nebivolol,fk_1134,1
-Necitumumab,fk_1135,1
-Nedocromil,fk_1136,1
-Nefazodone,fk_1137,1
-Nelfinavir,fk_1138,1
-Neomycin,fk_1139,1
-Neostigmine,fk_1140,1
-Neratinib,fk_1141,1
-Netarsudil,fk_1142,1
-Netilmicin,fk_1143,1
-Netupitant,fk_1144,1
-Nevirapine,fk_1145,1
-Niacin,fk_1146,1
-Nicardipine,fk_1147,1
-Nicergoline,fk_1148,1
-Nicorandil,fk_1149,1
-Nicotinamide,fk_1150,1
-Nicotine,fk_1151,1
-Nifedipine,fk_1152,1
-Nilotinib,fk_1153,1
-Nilutamide,fk_1154,1
-Nilvadipine,fk_1155,1
-Nimesulide,fk_1156,1
-Nimodipine,fk_1157,1
-Nintedanib,fk_1158,1
-Niraparib,fk_1159,1
-Nisoldipine,fk_1160,1
-Nitazoxanide,fk_1161,1
-Nitisinone,fk_1162,1
-Nitrazepam,fk_1163,1
-Nitrendipine,fk_1164,1
-Nitric Oxide,fk_1165,1
-Nitrofural,fk_1166,1
-Nitrofurantoin,fk_1167,1
-Nitroglycerin,fk_1168,1
-Nitroprusside,fk_1169,1
-Nitrous acid,fk_1170,1
-Nivolumab,fk_1171,1
-Nizatidine,fk_1172,1
-Nonacog beta pegol,fk_1173,1
-Norelgestromin,fk_1174,1
-Norepinephrine,fk_1175,1
-Norethisterone,fk_1176,1
-Norfloxacin,fk_1177,1
-Norgestimate,fk_1178,1
-Norgestrel,fk_1179,1
-Nortriptyline,fk_1180,1
-Novobiocin,fk_1181,1
-Nusinersen,fk_1182,1
-Nylidrin,fk_1183,1
-Obeticholic acid,fk_1184,1
-Obinutuzumab,fk_1185,1
-Ocrelizumab,fk_1186,1
-Ocriplasmin,fk_1187,1
-Ofatumumab,fk_1188,1
-Ofloxacin,fk_1189,1
-Olanzapine,fk_1190,1
-Olaparib,fk_1191,1
-Olaratumab,fk_1192,1
-Olmesartan,fk_1193,1
-Olodaterol,fk_1194,1
-Olopatadine,fk_1195,1
-Olsalazine,fk_1196,1
-Omacetaxine mepesuccinate,fk_1197,1
-Omadacycline,fk_1198,1
-Omalizumab,fk_1199,1
-Ombitasvir,fk_1200,1
-Omega-3 fatty acids,fk_1201,1
-Omega-3-carboxylic acids,fk_1202,1
-Omeprazole,fk_1203,1
-Ondansetron,fk_1204,1
-Opicapone,fk_1205,1
-Opium,fk_1206,1
-Oprelvekin,fk_1207,1
-Orciprenaline,fk_1208,1
-Orlistat,fk_1209,1
-Orphenadrine,fk_1210,1
-Oseltamivir,fk_1211,1
-Osilodrostat,fk_1212,1
-Osimertinib,fk_1213,1
-Ospemifene,fk_1214,1
-Ouabain,fk_1215,1
-Oxacillin,fk_1216,1
-Oxandrolone,fk_1217,1
-Oxaprozin,fk_1218,1
-Oxazepam,fk_1219,1
-Oxetacaine,fk_1220,1
-Oxiconazole,fk_1221,1
-Oxprenolol,fk_1222,1
-Oxtriphylline,fk_1223,1
-Oxybuprocaine,fk_1224,1
-Oxybutynin,fk_1225,1
-Oxycodone,fk_1226,1
-Oxymetazoline,fk_1227,1
-Oxymetholone,fk_1228,1
-Oxymorphone,fk_1229,1
-Oxyphencyclimine,fk_1230,1
-Oxyphenonium,fk_1231,1
-Oxytetracycline,fk_1232,1
-Oxytocin,fk_1233,1
-Ozanimod,fk_1234,1
-Ozenoxacin,fk_1235,1
-Paclitaxel,fk_1236,1
-Palbociclib,fk_1237,1
-Palifermin,fk_1238,1
-Paliperidone,fk_1239,1
-Palivizumab,fk_1240,1
-Palonosetron,fk_1241,1
-Pamidronic acid,fk_1242,1
-Pancuronium,fk_1243,1
-Panitumumab,fk_1244,1
-Panobinostat,fk_1245,1
-Pantoprazole,fk_1246,1
-Papaverine,fk_1247,1
-Paramethadione,fk_1248,1
-Parathyroid hormone,fk_1249,1
-Parecoxib,fk_1250,1
-Pargyline,fk_1251,1
-Paricalcitol,fk_1252,1
-Paritaprevir,fk_1253,1
-Paromomycin,fk_1254,1
-Paroxetine,fk_1255,1
-Patent Blue,fk_1256,1
-Pazopanib,fk_1257,1
-Pefloxacin,fk_1258,1
-Pegfilgrastim,fk_1259,1
-Peginesatide,fk_1260,1
-Peginterferon alfa-2a,fk_1261,1
-Peginterferon alfa-2b,fk_1262,1
-Pegvisomant,fk_1263,1
-Pembrolizumab,fk_1264,1
-Pemetrexed,fk_1265,1
-Pemigatinib,fk_1266,1
-Penbutolol,fk_1267,1
-Penciclovir,fk_1268,1
-Pentaerythritol tetranitrate,fk_1269,1
-Pentagastrin,fk_1270,1
-Pentazocine,fk_1271,1
-Pentobarbital,fk_1272,1
-Pentolinium,fk_1273,1
-Pentosan polysulfate,fk_1274,1
-Pentostatin,fk_1275,1
-Pentoxifylline,fk_1276,1
-Pentoxyverine,fk_1277,1
-Perampanel,fk_1278,1
-Pergolide,fk_1279,1
-Perhexiline,fk_1280,1
-Periciazine,fk_1281,1
-Perindopril,fk_1282,1
-Permethrin,fk_1283,1
-Perphenazine,fk_1284,1
-Pertuzumab,fk_1285,1
-Pexidartinib,fk_1286,1
-Phenacemide,fk_1287,1
-Phenazopyridine,fk_1288,1
-Phendimetrazine,fk_1289,1
-Phenelzine,fk_1290,1
-Phenformin,fk_1291,1
-Phenindamine,fk_1292,1
-Phenindione,fk_1293,1
-Pheniramine,fk_1294,1
-Phenmetrazine,fk_1295,1
-Phenobarbital,fk_1296,1
-Phenoxybenzamine,fk_1297,1
-Phenoxymethylpenicillin,fk_1298,1
-Phenprocoumon,fk_1299,1
-Phentermine,fk_1300,1
-Phentolamine,fk_1301,1
-Phenylbutazone,fk_1302,1
-Phenylephrine,fk_1303,1
-Phenyltoloxamine,fk_1304,1
-Phenytoin,fk_1305,1
-Pholcodine,fk_1306,1
-Phylloquinone,fk_1307,1
-Physostigmine,fk_1308,1
-Pibrentasvir,fk_1309,1
-Pilocarpine,fk_1310,1
-Pimavanserin,fk_1311,1
-Pimecrolimus,fk_1312,1
-Pimozide,fk_1313,1
-Pinaverium,fk_1314,1
-Pindolol,fk_1315,1
-Pioglitazone,fk_1316,1
-Pipecuronium,fk_1317,1
-Piperacillin,fk_1318,1
-Piperazine,fk_1319,1
-Pipotiazine,fk_1320,1
-Pirbuterol,fk_1321,1
-Pirenzepine,fk_1322,1
-Piroxicam,fk_1323,1
-Pitavastatin,fk_1324,1
-Pitolisant,fk_1325,1
-Pivampicillin,fk_1326,1
-Pivmecillinam,fk_1327,1
-Plazomicin,fk_1328,1
-Plecanatide,fk_1329,1
-Plerixafor,fk_1330,1
-Podofilox,fk_1331,1
-Polatuzumab vedotin,fk_1332,1
-Polyestradiol phosphate,fk_1333,1
-Polythiazide,fk_1334,1
-Pomalidomide,fk_1335,1
-Ponatinib,fk_1336,1
-Posaconazole,fk_1337,1
-Potassium perchlorate,fk_1338,1
-Practolol,fk_1339,1
-Pralatrexate,fk_1340,1
-Pralidoxime,fk_1341,1
-Pramipexole,fk_1342,1
-Pramlintide,fk_1343,1
-Pramocaine,fk_1344,1
-Prasugrel,fk_1345,1
-Pravastatin,fk_1346,1
-Prazepam,fk_1347,1
-Prazosin,fk_1348,1
-Prednicarbate,fk_1349,1
-Prednisolone,fk_1350,1
-Prednisolone acetate,fk_1351,1
-Prednisone,fk_1352,1
-Pregabalin,fk_1353,1
-Prilocaine,fk_1354,1
-Primidone,fk_1355,1
-Probenecid,fk_1356,1
-Probucol,fk_1357,1
-Procaine,fk_1358,1
-Procarbazine,fk_1359,1
-Procaterol,fk_1360,1
-Prochlorperazine,fk_1361,1
-Procyclidine,fk_1362,1
-Profenamine,fk_1363,1
-Progesterone,fk_1364,1
-Proguanil,fk_1365,1
-Promazine,fk_1366,1
-Promethazine,fk_1367,1
-Propafenone,fk_1368,1
-Propantheline,fk_1369,1
-Proparacaine,fk_1370,1
-Propiomazine,fk_1371,1
-Propiverine,fk_1372,1
-Propofol,fk_1373,1
-Propoxycaine,fk_1374,1
-Propranolol,fk_1375,1
-Propylhexedrine,fk_1376,1
-Propylthiouracil,fk_1377,1
-Protein C,fk_1378,1
-Protein S human,fk_1379,1
-Prothrombin,fk_1380,1
-Protirelin,fk_1381,1
-Protokylol,fk_1382,1
-Protriptyline,fk_1383,1
-Prucalopride,fk_1384,1
-Pseudoephedrine,fk_1385,1
-Pyrazinamide,fk_1386,1
-Pyridostigmine,fk_1387,1
-Pyridoxine,fk_1388,1
-Pyrimethamine,fk_1389,1
-Quazepam,fk_1390,1
-Quetiapine,fk_1391,1
-Quinapril,fk_1392,1
-Quinestrol,fk_1393,1
-Quinethazone,fk_1394,1
-Quinidine,fk_1395,1
-Quinidine barbiturate,fk_1396,1
-Quinupristin,fk_1397,1
-Rabeprazole,fk_1398,1
-"Rabies immune globulin, human",fk_1399,1
-Racepinephrine,fk_1400,1
-Raloxifene,fk_1401,1
-Raltegravir,fk_1402,1
-Raltitrexed,fk_1403,1
-Ramelteon,fk_1404,1
-Ramipril,fk_1405,1
-Ramucirumab,fk_1406,1
-Ranibizumab,fk_1407,1
-Ranitidine,fk_1408,1
-Rapacuronium,fk_1409,1
-Rasagiline,fk_1410,1
-Raxibacumab,fk_1411,1
-Reboxetine,fk_1412,1
-Regadenoson,fk_1413,1
-Regorafenib,fk_1414,1
-Relebactam,fk_1415,1
-Remifentanil,fk_1416,1
-Remoxipride,fk_1417,1
-Repaglinide,fk_1418,1
-Rescinnamine,fk_1419,1
-Reserpine,fk_1420,1
-Reslizumab,fk_1421,1
-Retapamulin,fk_1422,1
-Reteplase,fk_1423,1
-Revefenacin,fk_1424,1
-Ribavirin,fk_1425,1
-Ribociclib,fk_1426,1
-Riboflavin,fk_1427,1
-Rifabutin,fk_1428,1
-Rifampicin,fk_1429,1
-Rifamycin,fk_1430,1
-Rifapentine,fk_1431,1
-Rifaximin,fk_1432,1
-Rilpivirine,fk_1433,1
-Riluzole,fk_1434,1
-Rimantadine,fk_1435,1
-Rimegepant,fk_1436,1
-Rimexolone,fk_1437,1
-Rimonabant,fk_1438,1
-Riociguat,fk_1439,1
-Ripretinib,fk_1440,1
-Risankizumab,fk_1441,1
-Risedronic acid,fk_1442,1
-Risperidone,fk_1443,1
-Ritodrine,fk_1444,1
-Ritonavir,fk_1445,1
-Rituximab,fk_1446,1
-Rivaroxaban,fk_1447,1
-Rivastigmine,fk_1448,1
-Rizatriptan,fk_1449,1
-Rocuronium,fk_1450,1
-Rofecoxib,fk_1451,1
-Rolapitant,fk_1452,1
-Rolitetracycline,fk_1453,1
-Romidepsin,fk_1454,1
-Romiplostim,fk_1455,1
-Romosozumab,fk_1456,1
-Ropinirole,fk_1457,1
-Ropivacaine,fk_1458,1
-Rosiglitazone,fk_1459,1
-Rosoxacin,fk_1460,1
-Rosuvastatin,fk_1461,1
-Rotigotine,fk_1462,1
-Roxithromycin,fk_1463,1
-Rucaparib,fk_1464,1
-Rupatadine,fk_1465,1
-Ruxolitinib,fk_1466,1
-Sacituzumab govitecan,fk_1467,1
-Sacubitril,fk_1468,1
-Safinamide,fk_1469,1
-Salbutamol,fk_1470,1
-Salicylic acid,fk_1471,1
-Salmeterol,fk_1472,1
-Salsalate,fk_1473,1
-Sapropterin,fk_1474,1
-Saquinavir,fk_1475,1
-Sargramostim,fk_1476,1
-Sarilumab,fk_1477,1
-Saxagliptin,fk_1478,1
-Scopolamine,fk_1479,1
-Secobarbital,fk_1480,1
-Secretin human,fk_1481,1
-Secukinumab,fk_1482,1
-Segesterone acetate,fk_1483,1
-Selegiline,fk_1484,1
-Selexipag,fk_1485,1
-Selinexor,fk_1486,1
-Selpercatinib,fk_1487,1
-Selumetinib,fk_1488,1
-Semaglutide,fk_1489,1
-Seractide acetate,fk_1490,1
-Sermorelin,fk_1491,1
-Sertaconazole,fk_1492,1
-Sertindole,fk_1493,1
-Sertraline,fk_1494,1
-Sevoflurane,fk_1495,1
-Sibutramine,fk_1496,1
-Sildenafil,fk_1497,1
-Silodosin,fk_1498,1
-Siltuximab,fk_1499,1
-Simeprevir,fk_1500,1
-Simoctocog alfa,fk_1501,1
-Simvastatin,fk_1502,1
-Sipuleucel-T,fk_1503,1
-Sirolimus,fk_1504,1
-Sitagliptin,fk_1505,1
-Sitaxentan,fk_1506,1
-Sodium ferric gluconate complex,fk_1507,1
-Sodium stibogluconate,fk_1508,1
-Sodium sulfate,fk_1509,1
-Sodium tetradecyl sulfate,fk_1510,1
-Sofosbuvir,fk_1511,1
-Solifenacin,fk_1512,1
-Somatostatin,fk_1513,1
-Somatotropin,fk_1514,1
-Somatrem,fk_1515,1
-Sorafenib,fk_1516,1
-Sotalol,fk_1517,1
-Soybean oil,fk_1518,1
-Sparfloxacin,fk_1519,1
-Spectinomycin,fk_1520,1
-Spiramycin,fk_1521,1
-Spirapril,fk_1522,1
-Spironolactone,fk_1523,1
-Stanozolol,fk_1524,1
-Stavudine,fk_1525,1
-Stiripentol,fk_1526,1
-Streptokinase,fk_1527,1
-Streptomycin,fk_1528,1
-Streptozocin,fk_1529,1
-Succinylcholine,fk_1530,1
-Sucralfate,fk_1531,1
-Sufentanil,fk_1532,1
-Sulbactam,fk_1533,1
-Sulfacetamide,fk_1534,1
-Sulfacytine,fk_1535,1
-Sulfadiazine,fk_1536,1
-Sulfadoxine,fk_1537,1
-Sulfamerazine,fk_1538,1
-Sulfameter,fk_1539,1
-Sulfamethazine,fk_1540,1
-Sulfamethizole,fk_1541,1
-Sulfamethoxazole,fk_1542,1
-Sulfametopyrazine,fk_1543,1
-Sulfanilamide,fk_1544,1
-Sulfaphenazole,fk_1545,1
-Sulfasalazine,fk_1546,1
-Sulfathiazole,fk_1547,1
-Sulfinpyrazone,fk_1548,1
-Sulfisoxazole,fk_1549,1
-Sulfoxone,fk_1550,1
-Sulindac,fk_1551,1
-Sulodexide,fk_1552,1
-Sulpiride,fk_1553,1
-Sumatriptan,fk_1554,1
-Sunitinib,fk_1555,1
-Suprofen,fk_1556,1
-Susoctocog alfa,fk_1557,1
-Suvorexant,fk_1558,1
-"Synthetic Conjugated Estrogens, A",fk_1559,1
-"Synthetic Conjugated Estrogens, B",fk_1560,1
-Tacrine,fk_1561,1
-Tacrolimus,fk_1562,1
-Tadalafil,fk_1563,1
-Tafamidis,fk_1564,1
-Tafluprost,fk_1565,1
-Tagraxofusp,fk_1566,1
-Talazoparib,fk_1567,1
-Talbutal,fk_1568,1
-Talimogene laherparepvec,fk_1569,1
-Tamoxifen,fk_1570,1
-Tamsulosin,fk_1571,1
-Tapentadol,fk_1572,1
-Tasimelteon,fk_1573,1
-Tasonermin,fk_1574,1
-Taurine,fk_1575,1
-Tavaborole,fk_1576,1
-Tazarotene,fk_1577,1
-Tazemetostat,fk_1578,1
-Tazobactam,fk_1579,1
-Technetium Tc-99m nofetumomab merpentan,fk_1580,1
-Technetium Tc-99m tilmanocept,fk_1581,1
-Tecovirimat,fk_1582,1
-Teduglutide,fk_1583,1
-Tegafur,fk_1584,1
-Tegafur-uracil,fk_1585,1
-Tegaserod,fk_1586,1
-Telaprevir,fk_1587,1
-Telbivudine,fk_1588,1
-Telmisartan,fk_1589,1
-Telotristat ethyl,fk_1590,1
-Temazepam,fk_1591,1
-Temsirolimus,fk_1592,1
-Tenapanor,fk_1593,1
-Tenecteplase,fk_1594,1
-Teniposide,fk_1595,1
-Tenofovir alafenamide,fk_1596,1
-Tenofovir disoproxil,fk_1597,1
-Tenoxicam,fk_1598,1
-Terazosin,fk_1599,1
-Terbinafine,fk_1600,1
-Terbutaline,fk_1601,1
-Terconazole,fk_1602,1
-Terfenadine,fk_1603,1
-Terlipressin,fk_1604,1
-Tesamorelin,fk_1605,1
-Testolactone,fk_1606,1
-Testosterone,fk_1607,1
-Testosterone cypionate,fk_1608,1
-Testosterone enanthate,fk_1609,1
-Testosterone propionate,fk_1610,1
-Testosterone undecanoate,fk_1611,1
-"Tetanus immune globulin, human",fk_1612,1
-Tetrabenazine,fk_1613,1
-Tetracaine,fk_1614,1
-Tetracosactide,fk_1615,1
-Tetracycline,fk_1616,1
-Tetradecyl hydrogen sulfate (ester),fk_1617,1
-Tetraferric tricitrate decahydrate,fk_1618,1
-Tetryzoline,fk_1619,1
-Tezacaftor,fk_1620,1
-Thalidomide,fk_1621,1
-Theophylline,fk_1622,1
-Thiabendazole,fk_1623,1
-Thiamine,fk_1624,1
-Thiamylal,fk_1625,1
-Thiopental,fk_1626,1
-Thioridazine,fk_1627,1
-Thiothixene,fk_1628,1
-Thonzonium,fk_1629,1
-Thonzylamine,fk_1630,1
-Thrombin,fk_1631,1
-Thrombin alfa,fk_1632,1
-Thrombomodulin Alfa,fk_1633,1
-Thyrotropin alfa,fk_1634,1
-Tiagabine,fk_1635,1
-Tiaprofenic acid,fk_1636,1
-Tibolone,fk_1637,1
-Ticagrelor,fk_1638,1
-Ticarcillin,fk_1639,1
-Ticlopidine,fk_1640,1
-Tigecycline,fk_1641,1
-Tildrakizumab,fk_1642,1
-Timolol,fk_1643,1
-Tinzaparin,fk_1644,1
-Tioconazole,fk_1645,1
-Tiotropium,fk_1646,1
-Tipiracil,fk_1647,1
-Tipranavir,fk_1648,1
-Tirofiban,fk_1649,1
-Tisagenlecleucel,fk_1650,1
-Tixocortol,fk_1651,1
-Tobramycin,fk_1652,1
-Tocainide,fk_1653,1
-Tocilizumab,fk_1654,1
-Tofacitinib,fk_1655,1
-Tolazamide,fk_1656,1
-Tolazoline,fk_1657,1
-Tolbutamide,fk_1658,1
-Tolcapone,fk_1659,1
-Tolfenamic acid,fk_1660,1
-Tolmetin,fk_1661,1
-Tolnaftate,fk_1662,1
-Tolterodine,fk_1663,1
-Tolvaptan,fk_1664,1
-Topiramate,fk_1665,1
-Topotecan,fk_1666,1
-Torasemide,fk_1667,1
-Toremifene,fk_1668,1
-Tositumomab,fk_1669,1
-Tramadol,fk_1670,1
-Trametinib,fk_1671,1
-Trandolapril,fk_1672,1
-Tranexamic acid,fk_1673,1
-Tranylcypromine,fk_1674,1
-Trastuzumab,fk_1675,1
-Trastuzumab deruxtecan,fk_1676,1
-Trastuzumab emtansine,fk_1677,1
-Travoprost,fk_1678,1
-Trazodone,fk_1679,1
-Treprostinil,fk_1680,1
-Tretinoin,fk_1681,1
-Triamcinolone,fk_1682,1
-Triamterene,fk_1683,1
-Triazolam,fk_1684,1
-Trichlormethiazide,fk_1685,1
-Triclocarban,fk_1686,1
-Trifarotene,fk_1687,1
-Trifluoperazine,fk_1688,1
-Triflupromazine,fk_1689,1
-Trifluridine,fk_1690,1
-Triflusal,fk_1691,1
-Trihexyphenidyl,fk_1692,1
-Trilostane,fk_1693,1
-Trimebutine,fk_1694,1
-Trimetazidine,fk_1695,1
-Trimethadione,fk_1696,1
-Trimethaphan,fk_1697,1
-Trimethoprim,fk_1698,1
-Trimetrexate,fk_1699,1
-Trimipramine,fk_1700,1
-Tripelennamine,fk_1701,1
-Triprolidine,fk_1702,1
-Triptorelin,fk_1703,1
-Troglitazone,fk_1704,1
-Trolamine salicylate,fk_1705,1
-Troleandomycin,fk_1706,1
-Tropicamide,fk_1707,1
-Tropisetron,fk_1708,1
-Trovafloxacin,fk_1709,1
-Tuberculin purified protein derivative,fk_1710,1
-Tubocurarine,fk_1711,1
-Tucatinib,fk_1712,1
-Turoctocog alfa,fk_1713,1
-Turoctocog alfa pegol,fk_1714,1
-Tyloxapol,fk_1715,1
-Ubidecarenone,fk_1716,1
-Ubrogepant,fk_1717,1
-Udenafil,fk_1718,1
-Ulipristal,fk_1719,1
-Ulobetasol,fk_1720,1
-Umeclidinium,fk_1721,1
-Upadacitinib,fk_1722,1
-Urea,fk_1723,1
-Urea C-13,fk_1724,1
-Urea C-14,fk_1725,1
-Urofollitropin,fk_1726,1
-Urokinase,fk_1727,1
-Ursodeoxycholic acid,fk_1728,1
-Ustekinumab,fk_1729,1
-Vaborbactam,fk_1730,1
-Valaciclovir,fk_1731,1
-Valbenazine,fk_1732,1
-Valdecoxib,fk_1733,1
-Valproic acid,fk_1734,1
-Valrubicin,fk_1735,1
-Valsartan,fk_1736,1
-Vardenafil,fk_1737,1
-Varenicline,fk_1738,1
-Vasopressin,fk_1739,1
-Vecuronium,fk_1740,1
-Vedolizumab,fk_1741,1
-Velpatasvir,fk_1742,1
-Vemurafenib,fk_1743,1
-Venetoclax,fk_1744,1
-Venlafaxine,fk_1745,1
-Verapamil,fk_1746,1
-Vernakalant,fk_1747,1
-Vidarabine,fk_1748,1
-Vigabatrin,fk_1749,1
-Vilanterol,fk_1750,1
-Vilazodone,fk_1751,1
-Vildagliptin,fk_1752,1
-Viloxazine,fk_1753,1
-Vinblastine,fk_1754,1
-Vincristine,fk_1755,1
-Vindesine,fk_1756,1
-Vinflunine,fk_1757,1
-Vinorelbine,fk_1758,1
-Viomycin,fk_1759,1
-Vismodegib,fk_1760,1
-Von Willebrand factor human,fk_1761,1
-Vonicog alfa,fk_1762,1
-Vorapaxar,fk_1763,1
-Voretigene neparvovec,fk_1764,1
-Voriconazole,fk_1765,1
-Vorinostat,fk_1766,1
-Vortioxetine,fk_1767,1
-Voxelotor,fk_1768,1
-Voxilaprevir,fk_1769,1
-Warfarin,fk_1770,1
-Xamoterol,fk_1771,1
-Xanthinol,fk_1772,1
-Ximelagatran,fk_1773,1
-Xylometazoline,fk_1774,1
-Yohimbine,fk_1775,1
-Zafirlukast,fk_1776,1
-Zalcitabine,fk_1777,1
-Zaleplon,fk_1778,1
-Zanamivir,fk_1779,1
-Zanubrutinib,fk_1780,1
-Ziconotide,fk_1781,1
-Zidovudine,fk_1782,1
-Zileuton,fk_1783,1
-Ziprasidone,fk_1784,1
-Zofenopril,fk_1785,1
-Zoledronic acid,fk_1786,1
-Zolmitriptan,fk_1787,1
-Zolpidem,fk_1788,1
-Zonisamide,fk_1789,1
-Zopiclone,fk_1790,1
-Zotepine,fk_1791,1
-Zucapsaicin,fk_1792,1
-Zuclopenthixol,fk_1793,1
-alpha-Linolenic acid,fk_1794,1
-gamma-Hydroxybutyric acid,fk_1795,1
+"source","dest","weight"
+"abacavir","v_1",1
+"abaloparatide","v_2",1
+"abarelix","v_3",1
+"abatacept","v_4",1
+"abciximab","v_5",1
+"abemaciclib","v_6",1
+"abiraterone","v_7",1
+"acalabrutinib","v_8",1
+"acamprosate","v_9",1
+"acarbose","v_10",1
+"acebutolol","v_11",1
+"aceclofenac","v_12",1
+"acemetacin","v_13",1
+"acenocoumarol","v_14",1
+"acetaminophen","v_15",1
+"acetazolamide","v_16",1
+"acetohexamide","v_17",1
+"acetohydroxamic acid","v_18",1
+"acetophenazine","v_19",1
+"acetyl sulfisoxazole","v_20",1
+"acetylcysteine","v_21",1
+"acetyldigitoxin","v_22",1
+"acetylsalicylic acid","v_23",1
+"acitretin","v_24",1
+"aclidinium","v_25",1
+"acrivastine","v_26",1
+"acyclovir","v_27",1
+"adalimumab","v_28",1
+"adapalene","v_29",1
+"adefovir dipivoxil","v_30",1
+"adenosine","v_31",1
+"adenosine phosphate","v_32",1
+"afamelanotide","v_33",1
+"afatinib","v_34",1
+"aflibercept","v_35",1
+"agkistrodon piscivorus antivenin","v_36",1
+"agomelatine","v_37",1
+"ajmaline","v_38",1
+"albendazole","v_39",1
+"albiglutide","v_40",1
+"albutrepenonacog alfa","v_41",1
+"alclofenac","v_42",1
+"alclometasone","v_43",1
+"aldesleukin","v_44",1
+"alectinib","v_45",1
+"alefacept","v_46",1
+"alemtuzumab","v_47",1
+"alendronic acid","v_48",1
+"alfacalcidol","v_49",1
+"alfentanil","v_50",1
+"alfuzosin","v_51",1
+"alglucosidase alfa","v_52",1
+"alimemazine","v_53",1
+"alirocumab","v_54",1
+"aliskiren","v_55",1
+"alitretinoin","v_56",1
+"allopurinol","v_57",1
+"almitrine","v_58",1
+"alogliptin","v_59",1
+"alosetron","v_60",1
+"alpelisib","v_61",1
+"alpha-1-proteinase inhibitor","v_62",1
+"alprazolam","v_63",1
+"alprostadil","v_64",1
+"alteplase","v_65",1
+"alverine","v_66",1
+"alvimopan","v_67",1
+"amantadine","v_68",1
+"ambenonium","v_69",1
+"ambrisentan","v_70",1
+"amcinonide","v_71",1
+"amifampridine","v_72",1
+"amifostine","v_73",1
+"amikacin","v_74",1
+"amiloride","v_75",1
+"aminocaproic acid","v_76",1
+"aminoglutethimide","v_77",1
+"aminolevulinic acid","v_78",1
+"aminophylline","v_79",1
+"amiodarone","v_80",1
+"amisulpride","v_81",1
+"amitriptyline","v_82",1
+"amlodipine","v_83",1
+"amobarbital","v_84",1
+"amoxapine","v_85",1
+"amphetamine","v_86",1
+"ampicillin","v_87",1
+"amprenavir","v_88",1
+"amrinone","v_89",1
+"amsacrine","v_90",1
+"amyl nitrite","v_91",1
+"amylocaine","v_92",1
+"anagrelide","v_93",1
+"anakinra","v_94",1
+"anastrozole","v_95",1
+"ancestim","v_96",1
+"andexanet alfa","v_97",1
+"angiotensin ii","v_98",1
+"anidulafungin","v_99",1
+"anileridine","v_100",1
+"anisindione","v_101",1
+"anisotropine methylbromide","v_102",1
+"anistreplase","v_103",1
+"antazoline","v_104",1
+"anthralin","v_105",1
+"anthrax immune globulin human","v_106",1
+"anti-inhibitor coagulant complex","v_107",1
+"antihemophilic factor (recombinant), pegylated","v_108",1
+"antihemophilic factor human","v_109",1
+"antihemophilic factor, human recombinant","v_110",1
+"antithrombin alfa","v_111",1
+"antithymocyte immunoglobulin (rabbit)","v_112",1
+"apalutamide","v_113",1
+"apixaban","v_114",1
+"apomorphine","v_115",1
+"apraclonidine","v_116",1
+"apremilast","v_117",1
+"aprepitant","v_118",1
+"arbutamine","v_119",1
+"arbutin","v_120",1
+"ardeparin","v_121",1
+"arformoterol","v_122",1
+"argatroban","v_123",1
+"aripiprazole","v_124",1
+"aripiprazole lauroxil","v_125",1
+"armodafinil","v_126",1
+"arsenic trioxide","v_127",1
+"artesunate","v_128",1
+"asenapine","v_129",1
+"asfotase alfa","v_130",1
+"asparagine","v_131",1
+"astemizole","v_132",1
+"asunaprevir","v_133",1
+"atazanavir","v_134",1
+"atenolol","v_135",1
+"atezolizumab","v_136",1
+"atomoxetine","v_137",1
+"atorvastatin","v_138",1
+"atosiban","v_139",1
+"atovaquone","v_140",1
+"atracurium besylate","v_141",1
+"atropine","v_142",1
+"auranofin","v_143",1
+"avanafil","v_144",1
+"avatrombopag","v_145",1
+"avelumab","v_146",1
+"avibactam","v_147",1
+"axicabtagene ciloleucel","v_148",1
+"axitinib","v_149",1
+"azacitidine","v_150",1
+"azatadine","v_151",1
+"azelaic acid","v_152",1
+"azelastine","v_153",1
+"azilsartan medoxomil","v_154",1
+"azlocillin","v_155",1
+"aztreonam","v_156",1
+"bacampicillin","v_157",1
+"bacitracin","v_158",1
+"baclofen","v_159",1
+"balsalazide","v_160",1
+"baricitinib","v_161",1
+"basiliximab","v_162",1
+"bazedoxifene","v_163",1
+"becaplermin","v_164",1
+"beclomethasone dipropionate","v_165",1
+"bedaquiline","v_166",1
+"belatacept","v_167",1
+"belimumab","v_168",1
+"belinostat","v_169",1
+"bemiparin","v_170",1
+"bempedoic acid","v_171",1
+"benazepril","v_172",1
+"bendroflumethiazide","v_173",1
+"benralizumab","v_174",1
+"benserazide","v_175",1
+"benzatropine","v_176",1
+"benzocaine","v_177",1
+"benzphetamine","v_178",1
+"benzthiazide","v_179",1
+"benzylpenicilloyl polylysine","v_180",1
+"bepotastine","v_181",1
+"bepridil","v_182",1
+"besifloxacin","v_183",1
+"betahistine","v_184",1
+"betamethasone","v_185",1
+"betaxolol","v_186",1
+"betazole","v_187",1
+"bethanechol","v_188",1
+"bethanidine","v_189",1
+"betrixaban","v_190",1
+"bevacizumab","v_191",1
+"bexarotene","v_192",1
+"bezafibrate","v_193",1
+"bezlotoxumab","v_194",1
+"bicalutamide","v_195",1
+"bictegravir","v_196",1
+"bifonazole","v_197",1
+"bilastine","v_198",1
+"bimatoprost","v_199",1
+"binimetinib","v_200",1
+"bioallethrin","v_201",1
+"biperiden","v_202",1
+"bisoprolol","v_203",1
+"bivalirudin","v_204",1
+"blinatumomab","v_205",1
+"boceprevir","v_206",1
+"bortezomib","v_207",1
+"bosentan","v_208",1
+"bosutinib","v_209",1
+"botulinum toxin type a","v_210",1
+"botulinum toxin type b","v_211",1
+"brentuximab vedotin","v_212",1
+"bretylium","v_213",1
+"brexanolone","v_214",1
+"brexpiprazole","v_215",1
+"brigatinib","v_216",1
+"brimonidine","v_217",1
+"brinzolamide","v_218",1
+"brivaracetam","v_219",1
+"brivudine","v_220",1
+"brolucizumab","v_221",1
+"bromazepam","v_222",1
+"bromfenac","v_223",1
+"bromocriptine","v_224",1
+"bromodiphenhydramine","v_225",1
+"brompheniramine","v_226",1
+"buclizine","v_227",1
+"budesonide","v_228",1
+"bufexamac","v_229",1
+"bumetanide","v_230",1
+"bupivacaine","v_231",1
+"buprenorphine","v_232",1
+"bupropion","v_233",1
+"burosumab","v_234",1
+"buserelin","v_235",1
+"buspirone","v_236",1
+"butabarbital","v_237",1
+"butalbital","v_238",1
+"butamben","v_239",1
+"butenafine","v_240",1
+"butobarbital","v_241",1
+"butorphanol","v_242",1
+"butriptyline","v_243",1
+"butylscopolamine","v_244",1
+"cabazitaxel","v_245",1
+"cabergoline","v_246",1
+"cabozantinib","v_247",1
+"caffeine","v_248",1
+"calcifediol","v_249",1
+"calcitriol","v_250",1
+"calcium phosphate","v_251",1
+"calcium carbimide","v_252",1
+"calcium citrate","v_253",1
+"calcium phosphate dihydrate","v_254",1
+"camphor","v_255",1
+"canagliflozin","v_256",1
+"canakinumab","v_257",1
+"candesartan cilexetil","v_258",1
+"cangrelor","v_259",1
+"cannabidiol","v_260",1
+"capecitabine","v_261",1
+"capmatinib","v_262",1
+"capreomycin","v_263",1
+"capromab pendetide","v_264",1
+"capsaicin","v_265",1
+"capsicum oleoresin","v_266",1
+"captopril","v_267",1
+"carbamazepine","v_268",1
+"carbamoylcholine","v_269",1
+"carbenicillin","v_270",1
+"carbetocin","v_271",1
+"carbidopa","v_272",1
+"carbimazole","v_273",1
+"carbinoxamine","v_274",1
+"carbon monoxide","v_275",1
+"carboprost tromethamine","v_276",1
+"carfilzomib","v_277",1
+"carglumic acid","v_278",1
+"carindacillin","v_279",1
+"cariprazine","v_280",1
+"carmustine","v_281",1
+"carprofen","v_282",1
+"carteolol","v_283",1
+"carvedilol","v_284",1
+"caspofungin","v_285",1
+"castor oil","v_286",1
+"catridecacog","v_287",1
+"catumaxomab","v_288",1
+"cefaclor","v_289",1
+"cefadroxil","v_290",1
+"cefalotin","v_291",1
+"cefamandole","v_292",1
+"cefapirin","v_293",1
+"cefazolin","v_294",1
+"cefdinir","v_295",1
+"cefditoren","v_296",1
+"cefepime","v_297",1
+"cefiderocol","v_298",1
+"cefixime","v_299",1
+"cefmenoxime","v_300",1
+"cefmetazole","v_301",1
+"cefonicid","v_302",1
+"cefoperazone","v_303",1
+"ceforanide","v_304",1
+"cefotaxime","v_305",1
+"cefotetan","v_306",1
+"cefotiam","v_307",1
+"cefoxitin","v_308",1
+"cefpiramide","v_309",1
+"cefpodoxime","v_310",1
+"cefprozil","v_311",1
+"cefradine","v_312",1
+"ceftazidime","v_313",1
+"ceftibuten","v_314",1
+"ceftizoxime","v_315",1
+"ceftolozane","v_316",1
+"ceftriaxone","v_317",1
+"cefuroxime","v_318",1
+"celecoxib","v_319",1
+"celiprolol","v_320",1
+"cemiplimab","v_321",1
+"cephalexin","v_322",1
+"cephaloglycin","v_323",1
+"ceritinib","v_324",1
+"cerivastatin","v_325",1
+"certolizumab pegol","v_326",1
+"ceruletide","v_327",1
+"cetirizine","v_328",1
+"cetrorelix","v_329",1
+"cetuximab","v_330",1
+"cevimeline","v_331",1
+"chlorcyclizine","v_332",1
+"chlordiazepoxide","v_333",1
+"chlormerodrin","v_334",1
+"chlormezanone","v_335",1
+"chloroprocaine","v_336",1
+"chlorothiazide","v_337",1
+"chlorpheniramine","v_338",1
+"chlorpromazine","v_339",1
+"chlorpropamide","v_340",1
+"chlorprothixene","v_341",1
+"chlortetracycline","v_342",1
+"chlorthalidone","v_343",1
+"chlorzoxazone","v_344",1
+"cholecalciferol","v_345",1
+"choriogonadotropin alfa","v_346",1
+"chorionic gonadotropin (human)","v_347",1
+"chromic chloride","v_348",1
+"chymopapain","v_349",1
+"ciclesonide","v_350",1
+"ciclopirox","v_351",1
+"cidofovir","v_352",1
+"cilastatin","v_353",1
+"cilazapril","v_354",1
+"cilostazol","v_355",1
+"cimetidine","v_356",1
+"cinacalcet","v_357",1
+"cinchocaine","v_358",1
+"cinnarizine","v_359",1
+"cinoxacin","v_360",1
+"ciprofloxacin","v_361",1
+"cisapride","v_362",1
+"cisatracurium","v_363",1
+"citalopram","v_364",1
+"citric acid","v_365",1
+"cladribine","v_366",1
+"clarithromycin","v_367",1
+"clemastine","v_368",1
+"clenbuterol","v_369",1
+"clidinium","v_370",1
+"clindamycin","v_371",1
+"clobazam","v_372",1
+"clobetasol propionate","v_373",1
+"clobetasone","v_374",1
+"clocortolone","v_375",1
+"clodronic acid","v_376",1
+"clofarabine","v_377",1
+"clofedanol","v_378",1
+"clofibrate","v_379",1
+"clomifene","v_380",1
+"clomipramine","v_381",1
+"clonazepam","v_382",1
+"clonidine","v_383",1
+"clopidogrel","v_384",1
+"clorazepic acid","v_385",1
+"clotiazepam","v_386",1
+"clotrimazole","v_387",1
+"cloxacillin","v_388",1
+"clozapine","v_389",1
+"coagulation factor ix (recombinant)","v_390",1
+"coagulation factor ix human","v_391",1
+"coagulation factor vii human","v_392",1
+"cobimetinib","v_393",1
+"cocaine","v_394",1
+"codeine","v_395",1
+"colchicine","v_396",1
+"conestat alfa","v_397",1
+"conivaptan","v_398",1
+"conjugated estrogens","v_399",1
+"copanlisib","v_400",1
+"corifollitropin alfa","v_401",1
+"corticorelin ovine triflutate","v_402",1
+"corticotropin","v_403",1
+"cortisone acetate","v_404",1
+"creatine","v_405",1
+"crizanlizumab","v_406",1
+"crizotinib","v_407",1
+"crofelemer","v_408",1
+"crotalus adamanteus antivenin","v_409",1
+"cryptenamine","v_410",1
+"cyanocobalamin","v_411",1
+"cyclacillin","v_412",1
+"cyclizine","v_413",1
+"cyclobenzaprine","v_414",1
+"cyclopentolate","v_415",1
+"cycloserine","v_416",1
+"cyclosporine","v_417",1
+"cyclothiazide","v_418",1
+"cycrimine","v_419",1
+"cyproheptadine","v_420",1
+"cyproterone acetate","v_421",1
+"cytarabine","v_422",1
+"dl-methylephedrine","v_423",1
+"dabigatran etexilate","v_424",1
+"dabrafenib","v_425",1
+"daclatasvir","v_426",1
+"dacomitinib","v_427",1
+"dalfampridine","v_428",1
+"dalfopristin","v_429",1
+"dalteparin","v_430",1
+"damoctocog alfa pegol","v_431",1
+"danaparoid","v_432",1
+"danazol","v_433",1
+"dantrolene","v_434",1
+"dapagliflozin","v_435",1
+"dapiprazole","v_436",1
+"dapsone","v_437",1
+"darbepoetin alfa","v_438",1
+"darifenacin","v_439",1
+"darolutamide","v_440",1
+"darunavir","v_441",1
+"dasabuvir","v_442",1
+"dasatinib","v_443",1
+"daunorubicin","v_444",1
+"debrisoquine","v_445",1
+"decamethonium","v_446",1
+"decitabine","v_447",1
+"degarelix","v_448",1
+"delafloxacin","v_449",1
+"delavirdine","v_450",1
+"demecarium","v_451",1
+"denileukin diftitox","v_452",1
+"denosumab","v_453",1
+"dequalinium","v_454",1
+"deserpidine","v_455",1
+"desflurane","v_456",1
+"desipramine","v_457",1
+"deslanoside","v_458",1
+"desloratadine","v_459",1
+"desmopressin","v_460",1
+"desogestrel","v_461",1
+"desonide","v_462",1
+"desoximetasone","v_463",1
+"desvenlafaxine","v_464",1
+"deutetrabenazine","v_465",1
+"dexamethasone","v_466",1
+"dexamethasone acetate","v_467",1
+"dexbrompheniramine","v_468",1
+"dexchlorpheniramine maleate","v_469",1
+"dexfenfluramine","v_470",1
+"dexibuprofen","v_471",1
+"dexlansoprazole","v_472",1
+"dexmedetomidine","v_473",1
+"dexmethylphenidate","v_474",1
+"dexrazoxane","v_475",1
+"dextroamphetamine","v_476",1
+"dextromethorphan","v_477",1
+"dextropropoxyphene","v_478",1
+"dextrothyroxine","v_479",1
+"dezocine","v_480",1
+"diamorphine","v_481",1
+"diazepam","v_482",1
+"diazoxide","v_483",1
+"dibotermin alfa","v_484",1
+"dichloroacetic acid","v_485",1
+"dichlorobenzyl alcohol","v_486",1
+"diclofenac","v_487",1
+"diclofenamide","v_488",1
+"dicloxacillin","v_489",1
+"dicoumarol","v_490",1
+"dicyclomine","v_491",1
+"didanosine","v_492",1
+"dienestrol","v_493",1
+"dienogest","v_494",1
+"diethylcarbamazine","v_495",1
+"diethylpropion","v_496",1
+"diethylstilbestrol","v_497",1
+"diflorasone","v_498",1
+"diflunisal","v_499",1
+"difluocortolone","v_500",1
+"difluprednate","v_501",1
+"digitoxin","v_502",1
+"digoxin","v_503",1
+"dihydro-alpha-ergocryptine","v_504",1
+"dihydroergocornine","v_505",1
+"dihydroergocristine","v_506",1
+"dihydroergotamine","v_507",1
+"dihydrotachysterol","v_508",1
+"diltiazem","v_509",1
+"dimenhydrinate","v_510",1
+"dimethyl fumarate","v_511",1
+"dimetindene","v_512",1
+"dinoprost tromethamine","v_513",1
+"dinoprostone","v_514",1
+"diphemanil","v_515",1
+"diphenhydramine","v_516",1
+"diphenidol","v_517",1
+"diphenoxylate","v_518",1
+"diphenylpyraline","v_519",1
+"dipivefrin","v_520",1
+"dipyridamole","v_521",1
+"disopyramide","v_522",1
+"disulfiram","v_523",1
+"dobutamine","v_524",1
+"docetaxel","v_525",1
+"doconexent","v_526",1
+"docosanol","v_527",1
+"dofetilide","v_528",1
+"dolasetron","v_529",1
+"dolutegravir","v_530",1
+"domperidone","v_531",1
+"donepezil","v_532",1
+"dopamine","v_533",1
+"doripenem","v_534",1
+"dorzolamide","v_535",1
+"dosulepin","v_536",1
+"dotatate gallium ga-68","v_537",1
+"doxacurium","v_538",1
+"doxapram","v_539",1
+"doxazosin","v_540",1
+"doxepin","v_541",1
+"doxorubicin","v_542",1
+"doxylamine","v_543",1
+"dronabinol","v_544",1
+"dronedarone","v_545",1
+"droperidol","v_546",1
+"drospirenone","v_547",1
+"drotaverine","v_548",1
+"drotrecogin alfa","v_549",1
+"droxidopa","v_550",1
+"dulaglutide","v_551",1
+"duloxetine","v_552",1
+"dupilumab","v_553",1
+"durvalumab","v_554",1
+"dutasteride","v_555",1
+"duvelisib","v_556",1
+"dyclonine","v_557",1
+"dydrogesterone","v_558",1
+"dyphylline","v_559",1
+"ecallantide","v_560",1
+"echothiophate","v_561",1
+"econazole","v_562",1
+"eculizumab","v_563",1
+"edotreotide gallium ga-68","v_564",1
+"edoxaban","v_565",1
+"edoxudine","v_566",1
+"edrophonium","v_567",1
+"efalizumab","v_568",1
+"efavirenz","v_569",1
+"efinaconazole","v_570",1
+"eflornithine","v_571",1
+"efmoroctocog alfa","v_572",1
+"elbasvir","v_573",1
+"eletriptan","v_574",1
+"elexacaftor","v_575",1
+"eliglustat","v_576",1
+"elotuzumab","v_577",1
+"eluxadoline","v_578",1
+"elvitegravir","v_579",1
+"emapalumab","v_580",1
+"emedastine","v_581",1
+"emicizumab","v_582",1
+"empagliflozin","v_583",1
+"emtricitabine","v_584",1
+"enalapril","v_585",1
+"enalaprilat","v_586",1
+"enasidenib","v_587",1
+"encainide","v_588",1
+"encorafenib","v_589",1
+"enflurane","v_590",1
+"enfuvirtide","v_591",1
+"enoxacin","v_592",1
+"enoxaparin","v_593",1
+"enoximone","v_594",1
+"enprofylline","v_595",1
+"entacapone","v_596",1
+"entrectinib","v_597",1
+"enzalutamide","v_598",1
+"ephedrine","v_599",1
+"epicriptine","v_600",1
+"epinastine","v_601",1
+"epinephrine","v_602",1
+"eplerenone","v_603",1
+"epoprostenol","v_604",1
+"eprosartan","v_605",1
+"eptifibatide","v_606",1
+"eptinezumab","v_607",1
+"equine botulinum neurotoxin a immune fab2","v_608",1
+"equine botulinum neurotoxin b immune fab2","v_609",1
+"equine botulinum neurotoxin c immune fab2","v_610",1
+"equine botulinum neurotoxin d immune fab2","v_611",1
+"equine botulinum neurotoxin e immune fab2","v_612",1
+"equine botulinum neurotoxin f immune fab2","v_613",1
+"equine botulinum neurotoxin g immune fab2","v_614",1
+"eravacycline","v_615",1
+"erdafitinib","v_616",1
+"ergocalciferol","v_617",1
+"ergoloid mesylate","v_618",1
+"ergometrine","v_619",1
+"ergotamine","v_620",1
+"erlotinib","v_621",1
+"ertapenem","v_622",1
+"ertugliflozin","v_623",1
+"erythrityl tetranitrate","v_624",1
+"erythropoietin","v_625",1
+"escitalopram","v_626",1
+"eslicarbazepine","v_627",1
+"eslicarbazepine acetate","v_628",1
+"esmolol","v_629",1
+"esomeprazole","v_630",1
+"estazolam","v_631",1
+"estradiol","v_632",1
+"estradiol acetate","v_633",1
+"estradiol benzoate","v_634",1
+"estradiol cypionate","v_635",1
+"estradiol dienanthate","v_636",1
+"estradiol valerate","v_637",1
+"estramustine","v_638",1
+"estriol","v_639",1
+"estrone","v_640",1
+"estrone sulfate","v_641",1
+"eszopiclone","v_642",1
+"etacrynic acid","v_643",1
+"etafedrine","v_644",1
+"etanercept","v_645",1
+"etelcalcetide","v_646",1
+"ethambutol","v_647",1
+"ethanol","v_648",1
+"ethchlorvynol","v_649",1
+"ethinamate","v_650",1
+"ethinylestradiol","v_651",1
+"ethionamide","v_652",1
+"ethosuximide","v_653",1
+"ethotoin","v_654",1
+"ethynodiol diacetate","v_655",1
+"etodolac","v_656",1
+"etomidate","v_657",1
+"etonogestrel","v_658",1
+"etoposide","v_659",1
+"etoricoxib","v_660",1
+"everolimus","v_661",1
+"exemestane","v_662",1
+"exenatide","v_663",1
+"ezetimibe","v_664",1
+"famciclovir","v_665",1
+"famotidine","v_666",1
+"favipiravir","v_667",1
+"febuxostat","v_668",1
+"fedratinib","v_669",1
+"felbamate","v_670",1
+"felodipine","v_671",1
+"fenfluramine","v_672",1
+"fenofibrate","v_673",1
+"fenofibric acid","v_674",1
+"fenoldopam","v_675",1
+"fenoprofen","v_676",1
+"fenoterol","v_677",1
+"fentanyl","v_678",1
+"ferric cation","v_679",1
+"ferric pyrophosphate citrate","v_680",1
+"ferrous sulfate anhydrous","v_681",1
+"fesoterodine","v_682",1
+"fexofenadine","v_683",1
+"fidaxomicin","v_684",1
+"filgrastim","v_685",1
+"finafloxacin","v_686",1
+"finasteride","v_687",1
+"fingolimod","v_688",1
+"fish oil","v_689",1
+"flavoxate","v_690",1
+"flecainide","v_691",1
+"flibanserin","v_692",1
+"florbetaben (18f)","v_693",1
+"florbetapir (18f)","v_694",1
+"flortaucipir f-18","v_695",1
+"floxuridine","v_696",1
+"fluciclovine (18f)","v_697",1
+"flucloxacillin","v_698",1
+"fluconazole","v_699",1
+"fludarabine","v_700",1
+"fludrocortisone","v_701",1
+"flumazenil","v_702",1
+"flumethasone","v_703",1
+"flunarizine","v_704",1
+"flunisolide","v_705",1
+"flunitrazepam","v_706",1
+"fluocinolone acetonide","v_707",1
+"fluocinonide","v_708",1
+"fluorometholone","v_709",1
+"fluorouracil","v_710",1
+"fluoxetine","v_711",1
+"fluoxymesterone","v_712",1
+"flupentixol","v_713",1
+"fluphenazine","v_714",1
+"flurandrenolide","v_715",1
+"flurazepam","v_716",1
+"flurbiprofen","v_717",1
+"fluspirilene","v_718",1
+"flutamide","v_719",1
+"flutemetamol (18f)","v_720",1
+"fluticasone","v_721",1
+"fluticasone furoate","v_722",1
+"fluticasone propionate","v_723",1
+"fluvastatin","v_724",1
+"fluvoxamine","v_725",1
+"follitropin","v_726",1
+"fomepizole","v_727",1
+"fomivirsen","v_728",1
+"fondaparinux","v_729",1
+"foreskin fibroblast (neonatal)","v_730",1
+"foreskin keratinocyte (neonatal)","v_731",1
+"formoterol","v_732",1
+"fosamprenavir","v_733",1
+"foscarnet","v_734",1
+"fosfomycin","v_735",1
+"fosinopril","v_736",1
+"fosnetupitant","v_737",1
+"fosphenytoin","v_738",1
+"fospropofol","v_739",1
+"fostamatinib","v_740",1
+"framycetin","v_741",1
+"fremanezumab","v_742",1
+"frovatriptan","v_743",1
+"fulvestrant","v_744",1
+"furosemide","v_745",1
+"fusidic acid","v_746",1
+"gabapentin","v_747",1
+"galantamine","v_748",1
+"galcanezumab","v_749",1
+"gallamine triethiodide","v_750",1
+"gallium nitrate","v_751",1
+"galsulfase","v_752",1
+"ganciclovir","v_753",1
+"ganirelix","v_754",1
+"gatifloxacin","v_755",1
+"gefitinib","v_756",1
+"gemcitabine","v_757",1
+"gemeprost","v_758",1
+"gemfibrozil","v_759",1
+"gemifloxacin","v_760",1
+"gemtuzumab ozogamicin","v_761",1
+"gentamicin","v_762",1
+"gilteritinib","v_763",1
+"glasdegib","v_764",1
+"glecaprevir","v_765",1
+"gliclazide","v_766",1
+"glimepiride","v_767",1
+"glipizide","v_768",1
+"gliquidone","v_769",1
+"glucagon","v_770",1
+"glucosamine","v_771",1
+"glutethimide","v_772",1
+"glyburide","v_773",1
+"glycerin","v_774",1
+"glycol salicylate","v_775",1
+"glycopyrronium","v_776",1
+"glycyrrhizic acid","v_777",1
+"glymidine","v_778",1
+"golimumab","v_779",1
+"golodirsen","v_780",1
+"gonadorelin","v_781",1
+"goserelin","v_782",1
+"granisetron","v_783",1
+"grazoprevir","v_784",1
+"grepafloxacin","v_785",1
+"griseofulvin","v_786",1
+"guanabenz","v_787",1
+"guanadrel","v_788",1
+"guanethidine","v_789",1
+"guanfacine","v_790",1
+"guanidine","v_791",1
+"guselkumab","v_792",1
+"halazepam","v_793",1
+"halofantrine","v_794",1
+"haloperidol","v_795",1
+"halothane","v_796",1
+"heparin","v_797",1
+"hetacillin","v_798",1
+"hexachlorophene","v_799",1
+"hexafluronium","v_800",1
+"hexocyclium","v_801",1
+"hexylcaine","v_802",1
+"histamine","v_803",1
+"histrelin","v_804",1
+"homatropine","v_805",1
+"homatropine methylbromide","v_806",1
+"human c1-esterase inhibitor","v_807",1
+"human rho(d) immune globulin","v_808",1
+"human calcitonin","v_809",1
+"human immunoglobulin g","v_810",1
+"human interferon beta","v_811",1
+"human thrombin","v_812",1
+"hyaluronic acid","v_813",1
+"hydralazine","v_814",1
+"hydrochlorothiazide","v_815",1
+"hydrocodone","v_816",1
+"hydrocortamate","v_817",1
+"hydrocortisone","v_818",1
+"hydrocortisone acetate","v_819",1
+"hydrocortisone butyrate","v_820",1
+"hydrocortisone cypionate","v_821",1
+"hydrocortisone phosphate","v_822",1
+"hydrocortisone probutate","v_823",1
+"hydrocortisone valerate","v_824",1
+"hydroflumethiazide","v_825",1
+"hydromorphone","v_826",1
+"hydroquinone","v_827",1
+"hydroxocobalamin","v_828",1
+"hydroxychloroquine","v_829",1
+"hydroxyurea","v_830",1
+"hydroxyzine","v_831",1
+"hyoscyamine","v_832",1
+"ibandronate","v_833",1
+"ibritumomab tiuxetan","v_834",1
+"ibrutinib","v_835",1
+"ibuprofen","v_836",1
+"ibutilide","v_837",1
+"icatibant","v_838",1
+"icosapent","v_839",1
+"idarubicin","v_840",1
+"idelalisib","v_841",1
+"ifenprodil","v_842",1
+"iloperidone","v_843",1
+"iloprost","v_844",1
+"imatinib","v_845",1
+"imipenem","v_846",1
+"imipramine","v_847",1
+"imiquimod","v_848",1
+"indacaterol","v_849",1
+"indapamide","v_850",1
+"indecainide","v_851",1
+"indinavir","v_852",1
+"indomethacin","v_853",1
+"inebilizumab","v_854",1
+"infliximab","v_855",1
+"inositol nicotinate","v_856",1
+"inotuzumab ozogamicin","v_857",1
+"insulin aspart","v_858",1
+"insulin degludec","v_859",1
+"insulin detemir","v_860",1
+"insulin glargine","v_861",1
+"insulin glulisine","v_862",1
+"insulin human","v_863",1
+"insulin lispro","v_864",1
+"insulin pork","v_865",1
+"interferon alfa-2a","v_866",1
+"interferon alfa-2b","v_867",1
+"interferon alfa-n1","v_868",1
+"interferon alfa-n3","v_869",1
+"interferon alfacon-1","v_870",1
+"interferon beta-1a","v_871",1
+"interferon beta-1b","v_872",1
+"interferon gamma-1b","v_873",1
+"iodine","v_874",1
+"iopodic acid","v_875",1
+"ipilimumab","v_876",1
+"ipratropium","v_877",1
+"irbesartan","v_878",1
+"irinotecan","v_879",1
+"iron dextran","v_880",1
+"isavuconazole","v_881",1
+"isocarboxazid","v_882",1
+"isoetharine","v_883",1
+"isoflurane","v_884",1
+"isoflurophate","v_885",1
+"isometheptene","v_886",1
+"isoniazid","v_887",1
+"isoprenaline","v_888",1
+"isopropamide","v_889",1
+"isosorbide dinitrate","v_890",1
+"isosorbide mononitrate","v_891",1
+"isradipine","v_892",1
+"istradefylline","v_893",1
+"itraconazole","v_894",1
+"ivacaftor","v_895",1
+"ivermectin","v_896",1
+"ivosidenib","v_897",1
+"ixabepilone","v_898",1
+"ixekizumab","v_899",1
+"kanamycin","v_900",1
+"ketamine","v_901",1
+"ketazolam","v_902",1
+"ketoconazole","v_903",1
+"ketoprofen","v_904",1
+"ketorolac","v_905",1
+"ketotifen","v_906",1
+"labetalol","v_907",1
+"lacidipine","v_908",1
+"lamivudine","v_909",1
+"lamotrigine","v_910",1
+"lanadelumab","v_911",1
+"lansoprazole","v_912",1
+"lapatinib","v_913",1
+"larotrectinib","v_914",1
+"lasmiditan","v_915",1
+"lasofoxifene","v_916",1
+"latamoxef","v_917",1
+"latanoprost","v_918",1
+"latanoprostene bunod","v_919",1
+"ledipasvir","v_920",1
+"lefamulin","v_921",1
+"leflunomide","v_922",1
+"lemborexant","v_923",1
+"lenalidomide","v_924",1
+"lenograstim","v_925",1
+"lenvatinib","v_926",1
+"lepirudin","v_927",1
+"lercanidipine","v_928",1
+"lesinurad","v_929",1
+"letermovir","v_930",1
+"letrozole","v_931",1
+"leuprolide","v_932",1
+"levacetylmethadol","v_933",1
+"levallorphan","v_934",1
+"levamisole","v_935",1
+"levetiracetam","v_936",1
+"levobetaxolol","v_937",1
+"levobunolol","v_938",1
+"levobupivacaine","v_939",1
+"levocabastine","v_940",1
+"levocetirizine","v_941",1
+"levodopa","v_942",1
+"levofloxacin","v_943",1
+"levomenthol","v_944",1
+"levomilnacipran","v_945",1
+"levonordefrin","v_946",1
+"levonorgestrel","v_947",1
+"levorphanol","v_948",1
+"levosalbutamol","v_949",1
+"levosimendan","v_950",1
+"levothyroxine","v_951",1
+"lidocaine","v_952",1
+"lifitegrast","v_953",1
+"linaclotide","v_954",1
+"linagliptin","v_955",1
+"lincomycin","v_956",1
+"lindane","v_957",1
+"liothyronine","v_958",1
+"liotrix","v_959",1
+"lipegfilgrastim","v_960",1
+"liraglutide","v_961",1
+"lisinopril","v_962",1
+"lisuride","v_963",1
+"lixisenatide","v_964",1
+"lofexidine","v_965",1
+"lomefloxacin","v_966",1
+"lomitapide","v_967",1
+"lonoctocog alfa","v_968",1
+"loperamide","v_969",1
+"lopinavir","v_970",1
+"loracarbef","v_971",1
+"loratadine","v_972",1
+"lorazepam","v_973",1
+"lorlatinib","v_974",1
+"lormetazepam","v_975",1
+"lornoxicam","v_976",1
+"lorpiprazole","v_977",1
+"losartan","v_978",1
+"loteprednol etabonate","v_979",1
+"lovastatin","v_980",1
+"loxapine","v_981",1
+"loxoprofen","v_982",1
+"lubiprostone","v_983",1
+"luliconazole","v_984",1
+"lumacaftor","v_985",1
+"lumateperone","v_986",1
+"lumiracoxib","v_987",1
+"lurasidone","v_988",1
+"lusutrombopag","v_989",1
+"lutetium lu 177 dotatate","v_990",1
+"lutropin alfa","v_991",1
+"lyme disease vaccine (recombinant ospa)","v_992",1
+"lymecycline","v_993",1
+"lypressin","v_994",1
+"macitentan","v_995",1
+"magnesium sulfate","v_996",1
+"malathion","v_997",1
+"manidipine","v_998",1
+"maprotiline","v_999",1
+"maraviroc","v_1000",1
+"masoprocol","v_1001",1
+"mazindol","v_1002",1
+"mebendazole","v_1003",1
+"mecamylamine","v_1004",1
+"mecasermin","v_1005",1
+"mecasermin rinfabate","v_1006",1
+"meclizine","v_1007",1
+"meclofenamic acid","v_1008",1
+"mecobalamin","v_1009",1
+"medrogestone","v_1010",1
+"medroxyprogesterone acetate","v_1011",1
+"medrysone","v_1012",1
+"mefenamic acid","v_1013",1
+"megestrol acetate","v_1014",1
+"melatonin","v_1015",1
+"meloxicam","v_1016",1
+"memantine","v_1017",1
+"menadione","v_1018",1
+"menotropins","v_1019",1
+"menthyl salicylate","v_1020",1
+"mepenzolate","v_1021",1
+"meperidine","v_1022",1
+"mephentermine","v_1023",1
+"mephenytoin","v_1024",1
+"mepivacaine","v_1025",1
+"mepolizumab","v_1026",1
+"meprobamate","v_1027",1
+"mepyramine","v_1028",1
+"mercaptopurine","v_1029",1
+"meropenem","v_1030",1
+"mesalazine","v_1031",1
+"mesoridazine","v_1032",1
+"mestranol","v_1033",1
+"metamfetamine","v_1034",1
+"metaraminol","v_1035",1
+"metformin","v_1036",1
+"methacholine","v_1037",1
+"methadone","v_1038",1
+"methantheline","v_1039",1
+"methazolamide","v_1040",1
+"methdilazine","v_1041",1
+"methimazole","v_1042",1
+"methohexital","v_1043",1
+"methotrexate","v_1044",1
+"methotrimeprazine","v_1045",1
+"methoxamine","v_1046",1
+"methoxy polyethylene glycol-epoetin beta","v_1047",1
+"methoxyflurane","v_1048",1
+"methscopolamine bromide","v_1049",1
+"methsuximide","v_1050",1
+"methyldopa","v_1051",1
+"methylene blue","v_1052",1
+"methylergometrine","v_1053",1
+"methylnaltrexone","v_1054",1
+"methylphenidate","v_1055",1
+"methylphenobarbital","v_1056",1
+"methylprednisolone","v_1057",1
+"methyltestosterone","v_1058",1
+"methyprylon","v_1059",1
+"methysergide","v_1060",1
+"meticillin","v_1061",1
+"metipranolol","v_1062",1
+"metixene","v_1063",1
+"metoclopramide","v_1064",1
+"metocurine","v_1065",1
+"metocurine iodide","v_1066",1
+"metolazone","v_1067",1
+"metoprolol","v_1068",1
+"metreleptin","v_1069",1
+"metronidazole","v_1070",1
+"metyrapone","v_1071",1
+"metyrosine","v_1072",1
+"mexiletine","v_1073",1
+"mezlocillin","v_1074",1
+"micafungin","v_1075",1
+"miconazole","v_1076",1
+"midazolam","v_1077",1
+"midodrine","v_1078",1
+"midostaurin","v_1079",1
+"mifamurtide","v_1080",1
+"mifepristone","v_1081",1
+"miglitol","v_1082",1
+"miglustat","v_1083",1
+"milnacipran","v_1084",1
+"milrinone","v_1085",1
+"minaprine","v_1086",1
+"minocycline","v_1087",1
+"minoxidil","v_1088",1
+"mirabegron","v_1089",1
+"mirtazapine","v_1090",1
+"misoprostol","v_1091",1
+"mitotane","v_1092",1
+"mitoxantrone","v_1093",1
+"mivacurium","v_1094",1
+"moclobemide","v_1095",1
+"modafinil","v_1096",1
+"moexipril","v_1097",1
+"mogamulizumab","v_1098",1
+"molindone","v_1099",1
+"mometasone furoate","v_1100",1
+"montelukast","v_1101",1
+"moricizine","v_1102",1
+"moroctocog alfa","v_1103",1
+"morphine","v_1104",1
+"moxetumomab pasudotox","v_1105",1
+"moxidectin","v_1106",1
+"moxifloxacin","v_1107",1
+"moxisylyte","v_1108",1
+"moxonidine","v_1109",1
+"mupirocin","v_1110",1
+"muromonab","v_1111",1
+"mycophenolate mofetil","v_1112",1
+"mycophenolic acid","v_1113",1
+"nabilone","v_1114",1
+"nabumetone","v_1115",1
+"nadolol","v_1116",1
+"nadroparin","v_1117",1
+"nafarelin","v_1118",1
+"nafcillin","v_1119",1
+"naftifine","v_1120",1
+"nalbuphine","v_1121",1
+"naldemedine","v_1122",1
+"nalmefene","v_1123",1
+"naloxegol","v_1124",1
+"naloxone","v_1125",1
+"naltrexone","v_1126",1
+"nandrolone decanoate","v_1127",1
+"nandrolone phenpropionate","v_1128",1
+"naphazoline","v_1129",1
+"naproxen","v_1130",1
+"naratriptan","v_1131",1
+"natalizumab","v_1132",1
+"nateglinide","v_1133",1
+"nebivolol","v_1134",1
+"necitumumab","v_1135",1
+"nedocromil","v_1136",1
+"nefazodone","v_1137",1
+"nelfinavir","v_1138",1
+"neomycin","v_1139",1
+"neostigmine","v_1140",1
+"neratinib","v_1141",1
+"netarsudil","v_1142",1
+"netilmicin","v_1143",1
+"netupitant","v_1144",1
+"nevirapine","v_1145",1
+"niacin","v_1146",1
+"nicardipine","v_1147",1
+"nicergoline","v_1148",1
+"nicorandil","v_1149",1
+"nicotinamide","v_1150",1
+"nicotine","v_1151",1
+"nifedipine","v_1152",1
+"nilotinib","v_1153",1
+"nilutamide","v_1154",1
+"nilvadipine","v_1155",1
+"nimesulide","v_1156",1
+"nimodipine","v_1157",1
+"nintedanib","v_1158",1
+"niraparib","v_1159",1
+"nisoldipine","v_1160",1
+"nitazoxanide","v_1161",1
+"nitisinone","v_1162",1
+"nitrazepam","v_1163",1
+"nitrendipine","v_1164",1
+"nitric oxide","v_1165",1
+"nitrofural","v_1166",1
+"nitrofurantoin","v_1167",1
+"nitroglycerin","v_1168",1
+"nitroprusside","v_1169",1
+"nitrous acid","v_1170",1
+"nivolumab","v_1171",1
+"nizatidine","v_1172",1
+"nonacog beta pegol","v_1173",1
+"norelgestromin","v_1174",1
+"norepinephrine","v_1175",1
+"norethisterone","v_1176",1
+"norfloxacin","v_1177",1
+"norgestimate","v_1178",1
+"norgestrel","v_1179",1
+"nortriptyline","v_1180",1
+"novobiocin","v_1181",1
+"nusinersen","v_1182",1
+"nylidrin","v_1183",1
+"obeticholic acid","v_1184",1
+"obinutuzumab","v_1185",1
+"ocrelizumab","v_1186",1
+"ocriplasmin","v_1187",1
+"ofatumumab","v_1188",1
+"ofloxacin","v_1189",1
+"olanzapine","v_1190",1
+"olaparib","v_1191",1
+"olaratumab","v_1192",1
+"olmesartan","v_1193",1
+"olodaterol","v_1194",1
+"olopatadine","v_1195",1
+"olsalazine","v_1196",1
+"omacetaxine mepesuccinate","v_1197",1
+"omadacycline","v_1198",1
+"omalizumab","v_1199",1
+"ombitasvir","v_1200",1
+"omega-3 fatty acids","v_1201",1
+"omega-3-carboxylic acids","v_1202",1
+"omeprazole","v_1203",1
+"ondansetron","v_1204",1
+"opicapone","v_1205",1
+"opium","v_1206",1
+"oprelvekin","v_1207",1
+"orciprenaline","v_1208",1
+"orlistat","v_1209",1
+"orphenadrine","v_1210",1
+"oseltamivir","v_1211",1
+"osilodrostat","v_1212",1
+"osimertinib","v_1213",1
+"ospemifene","v_1214",1
+"ouabain","v_1215",1
+"oxacillin","v_1216",1
+"oxandrolone","v_1217",1
+"oxaprozin","v_1218",1
+"oxazepam","v_1219",1
+"oxetacaine","v_1220",1
+"oxiconazole","v_1221",1
+"oxprenolol","v_1222",1
+"oxtriphylline","v_1223",1
+"oxybuprocaine","v_1224",1
+"oxybutynin","v_1225",1
+"oxycodone","v_1226",1
+"oxymetazoline","v_1227",1
+"oxymetholone","v_1228",1
+"oxymorphone","v_1229",1
+"oxyphencyclimine","v_1230",1
+"oxyphenonium","v_1231",1
+"oxytetracycline","v_1232",1
+"oxytocin","v_1233",1
+"ozanimod","v_1234",1
+"ozenoxacin","v_1235",1
+"paclitaxel","v_1236",1
+"palbociclib","v_1237",1
+"palifermin","v_1238",1
+"paliperidone","v_1239",1
+"palivizumab","v_1240",1
+"palonosetron","v_1241",1
+"pamidronic acid","v_1242",1
+"pancuronium","v_1243",1
+"panitumumab","v_1244",1
+"panobinostat","v_1245",1
+"pantoprazole","v_1246",1
+"papaverine","v_1247",1
+"paramethadione","v_1248",1
+"parathyroid hormone","v_1249",1
+"parecoxib","v_1250",1
+"pargyline","v_1251",1
+"paricalcitol","v_1252",1
+"paritaprevir","v_1253",1
+"paromomycin","v_1254",1
+"paroxetine","v_1255",1
+"patent blue","v_1256",1
+"pazopanib","v_1257",1
+"pefloxacin","v_1258",1
+"pegfilgrastim","v_1259",1
+"peginesatide","v_1260",1
+"peginterferon alfa-2a","v_1261",1
+"peginterferon alfa-2b","v_1262",1
+"pegvisomant","v_1263",1
+"pembrolizumab","v_1264",1
+"pemetrexed","v_1265",1
+"pemigatinib","v_1266",1
+"penbutolol","v_1267",1
+"penciclovir","v_1268",1
+"pentaerythritol tetranitrate","v_1269",1
+"pentagastrin","v_1270",1
+"pentazocine","v_1271",1
+"pentobarbital","v_1272",1
+"pentolinium","v_1273",1
+"pentosan polysulfate","v_1274",1
+"pentostatin","v_1275",1
+"pentoxifylline","v_1276",1
+"pentoxyverine","v_1277",1
+"perampanel","v_1278",1
+"pergolide","v_1279",1
+"perhexiline","v_1280",1
+"periciazine","v_1281",1
+"perindopril","v_1282",1
+"permethrin","v_1283",1
+"perphenazine","v_1284",1
+"pertuzumab","v_1285",1
+"pexidartinib","v_1286",1
+"phenacemide","v_1287",1
+"phenazopyridine","v_1288",1
+"phendimetrazine","v_1289",1
+"phenelzine","v_1290",1
+"phenformin","v_1291",1
+"phenindamine","v_1292",1
+"phenindione","v_1293",1
+"pheniramine","v_1294",1
+"phenmetrazine","v_1295",1
+"phenobarbital","v_1296",1
+"phenoxybenzamine","v_1297",1
+"phenoxymethylpenicillin","v_1298",1
+"phenprocoumon","v_1299",1
+"phentermine","v_1300",1
+"phentolamine","v_1301",1
+"phenylbutazone","v_1302",1
+"phenylephrine","v_1303",1
+"phenyltoloxamine","v_1304",1
+"phenytoin","v_1305",1
+"pholcodine","v_1306",1
+"phylloquinone","v_1307",1
+"physostigmine","v_1308",1
+"pibrentasvir","v_1309",1
+"pilocarpine","v_1310",1
+"pimavanserin","v_1311",1
+"pimecrolimus","v_1312",1
+"pimozide","v_1313",1
+"pinaverium","v_1314",1
+"pindolol","v_1315",1
+"pioglitazone","v_1316",1
+"pipecuronium","v_1317",1
+"piperacillin","v_1318",1
+"piperazine","v_1319",1
+"pipotiazine","v_1320",1
+"pirbuterol","v_1321",1
+"pirenzepine","v_1322",1
+"piroxicam","v_1323",1
+"pitavastatin","v_1324",1
+"pitolisant","v_1325",1
+"pivampicillin","v_1326",1
+"pivmecillinam","v_1327",1
+"plazomicin","v_1328",1
+"plecanatide","v_1329",1
+"plerixafor","v_1330",1
+"podofilox","v_1331",1
+"polatuzumab vedotin","v_1332",1
+"polyestradiol phosphate","v_1333",1
+"polythiazide","v_1334",1
+"pomalidomide","v_1335",1
+"ponatinib","v_1336",1
+"posaconazole","v_1337",1
+"potassium perchlorate","v_1338",1
+"practolol","v_1339",1
+"pralatrexate","v_1340",1
+"pralidoxime","v_1341",1
+"pramipexole","v_1342",1
+"pramlintide","v_1343",1
+"pramocaine","v_1344",1
+"prasugrel","v_1345",1
+"pravastatin","v_1346",1
+"prazepam","v_1347",1
+"prazosin","v_1348",1
+"prednicarbate","v_1349",1
+"prednisolone","v_1350",1
+"prednisolone acetate","v_1351",1
+"prednisone","v_1352",1
+"pregabalin","v_1353",1
+"prilocaine","v_1354",1
+"primidone","v_1355",1
+"probenecid","v_1356",1
+"probucol","v_1357",1
+"procaine","v_1358",1
+"procarbazine","v_1359",1
+"procaterol","v_1360",1
+"prochlorperazine","v_1361",1
+"procyclidine","v_1362",1
+"profenamine","v_1363",1
+"progesterone","v_1364",1
+"proguanil","v_1365",1
+"promazine","v_1366",1
+"promethazine","v_1367",1
+"propafenone","v_1368",1
+"propantheline","v_1369",1
+"proparacaine","v_1370",1
+"propiomazine","v_1371",1
+"propiverine","v_1372",1
+"propofol","v_1373",1
+"propoxycaine","v_1374",1
+"propranolol","v_1375",1
+"propylhexedrine","v_1376",1
+"propylthiouracil","v_1377",1
+"protein c","v_1378",1
+"protein s human","v_1379",1
+"prothrombin","v_1380",1
+"protirelin","v_1381",1
+"protokylol","v_1382",1
+"protriptyline","v_1383",1
+"prucalopride","v_1384",1
+"pseudoephedrine","v_1385",1
+"pyrazinamide","v_1386",1
+"pyridostigmine","v_1387",1
+"pyridoxine","v_1388",1
+"pyrimethamine","v_1389",1
+"quazepam","v_1390",1
+"quetiapine","v_1391",1
+"quinapril","v_1392",1
+"quinestrol","v_1393",1
+"quinethazone","v_1394",1
+"quinidine","v_1395",1
+"quinidine barbiturate","v_1396",1
+"quinupristin","v_1397",1
+"rabeprazole","v_1398",1
+"rabies immune globulin, human","v_1399",1
+"racepinephrine","v_1400",1
+"raloxifene","v_1401",1
+"raltegravir","v_1402",1
+"raltitrexed","v_1403",1
+"ramelteon","v_1404",1
+"ramipril","v_1405",1
+"ramucirumab","v_1406",1
+"ranibizumab","v_1407",1
+"ranitidine","v_1408",1
+"rapacuronium","v_1409",1
+"rasagiline","v_1410",1
+"raxibacumab","v_1411",1
+"reboxetine","v_1412",1
+"regadenoson","v_1413",1
+"regorafenib","v_1414",1
+"relebactam","v_1415",1
+"remifentanil","v_1416",1
+"remoxipride","v_1417",1
+"repaglinide","v_1418",1
+"rescinnamine","v_1419",1
+"reserpine","v_1420",1
+"reslizumab","v_1421",1
+"retapamulin","v_1422",1
+"reteplase","v_1423",1
+"revefenacin","v_1424",1
+"ribavirin","v_1425",1
+"ribociclib","v_1426",1
+"riboflavin","v_1427",1
+"rifabutin","v_1428",1
+"rifampicin","v_1429",1
+"rifamycin","v_1430",1
+"rifapentine","v_1431",1
+"rifaximin","v_1432",1
+"rilpivirine","v_1433",1
+"riluzole","v_1434",1
+"rimantadine","v_1435",1
+"rimegepant","v_1436",1
+"rimexolone","v_1437",1
+"rimonabant","v_1438",1
+"riociguat","v_1439",1
+"ripretinib","v_1440",1
+"risankizumab","v_1441",1
+"risedronic acid","v_1442",1
+"risperidone","v_1443",1
+"ritodrine","v_1444",1
+"ritonavir","v_1445",1
+"rituximab","v_1446",1
+"rivaroxaban","v_1447",1
+"rivastigmine","v_1448",1
+"rizatriptan","v_1449",1
+"rocuronium","v_1450",1
+"rofecoxib","v_1451",1
+"rolapitant","v_1452",1
+"rolitetracycline","v_1453",1
+"romidepsin","v_1454",1
+"romiplostim","v_1455",1
+"romosozumab","v_1456",1
+"ropinirole","v_1457",1
+"ropivacaine","v_1458",1
+"rosiglitazone","v_1459",1
+"rosoxacin","v_1460",1
+"rosuvastatin","v_1461",1
+"rotigotine","v_1462",1
+"roxithromycin","v_1463",1
+"rucaparib","v_1464",1
+"rupatadine","v_1465",1
+"ruxolitinib","v_1466",1
+"sacituzumab govitecan","v_1467",1
+"sacubitril","v_1468",1
+"safinamide","v_1469",1
+"salbutamol","v_1470",1
+"salicylic acid","v_1471",1
+"salmeterol","v_1472",1
+"salsalate","v_1473",1
+"sapropterin","v_1474",1
+"saquinavir","v_1475",1
+"sargramostim","v_1476",1
+"sarilumab","v_1477",1
+"saxagliptin","v_1478",1
+"scopolamine","v_1479",1
+"secobarbital","v_1480",1
+"secretin human","v_1481",1
+"secukinumab","v_1482",1
+"segesterone acetate","v_1483",1
+"selegiline","v_1484",1
+"selexipag","v_1485",1
+"selinexor","v_1486",1
+"selpercatinib","v_1487",1
+"selumetinib","v_1488",1
+"semaglutide","v_1489",1
+"seractide acetate","v_1490",1
+"sermorelin","v_1491",1
+"sertaconazole","v_1492",1
+"sertindole","v_1493",1
+"sertraline","v_1494",1
+"sevoflurane","v_1495",1
+"sibutramine","v_1496",1
+"sildenafil","v_1497",1
+"silodosin","v_1498",1
+"siltuximab","v_1499",1
+"simeprevir","v_1500",1
+"simoctocog alfa","v_1501",1
+"simvastatin","v_1502",1
+"sipuleucel-t","v_1503",1
+"sirolimus","v_1504",1
+"sitagliptin","v_1505",1
+"sitaxentan","v_1506",1
+"sodium ferric gluconate complex","v_1507",1
+"sodium stibogluconate","v_1508",1
+"sodium sulfate","v_1509",1
+"sodium tetradecyl sulfate","v_1510",1
+"sofosbuvir","v_1511",1
+"solifenacin","v_1512",1
+"somatostatin","v_1513",1
+"somatotropin","v_1514",1
+"somatrem","v_1515",1
+"sorafenib","v_1516",1
+"sotalol","v_1517",1
+"soybean oil","v_1518",1
+"sparfloxacin","v_1519",1
+"spectinomycin","v_1520",1
+"spiramycin","v_1521",1
+"spirapril","v_1522",1
+"spironolactone","v_1523",1
+"stanozolol","v_1524",1
+"stavudine","v_1525",1
+"stiripentol","v_1526",1
+"streptokinase","v_1527",1
+"streptomycin","v_1528",1
+"streptozocin","v_1529",1
+"succinylcholine","v_1530",1
+"sucralfate","v_1531",1
+"sufentanil","v_1532",1
+"sulbactam","v_1533",1
+"sulfacetamide","v_1534",1
+"sulfacytine","v_1535",1
+"sulfadiazine","v_1536",1
+"sulfadoxine","v_1537",1
+"sulfamerazine","v_1538",1
+"sulfameter","v_1539",1
+"sulfamethazine","v_1540",1
+"sulfamethizole","v_1541",1
+"sulfamethoxazole","v_1542",1
+"sulfametopyrazine","v_1543",1
+"sulfanilamide","v_1544",1
+"sulfaphenazole","v_1545",1
+"sulfasalazine","v_1546",1
+"sulfathiazole","v_1547",1
+"sulfinpyrazone","v_1548",1
+"sulfisoxazole","v_1549",1
+"sulfoxone","v_1550",1
+"sulindac","v_1551",1
+"sulodexide","v_1552",1
+"sulpiride","v_1553",1
+"sumatriptan","v_1554",1
+"sunitinib","v_1555",1
+"suprofen","v_1556",1
+"susoctocog alfa","v_1557",1
+"suvorexant","v_1558",1
+"synthetic conjugated estrogens, a","v_1559",1
+"synthetic conjugated estrogens, b","v_1560",1
+"tacrine","v_1561",1
+"tacrolimus","v_1562",1
+"tadalafil","v_1563",1
+"tafamidis","v_1564",1
+"tafluprost","v_1565",1
+"tagraxofusp","v_1566",1
+"talazoparib","v_1567",1
+"talbutal","v_1568",1
+"talimogene laherparepvec","v_1569",1
+"tamoxifen","v_1570",1
+"tamsulosin","v_1571",1
+"tapentadol","v_1572",1
+"tasimelteon","v_1573",1
+"tasonermin","v_1574",1
+"taurine","v_1575",1
+"tavaborole","v_1576",1
+"tazarotene","v_1577",1
+"tazemetostat","v_1578",1
+"tazobactam","v_1579",1
+"technetium tc-99m nofetumomab merpentan","v_1580",1
+"technetium tc-99m tilmanocept","v_1581",1
+"tecovirimat","v_1582",1
+"teduglutide","v_1583",1
+"tegafur","v_1584",1
+"tegafur-uracil","v_1585",1
+"tegaserod","v_1586",1
+"telaprevir","v_1587",1
+"telbivudine","v_1588",1
+"telmisartan","v_1589",1
+"telotristat ethyl","v_1590",1
+"temazepam","v_1591",1
+"temsirolimus","v_1592",1
+"tenapanor","v_1593",1
+"tenecteplase","v_1594",1
+"teniposide","v_1595",1
+"tenofovir alafenamide","v_1596",1
+"tenofovir disoproxil","v_1597",1
+"tenoxicam","v_1598",1
+"terazosin","v_1599",1
+"terbinafine","v_1600",1
+"terbutaline","v_1601",1
+"terconazole","v_1602",1
+"terfenadine","v_1603",1
+"terlipressin","v_1604",1
+"tesamorelin","v_1605",1
+"testolactone","v_1606",1
+"testosterone","v_1607",1
+"testosterone cypionate","v_1608",1
+"testosterone enanthate","v_1609",1
+"testosterone propionate","v_1610",1
+"testosterone undecanoate","v_1611",1
+"tetanus immune globulin, human","v_1612",1
+"tetrabenazine","v_1613",1
+"tetracaine","v_1614",1
+"tetracosactide","v_1615",1
+"tetracycline","v_1616",1
+"tetradecyl hydrogen sulfate (ester)","v_1617",1
+"tetraferric tricitrate decahydrate","v_1618",1
+"tetryzoline","v_1619",1
+"tezacaftor","v_1620",1
+"thalidomide","v_1621",1
+"theophylline","v_1622",1
+"thiabendazole","v_1623",1
+"thiamine","v_1624",1
+"thiamylal","v_1625",1
+"thiopental","v_1626",1
+"thioridazine","v_1627",1
+"thiothixene","v_1628",1
+"thonzonium","v_1629",1
+"thonzylamine","v_1630",1
+"thrombin","v_1631",1
+"thrombin alfa","v_1632",1
+"thrombomodulin alfa","v_1633",1
+"thyrotropin alfa","v_1634",1
+"tiagabine","v_1635",1
+"tiaprofenic acid","v_1636",1
+"tibolone","v_1637",1
+"ticagrelor","v_1638",1
+"ticarcillin","v_1639",1
+"ticlopidine","v_1640",1
+"tigecycline","v_1641",1
+"tildrakizumab","v_1642",1
+"timolol","v_1643",1
+"tinzaparin","v_1644",1
+"tioconazole","v_1645",1
+"tiotropium","v_1646",1
+"tipiracil","v_1647",1
+"tipranavir","v_1648",1
+"tirofiban","v_1649",1
+"tisagenlecleucel","v_1650",1
+"tixocortol","v_1651",1
+"tobramycin","v_1652",1
+"tocainide","v_1653",1
+"tocilizumab","v_1654",1
+"tofacitinib","v_1655",1
+"tolazamide","v_1656",1
+"tolazoline","v_1657",1
+"tolbutamide","v_1658",1
+"tolcapone","v_1659",1
+"tolfenamic acid","v_1660",1
+"tolmetin","v_1661",1
+"tolnaftate","v_1662",1
+"tolterodine","v_1663",1
+"tolvaptan","v_1664",1
+"topiramate","v_1665",1
+"topotecan","v_1666",1
+"torasemide","v_1667",1
+"toremifene","v_1668",1
+"tositumomab","v_1669",1
+"tramadol","v_1670",1
+"trametinib","v_1671",1
+"trandolapril","v_1672",1
+"tranexamic acid","v_1673",1
+"tranylcypromine","v_1674",1
+"trastuzumab","v_1675",1
+"trastuzumab deruxtecan","v_1676",1
+"trastuzumab emtansine","v_1677",1
+"travoprost","v_1678",1
+"trazodone","v_1679",1
+"treprostinil","v_1680",1
+"tretinoin","v_1681",1
+"triamcinolone","v_1682",1
+"triamterene","v_1683",1
+"triazolam","v_1684",1
+"trichlormethiazide","v_1685",1
+"triclocarban","v_1686",1
+"trifarotene","v_1687",1
+"trifluoperazine","v_1688",1
+"triflupromazine","v_1689",1
+"trifluridine","v_1690",1
+"triflusal","v_1691",1
+"trihexyphenidyl","v_1692",1
+"trilostane","v_1693",1
+"trimebutine","v_1694",1
+"trimetazidine","v_1695",1
+"trimethadione","v_1696",1
+"trimethaphan","v_1697",1
+"trimethoprim","v_1698",1
+"trimetrexate","v_1699",1
+"trimipramine","v_1700",1
+"tripelennamine","v_1701",1
+"triprolidine","v_1702",1
+"triptorelin","v_1703",1
+"troglitazone","v_1704",1
+"trolamine salicylate","v_1705",1
+"troleandomycin","v_1706",1
+"tropicamide","v_1707",1
+"tropisetron","v_1708",1
+"trovafloxacin","v_1709",1
+"tuberculin purified protein derivative","v_1710",1
+"tubocurarine","v_1711",1
+"tucatinib","v_1712",1
+"turoctocog alfa","v_1713",1
+"turoctocog alfa pegol","v_1714",1
+"tyloxapol","v_1715",1
+"ubidecarenone","v_1716",1
+"ubrogepant","v_1717",1
+"udenafil","v_1718",1
+"ulipristal","v_1719",1
+"ulobetasol","v_1720",1
+"umeclidinium","v_1721",1
+"upadacitinib","v_1722",1
+"urea","v_1723",1
+"urea c-13","v_1724",1
+"urea c-14","v_1725",1
+"urofollitropin","v_1726",1
+"urokinase","v_1727",1
+"ursodeoxycholic acid","v_1728",1
+"ustekinumab","v_1729",1
+"vaborbactam","v_1730",1
+"valaciclovir","v_1731",1
+"valbenazine","v_1732",1
+"valdecoxib","v_1733",1
+"valproic acid","v_1734",1
+"valrubicin","v_1735",1
+"valsartan","v_1736",1
+"vardenafil","v_1737",1
+"varenicline","v_1738",1
+"vasopressin","v_1739",1
+"vecuronium","v_1740",1
+"vedolizumab","v_1741",1
+"velpatasvir","v_1742",1
+"vemurafenib","v_1743",1
+"venetoclax","v_1744",1
+"venlafaxine","v_1745",1
+"verapamil","v_1746",1
+"vernakalant","v_1747",1
+"vidarabine","v_1748",1
+"vigabatrin","v_1749",1
+"vilanterol","v_1750",1
+"vilazodone","v_1751",1
+"vildagliptin","v_1752",1
+"viloxazine","v_1753",1
+"vinblastine","v_1754",1
+"vincristine","v_1755",1
+"vindesine","v_1756",1
+"vinflunine","v_1757",1
+"vinorelbine","v_1758",1
+"viomycin","v_1759",1
+"vismodegib","v_1760",1
+"von willebrand factor human","v_1761",1
+"vonicog alfa","v_1762",1
+"vorapaxar","v_1763",1
+"voretigene neparvovec","v_1764",1
+"voriconazole","v_1765",1
+"vorinostat","v_1766",1
+"vortioxetine","v_1767",1
+"voxelotor","v_1768",1
+"voxilaprevir","v_1769",1
+"warfarin","v_1770",1
+"xamoterol","v_1771",1
+"xanthinol","v_1772",1
+"ximelagatran","v_1773",1
+"xylometazoline","v_1774",1
+"yohimbine","v_1775",1
+"zafirlukast","v_1776",1
+"zalcitabine","v_1777",1
+"zaleplon","v_1778",1
+"zanamivir","v_1779",1
+"zanubrutinib","v_1780",1
+"ziconotide","v_1781",1
+"zidovudine","v_1782",1
+"zileuton","v_1783",1
+"ziprasidone","v_1784",1
+"zofenopril","v_1785",1
+"zoledronic acid","v_1786",1
+"zolmitriptan","v_1787",1
+"zolpidem","v_1788",1
+"zonisamide","v_1789",1
+"zopiclone","v_1790",1
+"zotepine","v_1791",1
+"zucapsaicin","v_1792",1
+"zuclopenthixol","v_1793",1
+"alpha-linolenic acid","v_1794",1
+"gamma-hydroxybutyric acid","v_1795",1
