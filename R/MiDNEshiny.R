@@ -3625,7 +3625,7 @@ ui <- shinydashboard::dashboardPage(
           progress$set(message = "MiDNE", detail = paste("Inferring the network..."), value = 0)
           net <- omics_network_inference(omics_matrix = mats[[x]], 
                                          omics_type = input[[paste0('omics_type_', x)]], 
-                                         inference_method = input[[paste0('inference_method_', x)]], 
+                                         #inference_method = input[[paste0('inference_method_', x)]], 
                                          correction_method = input[[paste0('correction_method_', x)]], 
                                          th = input[[paste0('th_', x)]], 
                                          cpu = input[[paste0('cpu_', x)]])
@@ -3699,13 +3699,13 @@ ui <- shinydashboard::dashboardPage(
                                           label = "Select a omics type ",
                                           choices =  c("Genomics", "Epigenomics", "Transcriptomics", 'Proteomics'),
                                         ),
-                                        selectInput(
-                                          inputId = paste0('inference_method_', x),
-                                          label = "Select a network inference method",
-                                          choices = list(
-                                            "Association measures" = c("Pearson Correlation Coefficient", "Spearman Correlation Coefficient"),
-                                            "Co-occurrence measures" = c("Fisher's exact test + post-hoc analysis", 'Other'))
-                                        ),
+                                        # selectInput(
+                                        #   inputId = paste0('inference_method_', x),
+                                        #   label = "Select a network inference method",
+                                        #   choices = list(
+                                        #     "Association measures" = c("Pearson Correlation Coefficient", "Spearman Correlation Coefficient"),
+                                        #     "Co-occurrence measures" = c("Fisher's exact test + post-hoc analysis", 'Other'))
+                                        # ),
                                         selectInput(
                                           inputId = paste0('correction_method_', x),
                                           label = "Select a network inference method",
