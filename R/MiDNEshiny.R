@@ -1269,7 +1269,7 @@ ui <- shinydashboard::dashboardPage(
         input_list <- input$omics_example_files
         example_data <- list()
         for (file in input_list) {
-          example_data[[ file ]] <- readRDS(paste0('MiDNE/inst/extdata/data/biological/', file, '.RDS' ))
+          example_data[[ file ]] <- readRDS(paste0(extdata_path, '/data/biological/', file, '.RDS' ))
         }
         omicsFiles <- example_data
       }
@@ -1333,7 +1333,7 @@ ui <- shinydashboard::dashboardPage(
           # }
         }
       } else {
-        drugFiles$FDAdrugs <- readRDS('MiDNE/inst/extdata/data/pharmacological/FDAdrugs.RDS' )
+        drugFiles$FDAdrugs <- readRDS(paste0(extdata_path, '/data/pharmacological/FDAdrugs.RDS') )
       }
       
       drugFiles
@@ -1386,7 +1386,7 @@ ui <- shinydashboard::dashboardPage(
           }
         }
       }else if (input$anno_example_opt == 'Yes'){
-        listFiles[['annotation']] <- readRDS('MiDNE/inst/extdata/annotation/all_genes_drugs_annotation.RDS' )
+        listFiles[['annotation']] <- readRDS(paste0(extdata_path, '/annotation/all_genes_drugs_annotation.RDS') )
         annotation(listFiles)
       }else{
         return(NULL)
@@ -1800,7 +1800,7 @@ ui <- shinydashboard::dashboardPage(
         input_list <- input$omicsNet_example_files
         example_data <- list()
         for (file in input_list) {
-          example_data[[ file ]] <- readRDS(paste0('MiDNE/inst/extdata/networks/biological/', file, '.RDS' ))
+          example_data[[ file ]] <- readRDS(paste0(extdata_path, '/networks/biological/', file, '.RDS' ))
         }
         listFiles <- example_data
       }
@@ -1883,7 +1883,7 @@ ui <- shinydashboard::dashboardPage(
         }
         
       } else {
-        listFiles[['FDAdrugs_net']]  <- read_csv('MiDNE/inst/extdata/networks/pharmacological/FDAdrugs_net.csv')
+        listFiles[['FDAdrugs_net']]  <- read_csv(paste0(extdata_path, '/networks/pharmacological/FDAdrugs_net.csv'))
       }
       
       return(listFiles)
@@ -1961,7 +1961,7 @@ ui <- shinydashboard::dashboardPage(
         }
         
       } else {
-        bnet <- readRDS('MiDNE/inst/extdata/networks/bipartite/FDA_active_DRUGBANK_bnet.RDS' )
+        bnet <- readRDS(paste0(extdata_path, '/networks/bipartite/FDA_active_DRUGBANK_bnet.RDS') )
       }
       
       return(bnet)
@@ -2020,7 +2020,7 @@ ui <- shinydashboard::dashboardPage(
           }
         }
       } else {
-        readRDS('MiDNE/inst/extdata/annotation/all_genes_drugs_annotation.RDS')
+        readRDS(paste0(extdata_path, '/annotation/all_genes_drugs_annotation.RDS'))
       }
       
       annotation1(listFiles)
@@ -2458,10 +2458,10 @@ ui <- shinydashboard::dashboardPage(
       }else{
         listFiles <- list()
         if (input$select_simMat == 'Embedded BRCA-5-omics FDA-drugs similarity matrix'){
-          sim_mat <- readRDS('MiDNE/inst/extdata/similarity_matrices/emb_FDA_active_drug_5omics_uRWRMHmat.RDS')
+          sim_mat <- readRDS(paste0(extdata_path, '/similarity_matrices/emb_FDA_active_drug_5omics_uRWRMHmat.RDS'))
           
         } else{
-          sim_mat <- readRDS('MiDNE/inst/extdata/similarity_matrices/umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS')
+          sim_mat <- readRDS(paste0(extdata_path, '/similarity_matrices/umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS'))
           rownames(sim_mat) <- paste0('component', 1:nrow(sim_mat))
         }
         listFiles[['simMatFile']] <- sim_mat
@@ -2523,7 +2523,7 @@ ui <- shinydashboard::dashboardPage(
         loaded_simMat_Anno(listFiles)
       }else{
         listFiles <- list()
-        file <- readRDS('MiDNE/inst/extdata/annotation/all_genes_drugs_annotation.RDS')
+        file <- readRDS(paste0(extdata_path, '/annotation/all_genes_drugs_annotation.RDS'))
         listFiles[['annotation2']] <- file
         loaded_simMat_Anno(listFiles)
       }
