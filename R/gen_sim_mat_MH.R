@@ -2,21 +2,42 @@
 #                   Random Walk with Restart on Multiplex and Heterogeneous biological Networks                 #
 #################################################################################################################
 
-#### Import Packages
+#' Generate similarity matrix
+#' Adapted from:
+#' https://github.com/LPioL/MultiVERSE/blob/master/RWR/Functions_RWRMH.R
+#' https://github.com/LPioL/MultiVERSE/blob/master/RWR/GenerateSimMatrix_MH.R
+#'
+#' Research group:  Léo Pio-Lopez, Alberto Valdeolivas, Laurent Tichit, Élisabeth Remy, Anaïs Baudot
+#' Publication:     https://arxiv.org/abs/2008.10085
+#'
+#' @name generate_sim_mt_MH
+#' @import utils
+#' @import methods
+#' @import igraph
+#' @import foreach
+#' @param network1 a biological network
+#' @param network2 a pharmacological network
+#' @param network_B a bipartite network
+#' @param tau1 tau1
+#' @param tau2 tau2
+#' @param restart A real in the range of 0-1, it is the probability to restart the algorithm in the starting point
+#' @param delta1 delta
+#' @param delta2 delta
+#' @param lambda lambda
+#' @param layer_transition_1 cond_jump
+#' @param layer_transition_2 cond_jump
+#' @param jump_neighborhood_1 A boolean, if false, the nodes between omics will be connected if they are the same, if true, the nodes will be connected with itself and its neighborhood but in the other omics
+#' @param jump_neighborhood_2 A boolean, if false, the nodes between omics will be connected if they are the same, if true, the nodes will be connected with itself and its neighborhood but in the other omics
+#' @param weighted_multiplex_1 A boolean, if true, the edge between omics will be weighted. It is considered only if jump_neighborhood is true
+#' @param weighted_multiplex_2 A boolean, if true, the edge between omics will be weighted. It is considered only if jump_neighborhood is true
+#' @param aggregation_method aggregation method
+#' @param get_completeRWRmat boolean 
+#' @param no_seed_nodes vector of characterss
+#' @param cores Number of threads for Parallelization. It has to be positive integer. If it is equal to 1, no parallelization is not performed
+#' @return RWRMH_similarity
+#' @export
+#' 
 
-library(Matrix)
-library(tidyverse)
-library(igraph)
-library(doSNOW)
-library(snow)
-library(foreach)
-library(utils)
-library(methods)
-library(conflicted)
-
-conflicts_prefer(snow::makeCluster)
-conflicts_prefer(base::order)
-#### Functions
 
 gen_sim_mat_MH <- function(network1, network2,                                  # outputs of MoNETA::create_multiplex()
                            network_B,                                           # Bipartite network 
@@ -168,7 +189,7 @@ gen_sim_mat_MH <- function(network1, network2,                                  
   }
   
   message('Computing the transitiona matrix...')
-  trans_matrix <- compute.transition.matrix(MultiplexHet_Object, 
+  trans_matrix <- compute_transition_matrix(MultiplexHet_Object, 
                                             lambda = 0.5, delta1=0.5, delta2=0.5, 
                                             cond_jump1, cond_jump2,
                                             jump_mat_nodes_1, jump_mat_nodes_2 )
@@ -296,6 +317,8 @@ gen_sim_mat_MH <- function(network1, network2,                                  
 }
 
 
+################################################################################
+
 
 
 isMultiplex <- function (x)
@@ -320,11 +343,12 @@ add.missing.nodes <- function (Layers,Nr_Layers,NodeNames) {
 }
 
 
-create.multiplex <- function(...){
-  UseMethod("create.multiplex")
-}
+# create.multiplex <- function(...){
+#   UseMethod("create.multiplex")
+# }
 
-create.multiplex.default <- function(LayersList,...)
+#create.multiplex.default <- function(LayersList,...)
+create.multiplex <- function(LayersList,...)
 {
   
   Number_of_Layers <- length(LayersList)
@@ -360,15 +384,14 @@ create.multiplex.default <- function(LayersList,...)
 }
 
 
+# create.multiplexHet <- function(...) {
+#   UseMethod("create.multiplexHet")
+# }
 
 
-create.multiplexHet <- function(...) {
-  UseMethod("create.multiplexHet")
-}
-
-
-create.multiplexHet.default  <- function(MultiObject1, MultiObject2,
-                                         BipartiteNetwork,...)
+#create.multiplexHet.default  <- function(MultiObject1, MultiObject2,
+create.multiplexHet  <- function(MultiObject1, MultiObject2,
+                                 BipartiteNetwork,...)
 {
   
   Allnodes1 <- MultiObject1$Pool_of_Nodes
@@ -538,7 +561,7 @@ get.transition.multiplex <-
   }
 
 
-compute.transition.matrix <- function(x, lambda = 0.5, delta1=0.5, delta2=0.5, 
+compute_transition_matrix <- function(x, lambda = 0.5, delta1=0.5, delta2=0.5, 
                                       cond_jump1 = NULL, cond_jump2 = NULL,
                                       jump_mat_nodes_1 = NULL, jump_mat_nodes_2 = NULL)
 {
@@ -567,11 +590,11 @@ compute.transition.matrix <- function(x, lambda = 0.5, delta1=0.5, delta2=0.5,
   SupraBipartiteMatrix <- x$BipartiteNetwork
   
   message("Computing adjacency matrix of the first input network ...")
-  AdjMatrix_Multiplex1 <- compute.adjacency.matrix2(x$Multiplex1, delta1, cond_jump1, jump_mat_nodes_1)
+  AdjMatrix_Multiplex1 <- compute_adjacency_matrix2(x$Multiplex1, delta1, cond_jump1, jump_mat_nodes_1)
   norm_AdjMatrix_Multiplex1 <- normalize.multiplex.adjacency(AdjMatrix_Multiplex1)
   
   message("Computing adjacency matrix of the second input network ...")
-  AdjMatrix_Multiplex2 <- compute.adjacency.matrix2(x$Multiplex2, delta2, cond_jump2, jump_mat_nodes_2)
+  AdjMatrix_Multiplex2 <- compute_adjacency_matrix2(x$Multiplex2, delta2, cond_jump2, jump_mat_nodes_2)
   norm_AdjMatrix_Multiplex2 <- normalize.multiplex.adjacency(AdjMatrix_Multiplex2)
   
   ## Transition Matrix for the inter-subnetworks links
@@ -611,7 +634,7 @@ compute.transition.matrix <- function(x, lambda = 0.5, delta1=0.5, delta2=0.5,
 
 ##### Compute adjacency matrix (MoNETA version) + Normalization
 
-compute.adjacency.matrix2 <- function(x, delta = 0.5, cond_jump = NULL, jump_mat_nodes = NULL)
+compute_adjacency_matrix2 <- function(x, delta = 0.5, cond_jump = NULL, jump_mat_nodes = NULL)
 {
   if (!isMultiplex(x)) {
     stop("Not a Multiplex or Multiplex Heterogeneous object")
@@ -813,15 +836,15 @@ Random.Walk.Restart.MultiplexHet <-
         if (!all(Multiplex1_Multiplex2_Seeds %in% c(All_nodes_Multiplex1, All_nodes_Multiplex2))){
           stop("Some of the  input seeds are not nodes of the first
                input network")
-          }
         }
       }
+    }
     
     if (r >= 1 || r <= 0) {
       stop("Restart parameter should be between 0 and 1")
     }
     
-
+    
     if(!(as.character(MeanType) %in% c("Geometric","Arithmetic","Sum"))){
       stop("The type mean should be Geometric, Arithmetic or Sum")
     }
@@ -851,7 +874,7 @@ Random.Walk.Restart.MultiplexHet <-
     
     Seeds_Score <-
       get.seed.scoresMultiplex(Multiplex1_Multiplex2_Seeds, NumberLayers, 
-                              tau)
+                               tau)
     
     ## We define the prox_vector(The vector we will move after the first
     ## RWR iteration. We start from The seed. We have to take in account

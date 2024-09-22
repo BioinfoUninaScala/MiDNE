@@ -1,0 +1,70 @@
+Type: Package
+Package: MiDNE
+Title: MiDNE: Multi-omics genes and Drugs Network Embedding
+Version: 1.0.0
+Authors@R: c(
+    person("Aurora", "Brandi", , "aurora.brandi@unina.it", role = c("aut", "cre")),
+    person("Michele", "Ceccarelli", role = "aut"),
+    person("Giovanni", "Scala", , "giovanni.scala@unina.it", role = "aut")
+  )
+Description: Tool to integrate gene-centered multi-omics data and drugs
+    information using network-based strategies.
+License: GPL-3
+Depends: R (>= 3.5.0)
+Imports: 
+    MoNETA,
+    base,
+    conflicted,
+    crosstalk,
+    dendextend,
+    dplyr,
+    foreach,
+    fpc,
+    ggplot2,
+    glue,
+    gprofiler2,
+    igraph,
+    methods,
+    parallel,
+    plotly,
+    readr,
+    shiny,
+    shinyFiles,
+    shinyMatrix,
+    shinyalert,
+    shinycssloaders,
+    shinydashboard,
+    shinyjs,
+    snow,
+    stats,
+    tidyverse,
+    utils,
+    visNetwork,
+    vroom,
+    zip,
+    FNN, 
+    R.matlab,
+    RColorBrewer, 
+    bc3net, 
+    bigmemory,
+    bigstatsr, 
+    doFuture, 
+    doMC, 
+    doParallel, 
+    ggfortify,
+    ggrepel, 
+    kernlab, 
+    optparse, 
+    purrr, 
+    stringr, 
+    survival,
+    survminer,
+    tibble, 
+    uwot, 
+    wordspace,
+    Matrix,
+    DT, data.table, rstatix
+Suggests: RVAideMemoire, doSNOW
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

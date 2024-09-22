@@ -11,7 +11,6 @@
 #' @import glue
 #' @import conflicted
 #' @import fpc
-#' @import parallel
 #' @import plotly
 #' @import ggplot2
 #' @import gprofiler2
@@ -19,24 +18,21 @@
 #' @import tidyverse
 #' @import dendextend
 #' @import crosstalk
-#' @import magrittr
 #' @import dplyr
-#' @import igraph
-#' @import vroom
-#' @import zip
-#' @import MoNETA
+#' @import igraph 
+#' @import rstatix 
+#' @import DT 
+#' @import data.table 
+#' @importFrom zip zip
+#' @importFrom parallel detectCores
+#' @importFrom vroom vroom
 #' @importFrom utils data read.csv
 #' @importFrom stats as.dendrogram dist kmeans hclust
 #' @importFrom graphics abline par
-#' @param MAXreq shiny max request size
+#' @param MAXreq Shiny max request size
 #' @return Shiny app
 #' @export
-
-
-source('MiDNE/R/network_inference.R')
-source('MiDNE/R/gen_sim_mat_MH.R')
-source('MiDNE/R/myfunctions.R')
-
+#' 
 
 MiDNEshiny = function(MAXreq = 10000) {
   options(shiny.maxRequestSize = MAXreq * 1024^2)
@@ -1176,6 +1172,8 @@ ui <- shinydashboard::dashboardPage(
   
   server <- function(input, output, session) {
     
+    extdata_path <- system.file("extdata", package = "MiDNE")
+    
     ############################################################################################
     #                            DATA: LOADING DATA (INPUT)                       #
     ############################################################################################
@@ -1271,7 +1269,7 @@ ui <- shinydashboard::dashboardPage(
         input_list <- input$omics_example_files
         example_data <- list()
         for (file in input_list) {
-          example_data[[ file ]] <- readRDS(paste0('MiDNE/DATA/data/biological/', file, '.RDS' ))
+          example_data[[ file ]] <- readRDS(paste0('MiDNE/inst/extdata/data/biological/', file, '.RDS' ))
         }
         omicsFiles <- example_data
       }
@@ -1335,7 +1333,7 @@ ui <- shinydashboard::dashboardPage(
           # }
         }
       } else {
-        drugFiles$FDAdrugs <- readRDS('MiDNE/DATA/data/pharmacological/FDAdrugs.RDS' )
+        drugFiles$FDAdrugs <- readRDS('MiDNE/inst/extdata/data/pharmacological/FDAdrugs.RDS' )
       }
       
       drugFiles
@@ -1388,7 +1386,7 @@ ui <- shinydashboard::dashboardPage(
           }
         }
       }else if (input$anno_example_opt == 'Yes'){
-        listFiles[['annotation']] <- readRDS('MiDNE/DATA/annotation/all_genes_drugs_annotation.RDS' )
+        listFiles[['annotation']] <- readRDS('MiDNE/inst/extdata/annotation/all_genes_drugs_annotation.RDS' )
         annotation(listFiles)
       }else{
         return(NULL)
@@ -1529,7 +1527,7 @@ ui <- shinydashboard::dashboardPage(
       #shiny::isolate({
       if (input$intersect_opt == 'YES'){
         t_processed_mats <- lapply(processed_mats, t)
-        intersected_by_features <- MoNETA::get_intersection_matrices(t_processed_mats)
+        intersected_by_features <- get_intersection_matrices(t_processed_mats)
         t_intersected_by_features <- lapply(intersected_by_features, t)
         
         print(dim(t_processed_mats[[1]]))
@@ -1802,7 +1800,7 @@ ui <- shinydashboard::dashboardPage(
         input_list <- input$omicsNet_example_files
         example_data <- list()
         for (file in input_list) {
-          example_data[[ file ]] <- readRDS(paste0('MiDNE/DATA/networks/biological/', file, '.RDS' ))
+          example_data[[ file ]] <- readRDS(paste0('MiDNE/inst/extdata/networks/biological/', file, '.RDS' ))
         }
         listFiles <- example_data
       }
@@ -1885,7 +1883,7 @@ ui <- shinydashboard::dashboardPage(
         }
         
       } else {
-        listFiles[['FDAdrugs_net']]  <- read_csv('MiDNE/DATA/networks/pharmacological/FDAdrugs_net.csv')
+        listFiles[['FDAdrugs_net']]  <- read_csv('MiDNE/inst/extdata/networks/pharmacological/FDAdrugs_net.csv')
       }
       
       return(listFiles)
@@ -1963,7 +1961,7 @@ ui <- shinydashboard::dashboardPage(
         }
         
       } else {
-        bnet <- readRDS('MiDNE/DATA/networks/bipartite/FDA_active_DRUGBANK_bnet.RDS' )
+        bnet <- readRDS('MiDNE/inst/extdata/networks/bipartite/FDA_active_DRUGBANK_bnet.RDS' )
       }
       
       return(bnet)
@@ -2022,7 +2020,7 @@ ui <- shinydashboard::dashboardPage(
           }
         }
       } else {
-        readRDS('MiDNE/DATA/annotation/all_genes_drugs_annotation.RDS')
+        readRDS('MiDNE/inst/extdata/annotation/all_genes_drugs_annotation.RDS')
       }
       
       annotation1(listFiles)
@@ -2094,19 +2092,19 @@ ui <- shinydashboard::dashboardPage(
       net_list <- if (!is.null(g_net_list())) g_net_list() else l_net_list()
       
       if(input$weightMultiplex == 'YES'){
-        multiplex <- MoNETA::create_multiplex(net_list, weighted = TRUE)
+        multiplex <- create_multiplex(net_list, weighted = TRUE)
         multiplex_type <- 'Weighted'
         if(input$pruneMultiplex == 'YES'){
           if (!is.numeric(input$pruneMultiplex_th)) {
             shinyalert::shinyalert(title = 'Error', text = 'The threshold must be a real number.',closeOnClickOutside = TRUE,type = 'error')
             return(NULL)
           }
-          multiplex <- MoNETA::prune_multiplex_network(multiplex, input$pruneMultiplex_th)
+          multiplex <- prune_multiplex_network(multiplex, input$pruneMultiplex_th)
         }else{
           multiplex <- multiplex
         }
       }else{
-        multiplex <- MoNETA::create_multiplex(net_list, weighted = FALSE)
+        multiplex <- create_multiplex(net_list, weighted = FALSE)
         multiplex_type <- 'Unweighted'
       }
       
@@ -2119,19 +2117,19 @@ ui <- shinydashboard::dashboardPage(
       net_list <- if (!is.null(g_net_list())) g_net_list() else l_net_list()
       
       if(input$weightMultiplex == 'YES'){
-        multiplex <- MoNETA::create_multiplex(net_list, weighted = TRUE)
+        multiplex <- create_multiplex(net_list, weighted = TRUE)
         multiplex_type <- 'Weighted'
         if(input$pruneMultiplex == 'YES'){
           if (!is.numeric(input$pruneMultiplex_th)) {
             shinyalert::shinyalert(title = 'Error', text = 'The threshold must be a real number.',closeOnClickOutside = TRUE,type = 'error')
             return(NULL)
           }
-          multiplex <- MoNETA::prune_multiplex_network(multiplex, input$pruneMultiplex_th)
+          multiplex <- prune_multiplex_network(multiplex, input$pruneMultiplex_th)
         }else{
           multiplex <- multiplex
         }
       }else{
-        multiplex <- MoNETA::create_multiplex(net_list, weighted = FALSE)
+        multiplex <- create_multiplex(net_list, weighted = FALSE)
         multiplex_type <- 'Unweighted'
       }
       
@@ -2162,7 +2160,7 @@ ui <- shinydashboard::dashboardPage(
     #   print('Generating the multiplex drug network...')
     #   if (!is.null(g_dnet_list()) | !is.null(l_dnet_list())) {
     #     net_list <- if (!is.null(g_dnet_list())) g_dnet_list() else l_dnet_list()
-    #     multiplex <- MoNETA::create_multiplex(net_list, weighted = FALSE)
+    #     multiplex <- create_multiplex(net_list, weighted = FALSE)
     #     multiplex_type <- 'Unweighted'
     #   }
     #   print('drug network as multiplex created')
@@ -2175,19 +2173,19 @@ ui <- shinydashboard::dashboardPage(
       net_list <- if (!is.null(g_dnet_list())) g_dnet_list() else l_dnet_list()
 
       if(input$drug_weightMultiplex == 'YES'){
-        multiplex <- MoNETA::create_multiplex(net_list, weighted = TRUE)
+        multiplex <- create_multiplex(net_list, weighted = TRUE)
         multiplex_type <- 'Weighted'
         if(input$drug_pruneMultiplex == 'YES'){
           if (!is.numeric(input$drug_pruneMultiplex_th)) {
             shinyalert::shinyalert(title = 'Error', text = 'The threshold must be a real number.',closeOnClickOutside = TRUE,type = 'error')
             return(NULL)
           }
-          multiplex <- MoNETA::prune_multiplex_network(multiplex, input$drug_pruneMultiplex_th)
+          multiplex <- prune_multiplex_network(multiplex, input$drug_pruneMultiplex_th)
         }else{
           multiplex <- multiplex
         }
       }else{
-        multiplex <- MoNETA::create_multiplex(net_list, weighted = FALSE)
+        multiplex <- create_multiplex(net_list, weighted = FALSE)
         multiplex_type <- 'Unweighted'
       }
 
@@ -2224,7 +2222,7 @@ ui <- shinydashboard::dashboardPage(
         bnet <- bnetwork()
         colnames(bnet) <- c('source', 'target', 'weight')
         bnet$target <- tolower(bnet$target)
-        f_bnet <- bnet %>% filter(source %in% base::union(omics_multiplex$source, omics_multiplex$target), 
+        f_bnet <- bnet %>% dplyr::filter(source %in% base::union(omics_multiplex$source, omics_multiplex$target), 
                                   target %in% drug_multiplex$source)
         
         if (sum(is.na(omics_tau_list())) != 1) {
@@ -2243,7 +2241,7 @@ ui <- shinydashboard::dashboardPage(
         
         if (input$bioInf_transition == 'YES') {
           net_list <- if (!is.null(g_net_list())) g_net_list() else l_net_list()
-          omics_trans_mat <- MoNETA::create_layer_transition_matrix(net_list)
+          omics_trans_mat <- create_layer_transition_matrix(net_list)
         }else {
           omics_trans_mat <- input$editable_trans_mat
         }
@@ -2290,7 +2288,7 @@ ui <- shinydashboard::dashboardPage(
           )
           
           
-          rwr_simMat <- MoNETA::gen_sim_mat_M(
+          rwr_simMat <- gen_sim_mat_M(
             
             network =  omics_multiplex, 
             restart = input$restart,
@@ -2460,10 +2458,10 @@ ui <- shinydashboard::dashboardPage(
       }else{
         listFiles <- list()
         if (input$select_simMat == 'Embedded BRCA-5-omics FDA-drugs similarity matrix'){
-          sim_mat <- readRDS('MiDNE/DATA/similarity_matrices/emb_FDA_active_drug_5omics_uRWRMHmat.RDS')
+          sim_mat <- readRDS('MiDNE/inst/extdata/similarity_matrices/emb_FDA_active_drug_5omics_uRWRMHmat.RDS')
           
         } else{
-          sim_mat <- readRDS('MiDNE/DATA/similarity_matrices/umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS')
+          sim_mat <- readRDS('MiDNE/inst/extdata/similarity_matrices/umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS')
           rownames(sim_mat) <- paste0('component', 1:nrow(sim_mat))
         }
         listFiles[['simMatFile']] <- sim_mat
@@ -2525,7 +2523,7 @@ ui <- shinydashboard::dashboardPage(
         loaded_simMat_Anno(listFiles)
       }else{
         listFiles <- list()
-        file <- readRDS('MiDNE/DATA/annotation/all_genes_drugs_annotation.RDS')
+        file <- readRDS('MiDNE/inst/extdata/annotation/all_genes_drugs_annotation.RDS')
         listFiles[['annotation2']] <- file
         loaded_simMat_Anno(listFiles)
       }
@@ -2617,7 +2615,7 @@ ui <- shinydashboard::dashboardPage(
           progress$set(message = "MiDNE", detail = paste("Doing Embedding"), value = 0)
           
           if (input$emb_opt == 'YES'){
-            emb_mat <- MoNETA::get_embedding(matrix = rwr_mat, embedding_size = input$dim_emb, cores = input$cores_emb)
+            emb_mat <- get_embedding(matrix = rwr_mat, embedding_size = input$dim_emb, cores = input$cores_emb)
             dr_output$emb_mat <- emb_mat
           }else{
             emb_mat <- rwr_mat
@@ -2625,12 +2623,12 @@ ui <- shinydashboard::dashboardPage(
           
           if (input$dr_method == 'UMAP'){
             progress$inc(0.8, detail = paste("Doing UMAP"))
-            dr_mat <- MoNETA::get_parallel_umap_embedding(matrix = emb_mat,
+            dr_mat <- get_parallel_umap_embedding(matrix = emb_mat,
                                                           embedding_size = 2,
                                                           n_threads = input$threads)
           }else if (input$dr_method == 'PCA'){
             progress$inc(0.8, detail = paste("Doing PCA"))
-            dr_mat <- MoNETA::get_pca_embedding(matrix = emb_mat, embedding_size = input$emb_size)
+            dr_mat <- get_pca_embedding(matrix = emb_mat, embedding_size = input$emb_size)
           }else if (input$dr_method == 'tSNE'){
             progress$inc(0.8, detail = paste("Doing tSNE"))
             dr_mat <- get_tsne_embedding(matrix = emb_mat,
@@ -2653,12 +2651,12 @@ ui <- shinydashboard::dashboardPage(
           emb_mat <- dr_input
           if (input$dr_method == 'UMAP'){
             progress$set(message = "MiDNE", detail = paste("Doing UMAP"), value = 0)
-            dr_mat <- MoNETA::get_parallel_umap_embedding(matrix = emb_mat,
+            dr_mat <- get_parallel_umap_embedding(matrix = emb_mat,
                                                           embedding_size = 2,
                                                           n_threads = input$threads)
           }else if (input$dr_method == 'PCA'){
             progress$set(message = "MiDNE", detail = paste("Doing PCA"), value = 0)
-            dr_mat <- MoNETA::get_pca_embedding(matrix = emb_mat, embedding_size = input$emb_size)
+            dr_mat <- get_pca_embedding(matrix = emb_mat, embedding_size = input$emb_size)
           }else if (input$dr_method == 'tSNE'){
             progress$set(message = "MiDNE", detail = paste("Doing tSNE"), value = 0)
             dr_mat <- get_tsne_embedding(matrix = emb_mat,
@@ -2704,7 +2702,7 @@ ui <- shinydashboard::dashboardPage(
       
       dr_mat <- shiny::reactiveValuesToList(dr_output)$dr_mat
       
-      dr_plot <- MoNETA::plot_2D_matrix(coord = dr_mat[components,], nodes_anno = data.frame(id = colnames(dr_mat)),
+      dr_plot <- plot_2D_matrix(coord = dr_mat[components,], nodes_anno = data.frame(id = colnames(dr_mat)),
                                         id_name = 'id', interactive = FALSE, wo_legend = FALSE) +
         ggplot2::ggtitle(paste(method, emb)) +
         ggplot2::xlab(paste0(input$dr_method, x_lab)) +  ggplot2::ylab( paste0(input$dr_method, y_lab)) +
@@ -2852,7 +2850,7 @@ ui <- shinydashboard::dashboardPage(
             dendro <- to_create()
             progress$set(message = "MiDNE", detail = paste("Doing Cut tree"), value = 0)
             message('cut tree')
-            cutree_res <- cutree(dendro, h = input$hclust_par)
+            cutree_res <- dendextend::cutree(dendro, h = input$hclust_par)
             num_clust <- length(unique(cutree_res))
             cluster <- gPlot_mat
             cluster$clust <- factor(cutree_res)
@@ -2991,7 +2989,7 @@ ui <- shinydashboard::dashboardPage(
         return(NULL)
       }
       
-      cl_plot <- MoNETA::plot_2D_matrix(coord = dr_mat[1:2,], nodes_anno = clu_anno,
+      cl_plot <- plot_2D_matrix(coord = dr_mat[1:2,], nodes_anno = clu_anno,
                                         id_name = 'id', id_anno_color = 'clust',
                                         interactive = FALSE, wo_legend = FALSE) +
         ggplot2::ggtitle(title()) +
@@ -3136,7 +3134,7 @@ ui <- shinydashboard::dashboardPage(
         }
         
         path_cluster <- pea_table %>%
-          filter(source == input$source) %>%
+          dplyr::filter(source == input$source) %>%
           select(query, term_name)
         
         message('DONE!')
@@ -3325,9 +3323,9 @@ ui <- shinydashboard::dashboardPage(
           for (x in names(omics_files())){
             processed_omics_mat <- omics_files()[[x]]
             if (input[[paste0("remove0col_", x)]] == 'YES')
-              processed_omics_mat <- MoNETA::remove_zeros_cols(processed_omics_mat)
+              processed_omics_mat <- remove_zeros_cols(processed_omics_mat)
             if (input[[paste0("norm_", x)]] == 'YES')
-              processed_omics_mat <- MoNETA::normalize_omics(processed_omics_mat)
+              processed_omics_mat <- normalize_omics(processed_omics_mat)
             proc_matrices[[paste0('p_', x)]] <- processed_omics_mat
           }
           message('All matrices processed!')
@@ -5440,7 +5438,7 @@ ui <- shinydashboard::dashboardPage(
             type_col <- colnames(anno_table)[which.max(type_col_check)]
             
             dr_tab <- shiny::reactiveValuesToList(dr_output)$dr_mat
-            anno <- anno_table %>% filter(id %in% colnames(dr_tab))
+            anno <- anno_table %>% dplyr::filter(id %in% colnames(dr_tab))
             
             if ('gene' %in% anno[[type_col]] || 'drug' %in% anno[[type_col]]) {
               options <- c('All', unique(anno[[type_col]]))
@@ -5470,7 +5468,7 @@ ui <- shinydashboard::dashboardPage(
           if (!is.null(anno()) | !is.null(anno1()) | !is.null(anno2())) {
             pre_anno <- if (!is.null(anno())) anno()  else if (!is.null(anno1())) anno1() else anno2()
             print(pre_anno)
-            anno <- pre_anno %>%  filter(id %in% dr_tab$id)
+            anno <- pre_anno %>%  dplyr::filter(id %in% dr_tab$id)
             print(anno)
             nodes <- c('gene', 'drug')
             type_col_check <- sapply(colnames(anno), FUN = function(x) sum(nodes %in% anno[[x]]))
@@ -5495,11 +5493,11 @@ ui <- shinydashboard::dashboardPage(
           if(input$density_on_points == 'All') {
             dr_mat_density <- dr_tab
           } else if (input$density_on_points == 'drug'){
-            to_keep <- gPlot_data %>% filter(type == 'drug') %>% select(id)
-            dr_mat_density <- dr_tab %>%  filter(id %in% to_keep[['id']])
+            to_keep <- gPlot_data %>% dplyr::filter(type == 'drug') %>% select(id)
+            dr_mat_density <- dr_tab %>%  dplyr::filter(id %in% to_keep[['id']])
           }else{
-            to_keep <- gPlot_data %>% filter(type == 'gene') %>% select(id)
-            dr_mat_density <- dr_tab %>%  filter(id %in% to_keep[['id']])
+            to_keep <- gPlot_data %>% dplyr::filter(type == 'gene') %>% select(id)
+            dr_mat_density <- dr_tab %>%  dplyr::filter(id %in% to_keep[['id']])
           }
           
           d_plot <-
@@ -6378,7 +6376,7 @@ ui <- shinydashboard::dashboardPage(
           top_anno[ is.na(top_anno$clust), 'clust'] <- 2
         }
         
-        MoNETA::plot_2D_matrix(coord = dr_mat,
+        plot_2D_matrix(coord = dr_mat,
                                nodes_anno = top_anno,
                                id_name = 'id', id_anno_color = 'term_name', id_anno_shape = 'clust',
                                interactive = TRUE, wo_legend = TRUE,
@@ -6541,11 +6539,11 @@ ui <- shinydashboard::dashboardPage(
       if (length(shiny::reactiveValuesToList(clusters)) == 0) {
         return(NULL)}
       isolate({
-        enriched_clusters <- path_annotation()$path_cluster %>% filter(term_name == input$pathway_selector) %>% dplyr::pull(., query)
+        enriched_clusters <- path_annotation()$path_cluster %>% dplyr::filter(term_name == input$pathway_selector) %>% dplyr::pull(., query)
         annotation_table <- path_annotation()$gene_cluster %>% mutate(selected_pathway = ifelse(!(clust %in% enriched_clusters), 'FALSE', 'TRUE'))
         
         clusters <- shiny::reactiveValuesToList(clusters)
-        MoNETA::plot_2D_matrix(coord = clusters$dr_mat[1:2,], nodes_anno = annotation_table,
+        plot_2D_matrix(coord = clusters$dr_mat[1:2,], nodes_anno = annotation_table,
                                id_name = 'id', id_anno_color = 'selected_pathway',
                                interactive = TRUE, wo_legend = TRUE,
                                title = paste('Enriched clusters for "', input$pathway_selector, '" (', input$select_peaTable2, ')'))
@@ -6560,7 +6558,7 @@ ui <- shinydashboard::dashboardPage(
         return(NULL)
       isolate({
         gprof_res <- shiny::reactiveValuesToList(gProfiler_res)[[input$select_peaTable2]]
-        onedb <- filter(gprof_res, source == input$source)
+        onedb <- dplyr::filter(gprof_res, source == input$source)
         DT::datatable(onedb,
                       extensions = 'Buttons',
                       options = list(paging = TRUE,
@@ -6680,7 +6678,7 @@ ui <- shinydashboard::dashboardPage(
         } else {
           drug_cluster <- shiny::reactiveValuesToList(clusters)[[input$select_cluList2]]$cluster %>% 
             dplyr::mutate_if(is.factor, as.numeric) %>%
-            filter(id %in% drugs()) %>% select(clust) %>% unique(.) %>% sort(.)
+            dplyr::filter(id %in% drugs()) %>% select(clust) %>% unique(.) %>% sort(.)
           shiny::selectInput('cluster_selector',
                              'Select one cluster to highlight in the plot',
                              choices = drug_cluster[[1]], selected = NULL)
@@ -6707,7 +6705,7 @@ ui <- shinydashboard::dashboardPage(
                 clu_anno <- clu_anno %>% mutate(shape = ifelse(id %in% drugs(), 'drug', 'gene'))
                 print(clu_anno)
                 
-                p <- MoNETA::plot_2D_matrix(coord = clusters$dr_mat[1:2,], nodes_anno = clu_anno,
+                p <- plot_2D_matrix(coord = clusters$dr_mat[1:2,], nodes_anno = clu_anno,
                                             id_name = 'id', id_anno_color = 'clu_col', id_anno_shape = 'shape',
                                             title =  paste('Cluster2Drugs:', 
                                                            paste0('"',  input$cluster_selector, '"'), 
@@ -6718,11 +6716,11 @@ ui <- shinydashboard::dashboardPage(
                 
                 
               } else if  (input$approach == 'drug') {
-                id_cluster <- clu_anno %>% filter(id == input$drug_selector) %>% select(clust)
+                id_cluster <- clu_anno %>% dplyr::filter(id == input$drug_selector) %>% select(clust)
                 clu_anno <- clu_anno %>% mutate(clu_col = ifelse(clust == id_cluster[[1]], 'cluster', 'others'))
                 clu_anno <- clu_anno %>% mutate(shape = ifelse(id %in% drugs(), 'drug', 'gene'))
                 
-                p <- MoNETA::plot_2D_matrix(coord =  clusters$dr_mat[1:2,], nodes_anno = clu_anno,
+                p <- plot_2D_matrix(coord =  clusters$dr_mat[1:2,], nodes_anno = clu_anno,
                                             id_name = 'id', id_anno_color = 'clu_col', id_anno_shape = 'shape',
                                             title = paste('Drug2Cluster:', 
                                                           paste0('"',  input$drug_selector, '"'), 
@@ -6760,7 +6758,7 @@ ui <- shinydashboard::dashboardPage(
           if (input$approach == 'cluster'){
             
             onedb <- dplyr::filter(cluster , clust == as.integer(input$cluster_selector)) %>%
-              filter(id %in% drugs())
+              dplyr::filter(id %in% drugs())
             DT::datatable(onedb,
                           extensions = 'Buttons',
                           options = list(paging = TRUE,
@@ -6782,9 +6780,9 @@ ui <- shinydashboard::dashboardPage(
                           rownames = FALSE
             )
           } else if (input$approach == 'drug') {
-            id_cluster <- cluster %>% filter(id == input$drug_selector) %>% select(clust)
+            id_cluster <- cluster %>% dplyr::filter(id == input$drug_selector) %>% select(clust)
             onedb <- dplyr::filter(cluster , clust == id_cluster[[1]]) %>%
-              filter(id %in% drugs())
+              dplyr::filter(id %in% drugs())
             DT::datatable(onedb,
                           options = list(paging = TRUE,
                                          pageLength = 15,
@@ -6820,7 +6818,7 @@ ui <- shinydashboard::dashboardPage(
           
           if (input$approach == 'cluster') {
             onedb <- dplyr::filter(cluster , clust == as.integer(input$cluster_selector)) %>%
-              filter(!(id %in% drugs()))
+              dplyr::filter(!(id %in% drugs()))
             DT::datatable(onedb,
                           extensions = 'Buttons',
                           options = list(paging = TRUE,
@@ -6841,9 +6839,9 @@ ui <- shinydashboard::dashboardPage(
                           rownames = FALSE
             )
           } else if (input$approach == 'drug') {
-            id_cluster <- cluster %>% filter(id == input$drug_selector) %>% select(clust)
+            id_cluster <- cluster %>% dplyr::filter(id == input$drug_selector) %>% select(clust)
             onedb <- dplyr::filter(cluster , clust == id_cluster[[1]]) %>%
-              filter(!(id %in% drugs()))
+              dplyr::filter(!(id %in% drugs()))
             DT::datatable(onedb,
                           options = list(paging = TRUE,
                                          pageLength = 15,
