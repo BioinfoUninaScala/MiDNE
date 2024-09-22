@@ -10,7 +10,7 @@ In R console, run
 
 ```r
 library(devtools)
-install_github("BioinfoUninaScala/MoNETA", 
+install_github("BioinfoUninaScala/MiDNE", 
                build_vignettes=FALSE, 
                repos=BiocManager::repositories(),
                dependencies=TRUE, type="source")
