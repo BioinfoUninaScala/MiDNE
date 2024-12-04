@@ -5,7 +5,7 @@
 \alias{gen_coCNVnet.R}
 \title{Generate co-CNV network}
 \usage{
-gen_coCNVnet.R(omics_matrix, correction_method = NULL, cpu = 1)
+gen_coCNVnet(omics_matrix, correction_method = NULL, cpu = 1)
 }
 \arguments{
 \item{omics_matrix}{A matrix of dimensions genes X samples representing Copy Number Variation (CNV) data.}
