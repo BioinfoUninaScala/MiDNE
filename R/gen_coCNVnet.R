@@ -8,7 +8,7 @@
 #' @export
 
 
-gen_coCNVnet.R <- function( 
+gen_coCNVnet <- function( 
                             omics_matrix, 
                             correction_method = NULL,
                             cpu = 1
