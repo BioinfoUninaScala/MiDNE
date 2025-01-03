@@ -365,8 +365,8 @@ ui <- shinydashboard::dashboardPage(
                                                                   shiny::checkboxGroupInput(inputId = 'omicsNet_example_files',
                                                                                             label = shiny::h4(shiny::span('Select one or more omic networks', style = "font-weight: bold")),
                                                                                             choices = c("BRCA_filt_coexpr_network", "BRCA_filt_prot_net",
-                                                                                                        "BRCA_filtered_coMethy_network", "BRCA_filt_coamp_network.RDS",
-                                                                                                        'BRCA_filt_codel_network.RDS'))
+                                                                                                        "BRCA_filt_cometh_network", "BRCA_filt_coamp_network",
+                                                                                                        'BRCA_filt_codel_network'))
                                                                 ),
                                                                 shiny::conditionalPanel(
                                                                   condition = 'input.omicsNet_example_opt == "No"',
@@ -1765,87 +1765,89 @@ ui <- shinydashboard::dashboardPage(
     #################### load OMICS networks #####################
     
     loaded_omics_net_list <- shiny::eventReactive(input$load_omics_net_button, {
-      req(input$omics_net_files)
+      req(input$omicsNet_example_opt)
       
+      listFiles <- list()
       
-      if (input$omicsNet_example_opt == 'No'){
-        listFiles <- list()
+      if (input$omicsNet_example_opt == 'No') {
+        req(input$omics_net_files)
         inFiles <- input$omics_net_files
-        if (is.null(inFiles)){
+        if (is.null(inFiles)) {
           return(NULL)
         } else {
           for (i in 1:nrow(inFiles)) {
             name <- tools::file_path_sans_ext(inFiles$name[i])
             input_name <- input[[paste0('omics_net_name', i)]]
             new_name <- ifelse(nchar(input_name) == 0, name, input_name)
-            
             ext <- tools::file_ext(inFiles$name[i])
-            file <- switch(ext,
-                           csv = vroom::vroom(inFiles$datapath[i], delim = ","),
-                           RDS = readRDS(inFiles$datapath[i]),
-                           validate("Invalid file; Please upload a .csv or .RDS file")
+            
+            file <- switch(
+              ext,
+              csv = tryCatch(vroom::vroom(inFiles$datapath[i], delim = ","),
+                             error = function(e) stop("Error loading CSV file.")),
+              RDS = tryCatch(readRDS(inFiles$datapath[i]),
+                             error = function(e) stop("Error loading RDS file.")),
+              {
+                shinyalert::shinyalert("Invalid file type", "Please upload a .csv or .RDS file.", type = "error")
+                return(NULL)
+              }
             )
-            if (is.data.frame(file) & ncol(file) == 3){
+            
+            if (is.data.frame(file) && ncol(file) == 3) {
               listFiles[[new_name]] <- file
-            }else if (!is.data.frame(file) ){
-              shinyalert::shinyalert("Type Error", "Uploaded Data is not a dataframe",closeOnClickOutside = TRUE, type = "error")
-              returnValue()
-            }else if (ncol(file) != 3){
-              shinyalert::shinyalert("Column Error", "Uploaded Data has not 3 columns",closeOnClickOutside = TRUE, type = "error")
-              returnValue()
+            } else {
+              shinyalert::shinyalert(
+                title = "File Error",
+                text = paste0("File '", inFiles$name[i], "' is invalid. Ensure it is a dataframe with 3 columns."),
+                type = "error"
+              )
+              return(NULL)
             }
           }
         }
-        
-      } else {
+      } else if (input$omicsNet_example_opt == 'Yes'){
+        req(input$omicsNet_example_files) 
         input_list <- input$omicsNet_example_files
+        print(paste0('omics_net: ', input_list))
         example_data <- list()
         for (file in input_list) {
-          file_path <- system.file("extdata", "networks", "biological", paste0(file, '.RDS' ), package = "MiDNE")
-          example_data[[ file ]] <- readRDS(file_path)
+          print(file)
+          file_path <- system.file(
+            "extdata", "networks", "biological", paste0(file, ".RDS"), package = "MiDNE"
+          )
+          example_data[[file]] <- readRDS(file_path)
         }
         listFiles <- example_data
       }
+      
       return(listFiles)
     })
     
-    
+    # Messaggio di caricamento
     observeEvent(input$load_omics_net_button, {
       shinyalert::shinyalert(
         title = "Wait",
-        text = "Waiting for data loading",
-        size = "xs",
-        closeOnEsc = TRUE,
-        closeOnClickOutside = TRUE,
-        html = TRUE,
+        text = "Waiting for data loading...",
         type = "info",
-        showConfirmButton = TRUE,
-        confirmButtonText = "OK",
-        confirmButtonCol = "#004192",
-        showCancelButton = FALSE,
-        imageUrl = "",
-        animation = TRUE
+        size = "xs",
+        closeOnClickOutside = TRUE,
+        showConfirmButton = TRUE
       )
-      
-    },
-    ignoreNULL = FALSE,
-    ignoreInit = TRUE
-    )
-    
-    
-    ############## set files names #############
+    })
+  
     
     output$omics_net_names <- shiny::renderUI({
       inFiles <- input$omics_net_files
-      if (is.null(inFiles)){
+      if (is.null(inFiles)) {
+        cat("No files uploaded.\n")
         return(NULL)
-      }else{
-        omicsNames <- list()
-        for (i in 1:nrow(inFiles)) {
+      } else {
+        cat("Generating input fields for file names.\n")
+        omicsNames <- lapply(1:nrow(inFiles), function(i) {
           name <- tools::file_path_sans_ext(inFiles$name[i])
-          omicsNames[[i]] <- shiny::textInput(paste0('omics_net_name', i), paste('Rename the ', name, ' file'))
-        }
-        omicsNames
+          shiny::textInput(paste0('omics_net_name', i), label = paste('Rename the', name, 'file'), value = name)
+        })
+        do.call(shiny::tagList, omicsNames)
       }
     })
     
