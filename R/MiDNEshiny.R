@@ -1193,8 +1193,8 @@ ui <- shinydashboard::dashboardPage(
 
             <b>Use Example Dataset</b>: <br/>  <span style='font-weight:normal;'>
              <p align='justify'>
-            Alternatively, you can upload the example dataset consisting of five omic matrices of BRCA patients,
-            including transcriptomics, proteomics, epigenomics, and CNVs data. </span> </span>
+            Alternatively, you can upload the example dataset consisting of four omic matrices of BRCA patients,
+            including transcriptomics, proteomics, epigenomics, and SCNVs data. </span> </span>
             </p>
             <hr style='border-top: 1px solid white;'>
 
@@ -3324,7 +3324,6 @@ ui <- shinydashboard::dashboardPage(
         list_of_buttons
       },
       handlerExpr = {
-        # Verifica se almeno un bottone è stato attivato
         if (any(button_states$activated)) {
           print(any(button_states$activated))
           print(button_states$activated)
@@ -3794,8 +3793,7 @@ ui <- shinydashboard::dashboardPage(
             
             progress$set(message = "MiDNE", detail = paste("Inferring the network..."), value = 0)
             net <- drug_network_inference(drug_input = drug_files()[[x]], 
-                                          drug_type = input[[paste0('drug_type_', x)]], 
-                                          dist = dist, 
+                                          drug_type = input[[paste0('drug_type_', x)]],
                                           cpu = cpu)
             
             progress$inc(1, detail = paste("Network constructed!"))

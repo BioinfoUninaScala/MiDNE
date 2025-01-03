@@ -2,7 +2,6 @@
 % Please edit documentation in R/gen_coCNVnet.R
 \name{gen_coCNVnet}
 \alias{gen_coCNVnet}
-\alias{gen_coCNVnet.R}
 \title{Generate co-CNV network}
 \usage{
 gen_coCNVnet(omics_matrix, correction_method = NULL, cpu = 1)

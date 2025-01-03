@@ -11,7 +11,6 @@
 drug_network_inference <- function(
                                     drug_input,
                                     drug_type,
-                                    #dist, 
                                     cpu = 1
     )
   {
