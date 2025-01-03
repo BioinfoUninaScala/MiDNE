@@ -3329,8 +3329,8 @@ ui <- shinydashboard::dashboardPage(
           print(button_states$activated)
           for (x in names(omics_files())){
             processed_omics_mat <- omics_files()[[x]]
-            if (input[[paste0("remove0col_", x)]] == 'YES')
-              processed_omics_mat <- remove_zeros_cols(processed_omics_mat)
+            if (input[[paste0("remove0row_", x)]] == 'YES')
+              processed_omics_mat <- remove_zeros_rows(processed_omics_mat)
             if (input[[paste0("norm_", x)]] == 'YES')
               processed_omics_mat <- normalize_omics(processed_omics_mat)
             proc_matrices[[paste0('p_', x)]] <- processed_omics_mat
@@ -3389,8 +3389,8 @@ ui <- shinydashboard::dashboardPage(
           tab <- shiny::tabPanel(title = x,
                                  shiny::fluidRow(
                                    shiny::column(width = 12,
-                                                 shiny::radioButtons(inputId = paste0("remove0col_", x),
-                                                                     label = shiny::h4(shiny::span("Do you want to remove zeros columns?", style = "font-weight: bold")),
+                                                 shiny::radioButtons(inputId = paste0("remove0row_", x),
+                                                                     label = shiny::h4(shiny::span("Do you want to remove rows containing only zeros?", style = "font-weight: bold")),
                                                                      choices = c('YES', 'NO'), selected = 'NO'
                                                  ),
                                                  shiny::radioButtons(inputId = paste0("norm_", x),
