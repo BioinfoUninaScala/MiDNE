@@ -33,7 +33,7 @@ fisher_test_post_hoc <- function(matrix,
   doSNOW::registerDoSNOW(cl)
   iterations <- base::nrow(matrix)
   pb <- utils::txtProgressBar(max = iterations, style = 3)
-  progress <- function(n) setTxtProgressBar::setTxtProgressBar(pb, n)
+  progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
   
   output_list <- list()
