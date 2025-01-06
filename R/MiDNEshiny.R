@@ -690,7 +690,7 @@ ui <- shinydashboard::dashboardPage(
                                                                 title = shiny::h2(shiny::span("Upload Similarity matrix", style = "font-weight: bold")),
                                                                 width = 12, status = "primary", solidHeader = FALSE,
                                                                 shiny::radioButtons(inputId = 'example_simMat', 
-                                                                                    label = shiny::h4(shiny::span( 'Do you want load to select an example similarity matrix?', style = "font-weight: bold")),
+                                                                                    label = shiny::h4(shiny::span( 'Do you want to select an example similarity matrix?', style = "font-weight: bold")),
                                                                                     choices = c('YES', 'NO'), selected = 'NO'),
                                                                 
                                                                 shiny::conditionalPanel(
@@ -1855,10 +1855,11 @@ ui <- shinydashboard::dashboardPage(
     #################### load DRUG networks #####################
     
     loaded_drug_net_list <- shiny::eventReactive(input$load_drug_net_button, {
-      req(input$drug_net_files)
+      req(input$drugNet_example_opt)
+      listFiles <- list()
       
       if (input$drugNet_example_opt == 'No'){
-        listFiles <- list()
+        req(input$drug_net_files)
         inFiles <- input$drug_net_files
         if (is.null(inFiles)){
           return(NULL)
@@ -1939,7 +1940,6 @@ ui <- shinydashboard::dashboardPage(
     #################### load BIPARTITE networks #####################
     
     bnetwork <- shiny::eventReactive(input$load_bnet_button, {
-      
       
       if (input$bNet_example_opt == 'No'){
         req(input$bnet_file)
