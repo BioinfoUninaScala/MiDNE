@@ -942,7 +942,7 @@ ui <- shinydashboard::dashboardPage(
                                                                       shiny::fluidRow(
                                                                         shiny::column(width=12,
                                                                                       shiny::hr(),
-                                                                                      shinydashboard::box(title = shiny::h2(shiny::span("Pathway Enrichment Analysis", style = "font-weight: bold")), 
+                                                                                      shinydashboard::box(title = shiny::h2(shiny::span("Enrichment Analysis", style = "font-weight: bold")), 
                                                                                                           width = 12, collapsible = TRUE, 
                                                                                                           solidHeader = FALSE, status = 'primary',
                                                                                                           shiny::uiOutput('cl_table_selector'),
@@ -3043,7 +3043,7 @@ ui <- shinydashboard::dashboardPage(
           
           progress <- shiny::Progress$new()
           on.exit(progress$close())
-          progress$set(message = "MiDNE", detail = paste("Doing Pathway Enrichment Analysis"), value = 0)
+          progress$set(message = "MiDNE", detail = paste("Doing Enrichment Analysis"), value = 0)
           message('Compute gProfiler...')
           enrich_analysis <- gprofiler2::gost(query = cluster_anno,
                                               organism = "hsapiens",
@@ -6302,7 +6302,7 @@ ui <- shinydashboard::dashboardPage(
     output$info_box_11 <- renderText({
       HTML("<br/> <span style='font-weight:normal;'>
               <p align='justify'>
-              Here, you can conduct the Pathway Enrichment Analysis (PEA) for a particular list of clusters obtained in the previous step. <br/>
+              Here, you can conduct the Enrichment Analysis (PEA) for a particular list of clusters obtained in the previous step. <br/>
               Then, you can perform the <b> Cluster2Pathway Analysis </b>, by filtering the PEA table based on one or more databases. 
               The output will be a table and a plot in which each cluster is associated with the most statistically significant pathway/function.
               </span> <br/>
@@ -6507,7 +6507,7 @@ ui <- shinydashboard::dashboardPage(
     output$info_box_12 <- renderText({
       HTML("<br/> <span style='font-weight:normal;'>
               <p align='justify'>
-              After conducting the pathway enrichment analysis,
+              After conducting the enrichment analysis,
               here you can verify the enrichment specificity of a particular pathway across all defined clusters. 
               Select a single database to filter the enrichment table, and then select a pathway/functionality to test its specificity. </span> <br/>
               </p> <hr style='border-top: 1px solid white;'>
