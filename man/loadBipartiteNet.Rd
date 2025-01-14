@@ -7,7 +7,7 @@
 loadBipartiteNet()
 }
 \value{
-A dataframe with three column reporting genes as source nodes, drugs as target nodes and the weights of the edges.
+A dataframe with three columns reporting genes as source nodes, drugs as target nodes and the weights of the edges.
 }
 \description{
 This function loads gene-drug network included in the \code{MiDNE} package.

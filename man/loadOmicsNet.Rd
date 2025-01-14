@@ -2,7 +2,7 @@
 % Please edit documentation in R/loadOmicsNet.R
 \name{loadOmicsNet}
 \alias{loadOmicsNet}
-\title{Load TCGA-BRCA omics matrices.}
+\title{Load TCGA-BRCA omics networks}
 \usage{
 loadOmicsNet(
   net_type = c("expression", "proteomics", "methylation", "del", "amp", "all")
@@ -14,16 +14,9 @@ loadOmicsNet(
 (e.g., \code{c('expression', 'proteomics')}).}
 }
 \value{
-A named list of TCGA-BRCA matrices with genes on rows and samples on columns.
+A named list of TCGA-BRCA networks.
 The names of the list correspond to the omics types provided in \code{net_type}.
 }
 \description{
-This function loads specific omics matrices from the TCGA-BRCA dataset included in the \code{MiDNE} package.
-}
-\examples{
-# Load expression and proteomics data
-omics_data <- loadOmicsMat(net_type = c('expression', 'proteomics'))
-
-# Load all data types
-all_data <- loadOmicsMat(net_type = 'all')
+This function loads specific omics networks included in the \code{MiDNE} package.
 }

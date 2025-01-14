@@ -2,7 +2,7 @@
 #'
 #' @description This function loads gene-drug network included in the `MiDNE` package.
 #' @import readr
-#' @return A dataframe with three column reporting genes as source nodes, drugs as target nodes and the weights of the edges.
+#' @return A dataframe with three columns reporting genes as source nodes, drugs as target nodes and the weights of the edges.
 #' @export
 
 loadBipartiteNet <- function() {

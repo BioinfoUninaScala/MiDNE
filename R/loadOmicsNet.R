@@ -1,18 +1,12 @@
-#' Load TCGA-BRCA omics matrices.
+#' Load TCGA-BRCA omics networks
 #'
-#' @description This function loads specific omics matrices from the TCGA-BRCA dataset included in the `MiDNE` package.
+#' @description This function loads specific omics networks included in the `MiDNE` package.
 #'
 #' @param net_type A character vector containing the names of omics networks to upload. Accepted values are: 
 #' 'expression', 'proteomics', 'methylation', 'amp', 'del' and 'all'. You can provide a combination of the first four values 
 #' (e.g., `c('expression', 'proteomics')`).
-#' @return A named list of TCGA-BRCA matrices with genes on rows and samples on columns.
+#' @return A named list of TCGA-BRCA networks.
 #' The names of the list correspond to the omics types provided in `net_type`.
-#' @examples
-#' # Load expression and proteomics data
-#' omics_data <- loadOmicsMat(net_type = c('expression', 'proteomics'))
-#'
-#' # Load all data types
-#' all_data <- loadOmicsMat(net_type = 'all')
 #' @export
 
 loadOmicsNet<- function(net_type = c('expression', 'proteomics', 'methylation', 'del', 'amp', 'all')) {
