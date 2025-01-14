@@ -7,7 +7,7 @@
 
 loadBipartiteNet <- function() {
   
-  file_path <- system.file("extdata", "networks/bipartite/FDAdrugs_net.csv", package = "MiDNE")
+  file_path <- system.file("extdata", "networks/bipartite/FDA_active_DRUGBANK_bnet.RDS", package = "MiDNE")
   file <- readr::read_delim(file = file_path, delim = ',')
 
   return(file)
