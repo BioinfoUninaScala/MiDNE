@@ -32,7 +32,7 @@
 #' @param weighted_multiplex_2 A boolean, if true, the edge between omics will be weighted. It is considered only if jump_neighborhood is true
 #' @param aggregation_method aggregation method
 #' @param get_completeRWRmat boolean 
-#' @param no_seed_nodes vector of characterss
+#' @param no_seed_nodes vector of characters specifying the nodes to exclude from the restarting procedure (e.g. no_seed_nodes = c('afatinib', 'TP53', 'ADH1A'))   
 #' @param cores Number of threads for Parallelization. It has to be positive integer. If it is equal to 1, no parallelization is not performed
 #' @return RWRMH_similarity
 #' @export
@@ -312,7 +312,10 @@ gen_sim_mat_MH <- function(network1, network2,                                  
                                          c(f_sorted_genes, f_sorted_drugs)]
   }
 
-  return(list(RWRMH_sim_mat = RWRMH_similarity, 
+  f_RWRMH_similarity <- RWRMH_similarity[!(rownames(RWRMH_similarity) %in% no_seed_nodes),]
+  final_RWRMH_similarity <-  t(t(f_RWRMH_similarity)/colSums(f_RWRMH_similarity))
+  
+  return(list(RWRMH_sim_mat = final_RWRMH_similarity, 
               wholeRWRMH_sim_mat = preRWRMH_similarity))
 }
 

@@ -2368,10 +2368,10 @@ ui <- shinydashboard::dashboardPage(
             no_seed_nodes = virtual_nodes,
             cores = input$cores_rwr)
           
-          pre_rwr_simMat <- rwr_simMat_list$RWRMH_sim_mat
-          
-          nofk_rwr_simMat <- pre_rwr_simMat[!(rownames(pre_rwr_simMat) %in% virtual_nodes),]
-          rwr_simMat <-  t(t(nofk_rwr_simMat)/colSums(nofk_rwr_simMat))
+          # pre_rwr_simMat <- rwr_simMat_list$RWRMH_sim_mat
+          # 
+          # nofk_rwr_simMat <- pre_rwr_simMat[!(rownames(pre_rwr_simMat) %in% virtual_nodes),]
+          # rwr_simMat <-  t(t(nofk_rwr_simMat)/colSums(nofk_rwr_simMat))
          
         }
         
