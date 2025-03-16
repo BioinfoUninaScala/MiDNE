@@ -24,11 +24,12 @@
 #' @param wo_legend logical, if TRUE returns the plot without legend
 #' @param title title of the plot
 #' @param shapes  shapes list to be used for plotting, id_anno_shape is not NA
+#' @param size  size indicates the size of the point in the plot
 #' @return a ggplot or a plotly object
 #' @export
 
 plot_2D_matrix <- function(coord, nodes_anno, id_name, id_anno_color = NA, id_anno_shape = NA,
-                           interactive = TRUE, wo_legend = FALSE, title = "", shapes = NULL) {
+                           interactive = TRUE, wo_legend = FALSE, title = "", shapes = NULL, size = 5) {
   
   
   
@@ -102,7 +103,7 @@ plot_2D_matrix <- function(coord, nodes_anno, id_name, id_anno_color = NA, id_an
     if (interactive) {
       gPlot <- gPlot_data %>% plotly::plot_ly(x = ~V1, y = ~V2, type = "scatter",
                                               mode = "markers",
-                                              marker = list(size = 5), text = ~id,
+                                              marker = list(size = size), text = ~id,
                                               colors = "Set2") %>%
         plotly::layout(xaxis = list(zeroline = F), yaxis = list(zeroline = F),
                        title = title)
@@ -118,7 +119,7 @@ plot_2D_matrix <- function(coord, nodes_anno, id_name, id_anno_color = NA, id_an
         plotly::plot_ly(x = ~V1, y = ~V2, type = "scatter",
                         color = ~group1, mode = "markers", symbol = ~group2,
                         symbols = vals,
-                        marker = list(size = 5), text = ~id,
+                        marker = list(size = size), text = ~id,
                         name = paste0(gPlot_data$group1, "\n", gPlot_data$group2),
                         colors = "Set2") %>%
         plotly::layout(xaxis = list(zeroline = F), yaxis = list(zeroline = F),
@@ -134,7 +135,7 @@ plot_2D_matrix <- function(coord, nodes_anno, id_name, id_anno_color = NA, id_an
     if (interactive) {
       gPlot <- gPlot_data %>% plotly::plot_ly(x = ~V1, y = ~V2, type = "scatter",
                                               color = ~group1, mode = "markers",
-                                              marker = list(size = 5), text = ~id,
+                                              marker = list(size = size), text = ~id,
                                               colors = "Set2") %>%
         plotly::layout(xaxis = list(zeroline = F), yaxis = list(zeroline = F),
                        title = title)
@@ -151,7 +152,7 @@ plot_2D_matrix <- function(coord, nodes_anno, id_name, id_anno_color = NA, id_an
         plotly::plot_ly(x = ~V1, y = ~V2, type = "scatter",
                         mode = "markers", symbol = ~group2,
                         symbols = vals,
-                        marker = list(size = 5), text = ~id,
+                        marker = list(size = size), text = ~id,
                         name = paste0(gPlot_data$group2),
                         colors = "Set2") %>%
         plotly::layout(xaxis = list(zeroline = F), yaxis = list(zeroline = F),

@@ -13,7 +13,8 @@ plot_2D_matrix(
   interactive = TRUE,
   wo_legend = FALSE,
   title = "",
-  shapes = NULL
+  shapes = NULL,
+  size = 5
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ plot_2D_matrix(
 \item{title}{title of the plot}
 
 \item{shapes}{shapes list to be used for plotting, id_anno_shape is not NA}
+
+\item{size}{size indicates the size of the point in the plot}
 }
 \value{
 a ggplot or a plotly object

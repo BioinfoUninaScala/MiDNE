@@ -65,7 +65,7 @@ gen_sim_mat_MH(
 
 \item{get_completeRWRmat}{boolean}
 
-\item{no_seed_nodes}{vector of characterss}
+\item{no_seed_nodes}{vector of characters specifying the nodes to exclude from the restarting procedure (e.g. no_seed_nodes = c('afatinib', 'TP53', 'ADH1A'))}
 
 \item{cores}{Number of threads for Parallelization. It has to be positive integer. If it is equal to 1, no parallelization is not performed}
 }
