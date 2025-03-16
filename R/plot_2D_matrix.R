@@ -109,7 +109,7 @@ plot_2D_matrix <- function(coord, nodes_anno, id_name, id_anno_color = NA, id_an
                        title = title)
     } else {
       gPlot <- ggplot(gPlot_data, aes(x = V1, y = V2)) +
-        geom_point(color = "blue")  +
+        geom_point(color = "blue", size = size)  +
         theme_bw() +
         labs(title = title)
     }
@@ -126,7 +126,7 @@ plot_2D_matrix <- function(coord, nodes_anno, id_name, id_anno_color = NA, id_an
                        title = title)
     } else {
       gPlot <- ggplot(gPlot_data, aes(x = V1, y = V2)) +
-        geom_point(aes(color = group1, shape = group2))  +
+        geom_point(aes(color = group1, shape = group2), size = size)  +
         theme_bw() +
         labs(title = title, color = id_anno_color, shape = id_anno_shape) +
         scale_color_brewer(palette="Set2")
@@ -141,7 +141,7 @@ plot_2D_matrix <- function(coord, nodes_anno, id_name, id_anno_color = NA, id_an
                        title = title)
     } else {
       gPlot <- ggplot(gPlot_data, aes(x = V1, y = V2)) +
-        geom_point(aes(color = group1))  +
+        geom_point(aes(color = group1), size = size)  +
         theme_bw()  +
         labs(title = title, color = id_anno_color) +
         scale_color_brewer(palette="Set2")
@@ -159,7 +159,7 @@ plot_2D_matrix <- function(coord, nodes_anno, id_name, id_anno_color = NA, id_an
                        title = title)
     } else {
       gPlot <- ggplot(gPlot_data, aes(x = V1, y = V2)) +
-        geom_point(color = "blue", aes(shape = group2))  +
+        geom_point(color = "blue", aes(shape = group2), size = size)  +
         theme_bw() +
         labs(title = title, shape = id_anno_shape)
     }
