@@ -69,9 +69,16 @@ post_hoc_analysis_2 <- function(cont_table, fisher_p, rows, correction_method){
   }
   
   post_hoc <- RVAideMemoire::chisq.theo.multcomp(cont_table, p.method = correction_method)
+  
   pval <- post_hoc$p.value[rows, 6]
-  obs <- post_hoc$p.value$observed.Freq
-  exp <- post_hoc$p.value$expected
-  logFC <- ifelse(all(pval < 0.05), log2(base::mean(obs[rows])/exp[1]), 0)
+  other_pval <- post_hoc$p.value[-rows, 6]
+  
+  if (all(pval < other_pval)) {
+    obs <- post_hoc$p.value$observed.Freq
+    exp <- post_hoc$p.value$expected
+    logFC <- log2(base::mean(obs[rows])/exp[1])
+  } else {
+    logFC <- 0
+  }
   return(logFC)
 }
