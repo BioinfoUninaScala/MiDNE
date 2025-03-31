@@ -9,6 +9,7 @@
 #' @param correction_method The method used to correct the p-value (either "bonferroni" or "fdr").
 #' @param rows The number of rows associated with the pair of events of interest (e.g., row 4 indicates the co-occurrence of a molecular event, including co-methylation, co-amplification, and co-deletion).
 #' @param cpu The number of cores to use for parallel processing.
+#' @param pth A numeric value, ranging from 0 and 1, that will be applied to the p-value of the Fisher's Exact Test and of post-hoc analysis.
 #' @return A gene X gene log(expected/observed) matrix.
 #' @export
 
@@ -17,7 +18,9 @@
 fisher_test_post_hoc <- function(matrix, 
                                  cpu,
                                  rows, 
-                                 correction_method){
+                                 correction_method,
+                                 pth = 0.05
+                                 ){
   
   if (!requireNamespace("RVAideMemoire", quietly = TRUE)) {
     stop("The 'RVAideMemoire' package is required but not installed.")
@@ -46,7 +49,7 @@ fisher_test_post_hoc <- function(matrix,
                          cont_table <- base::table(matrix[i, , drop = FALSE], matrix[j, ,drop = FALSE])
                          # Perform Fisher's exact test
                          fisher_p  <- stats::fisher.test(cont_table)$p.value
-                         vector[j] <- ifelse(fisher_p < 0.05, post_hoc_analysis_2(cont_table, fisher_p, rows, correction_method), 0)
+                         vector[j] <- ifelse(fisher_p < pth, post_hoc_analysis_2(cont_table, fisher_p, rows, correction_method), 0)
                        }
                        output_list[[i]] <- vector
                        
@@ -71,14 +74,20 @@ post_hoc_analysis_2 <- function(cont_table, fisher_p, rows, correction_method){
   post_hoc <- RVAideMemoire::chisq.theo.multcomp(cont_table, p.method = correction_method)
   
   pval <- post_hoc$p.value[rows, 6]
-  other_pval <- post_hoc$p.value[-rows, 6]
+  obs <- post_hoc$p.value$observed.Freq
+  exp <- post_hoc$p.value$expected
+  logODD <- log2(base::mean(obs[rows])/exp[1])
   
-  if (all(pval < other_pval)) {
-    obs <- post_hoc$p.value$observed.Freq
-    exp <- post_hoc$p.value$expected
-    logFC <- log2(base::mean(obs[rows])/exp[1])
-  } else {
-    logFC <- 0
-  }
-  return(logFC)
+  res <- ifelse(all(pval < pth) & logODD > 0, logODD, 0)
+  
+  #other_pval <- post_hoc$p.value[-rows, 6]
+  # if (all(pval < other_pval)) {
+  #   obs <- post_hoc$p.value$observed.Freq
+  #   exp <- post_hoc$p.value$expected
+  #   logFC <- log2(base::mean(obs[rows])/exp[1])
+  # } else {
+  #   logFC <- 0
+  # }
+  
+  return(res)
 }
