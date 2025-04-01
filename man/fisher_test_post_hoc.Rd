@@ -11,8 +11,6 @@ fisher_test_post_hoc(matrix, cpu, rows, correction_method, pth = 0.05)
 
 \item{cpu}{The number of cores to use for parallel processing.}
 
-\item{rows}{The number of rows associated with the pair of events of interest (e.g., row 4 indicates the co-occurrence of a molecular event, including co-methylation, co-amplification, and co-deletion).}
-
 \item{correction_method}{The method used to correct the p-value (either "bonferroni" or "fdr").}
 
 \item{pth}{A numeric value, ranging from 0 and 1, that will be applied to the p-value of the Fisher's Exact Test and of post-hoc analysis.}
