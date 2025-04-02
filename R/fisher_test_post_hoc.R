@@ -48,7 +48,7 @@ fisher_test_post_hoc <- function(matrix,
                          cont_table <- base::table(matrix[i, , drop = FALSE], matrix[j, ,drop = FALSE])
                          # Perform Fisher's exact test
                          fisher_p  <- stats::fisher.test(cont_table)$p.value
-                         vector[j] <- ifelse(fisher_p < pth, post_hoc_analysis_2(cont_table, fisher_p, rows, correction_method), 0)
+                         vector[j] <- ifelse(fisher_p < pth, post_hoc_analysis_2(cont_table, correction_method), 0)
                        }
                        output_list[[i]] <- vector
                        
@@ -64,7 +64,7 @@ fisher_test_post_hoc <- function(matrix,
 }
 
 
-post_hoc_analysis_2 <- function(cont_table, fisher_p, correction_method){
+post_hoc_analysis_2 <- function(cont_table, correction_method){
   
   if (!requireNamespace("RVAideMemoire", quietly = TRUE)) {
     stop("The 'RVAideMemoire' package is required but not installed.")
