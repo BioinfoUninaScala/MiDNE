@@ -4,7 +4,7 @@
 \alias{fisher_test_post_hoc}
 \title{Fisher's Exact Test and post-hoc analysis}
 \usage{
-fisher_test_post_hoc(matrix, cpu, rows, correction_method, pth = 0.05)
+fisher_test_post_hoc(matrix, cpu, correction_method, pth = 0.05)
 }
 \arguments{
 \item{matrix}{A matrix of dimensions genes X samples.}
@@ -16,7 +16,7 @@ fisher_test_post_hoc(matrix, cpu, rows, correction_method, pth = 0.05)
 \item{pth}{A numeric value, ranging from 0 and 1, that will be applied to the p-value of the Fisher's Exact Test and of post-hoc analysis.}
 }
 \value{
-A gene X gene log(expected/observed) matrix.
+A gene X gene matrix.
 }
 \description{
 Fisher's Exact Test and post-hoc analysis

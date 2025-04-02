@@ -9,14 +9,13 @@
 #' @param correction_method The method used to correct the p-value (either "bonferroni" or "fdr").
 #' @param cpu The number of cores to use for parallel processing.
 #' @param pth A numeric value, ranging from 0 and 1, that will be applied to the p-value of the Fisher's Exact Test and of post-hoc analysis.
-#' @return A gene X gene log(expected/observed) matrix.
+#' @return A gene X gene matrix.
 #' @export
 
 
 
 fisher_test_post_hoc <- function(matrix, 
                                  cpu,
-                                 rows, 
                                  correction_method,
                                  pth = 0.05
                                  ){
