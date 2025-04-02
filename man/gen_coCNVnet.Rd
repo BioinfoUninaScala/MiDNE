@@ -4,7 +4,7 @@
 \alias{gen_coCNVnet}
 \title{Generate co-CNV network}
 \usage{
-gen_coCNVnet(omics_matrix, correction_method = NULL, cpu = 1)
+gen_coCNVnet(omics_matrix, correction_method = NULL, cpu = 1, pth)
 }
 \arguments{
 \item{omics_matrix}{A matrix of dimensions genes X samples representing Copy Number Variation (CNV) data.}
@@ -12,6 +12,8 @@ gen_coCNVnet(omics_matrix, correction_method = NULL, cpu = 1)
 \item{correction_method}{The method used to correct the p-value of the statistical test (either "bonferroni" or "fdr").}
 
 \item{cpu}{The number of cores to use for parallel processing.}
+
+\item{pth}{A numeric value, ranging from 0 and 1, that will be applied to the p-value of the Fisher's Exact Test and of post-hoc analysis.}
 }
 \value{
 A list containing two undirected networks (co-amplification and co-deletion), each represented as a 3-column table (source, dest, weight).

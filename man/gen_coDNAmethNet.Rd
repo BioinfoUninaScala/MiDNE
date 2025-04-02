@@ -4,7 +4,13 @@
 \alias{gen_coDNAmethNet}
 \title{Generate co-methylation network}
 \usage{
-gen_coDNAmethNet(omics_matrix, correction_method = NULL, th = 0.3, cpu = 1)
+gen_coDNAmethNet(
+  omics_matrix,
+  correction_method = NULL,
+  th = 0.3,
+  cpu = 1,
+  pth = 0.05
+)
 }
 \arguments{
 \item{omics_matrix}{A matrix of dimensions genes X samples representing DNA methylation data (beta-values).}
@@ -14,6 +20,8 @@ gen_coDNAmethNet(omics_matrix, correction_method = NULL, th = 0.3, cpu = 1)
 \item{th}{A positive integer used to binarize the input DNA methylation matrix.}
 
 \item{cpu}{The number of cores to use for parallel processing.}
+
+\item{pth}{A numeric value, ranging from 0 and 1, that will be applied to the p-value of the Fisher's Exact Test and of post-hoc analysis.}
 }
 \value{
 A list containing two undirected networks (co-amplification and co-deletion), each defined as a 3-column table (source, dest, weight).

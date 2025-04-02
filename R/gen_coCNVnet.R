@@ -4,6 +4,7 @@
 #' @param omics_matrix A matrix of dimensions genes X samples representing Copy Number Variation (CNV) data.
 #' @param correction_method The method used to correct the p-value of the statistical test (either "bonferroni" or "fdr").
 #' @param cpu The number of cores to use for parallel processing.
+#' @param pth A numeric value, ranging from 0 and 1, that will be applied to the p-value of the Fisher's Exact Test and of post-hoc analysis.
 #' @return A list containing two undirected networks (co-amplification and co-deletion), each represented as a 3-column table (source, dest, weight).
 #' @export
 
@@ -11,7 +12,8 @@
 gen_coCNVnet <- function( 
                             omics_matrix, 
                             correction_method = NULL,
-                            cpu = 1
+                            cpu = 1,
+                            pth
                             )
 {
   cnv_mat <- as.data.frame(omics_matrix)
@@ -25,8 +27,8 @@ gen_coCNVnet <- function(
   colnames(amp_mat) <-  colnames(amp)
   colnames(del_mat) <-  colnames(del)
   
-  coamp <- fisher_test_post_hoc(matrix = amp_mat, cpu = cpu, rows = 4, correction_method)
-  codel <- fisher_test_post_hoc(matrix = del_mat, cpu = cpu, rows = 4, correction_method)
+  coamp <- fisher_test_post_hoc(matrix = amp_mat, cpu = cpu, correction_method,  pth = pth)
+  codel <- fisher_test_post_hoc(matrix = del_mat, cpu = cpu, correction_method,  pth = pth)
   net_matrix <- list('coamp' = coamp, 'codel' = codel)
   
   result <- list()
