@@ -77,7 +77,7 @@ post_hoc_analysis_2 <- function(cont_table, correction_method){
   
   if (any(diff_obs_exp[-1] > 0)) {
     chisq <- chisq.test(cont_table)
-    res <- chisq$statistic
+    res <- unname(chisq$statistic)
   } else {
     stat <- 0
   }
