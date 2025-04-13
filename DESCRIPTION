@@ -64,6 +64,8 @@ Imports:
     wordspace,
     Matrix,
     DT, data.table, rstatix
+Remotes: 
+    github::BioinfoUninaScala/MoNETA
 Suggests: RVAideMemoire, doSNOW
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
