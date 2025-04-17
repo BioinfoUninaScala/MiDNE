@@ -1,4 +1,4 @@
-<p align="right">
+r<p align="center">
  <img src="https://github.com/BioinfoUninaScala/MiDNE/blob/main/MiDNE_logo.png" width="350" alt="MiDNE Logo">
 </p>
 
