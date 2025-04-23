@@ -63,4 +63,29 @@ install_github("BioinfoUninaScala/MiDNE",
 
 
 #### `inst/extdata/` directory
+##### /data
+- `/pharmacological/FDAdrugs.RDS`:
+- `/pharmacological/ALLdrugs.RDS`:
+- `/pharmacological/FDAdrugs.RDS`:
+- `/pharmacological/ALLdrugs.RDS`:
+- `/biological/BRCA_Methylation_Meth450.RDS`:
+- `/biological/BRCA_proteome_CDAP.RDS`:
+- `/biological/BRCA_SCNA.RDS`:
+
+##### /annotation
+- `Human__TCGA_BRCA__MS__Clinical__Clinical__01_28_2016__BI__Clinical__Firehose.tsi`:
+- `all_genes_drugs_annotation.RDS`:
+
+##### /networks
+- `/biological/BRCA_filt_codel_network.RDS`:
+- `/biological/BRCA_filt_coamp_network.RDS`:
+- `/biological/BRCA_filt_cometh_network.RDS`:
+- `/biological/BRCA_filt_prot_net.RDS`:
+- `/biological/BRCA_filt_coexpr_network.RDS`:
+- `/pharmacological/FDAdrugs_net.csv`:
+- `/bipartite/FDA_active_DRUGBANK_bnet.RDS`:
+
+##### /similarity_matrices
+- `emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:
+- `umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:
 
