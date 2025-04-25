@@ -2,6 +2,7 @@
  <img src="https://github.com/BioinfoUninaScala/MiDNE/blob/main/MiDNE_logo.png" width="350" alt="MiDNE Logo">
 </p>
 
+
 # MiDNE: Multi-omics genes and Drugs Network Embedding
 #### A novel R package for integrating gene-centered multi-omics data with drug information. 
 MiDNE is a computational pipeline to predict condition-specific gene-gene, drug-gene and drug-drug associations by integrating multi-omics data and drug information. MiDNE leverages network-based approach to model the multi-omics relationships between genes and drugs into a heterogeneous network. The neighborhood of each node is explored and numerically encoded through a Random Walk with Restart procedure. MiDNE can also learn a low-dimensional representation of each node in the integrated network, and then facilitates its visualization and interpretation via clustering and enrichment analyses. 
@@ -93,8 +94,9 @@ MiDNE includes functions to load example datasets used as a case study, based on
 - `emb_FDA_active_drug_5omics_uRWRMHmat.RDS`: embedded similarity matrix computed usign Random Walk with Restart (RWR) on the BRCA heterogeneous network, followed by dimensionality reduction via the `get_embedding` function.
 - `umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:  UMAP-based low-dimensional embedding of the above embedded similarity matrix for visualization.
 
-&nbsp;  
-
 ---
+
 ## Contacts
 If you have any questions or comments, please feel free to email Aurora Brandi (aurora.brandi@unina.it).
+
+
