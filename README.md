@@ -8,7 +8,7 @@ MiDNE is a computational pipeline to predict condition-specific gene-gene, drug-
 
 ---
 
-### Installation 
+## Installation 
 In R console, run 
 
 ```r
@@ -20,8 +20,8 @@ install_github("BioinfoUninaScala/MiDNE",
 ```
 ----------
 
-### Code and data
-#### 📂 `R/` — Code Directory
+## Code and data
+### 📂 `R/` — Code Directory
 **0. Load example files and networks**
 
 MiDNE includes functions to load example datasets used as a case study, based on TCGA-BRCA omics data and drug information from DrugBank.
@@ -65,10 +65,9 @@ MiDNE includes functions to load example datasets used as a case study, based on
 **Other**
 - `utils.R`: contains utility functions used throughout the MiDNE package, including checks, data formatting, and helper functions.
 
+&nbsp;  
 
----
-
-#### 📂 `inst/extdata/` — Data Directory
+### 📂 `inst/extdata/` — Data Directory
 **/data**
 - `/pharmacological/FDAdrugs.RDS`: a list of drugs approved by the FDA, used in the drug network analysis.
 - `/pharmacological/ALLdrugs.RDS`: a comprehensive list of drugs included in the DrugBank reference set.
@@ -94,8 +93,8 @@ MiDNE includes functions to load example datasets used as a case study, based on
 - `emb_FDA_active_drug_5omics_uRWRMHmat.RDS`: embedded similarity matrix computed usign Random Walk with Restart (RWR) on the BRCA heterogeneous network, followed by dimensionality reduction via the `get_embedding` function.
 - `umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:  UMAP-based low-dimensional embedding of the above embedded similarity matrix for visualization.
 
+&nbsp;  
 
 ---
-
-### Contacts
+## Contacts
 If you have any questions or comments, please feel free to email Aurora Brandi (aurora.brandi@unina.it).
