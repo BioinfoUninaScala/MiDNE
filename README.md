@@ -65,30 +65,29 @@ MiDNE includes functions to load example datasets used as a case study, based on
 
 #### `inst/extdata/` directory
 ##### /data
-- `/pharmacological/FDAdrugs.RDS`:
-- `/pharmacological/ALLdrugs.RDS`:
-- `/pharmacological/FDAdrugs.RDS`:
-- `/pharmacological/ALLdrugs.RDS`:
-- `/biological/BRCA_Methylation_Meth450.RDS`:
-- `/biological/BRCA_proteome_CDAP.RDS`:
-- `/biological/BRCA_SCNA.RDS`:
+- `/pharmacological/FDAdrugs.RDS`: a list of drugs approved by the FDA, used in the drug network analysis.
+- `/pharmacological/ALLdrugs.RDS`: a comprehensive list of drugs included in the DrugBank reference set.
+- `BRCA_expr_HiSeq.RDS`: expression data from TCGA-BRCA samples measured with the Illumina HiSeq technology.
+- `/biological/BRCA_Methylation_Meth450.RDS`: methylation data from TCGA-BRCA samples measured with the Illumina 450K platform.
+- `/biological/BRCA_proteome_CDAP.RDS`: proteomics data for TCGA-BRCA samples obtained from the CDAP pipeline.
+- `/biological/BRCA_SCNA.RDS`: Somatic copy number alteration (SCNA) data for TCGA-BRCA samples.
 
 ##### /annotation
-- `Human__TCGA_BRCA__MS__Clinical__Clinical__01_28_2016__BI__Clinical__Firehose.tsi`:
-- `all_genes_drugs_annotation.RDS`:
+- `Human__TCGA_BRCA__MS__Clinical__Clinical__01_28_2016__BI__Clinical__Firehose.tsi`: clinical metadata for TCGA-BRCA samples from the Broad Firehose pipeline.
+- `all_genes_drugs_annotation.RDS`: an annotation table that includes both genes and drugs. For genes, the table includes information such as associated biological processes, protein complexes, and transcription factor status. For drugs, it includes annotations such as FDA approval status.
 
 ##### /networks
-- `/biological/BRCA_filt_codel_network.RDS`:
-- `/biological/BRCA_filt_coamp_network.RDS`:
-- `/biological/BRCA_filt_cometh_network.RDS`:
-- `/biological/BRCA_filt_prot_net.RDS`:
-- `/biological/BRCA_filt_coexpr_network.RDS`:
-- `/pharmacological/FDAdrugs_net.csv`:
-- `/bipartite/FDA_active_DRUGBANK_bnet.RDS`:
+- `/biological/BRCA_filt_codel_network.RDS`: filtered co-deletion network of genes based on SCNA data.
+- `/biological/BRCA_filt_coamp_network.RDS`: filtered co-amplification network of genes based on SCNA data.
+- `/biological/BRCA_filt_cometh_network.RDS`: filtered co-methylation network based on DNA methylation profiles.
+- `/biological/BRCA_filt_prot_net.RDS`: filtered co-abundance network based on proteomics data.
+- `/biological/BRCA_filt_coexpr_network.RDS`: filtered gene co-expression network based on transcriptomic data.
+- `/pharmacological/FDAdrugs_net.csv`: isolated drug network for FDA-approved drugs.
+- `/bipartite/FDA_active_DRUGBANK_bnet.RDS`: bipartite network connecting FDA-approved drugs to their known gene targets.
 
 ##### /similarity_matrices
-- `emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:
-- `umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:
+- `emb_FDA_active_drug_5omics_uRWRMHmat.RDS`: embedded similarity matrix computed usign Random Walk with Restart (RWR) on the BRCA heterogeneous network, followed by dimensionality reduction via the `get_embedding` function.
+- `umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:  UMAP-based low-dimensional embedding of the above embedded similarity matrix for visualization.
 
 
 ### Contacts
