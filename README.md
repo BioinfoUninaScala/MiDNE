@@ -21,13 +21,14 @@ install_github("BioinfoUninaScala/MiDNE",
 ### Code and data
 #### `R/` directory
 ##### Load example files and networks
-- `loadAnnotation.R`:
-- `loadOmicsMat.R`: 
-- `loadDrugs.R`:     
-- `loadOmicsNet.R`:    
-- `loadDrugNet.R`:       
-- `loadBipartiteNet.R`:  
-
+MiDNE includes functions to load example datasets used as a case study, based on TCGA-BRCA omics data and drug information from DrugBank.
+- `loadOmicsMat.R`: loads example omics matrices (e.g., gene expression, CNV, methylation) used in the MiDNE case study.
+- `loadDrugs.R`: loads a single-column data frame cointaning drug IDs obtained from the DrugBank database.
+- `loadOmicsNet.R`: loads example omics-based networks inferred by MiDNE.  
+- `loadDrugNet.R`: loads an isolated drug network constructed by MiDNE.
+- `loadBipartiteNet.R`: loads bipartite networks connecting drugs to genes based on their known physical interactions retrieved from the DrugBank database.
+- `loadAnnotation.R`: loads annotation data depending on the selected mode. If "sample" is selected, it returns sample-level metadata from breast cancer datasets used as case study. This can be useful for users who wish to build gene-centered biological networks starting from specific subtypes. If "gene-drug" is selected, it loads an annotation matrix of known genes and drugs.
+  
 ##### Pre-processing omics matrices
 - `remove_zero_rows.R`: removes rows from a matrix - assumed to be features x samples - where all the elements are equal to zero.
 - `normalize_omics.R`: applies normalization to omics datasets to make them comparable across samples.
@@ -41,7 +42,7 @@ install_github("BioinfoUninaScala/MiDNE",
 - `gen_isolatedDrugNet.R`: constructs a drug network where each node represents a drug and no prior connections are assumed. Each drug is connected with a corresponding virtual node in order to simulate an isolated network structure.  
 - `fisher_test_post_hoc.R`: performs Fisher's exact test on a contingency table representing the status of a gene pair, and applies post hoc analysis to assess whether the observed imbalance may have biological significance. This function is internally used in `gen_coDNAmethNet.R` and `gen_coCNVnet.R`.
 - `get_filtered_corMat_by_adj_pval.R`: filters a correlation matrix based on associated adjusted p-values, retaining only statistically significant correlations. This function is internally used in `gen_coExpressionNet.R` and `gen_coAbundanceNet.R`.
-- `omics_network_inference.R`: generic function to infer biological networks from omics data. Supports different input types (e.g., expression, CNV, methylation, proteomics) and inference methods (e.g., correlation, Fisher's exact test).
+- `omics_network_inference.R`: generic function to infer biological networks from omics data. Supports different input types (e.g., expression, CNV) and inference methods (e.g., correlation, Fisher's exact test).
 
 ##### Integration 
 - `create_multiplex.R`: combines multiple omics-based networks into a multiplex structure, where each layer represents a different omics view of the same set of entities (e.g., genes). 
@@ -89,3 +90,6 @@ install_github("BioinfoUninaScala/MiDNE",
 - `emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:
 - `umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:
 
+
+### Contacts
+If you have any questions or comments, please feel free to email Aurora Brandi (aurora.brandi@unina.it).
