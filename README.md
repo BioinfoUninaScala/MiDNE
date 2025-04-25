@@ -29,37 +29,37 @@ install_github("BioinfoUninaScala/MiDNE",
 - `loadBipartiteNet.R`:  
 
 ##### Pre-processing omics matrices
-- `remove_zero_rows.R`:
-- `normalize_omics.R`:
-- `get_intersection_matrices.R`:     
-
+- `remove_zero_rows.R`: removes rows from a matrix - assumed to be features x samples - where all the elements are equal to zero.
+- `normalize_omics.R`: applies normalization to omics datasets to make them comparable across samples.
+- `get_intersection_matrices.R`: takes a list of matrices and returns a new list based on their shared row names.
+    
 ##### Network inference
-- `gen_coCNVnet.R`:           
-- `gen_coExpressionNet.R`:    
-- `gen_coAbundanceNet.R`:      
-- `gen_coDNAmethNet.R`:       
-- `gen_isolatedDrugNet.R`:     
-- `fisher_test_post_hoc.R`:   
-- `get_filtered_corMat_by_adj_pval.R`:  
-- `omics_network_inference.R`:
+- `gen_coExpressionNet.R`: constructs a gene co-expression network based on Pearson's correlations across expression profiles.
+- `gen_coAbundanceNet.R`: constructs a gene co-abundance network based on Spearman's correlations across samples.
+- `gen_coDNAmethNet.R`: constructs a gene network based on co-variation in DNA methylation patterns across samples.
+- `gen_coCNVnet.R`: constructs a gene network based on co-occurrence patterns in copy number variation (CNV) data across samples.
+- `gen_isolatedDrugNet.R`: constructs a drug network where each node represents a drug and no prior connections are assumed. Each drug is connected with a corresponding virtual node in order to simulate an isolated network structure.  
+- `fisher_test_post_hoc.R`: performs Fisher's exact test on a contingency table representing the status of a gene pair, and applies post hoc analysis to assess whether the observed imbalance may have biological significance. This function is internally used in `gen_coDNAmethNet.R` and `gen_coCNVnet.R`.
+- `get_filtered_corMat_by_adj_pval.R`: filters a correlation matrix based on associated adjusted p-values, retaining only statistically significant correlations. This function is internally used in `gen_coExpressionNet.R` and `gen_coAbundanceNet.R`.
+- `omics_network_inference.R`: generic function to infer biological networks from omics data. Supports different input types (e.g., expression, CNV, methylation, proteomics) and inference methods (e.g., correlation, Fisher's exact test).
 
 ##### Integration 
-- `create_multiplex.R`:    
-- `prune_multiplex_network.R`:
-- `create_layer_transition_matrix.R`:
-- `gen_sim_mat_M.R`:                  
-- `gen_sim_mat_MH.R`:             
-- `get_embedding.R`:             
-- `get_parallel_umap_embedding.R`:      
+- `create_multiplex.R`: combines multiple omics-based networks into a multiplex structure, where each layer represents a different omics view of the same set of entities (e.g., genes). 
+- `prune_multiplex_network.R`: prunes the multiplex network by removing edges whose weights fall below a specified threshold. For instance, in a correlation-based network, setting the threshold to 0.5 will remove all edges with an absolute correlation value lower than 0.5.
+- `create_layer_transition_matrix.R`: builds a layer transition matrix for the multiplex network, defining transition probabilities between layers for random walk-based embedding. These transition probabilities are computed using the Jaccard index between layers — the higher the number of shared edges between two layers, the higher the transition probability.
+- `gen_sim_mat_M.R`: applies Random Walk with Restart (RWR) to a multiplex network composed only of omics layers, integrating the information into a gene-by-gene similarity matrix. Each column of the resulting matrix represents the association scores between a given gene (the seed node) and all other genes in the multiplex network. The matrix is column-wise normalized.      
+- `gen_sim_mat_MH.R`: applies Random Walk with Restart (RWR) to a heterogeneous multiplex network that includes both omics and drug layers, returning a (gene + drug)-by-(gene + drug) similarity matrix. Each column represents the association scores between a specific node (gene or drug) and all other nodes in the network. The matrix is column-wise normalized.       
+- `get_embedding.R`: computes a low-dimensional embedding of the RWR similarity matrix by appling the MultiVERSE algorithm. 
+- `get_parallel_umap_embedding.R`: applies UMAP in parallel for dimensionality reduction on (embedded) similarity matrix, enabling visualization and downstream analysis.
 
 ##### Plotting
-- `plot_2D_matrix.R`:
+- `plot_2D_matrix.R`: plots a 2D representation of a matrix (e.g., similarity or embedding matrix) as a scatterplot where point color and shape can be customized by providing an annotation data frame.
 
 ##### Interactive interface
-- `MiDNEshiny.R`:
+- `MiDNEshiny.R`: launches the Shiny app for summarizing the MiDNE workflow and exploring results interactively, including clustering and enrichment analyses.
 
 ##### Other
-- `utils.R`:
+- `utils.R`: contains utility functions used throughout the MiDNE package, including checks, data formatting, and helper functions.
 
 
 #### `inst/extdata/` directory
