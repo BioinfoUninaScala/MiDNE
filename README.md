@@ -6,6 +6,8 @@
 #### A novel R package for integrating gene-centered multi-omics data with drug information. 
 MiDNE is a computational pipeline to predict condition-specific gene-gene, drug-gene and drug-drug associations by integrating multi-omics data and drug information. MiDNE leverages network-based approach to model the multi-omics relationships between genes and drugs into a heterogeneous network. The neighborhood of each node is explored and numerically encoded through a Random Walk with Restart procedure. MiDNE can also learn a low-dimensional representation of each node in the integrated network, and then facilitates its visualization and interpretation via clustering and enrichment analyses. 
 
+---
+
 ### Installation 
 In R console, run 
 
@@ -19,8 +21,9 @@ install_github("BioinfoUninaScala/MiDNE",
 ----------
 
 ### Code and data
-#### `R/` directory
-##### Load example files and networks
+#### 📂 `R/` — Code Directory
+**0. Load example files and networks**
+
 MiDNE includes functions to load example datasets used as a case study, based on TCGA-BRCA omics data and drug information from DrugBank.
 - `loadOmicsMat.R`: loads example omics matrices (e.g., gene expression, CNV, methylation) used in the MiDNE case study.
 - `loadDrugs.R`: loads a single-column data frame cointaning drug IDs obtained from the DrugBank database.
@@ -29,12 +32,12 @@ MiDNE includes functions to load example datasets used as a case study, based on
 - `loadBipartiteNet.R`: loads bipartite networks connecting drugs to genes based on their known physical interactions retrieved from the DrugBank database.
 - `loadAnnotation.R`: loads annotation data depending on the selected mode. If "sample" is selected, it returns sample-level metadata from breast cancer datasets used as case study. This can be useful for users who wish to build gene-centered biological networks starting from specific subtypes. If "gene-drug" is selected, it loads an annotation matrix of known genes and drugs.
   
-##### Pre-processing omics matrices
+**1. Pre-processing omics matrices**
 - `remove_zero_rows.R`: removes rows from a matrix - assumed to be features x samples - where all the elements are equal to zero.
 - `normalize_omics.R`: applies normalization to omics datasets to make them comparable across samples.
 - `get_intersection_matrices.R`: takes a list of matrices and returns a new list based on their shared row names.
-    
-##### Network inference
+
+**2. Network inference**
 - `gen_coExpressionNet.R`: constructs a gene co-expression network based on Pearson's correlations across expression profiles.
 - `gen_coAbundanceNet.R`: constructs a gene co-abundance network based on Spearman's correlations across samples.
 - `gen_coDNAmethNet.R`: constructs a gene network based on co-variation in DNA methylation patterns across samples.
@@ -43,28 +46,30 @@ MiDNE includes functions to load example datasets used as a case study, based on
 - `fisher_test_post_hoc.R`: performs Fisher's exact test on a contingency table representing the status of a gene pair, and applies post hoc analysis to assess whether the observed imbalance may have biological significance. This function is internally used in `gen_coDNAmethNet.R` and `gen_coCNVnet.R`.
 - `get_filtered_corMat_by_adj_pval.R`: filters a correlation matrix based on associated adjusted p-values, retaining only statistically significant correlations. This function is internally used in `gen_coExpressionNet.R` and `gen_coAbundanceNet.R`.
 - `omics_network_inference.R`: generic function to infer biological networks from omics data. Supports different input types (e.g., expression, CNV) and inference methods (e.g., correlation, Fisher's exact test).
-
-##### Integration 
+  
+**3. Integration**
 - `create_multiplex.R`: combines multiple omics-based networks into a multiplex structure, where each layer represents a different omics view of the same set of entities (e.g., genes). 
 - `prune_multiplex_network.R`: prunes the multiplex network by removing edges whose weights fall below a specified threshold. For instance, in a correlation-based network, setting the threshold to 0.5 will remove all edges with an absolute correlation value lower than 0.5.
 - `create_layer_transition_matrix.R`: builds a layer transition matrix for the multiplex network, defining transition probabilities between layers for random walk-based embedding. These transition probabilities are computed using the Jaccard index between layers — the higher the number of shared edges between two layers, the higher the transition probability.
 - `gen_sim_mat_M.R`: applies Random Walk with Restart (RWR) to a multiplex network composed only of omics layers, integrating the information into a gene-by-gene similarity matrix. Each column of the resulting matrix represents the association scores between a given gene (the seed node) and all other genes in the multiplex network. The matrix is column-wise normalized.      
 - `gen_sim_mat_MH.R`: applies Random Walk with Restart (RWR) to a heterogeneous multiplex network that includes both omics and drug layers, returning a (gene + drug)-by-(gene + drug) similarity matrix. Each column represents the association scores between a specific node (gene or drug) and all other nodes in the network. The matrix is column-wise normalized.       
-- `get_embedding.R`: computes a low-dimensional embedding of the RWR similarity matrix by appling the MultiVERSE algorithm. 
+- `get_embedding.R`: computes a low-dimensional embedding of the RWR similarity matrix by appling the [MultiVERSE algorithm](https://github.com/Lpiol/MultiVERSE) described by [Léo Pio-Lopez, et al.](https://arxiv.org/abs/2008.10085). 
 - `get_parallel_umap_embedding.R`: applies UMAP in parallel for dimensionality reduction on (embedded) similarity matrix, enabling visualization and downstream analysis.
 
-##### Plotting
+**4. Plotting**
 - `plot_2D_matrix.R`: plots a 2D representation of a matrix (e.g., similarity or embedding matrix) as a scatterplot where point color and shape can be customized by providing an annotation data frame.
 
-##### Interactive interface
+**Interactive interface**
 - `MiDNEshiny.R`: launches the Shiny app for summarizing the MiDNE workflow and exploring results interactively, including clustering and enrichment analyses.
 
-##### Other
+**Other**
 - `utils.R`: contains utility functions used throughout the MiDNE package, including checks, data formatting, and helper functions.
 
 
-#### `inst/extdata/` directory
-##### /data
+---
+
+#### 📂 `inst/extdata/` — Data Directory
+**/data**
 - `/pharmacological/FDAdrugs.RDS`: a list of drugs approved by the FDA, used in the drug network analysis.
 - `/pharmacological/ALLdrugs.RDS`: a comprehensive list of drugs included in the DrugBank reference set.
 - `BRCA_expr_HiSeq.RDS`: expression data from TCGA-BRCA samples measured with the Illumina HiSeq technology.
@@ -72,11 +77,11 @@ MiDNE includes functions to load example datasets used as a case study, based on
 - `/biological/BRCA_proteome_CDAP.RDS`: proteomics data for TCGA-BRCA samples obtained from the CDAP pipeline.
 - `/biological/BRCA_SCNA.RDS`: Somatic copy number alteration (SCNA) data for TCGA-BRCA samples.
 
-##### /annotation
+**/annotation**
 - `Human__TCGA_BRCA__MS__Clinical__Clinical__01_28_2016__BI__Clinical__Firehose.tsi`: clinical metadata for TCGA-BRCA samples from the Broad Firehose pipeline.
 - `all_genes_drugs_annotation.RDS`: an annotation table that includes both genes and drugs. For genes, the table includes information such as associated biological processes, protein complexes, and transcription factor status. For drugs, it includes annotations such as FDA approval status.
 
-##### /networks
+**/networks**
 - `/biological/BRCA_filt_codel_network.RDS`: filtered co-deletion network of genes based on SCNA data.
 - `/biological/BRCA_filt_coamp_network.RDS`: filtered co-amplification network of genes based on SCNA data.
 - `/biological/BRCA_filt_cometh_network.RDS`: filtered co-methylation network based on DNA methylation profiles.
@@ -85,10 +90,12 @@ MiDNE includes functions to load example datasets used as a case study, based on
 - `/pharmacological/FDAdrugs_net.csv`: isolated drug network for FDA-approved drugs.
 - `/bipartite/FDA_active_DRUGBANK_bnet.RDS`: bipartite network connecting FDA-approved drugs to their known gene targets.
 
-##### /similarity_matrices
+**/similarity_matrices**
 - `emb_FDA_active_drug_5omics_uRWRMHmat.RDS`: embedded similarity matrix computed usign Random Walk with Restart (RWR) on the BRCA heterogeneous network, followed by dimensionality reduction via the `get_embedding` function.
 - `umap_emb_FDA_active_drug_5omics_uRWRMHmat.RDS`:  UMAP-based low-dimensional embedding of the above embedded similarity matrix for visualization.
 
+
+---
 
 ### Contacts
 If you have any questions or comments, please feel free to email Aurora Brandi (aurora.brandi@unina.it).
