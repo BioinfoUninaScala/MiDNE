@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_2D_matrix.R
 \name{plot_2D_matrix}
 \alias{plot_2D_matrix}
-\title{Plot bimedinational reduction of a matrix}
+\title{Plot bidimensional reduction of a matrix}
 \usage{
 plot_2D_matrix(
   coord,
@@ -24,9 +24,9 @@ plot_2D_matrix(
 
 \item{id_name}{name of the column in \emph{nodes_anno} containing unique sample ids. There has to be correspondence on \emph{coord} columns names}
 
-\item{id_anno_color}{name of the column in \emph{nodes_anno} whose values are mapped to colors to observations. Notice that colors can be recycled it eh number of distinct values exceed available shapes}
+\item{id_anno_color}{name of the column in \emph{nodes_anno} whose values are mapped to colors to observations}
 
-\item{id_anno_shape}{name of the column in \emph{nodes_anno} whose values are mapped to shapes to observations. Notice that shapes can be recycled it eh number of distinct values exceed available shapes}
+\item{id_anno_shape}{name of the column in \emph{nodes_anno} whose values are mapped to shapes to observations}
 
 \item{interactive}{logical, if TRUE returns a plotly interactive plot, otherwise a standard ggplot is returned}
 
@@ -34,13 +34,13 @@ plot_2D_matrix(
 
 \item{title}{title of the plot}
 
-\item{shapes}{shapes list to be used for plotting, id_anno_shape is not NA}
+\item{shapes}{shapes list to be used for plotting, if id_anno_shape is not NA}
 
-\item{size}{size indicates the size of the point in the plot}
+\item{size}{size of the points}
 }
 \value{
 a ggplot or a plotly object
 }
 \description{
-Plot bimedinational reduction of a matrix
+Plot bidimensional reduction of a matrix
 }

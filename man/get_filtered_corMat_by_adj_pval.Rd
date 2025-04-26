@@ -3,22 +3,14 @@
 \name{get_filtered_corMat_by_adj_pval}
 \alias{get_filtered_corMat_by_adj_pval}
 \title{Function to infer correlation network filtered by corrected p-value}
-\usage{
-get_filtered_corMat_by_adj_pval(
-  input_matrix,
-  cpu = 10,
-  cor_method = "spearman",
-  adj_method = "fdr"
-)
-}
 \arguments{
 \item{input_matrix}{A matrix of dimensions genes X samples.}
-
-\item{cpu}{The number of cores to use for parallel processing.}
 
 \item{cor_method}{The correlation method to use (e.g., "pearson", "spearman").}
 
 \item{adj_method}{The method used to correct the p-value (either "bonferroni" or "fdr").}
+
+\item{cpu}{The number of cores to use for parallel processing.}
 }
 \value{
 A gene X gene correlation matrix, filtered by a corrected p-value lower than 0.05.

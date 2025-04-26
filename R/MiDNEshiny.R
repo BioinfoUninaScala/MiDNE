@@ -1,11 +1,9 @@
 #' MiDNE Shiny app
 #'
-#' @import shinyFiles
 #' @import shinyMatrix
 #' @import shinycssloaders
 #' @import readr
 #' @import glue
-#' @import conflicted
 #' @import fpc
 #' @import ggplot2
 #' @import gprofiler2
@@ -26,6 +24,10 @@ MiDNEshiny = function(MAXreq = 10000) {
   
 }
 
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(c("..density..", ".", "clust", "steps", "target", "type",
+                           "weight", "y", "Degree", "V1", "V2", "group1", "group2"))
+}
 
 ui <- shinydashboard::dashboardPage(
   
@@ -2883,8 +2885,8 @@ ui <- shinydashboard::dashboardPage(
       
       if (!is.null(manual_cluster())) {
         selected_cluster <- manual_cluster() %>% 
-          mutate(clust = rep(1, nrow(.))) %>% 
-          select(-selected_)
+          dplyr::mutate('clust' = rep(1, nrow(.))) %>% 
+          dplyr::select(-c('selected_'))
         clusters$manual_cluster <- selected_cluster
         print(selected_cluster)
         print('added!!!')
@@ -2955,11 +2957,11 @@ ui <- shinydashboard::dashboardPage(
       param <- if (shiny::isTruthy(input[[paste0(input$cluster_method, '_par')]])) input[[paste0(input$cluster_method, '_par')]] else NULL
       if (!is.null(shiny::reactiveValuesToList(clusters)[[paste0(input$cluster_method, '_', param)]]$cluster)){
         cluster <- shiny::reactiveValuesToList(clusters)[[paste0(input$cluster_method, '_', param)]]$cluster
-        clu_anno <- cluster %>% dplyr::arrange(clust)
+        clu_anno <- cluster %>% dplyr::arrange('clust')
         
       } else if (!is.null(shiny::reactiveValuesToList(clusters)$manual_cluster)) {
         cluster <- shiny::reactiveValuesToList(clusters)$manual_cluster
-        dr_tab <- tibble( id = colnames(dr_mat), x = dr_mat[1,], y = dr_mat[2,], 
+        dr_tab <- dplyr::tibble( id = colnames(dr_mat), x = dr_mat[1,], y = dr_mat[2,], 
                           clust = 2)
         dr_tab[dr_tab$id %in% cluster$id, 'clust'] <- 1
         clu_anno <- dr_tab %>%  mutate_at(4, as.factor)
@@ -3021,8 +3023,10 @@ ui <- shinydashboard::dashboardPage(
           )
           
           enrich_res <- enrich_analysis$result %>%
-            select(query, term_name, term_size, query_size, intersection_size, source, p_value) %>%
-            group_by(query) %>% dplyr::mutate_at('query', as.integer) %>% arrange(query)
+            dplyr::select('query', 'term_name', 'term_size', 'query_size', 'intersection_size', 'source', 'p_value') %>%
+            dplyr::group_by('query') %>%
+            dplyr::mutate_at('query', as.integer) %>% 
+            dplyr::arrange('query')
           message('Done!')
           
           
@@ -3055,7 +3059,7 @@ ui <- shinydashboard::dashboardPage(
           pea_table <- shiny::reactiveValuesToList(gProfiler_res)[[input$select_peaTable]]
           top_enrich_path <- pea_table %>%
               dplyr::filter(source %in% input$anno_source) %>%
-              dplyr::slice(which.min(p_value)) %>% ungroup()
+              dplyr::slice(which.min('p_value')) %>% ungroup()
           
           if (input$select_peaTable != 'manual_cluster'){
             top_anno <- shiny::reactiveValuesToList(clusters)[[input$select_peaTable]]$cluster %>%
@@ -3104,17 +3108,19 @@ ui <- shinydashboard::dashboardPage(
         
         if (input$select_peaTable != 'manual_cluster'){
           gene_cluster <- cl_table$cluster %>%
-            mutate_at('clust', as.integer) %>%
-            select(id, clust) %>% arrange(clust)
+            dplyr::mutate_at('clust', as.integer) %>%
+            dplyr::select('id', 'clust') %>% 
+            dplyr::arrange('clust')
         }else{
           gene_cluster <- cl_table %>%
             dplyr::mutate_at('clust', as.integer) %>%
-            select(id, clust) %>% arrange(clust)
+            dplyr::select('id', 'clust') %>%
+            dplyr::arrange('clust')
         }
         
         path_cluster <- pea_table %>%
           dplyr::filter(source == input$source) %>%
-          select(query, term_name)
+          dplyr::select('query', 'term_name')
         
         message('DONE!')
         progress$inc(1, detail = paste("Done!"))
@@ -3690,7 +3696,7 @@ ui <- shinydashboard::dashboardPage(
                                           condition = paste('input.', paste0('omics_type_', x), '== "Epigenomics"'),
                                           shiny::sliderInput(
                                             inputId = paste0('th_', x),
-                                            label = HTML("Select a threshold to discretized &beta;-values"), min = 0, max = 1, value = 0.3
+                                            label = shiny::HTML("Select a threshold to discretized &beta;-values"), min = 0, max = 1, value = 0.3
                                           )
                                         )
                           ),
@@ -3840,7 +3846,7 @@ ui <- shinydashboard::dashboardPage(
                                           )
                             )
                           ),
-                          hr(),
+                          shiny::hr(),
                           shiny::fluidRow(
                             shiny::column(width = 6, shiny::actionButton(paste0('generate_drug_net_', x), "Generate network"))
                           )
@@ -4051,7 +4057,7 @@ ui <- shinydashboard::dashboardPage(
             fnet1$weight <- 1
             graph <- igraph::graph_from_data_frame(fnet1, directed = FALSE)
             degree_table <- data.frame('Degree' = igraph::degree(graph))
-            p <- plotly::ggplotly(ggplot2::ggplot(degree_table, ggplot2::aes(x = 'Degree')) + ggplot2::geom_histogram() +
+            p <- plotly::ggplotly(ggplot2::ggplot(degree_table, ggplot2::aes(x = Degree)) + ggplot2::geom_histogram() +
                                     ggplot2::ggtitle('Nodes Degree Distribution') +
                                     ggplot2::ylab("Number of nodes") + ggplot2::xlab("Node degree") +
                                     ggplot2::theme(text = ggplot2::element_text(family="LM Roman 10"),
@@ -4298,7 +4304,7 @@ ui <- shinydashboard::dashboardPage(
           if (length(extra_genes_in_anno) != 0){
             message1 <- shiny::HTML(paste('&ensp;', paste("<b>", length(extra_genes_in_anno), "</b>"), " features are not present in the omics data collection", "<br/>"))
           }else if (length(not_annotated_genes) != 0){
-            message2 <- shiny::HTML(paste('&ensp;', paste("<b>", length(not_annotated_samples), "</b>"), " features are not annotated in the provided annotation file", "<br/>"))
+            message2 <- shiny::HTML(paste('&ensp;', paste("<b>", length(not_annotated_genes), "</b>"), " features are not annotated in the provided annotation file", "<br/>"))
           }
           shinydashboard::box(width = 12,
                               shiny::HTML(paste("<b>", p('WARNING!', style = "color:red"), "</b>")), message1, message2
@@ -5343,7 +5349,7 @@ ui <- shinydashboard::dashboardPage(
           output$selected_data <- DT::renderDT({
             if (length(shiny::reactiveValuesToList(dr_output)) != 0){
               dat <- data_orig_list()$data_shared$data(withSelection = TRUE)
-              filtered_tab <- rstatix::filter(dat, selected_)
+              filtered_tab <- rstatix::filter(dat, 'selected_')
               
               DT::datatable(filtered_tab,
                             extensions = 'Buttons',
@@ -5766,7 +5772,7 @@ ui <- shinydashboard::dashboardPage(
               #shiny::isolate({
               cl_plot <- clu_anno %>% 
                 plotly::plot_ly(x = ~x, y = ~y, source = 'cl_plot',
-                                type = "scatter", color = ~clust,
+                                type = "scatter", color = 'clust',
                                 mode = "markers", 
                                 marker = list(size = 5)
                 ) %>%
@@ -5966,7 +5972,7 @@ ui <- shinydashboard::dashboardPage(
           
             dat <- cl_data_orig_list()$data_shared$data(withSelection = TRUE)
             
-            filtered_tab <- rstatix::filter(dat, selected_)
+            filtered_tab <- rstatix::filter(dat, 'selected_')
             manual_cluster(filtered_tab)
             
             print(filtered_tab)
@@ -6516,8 +6522,8 @@ ui <- shinydashboard::dashboardPage(
       if (length(shiny::reactiveValuesToList(clusters)) == 0) {
         return(NULL)}
       shiny::isolate({
-        enriched_clusters <- path_annotation()$path_cluster %>% dplyr::filter(term_name == input$pathway_selector) %>% dplyr::pull(., query)
-        annotation_table <- path_annotation()$gene_cluster %>% mutate(selected_pathway = ifelse(!(clust %in% enriched_clusters), 'FALSE', 'TRUE'))
+        enriched_clusters <- path_annotation()$path_cluster %>% dplyr::filter('term_name' == input$pathway_selector) %>% dplyr::pull(., 'query')
+        annotation_table <- path_annotation()$gene_cluster %>% dplyr::mutate(selected_pathway = ifelse(!(clust %in% enriched_clusters), 'FALSE', 'TRUE'))
         
         clusters <- shiny::reactiveValuesToList(clusters)
         plot_2D_matrix(coord = clusters$dr_mat[1:2,], nodes_anno = annotation_table,
@@ -6655,7 +6661,7 @@ ui <- shinydashboard::dashboardPage(
         } else {
           drug_cluster <- shiny::reactiveValuesToList(clusters)[[input$select_cluList2]]$cluster %>% 
             dplyr::mutate_if(is.factor, as.numeric) %>%
-            dplyr::filter(id %in% drugs()) %>% select(clust) %>% unique(.) %>% sort(.)
+            dplyr::filter(id %in% drugs()) %>% dplyr::select('clust') %>% unique(.) %>% sort(.)
           shiny::selectInput('cluster_selector',
                              'Select one cluster to highlight in the plot',
                              choices = drug_cluster[[1]], selected = NULL)
@@ -6693,9 +6699,9 @@ ui <- shinydashboard::dashboardPage(
                 
                 
               } else if  (input$approach == 'drug') {
-                id_cluster <- clu_anno %>% dplyr::filter(id == input$drug_selector) %>% select(clust)
-                clu_anno <- clu_anno %>% mutate(clu_col = ifelse(clust == id_cluster[[1]], 'cluster', 'others'))
-                clu_anno <- clu_anno %>% mutate(shape = ifelse(id %in% drugs(), 'drug', 'gene'))
+                id_cluster <- clu_anno %>% dplyr::filter(id == input$drug_selector) %>% dplyr::select('clust')
+                clu_anno <- clu_anno %>% dplyr::mutate(clu_col = ifelse(clust == id_cluster[[1]], 'cluster', 'others'))
+                clu_anno <- clu_anno %>% dplyr::mutate(shape = ifelse(id %in% drugs(), 'drug', 'gene'))
                 
                 p <- plot_2D_matrix(coord =  clusters$dr_mat[1:2,], nodes_anno = clu_anno,
                                             id_name = 'id', id_anno_color = 'clu_col', id_anno_shape = 'shape',
@@ -6757,7 +6763,7 @@ ui <- shinydashboard::dashboardPage(
                           rownames = FALSE
             )
           } else if (input$approach == 'drug') {
-            id_cluster <- cluster %>% dplyr::filter(id == input$drug_selector) %>% select(clust)
+            id_cluster <- cluster %>% dplyr::filter(id == input$drug_selector) %>% dplyr::select('clust')
             onedb <- dplyr::filter(cluster , clust == id_cluster[[1]]) %>%
               dplyr::filter(id %in% drugs())
             DT::datatable(onedb,
@@ -6816,7 +6822,7 @@ ui <- shinydashboard::dashboardPage(
                           rownames = FALSE
             )
           } else if (input$approach == 'drug') {
-            id_cluster <- cluster %>% dplyr::filter(id == input$drug_selector) %>% select(clust)
+            id_cluster <- cluster %>% dplyr::filter(id == input$drug_selector) %>% dplyr::select('clust')
             onedb <- dplyr::filter(cluster , clust == id_cluster[[1]]) %>%
               dplyr::filter(!(id %in% drugs()))
             DT::datatable(onedb,

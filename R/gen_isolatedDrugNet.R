@@ -16,7 +16,7 @@ drug_network_inference <- function(
   {
   if (drug_type == "Virtual Nodes"){
     colnames(drug_input)[1] <- 'source'
-    f_drug_table <- drug_input %>% tibble::as_tibble(.) %>% dplyr::distinct() %>% dplyr::arrange(source) %>%
+    f_drug_table <- drug_input %>% tibble::as_tibble() %>% dplyr::distinct() %>% dplyr::arrange(source) %>%
       dplyr::mutate(dest = paste0('v_', 1:nrow(drug_input)),
              weight = rep(1, nrow(drug_input)))
     return(f_drug_table)

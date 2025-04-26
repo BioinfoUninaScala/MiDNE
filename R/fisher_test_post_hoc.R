@@ -1,6 +1,8 @@
 #' Fisher's Exact Test and post-hoc analysis
 #' 
 #' @name fisher_test_post_hoc
+#' @importFrom doSNOW registerDoSNOW
+#' @importFrom RVAideMemoire chisq.theo.multcomp
 #' @param matrix A matrix of dimensions genes X samples.
 #' @param correction_method The method used to correct the p-value (either "bonferroni" or "fdr").
 #' @param cpu The number of cores to use for parallel processing.

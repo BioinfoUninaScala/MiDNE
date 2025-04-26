@@ -8,6 +8,9 @@
 #' @return A gene X gene correlation matrix, filtered by a corrected p-value lower than 0.05.
 #' @export
 
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(c("i"))
+}
 
 get_filtered_corMat_by_adj_pval <- function(
     input_matrix,

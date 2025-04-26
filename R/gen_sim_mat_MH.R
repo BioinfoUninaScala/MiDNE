@@ -210,15 +210,15 @@ gen_sim_mat_MH <- function(network1, network2,                                  
   doSNOW::registerDoSNOW(cl)
   iterations <- length(f_Allnodes)
   pb <- utils::txtProgressBar(max = iterations, style = 3)
-  progress <- function(n) setTxtProgressBar(pb, n)
+  progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
   
   Results <- foreach::foreach(i = 1:length(f_Allnodes),
                               .packages = c("Matrix"),
-                              .export = c('Random.Walk.Restart.MultiplexHet', 'isMultiplexHet',
+                              .export = c('Random.Walk.Restart.MultiplexHet.default', 'isMultiplexHet',
                                           'get.seed.scoresMultiplex', "sumValues"),
                               .options.snow=opts) %dopar% {
-                                Random.Walk.Restart.MultiplexHet(x = trans_matrix, 
+                                Random.Walk.Restart.MultiplexHet.default(x = trans_matrix, 
                                                                  MultiplexHet_Object = MultiplexHet_Object,
                                                                  Multiplex1_Multiplex2_Seeds = f_Allnodes[i],
                                                                  r = restart, 
@@ -800,12 +800,12 @@ sumValues <- function(Scores, L, N) {
 
 ###### RWR-MH
 
-Random.Walk.Restart.MultiplexHet <-
+Random.Walk.Restart.MultiplexHet.default <-
   function(x, MultiplexHet_Object, 
            Multiplex1_Multiplex2_Seeds,
            r = 0.7, tau1, tau2, 
-           MeanType= aggregation_method,
-           get_completeRWRmat = get_completeRWRmat, 
+           MeanType,
+           get_completeRWRmat, 
            DispResults="Alphabetic", ...){
     
     ## We control the different values.
@@ -937,7 +937,7 @@ Random.Walk.Restart.MultiplexHet <-
       
       ### We remove the seed nodes from the Ranking and we write the results.
       Global_results <-
-        Global_results[which(!Global_results$NodeNames %in% Seeds),]
+        Global_results[which(!Global_results$NodeNames %in% Multiplex1_Multiplex2_Seeds),]
     } else {
       Global_results <- Global_results
     }

@@ -55,7 +55,10 @@ MiDNE includes functions to load example datasets used as a case study, based on
 - `gen_sim_mat_M.R`: applies Random Walk with Restart (RWR) to a multiplex network composed only of omics layers, integrating the information into a gene-by-gene similarity matrix. Each column of the resulting matrix represents the association scores between a given gene (the seed node) and all other genes in the multiplex network. The matrix is column-wise normalized.      
 - `gen_sim_mat_MH.R`: applies Random Walk with Restart (RWR) to a heterogeneous multiplex network that includes both omics and drug layers, returning a (gene + drug)-by-(gene + drug) similarity matrix. Each column represents the association scores between a specific node (gene or drug) and all other nodes in the network. The matrix is column-wise normalized.       
 - `get_embedding.R`: computes a low-dimensional embedding of the RWR similarity matrix by appling the [MultiVERSE algorithm](https://github.com/Lpiol/MultiVERSE) described by [Léo Pio-Lopez, et al.](https://arxiv.org/abs/2008.10085). 
-- `get_parallel_umap_embedding.R`: applies UMAP in parallel for dimensionality reduction on (embedded) similarity matrix, enabling visualization and downstream analysis.
+- `get_parallel_umap_embedding.R`: applies UMAP in parallel for dimensionality reduction on (embedded) similarity matrix. 
+- `get_pca_embedding.R`: applies PCA for dimensionality reduction on (embedded) similarity matrix.
+- `get_tsne_embedding.R`: applies t-SNE in parallel for dimensionality reduction on (embedded) similarity matrix.
+
 
 **4. Plotting**
 - `plot_2D_matrix.R`: plots a 2D representation of a matrix (e.g., similarity or embedding matrix) as a scatterplot where point color and shape can be customized by providing an annotation data frame.

@@ -12,10 +12,11 @@ create_multiplex <- function(omics_list, weighted = FALSE) {
   
   # rbind omics matrices, add id column
   
-  multiplex <- omics_list %>% purrr::map(dplyr::select, source, dest, weight) %>% dplyr::bind_rows(.id = "EdgeType") %>%
-    dplyr::select(EdgeType, source = source, target = dest, weight = weight)
+  multiplex <- omics_list %>% purrr::map(dplyr::select, 'source', 'dest', 'weight') %>% 
+    dplyr::bind_rows(.id = "EdgeType") %>%
+    dplyr::select('EdgeType', source = source, target = 'dest', weight = 'weight')
   if (! weighted) {
-    multiplex <- multiplex %>% dplyr::mutate(weight = 1)
+    multiplex <- multiplex %>% dplyr::mutate('weight' = 1)
   }
   
   multiplex
