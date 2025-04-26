@@ -1,10 +1,6 @@
 #' Fisher's Exact Test and post-hoc analysis
 #' 
 #' @name fisher_test_post_hoc
-#' @import snow
-#' @import utils
-#' @import foreach
-#' @import stats
 #' @param matrix A matrix of dimensions genes X samples.
 #' @param correction_method The method used to correct the p-value (either "bonferroni" or "fdr").
 #' @param cpu The number of cores to use for parallel processing.
@@ -47,7 +43,7 @@ fisher_test_post_hoc <- function(matrix,
                          cont_table <- base::table(matrix[i, , drop = FALSE], matrix[j, ,drop = FALSE])
                          # Perform Fisher's exact test
                          fisher_p  <- stats::fisher.test(cont_table)$p.value
-                         vector[j] <- ifelse(fisher_p < pth, post_hoc_analysis_2(cont_table, correction_method), 0)
+                         vector[j] <- base::ifelse(fisher_p < pth, post_hoc_analysis_2(cont_table, correction_method), 0)
                        }
                        output_list[[i]] <- vector
                        
@@ -76,7 +72,7 @@ post_hoc_analysis_2 <- function(cont_table, correction_method){
   diff_obs_exp <- obs - exp
   
   if (any(diff_obs_exp[-1] > 0)) {
-    chisq <- chisq.test(cont_table)
+    chisq <- stats::chisq.test(cont_table)
     stat <- unname(chisq$statistic)
   } else {
     stat <- 0

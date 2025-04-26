@@ -1,8 +1,6 @@
 #' Function to infer correlation network filtered by corrected p-value
 #'
 #' @name get_filtered_corMat_by_adj_pval
-#' @import stats
-#' @import utils
 #' @param input_matrix A matrix of dimensions genes X samples.
 #' @param cor_method The correlation method to use (e.g., "pearson", "spearman").
 #' @param adj_method The method used to correct the p-value (either "bonferroni" or "fdr").
@@ -49,7 +47,7 @@ get_filtered_corMat_by_adj_pval <- function(
                       for (j in i:nrow(matrix)){
                         x <- matrix[i,]
                         y <- matrix[j,]
-                        res <- cor.test(x,y, method = cor_method)
+                        res <- stats::cor.test(x,y, method = cor_method)
                         vector[j] <- res$p.value
                       }
                       output_list[[i]] <- vector

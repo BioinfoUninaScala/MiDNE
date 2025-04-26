@@ -11,10 +11,7 @@
 #' Publication:     https://arxiv.org/abs/2008.10085
 #'
 #' @name generate_sim_mt_MH
-#' @import utils
 #' @import methods
-#' @import igraph
-#' @import foreach
 #' @param network1 a biological network
 #' @param network2 a pharmacological network
 #' @param network_B a bipartite network
@@ -157,7 +154,7 @@ gen_sim_mat_MH <- function(network1, network2,                                  
     }
     for (mo_name in names(Multiplex_Object1)[seq(Multiplex_Object1$Number_of_Layers)]) {
       mo = Multiplex_Object1[[mo_name]]
-      adjacency = as_adjacency_matrix(mo, attr = attr, sparse = T)
+      adjacency = igraph::as_adjacency_matrix(mo, attr = attr, sparse = T)
       rsum = rowSums(adjacency)
       rsum[rsum == 0] = 1
       wadj = adjacency/(rsum * 2)
@@ -178,7 +175,7 @@ gen_sim_mat_MH <- function(network1, network2,                                  
     }
     for (mo_name in names(Multiplex_Object2)[seq(Multiplex_Object2$Number_of_Layers)]) {
       mo = Multiplex_Object2[[mo_name]]
-      adjacency = as_adjacency_matrix(mo, attr = attr, sparse = T)
+      adjacency = igraph::as_adjacency_matrix(mo, attr = attr, sparse = T)
       rsum = rowSums(adjacency)
       rsum[rsum == 0] = 1
       wadj = adjacency/(rsum * 2)
@@ -212,7 +209,7 @@ gen_sim_mat_MH <- function(network1, network2,                                  
   cl <- snow::makeCluster(cores)
   doSNOW::registerDoSNOW(cl)
   iterations <- length(f_Allnodes)
-  pb <- txtProgressBar(max = iterations, style = 3)
+  pb <- utils::txtProgressBar(max = iterations, style = 3)
   progress <- function(n) setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
   

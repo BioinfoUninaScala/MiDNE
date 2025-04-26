@@ -1,6 +1,5 @@
 #' Create transition probabilities matrix
 #'
-#' @importFrom dplyr inner_join
 #' @param omics_list
 #' a named list of data frames containing an omics multiplex network.
 #' Each data frame in the list is required to have at least two columns containing nodes ids respectively named source and destination

@@ -78,7 +78,7 @@ MiDNE includes functions to load example datasets used as a case study, based on
 - `/biological/BRCA_SCNA.RDS`: Somatic copy number alteration (SCNA) data for TCGA-BRCA samples.
 
 **/annotation**
-- `Human__TCGA_BRCA__MS__Clinical__Clinical__01_28_2016__BI__Clinical__Firehose.tsi`: clinical metadata for TCGA-BRCA samples from the Broad Firehose pipeline.
+- `TCGA_BRCA_01_28_2016_ClinicalFirehose.tsi`: clinical metadata for TCGA-BRCA samples from the Broad Firehose pipeline.
 - `all_genes_drugs_annotation.RDS`: an annotation table that includes both genes and drugs. For genes, the table includes information such as associated biological processes, protein complexes, and transcription factor status. For drugs, it includes annotations such as FDA approval status.
 
 **/networks**

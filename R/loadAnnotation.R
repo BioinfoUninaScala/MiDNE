@@ -29,19 +29,19 @@ loadAnnot <- function(annot_type = 'gene_drug') {
   
   # Load the appropriate annotation file
   if (annot_type == 'gene_drug') {
-    annot_path <- system.file(
+    annot_path <- base::system.file(
       "extdata", "annotation/all_genes_drugs_annotation.RDS", package = "MiDNE"
     )
     annot <- readRDS(file = annot_path)
   } else if (annot_type == 'BRCA_sample') {
-    annot_path <- system.file(
-      "extdata", "annotation/Human__TCGA_BRCA__MS__Clinical__Clinical__01_28_2016__BI__Clinical__Firehose.tsi",
+    annot_path <- base::system.file(
+      "extdata", "annotation/TCGA_BRCA_01_28_2016_ClinicalFirehose.tsi",
       package = "MiDNE"
     )
     if (!file.exists(annot_path) || annot_path == "") {
       stop("The specified file for 'BRCA_sample' could not be found. Check your installation.")
     }
-    annot <- read.delim(file = annot_path, sep = "\t", stringsAsFactors = FALSE)
+    annot <- utils::read.delim(file = annot_path, sep = "\t", stringsAsFactors = FALSE)
   }
   
   return(annot)

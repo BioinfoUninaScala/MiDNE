@@ -1,33 +1,19 @@
 #' MiDNE Shiny app
 #'
-#' @import shiny
-#' @import shinydashboard
-#' @import shinyalert
 #' @import shinyFiles
 #' @import shinyMatrix
-#' @import shinyjs
 #' @import shinycssloaders
 #' @import readr
 #' @import glue
 #' @import conflicted
 #' @import fpc
-#' @import plotly
 #' @import ggplot2
 #' @import gprofiler2
 #' @import visNetwork
 #' @import tidyverse
-#' @import dendextend
 #' @import crosstalk
-#' @import dplyr
-#' @import igraph 
 #' @import rstatix 
-#' @import DT 
-#' @import data.table 
-#' @importFrom zip zip
-#' @importFrom parallel detectCores
-#' @importFrom vroom vroom
 #' @importFrom utils data read.csv
-#' @importFrom stats as.dendrogram dist kmeans hclust
 #' @importFrom graphics abline par
 #' @param MAXreq Shiny max request size
 #' @return Shiny app
@@ -38,23 +24,6 @@ MiDNEshiny = function(MAXreq = 10000) {
   options(shiny.maxRequestSize = MAXreq * 1024^2)
   shiny::shinyApp(ui, server)
   
-}
-
-
-netSummary <- function(network){
-  
-  nodes <- c(network[[1]], network[[2]])
-  degree <- table(nodes) %>%
-    dplyr::as_tibble(.) %>%
-    dplyr::arrange(dplyr::desc(n))
-  top10 <- c(degree[c(1:10), 'nodes'])
-  netSummary_list <- list( 'dim'= dim(network),
-                           'edges'= dim(network)[1],
-                           'nodes'= length(unique(nodes)),
-                           'maxConnections'= degree[[1, 'n']]#,
-                           #'maxDegreeNodes'= top10$nodes
-  )
-  return(netSummary_list)
 }
 
 
@@ -1176,7 +1145,7 @@ ui <- shinydashboard::dashboardPage(
     #                            DATA: LOADING DATA (INPUT)                       #
     ############################################################################################
     
-    output$info_box_1 <- renderText({
+    output$info_box_1 <- shiny::renderText({
       shiny::HTML("<br/> <span style='font-weight:normal;'>
             <p align='justify'>
             Welcome to the MiDNE Shiny app, an R package for network-based multi-omics and drug data integration.<br/>
@@ -1251,7 +1220,7 @@ ui <- shinydashboard::dashboardPage(
                          csv = vroom::vroom(inFiles$datapath[i], delim = ","),
                          tsv = vroom::vroom(inFiles$datapath[i], delim = "\t"),
                          RDS = readRDS(inFiles$datapath[i]),
-                         validate("Invalid file; Please upload a .csv, .tsv or .RDS file")
+                         shiny::validate("Invalid file; Please upload a .csv, .tsv or .RDS file")
           )
           file <- as.matrix(file)
           if (is.numeric(file)){
@@ -1277,7 +1246,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     
-    observeEvent(input$load_mat_button, {
+    shiny::observeEvent(input$load_mat_button, {
       shinyalert::shinyalert(
         title = "Wait",
         text = "Waiting for data loading",
@@ -1301,7 +1270,7 @@ ui <- shinydashboard::dashboardPage(
     
     
     ## Load drug matrices 
-    drug_files <- eventReactive(input$load_drug_mat_button, {
+    drug_files <- shiny::eventReactive(input$load_drug_mat_button, {
       drugFiles <- list()
       if (input$drug_example_opt == 'No'){
         
@@ -1318,7 +1287,7 @@ ui <- shinydashboard::dashboardPage(
                          csv = vroom::vroom(inFiles$datapath[i], delim = ","),
                          tsv = vroom::vroom(inFiles$datapath[i], delim = "\t"),
                          RDS = readRDS(inFiles$datapath[i]),
-                         validate("Invalid file; Please upload a .csv, .tsv or .RDS file")
+                         shiny::validate("Invalid file; Please upload a .csv, .tsv or .RDS file")
           )
           #file <- as.matrix(file)
           drugFiles[[new_name]] <- file
@@ -1339,7 +1308,7 @@ ui <- shinydashboard::dashboardPage(
       drugFiles
     })
     
-    observeEvent(input$load_drug_mat_button, {
+    shiny::observeEvent(input$load_drug_mat_button, {
       shinyalert::shinyalert(
         title = "Wait",
         text = "Waiting for data loading",
@@ -1362,7 +1331,7 @@ ui <- shinydashboard::dashboardPage(
     )
     
     ### Load annotation file
-    annotation <- reactiveVal(NULL)
+    annotation <- shiny::reactiveVal(NULL)
     shiny::observeEvent(input$load_anno_button, {
       listFiles <- list()
       
@@ -1375,7 +1344,7 @@ ui <- shinydashboard::dashboardPage(
           file <- switch(ext,
                          csv = vroom::vroom(inFiles$datapath, delim = ","),
                          RDS = readRDS(inFiles$datapath),
-                         validate("Invalid file; Please upload a .csv or .RDS file")
+                         shiny::validate("Invalid file; Please upload a .csv or .RDS file")
           )
           if (is.data.frame(file)){
             listFiles[['annotation']] <- file
@@ -1394,7 +1363,7 @@ ui <- shinydashboard::dashboardPage(
       }
     })
     
-    observeEvent(input$load_anno_button, {
+    shiny::observeEvent(input$load_anno_button, {
       shinyalert::shinyalert(
         title = "Wait",
         text = "Waiting for data loading",
@@ -1432,7 +1401,7 @@ ui <- shinydashboard::dashboardPage(
       omicsNames
     })
     
-    output$drug_names <- renderUI({
+    output$drug_names <- shiny::renderUI({
       drugNames <- list()
       inFiles <- input$drug_files
       if (is.null(inFiles))
@@ -1450,35 +1419,35 @@ ui <- shinydashboard::dashboardPage(
     
     ###
     
-    output$jump2P2 <- renderUI({
+    output$jump2P2 <- shiny::renderUI({
       if (length(omics_files()) != 0){
-        actionButton('jump2P2', label = 'Next', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P2', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }
     })
     
-    observeEvent(input$jump2P2, {
+    shiny::observeEvent(input$jump2P2, {
       shinydashboard::updateTabItems(session, inputId = "tabs", selected = "mat_sub_2")
       shinyjs::runjs('$(".sidebar-menu .treeview").removeClass("active"); $("#mat_tab").closest(".treeview").addClass("active");')
     })
     
     ###
-    output$jump2P1.1 <- renderUI({
-      actionButton('jump2P1.1', label = 'Go to RWR', shiny::icon("paper-plane"),
+    output$jump2P1.1 <- shiny::renderUI({
+      shiny::actionButton('jump2P1.1', label = 'Go to RWR', shiny::icon("paper-plane"),
                    style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
     })
     
-    observeEvent(input$jump2P1.1, {
+    shiny::observeEvent(input$jump2P1.1, {
       shinydashboard::updateTabItems(session, inputId = "tabs", selected = "rwr_tab_1")
     })
     
     ###
-    output$jump2P1.2 <- renderUI({
-      actionButton('jump2P1.2', label = 'Go to DR', shiny::icon("paper-plane"),
+    output$jump2P1.2 <- shiny::renderUI({
+      shiny::actionButton('jump2P1.2', label = 'Go to DR', shiny::icon("paper-plane"),
                    style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
     })
     
-    observeEvent(input$jump2P1.2, {
+    shiny::observeEvent(input$jump2P1.2, {
       shinydashboard::updateTabItems(session, inputId = "tabs", selected = "dr_tab_1")
     })
     
@@ -1488,14 +1457,14 @@ ui <- shinydashboard::dashboardPage(
     ############################################################################################
     
     shinyjs::addCssClass(selector = "a[data-value='mat_sub_2']", class = "inactiveLink")
-    observe({
+    shiny::observe({
       if (length(omics_files()) != 0){
         shinyjs::removeCssClass(selector = "a[data-value='mat_sub_2']", class = "inactiveLink")
       }
     })
     
     ############
-    output$info_box_2 <- renderText({
+    output$info_box_2 <- shiny::renderText({
       shiny::HTML("<br/> <span style='font-weight:normal;'>
         <p align='justify'>
             In this section you can manage the omics matrices before inferring the networks. </span> <br/>
@@ -1565,10 +1534,10 @@ ui <- shinydashboard::dashboardPage(
     ############################################################################################
     
     shinyjs::addCssClass(selector = "a[data-value='net_sub_1']", class = "inactiveLink")
-    observe({
-      if (length(omics_files()) == 1 && length(reactiveValuesToList(proc_matrices)) != 0){
+    shiny::observe({
+      if (length(omics_files()) == 1 && length(shiny::reactiveValuesToList(proc_matrices)) != 0){
         shinyjs::removeCssClass(selector = "a[data-value='net_sub_1']", class = "inactiveLink")
-      } else if (length(omics_files()) >= 1 && length(reactiveValuesToList(proc_matrices)) != 0 && shiny::isTruthy(input$intersect_btn)){
+      } else if (length(omics_files()) >= 1 && length(shiny::reactiveValuesToList(proc_matrices)) != 0 && shiny::isTruthy(input$intersect_btn)){
         shinyjs::removeCssClass(selector = "a[data-value='net_sub_1']", class = "inactiveLink")
       }else{
         return(NULL)
@@ -1577,7 +1546,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     ############
-    output$info_box_3 <- renderText({
+    output$info_box_3 <- shiny::renderText({
       shiny::HTML("<br/> <span style='font-weight:normal;'>
         <p align='justify'>
             In this section you can create the omics and drug networks. </span> <br/>
@@ -1615,7 +1584,7 @@ ui <- shinydashboard::dashboardPage(
     ############################################################################################
     
     shinyjs::addCssClass(selector = "a[data-value='net_sub_2']", class = "inactiveLink")
-    observe({
+    shiny::observe({
       if (length(shiny::reactiveValuesToList(gene_networks)) == length(omics_files())){
         shinyjs::removeCssClass(selector = "a[data-value='net_sub_2']", class = "inactiveLink")
       }else{
@@ -1623,7 +1592,7 @@ ui <- shinydashboard::dashboardPage(
       }
     })
     
-    output$info_box_4 <- renderText({
+    output$info_box_4 <- shiny::renderText({
       shiny::HTML("<br/> <span style='font-weight:normal;'>
             <p align='justify'>
             Here, you can prune the edges of inferred networks by filtering the <b>weight</b> column. 
@@ -1661,7 +1630,7 @@ ui <- shinydashboard::dashboardPage(
         for(var in buttons) {
           list_of_buttons <- append(list_of_buttons, input[[var]])
         }
-        req(list_of_buttons)
+        shiny::req(list_of_buttons)
       },
       handlerExpr = {
         nets <- shiny::reactiveValuesToList(gene_networks)
@@ -1727,7 +1696,7 @@ ui <- shinydashboard::dashboardPage(
     #                                 RWR: LOADING NETWORKS (INPUT)                            #
     ############################################################################################
     
-    output$info_box_5 <- renderText({
+    output$info_box_5 <- shiny::renderText({
       shiny::HTML("<br/> <span style='font-weight:normal;'>
             <p align='justify'>
             You can start the pipeline here by uploading omics networks,
@@ -1765,12 +1734,12 @@ ui <- shinydashboard::dashboardPage(
     #################### load OMICS networks #####################
     
     loaded_omics_net_list <- shiny::eventReactive(input$load_omics_net_button, {
-      req(input$omicsNet_example_opt)
+      shiny::req(input$omicsNet_example_opt)
       
       listFiles <- list()
       
       if (input$omicsNet_example_opt == 'No') {
-        req(input$omics_net_files)
+        shiny::req(input$omics_net_files)
         inFiles <- input$omics_net_files
         if (is.null(inFiles)) {
           return(NULL)
@@ -1806,7 +1775,7 @@ ui <- shinydashboard::dashboardPage(
           }
         }
       } else if (input$omicsNet_example_opt == 'Yes'){
-        req(input$omicsNet_example_files) 
+        shiny::req(input$omicsNet_example_files) 
         input_list <- input$omicsNet_example_files
         print(paste0('omics_net: ', input_list))
         example_data <- list()
@@ -1824,7 +1793,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     # Messaggio di caricamento
-    observeEvent(input$load_omics_net_button, {
+    shiny::observeEvent(input$load_omics_net_button, {
       shinyalert::shinyalert(
         title = "Wait",
         text = "Waiting for data loading...",
@@ -1855,11 +1824,11 @@ ui <- shinydashboard::dashboardPage(
     #################### load DRUG networks #####################
     
     loaded_drug_net_list <- shiny::eventReactive(input$load_drug_net_button, {
-      req(input$drugNet_example_opt)
+      shiny::req(input$drugNet_example_opt)
       listFiles <- list()
       
       if (input$drugNet_example_opt == 'No'){
-        req(input$drug_net_files)
+        shiny::req(input$drug_net_files)
         inFiles <- input$drug_net_files
         if (is.null(inFiles)){
           return(NULL)
@@ -1873,7 +1842,7 @@ ui <- shinydashboard::dashboardPage(
             file <- switch(ext,
                            csv = vroom::vroom(inFiles$datapath[i], delim = ","),
                            RDS = readRDS(inFiles$datapath[i]),
-                           validate("Invalid file; Please upload a .csv or .RDS file")
+                           shiny::validate("Invalid file; Please upload a .csv or .RDS file")
             )
             if (is.data.frame(file) & ncol(file) == 3){
               listFiles[[new_name]] <- file
@@ -1896,7 +1865,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     
-    observeEvent(input$load_drug_net_button, {
+    shiny::observeEvent(input$load_drug_net_button, {
       shinyalert::shinyalert(
         title = "Wait",
         text = "Waiting for data loading",
@@ -1942,7 +1911,7 @@ ui <- shinydashboard::dashboardPage(
     bnetwork <- shiny::eventReactive(input$load_bnet_button, {
       
       if (input$bNet_example_opt == 'No'){
-        req(input$bnet_file)
+        shiny::req(input$bnet_file)
         inFiles <- input$bnet_file
         if (is.null(inFiles)){
           return(NULL)
@@ -1952,7 +1921,7 @@ ui <- shinydashboard::dashboardPage(
           file <- switch(ext,
                          csv = vroom::vroom(inFiles$datapath, delim = ","),
                          RDS = readRDS(inFiles$datapath),
-                         validate("Invalid file; Please upload a .csv or .RDS file")
+                         shiny::validate("Invalid file; Please upload a .csv or .RDS file")
           )
           if (is.data.frame(file) & ncol(file) == 3){
             bnet <- file
@@ -1974,7 +1943,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     
-    observeEvent(input$load_bnet_button, {
+    shiny::observeEvent(input$load_bnet_button, {
       shinyalert::shinyalert(
         title = "Wait",
         text = "Waiting for data loading",
@@ -2001,9 +1970,9 @@ ui <- shinydashboard::dashboardPage(
     ### annotation1
     ### Load annotation file
     
-    annotation1 <- reactiveVal(NULL)
+    annotation1 <- shiny::reactiveVal(NULL)
     shiny::observeEvent(input$load_anno_button1, {
-      req(input$anno_file1)
+      shiny::req(input$anno_file1)
       
       if (input$rwr_anno_example_opt == 'No'){
         listFiles <- list()
@@ -2016,7 +1985,7 @@ ui <- shinydashboard::dashboardPage(
           file <- switch(ext,
                          csv = vroom::vroom(inFiles$datapath, delim = ","),
                          RDS = readRDS(inFiles$datapath),
-                         validate("Invalid file; Please upload a .csv or .RDS file")
+                         shiny::validate("Invalid file; Please upload a .csv or .RDS file")
           )
           if (is.data.frame(file)){
             listFiles[[new_name]] <- file
@@ -2033,7 +2002,7 @@ ui <- shinydashboard::dashboardPage(
       annotation1(listFiles)
     })
     
-    observeEvent(input$load_anno_button1, {
+    shiny::observeEvent(input$load_anno_button1, {
       shinyalert::shinyalert(
         title = "Wait",
         text = "Waiting for data loading",
@@ -2061,14 +2030,14 @@ ui <- shinydashboard::dashboardPage(
     ############################################################################################
     
     shinyjs::addCssClass(selector = "a[data-value='rwr_tab_2']", class = "inactiveLink")
-    observe({
+    shiny::observe({
       if (length(shiny::reactiveValuesToList(filteredOmicsNetworks)) == length(omics_files())){
         shinyjs::removeCssClass(selector = "a[data-value='rwr_tab_2']", class = "inactiveLink")
       }else{
         return(NULL)
       }
     })
-    observe({
+    shiny::observe({
       if (length(loaded_omics_net_list()) != 0 ){
         shinyjs::removeCssClass(selector = "a[data-value='rwr_tab_2']", class = "inactiveLink")
       }else{
@@ -2207,8 +2176,8 @@ ui <- shinydashboard::dashboardPage(
     ############################################################################################
     
     shinyjs::addCssClass(selector = "a[data-value='rwr_tab_3']", class = "inactiveLink")
-    observe({
-      if (isTruthy(input$gen_multiplex_btn)){
+    shiny::observe({
+      if (shiny::isTruthy(input$gen_multiplex_btn)){
         shinyjs::removeCssClass(selector = "a[data-value='rwr_tab_3']", class = "inactiveLink")
       }else{
         return(NULL)
@@ -2431,11 +2400,11 @@ ui <- shinydashboard::dashboardPage(
     #                        DIMENSIONALITY REDUCTION: LOADING DATA (INPUT)                   #
     ############################################################################################
     
-    loaded_simMat <- reactiveVal(NULL)
+    loaded_simMat <- shiny::reactiveVal(NULL)
     shiny::observeEvent(input$load_simMat_button, {
       
       if (input$example_simMat == 'NO'){
-        req(input$simMat_file)
+        shiny::req(input$simMat_file)
         listFiles <- list()
         inFiles <- input$simMat_file
         if (is.null(inFiles)){
@@ -2446,7 +2415,7 @@ ui <- shinydashboard::dashboardPage(
           file <- switch(ext,
                          csv = vroom::vroom(inFiles$datapath, delim = ","),
                          RDS = readRDS(inFiles$datapath),
-                         validate("Invalid file; Please upload a .csv or .RDS file")
+                         shiny::validate("Invalid file; Please upload a .csv or .RDS file")
           )
           if(ncol(file) > nrow(file)){
             rownames(file) <- paste0('component', 1:nrow(file))
@@ -2478,8 +2447,8 @@ ui <- shinydashboard::dashboardPage(
       }
     })
     
-    observeEvent(input$load_simMat_button, {
-      if (isTruthy(input$simMat_file) & input$example_simMat == 'NO'){
+    shiny::observeEvent(input$load_simMat_button, {
+      if (shiny::isTruthy(input$simMat_file) & input$example_simMat == 'NO'){
         shinyalert::shinyalert(
           title = "Wait",
           text = "Waiting for data loading",
@@ -2495,7 +2464,7 @@ ui <- shinydashboard::dashboardPage(
           imageUrl = "",
           animation = TRUE
         )
-      } else if (!isTruthy(input$simMat_file) & input$example_simMat == 'NO'){
+      } else if (!shiny::isTruthy(input$simMat_file) & input$example_simMat == 'NO'){
         shinyalert::shinyalert(title = 'Error', text = 'Please select a file to be uploaded.', type = 'error',
                                closeOnEsc = TRUE, closeOnClickOutside = TRUE)
       }
@@ -2504,12 +2473,12 @@ ui <- shinydashboard::dashboardPage(
     
     #### Load annotation file
     
-    loaded_simMat_Anno <- reactiveVal(NULL)
+    loaded_simMat_Anno <- shiny::reactiveVal(NULL)
     shiny::observeEvent(input$load_anno_button2, {
       
       if (input$example_simMat_anno == 'NO'){
       
-        req(input$anno_file2)
+        shiny::req(input$anno_file2)
         listFiles <- list()
         inFiles <- input$anno_file2
         if (is.null(inFiles)){
@@ -2520,7 +2489,7 @@ ui <- shinydashboard::dashboardPage(
           file <- switch(ext,
                          csv = vroom::vroom(inFiles$datapath, delim = ","),
                          RDS = readRDS(inFiles$datapath),
-                         validate("Invalid file; Please upload a .csv or .RDS file")
+                         shiny::validate("Invalid file; Please upload a .csv or .RDS file")
           )
           if (is.data.frame(file)){
             listFiles[[new_name]] <- file
@@ -2539,8 +2508,8 @@ ui <- shinydashboard::dashboardPage(
       }
     })
     
-    observeEvent(input$load_anno_button2, {
-      if(isTruthy(input$anno_file2) & input$example_simMat_anno == 'NO'){
+    shiny::observeEvent(input$load_anno_button2, {
+      if(shiny::isTruthy(input$anno_file2) & input$example_simMat_anno == 'NO'){
         shinyalert::shinyalert(
           title = "Wait",
           text = "Waiting for data loading",
@@ -2556,7 +2525,7 @@ ui <- shinydashboard::dashboardPage(
           imageUrl = "",
           animation = TRUE
         )
-      } else if(!isTruthy(input$anno_file2) & input$example_simMat_anno == 'NO'){
+      } else if(!shiny::isTruthy(input$anno_file2) & input$example_simMat_anno == 'NO'){
         shinyalert::shinyalert(title = 'Error', text = 'Please select a file to be uploaded.', type = 'error',
                                closeOnEsc = TRUE, closeOnClickOutside = TRUE)
       }
@@ -2572,7 +2541,7 @@ ui <- shinydashboard::dashboardPage(
     ############################################################################################
     
     shinyjs::addCssClass(selector = "a[data-value='dr_tab_2']", class = "inactiveLink")
-    observe({
+    shiny::observe({
       if (length(shiny::reactiveValuesToList(RWR_output)) != 0 | length(loaded_simMat()) != 0){
         shinyjs::removeCssClass(selector = "a[data-value='dr_tab_2']", class = "inactiveLink")
       }else{
@@ -2603,7 +2572,7 @@ ui <- shinydashboard::dashboardPage(
         
         if (drType_input == 'Similarity matrix'){ 
           rwr_mat <- dr_input
-          req(input$dr_method)
+          shiny::req(input$dr_method)
           
           shinyalert::shinyalert(
             title = "Wait",
@@ -2726,7 +2695,7 @@ ui <- shinydashboard::dashboardPage(
     
     shiny::observeEvent(input$select_c1, {
       if (length(loaded_simMat()) != 0){
-        updateSelectInput(inputId = 'select_c2', session, label = 'Select the second component',
+        shiny::updateSelectInput(inputId = 'select_c2', session, label = 'Select the second component',
                           choices = rownames(loaded_simMat()$simMatFile)[-which(rownames(loaded_simMat()$simMatFile) == input$select_c1)]
         )
       }
@@ -2739,7 +2708,7 @@ ui <- shinydashboard::dashboardPage(
     ############################################################################################
     
     shinyjs::addCssClass(selector = "a[data-value='cl_tab']", class = "inactiveLink")
-    observe({
+    shiny::observe({
      if (length(shiny::reactiveValuesToList(dr_output)) != 0){
        shinyjs::removeCssClass(selector = "a[data-value='cl_tab']", class = "inactiveLink")
      }else{
@@ -2748,7 +2717,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     
-    showPlot <- reactiveVal(FALSE)
+    showPlot <- shiny::reactiveVal(FALSE)
     
     anno <-  shiny::reactive({
       if (!is.null(annotation())) {
@@ -2821,7 +2790,7 @@ ui <- shinydashboard::dashboardPage(
           on.exit(progress$close())
           progress$set(message = "MiDNE", detail = paste("Doing kmeans"), value = 0)
           
-          kmeans_clus <- kmeans(t_mat, input[[paste0(input$cluster_method, '_par')]])
+          kmeans_clus <- stats::kmeans(t_mat, input[[paste0(input$cluster_method, '_par')]])
           cluster <- gPlot_mat
           cluster$clust <- factor(kmeans_clus$cluster)
           
@@ -2850,8 +2819,8 @@ ui <- shinydashboard::dashboardPage(
             progress$set(message = "MiDNE", detail = paste("Doing hclust"), value = 0)
             message('hclust')
             dendro <- t_mat %>%
-              dist() %>%
-              hclust()
+              stats::dist() %>%
+              stats::hclust()
             
             to_create(dendro)
             clusters$hclust_output <- dendro
@@ -2952,9 +2921,9 @@ ui <- shinydashboard::dashboardPage(
     
     output$h <-
       shiny::renderUI({
-        req(to_create())
+        shiny::req(to_create())
         if( !is.null(to_create())){
-          tree <- as.dendrogram(to_create())
+          tree <- stats::as.dendrogram(to_create())
           shiny::sliderInput(inputId = "hclust_par", label = 'Select h to cut the dendrogram', min = 0,
                              max = round(base::attr(tree, "height"), digits = 2),
                              value = round(base::attr(tree, "height"), digits = 2), step = 0.01)
@@ -2962,7 +2931,7 @@ ui <- shinydashboard::dashboardPage(
       })
     
     title <-  shiny::eventReactive(input$cl_btn, {
-      param <- if (isTruthy(input[[paste0(input$cluster_method, '_par')]])) input[[paste0(input$cluster_method, '_par')]] else NULL
+      param <- if (shiny::isTruthy(input[[paste0(input$cluster_method, '_par')]])) input[[paste0(input$cluster_method, '_par')]] else NULL
       clusters_type <- shiny::reactiveValuesToList(clusters)[[paste0(input$cluster_method, '_', param)]]
       
       if (input$cluster_method == "kmeans"){
@@ -2983,7 +2952,7 @@ ui <- shinydashboard::dashboardPage(
     cl_plot <- shiny::reactive({
       
       dr_mat <- shiny::reactiveValuesToList(clusters)$dr_mat
-      param <- if (isTruthy(input[[paste0(input$cluster_method, '_par')]])) input[[paste0(input$cluster_method, '_par')]] else NULL
+      param <- if (shiny::isTruthy(input[[paste0(input$cluster_method, '_par')]])) input[[paste0(input$cluster_method, '_par')]] else NULL
       if (!is.null(shiny::reactiveValuesToList(clusters)[[paste0(input$cluster_method, '_', param)]]$cluster)){
         cluster <- shiny::reactiveValuesToList(clusters)[[paste0(input$cluster_method, '_', param)]]$cluster
         clu_anno <- cluster %>% dplyr::arrange(clust)
@@ -3017,7 +2986,7 @@ ui <- shinydashboard::dashboardPage(
     ############################################################################################
     
     shinyjs::addCssClass(selector = "a[data-value='clupath_tab']", class = "inactiveLink")
-    observe({
+    shiny::observe({
       if (length(shiny::reactiveValuesToList(clusters)) != 0){
         shinyjs::removeCssClass(selector = "a[data-value='clupath_tab']", class = "inactiveLink")
       }else{
@@ -3031,11 +3000,11 @@ ui <- shinydashboard::dashboardPage(
  
       if (!is.null(shiny::reactiveValuesToList(clusters)) #& is.null(shiny::reactiveValuesToList(gProfiler_res)[[input$select_cluList]])
       ){
-        isolate({
+        shiny::isolate({
           cl_table <- shiny::reactiveValuesToList(clusters)[[input$select_cluList]]
           
           if (input$select_cluList != 'manual_cluster'){
-            cluster_anno <- cl_table$cluster %>% unstack(., id ~ clust)
+            cluster_anno <- cl_table$cluster %>% utils::unstack(., id ~ clust)
           }else{
             cluster_anno <- list('1' = cl_table$id)
           }
@@ -3078,7 +3047,7 @@ ui <- shinydashboard::dashboardPage(
     
     
     topPath <- shiny::eventReactive(input$showOne, {
-      isolate({
+      shiny::isolate({
         if (is.null(input$anno_source) & is.null( shiny::reactiveValuesToList(gProfiler_res))){
           return(NULL)
         }else{
@@ -3112,7 +3081,7 @@ ui <- shinydashboard::dashboardPage(
     #                        ENRICHMENT ANALYSIS: PATHWAY2CLUSTERS (INPUT)                      #
     ############################################################################################
     shinyjs::addCssClass(selector = "a[data-value='pathclu_tab']", class = "inactiveLink")
-    observe({
+    shiny::observe({
       if (length(shiny::reactiveValuesToList(gProfiler_res)) != 0){
         shinyjs::removeCssClass(selector = "a[data-value='pathclu_tab']", class = "inactiveLink")
       }else{
@@ -3121,10 +3090,10 @@ ui <- shinydashboard::dashboardPage(
     })
     
     
-    path_annotation <- eventReactive(input$path2clust, {
+    path_annotation <- shiny::eventReactive(input$path2clust, {
       if (is.null(input$source) & is.null( shiny::reactiveValuesToList(gProfiler_res)))
         return(NULL)
-      isolate({
+      shiny::isolate({
         progress <- shiny::Progress$new()
         on.exit(progress$close())
         progress$set(message = "MiDNE", detail = paste("Doing Pathway2Clusters"), value = 0)
@@ -3161,7 +3130,7 @@ ui <- shinydashboard::dashboardPage(
     ############################################################################################
     
     shinyjs::addCssClass(selector = "a[data-value='dd_tab']", class = "inactiveLink")
-    observe({
+    shiny::observe({
       if (length(shiny::reactiveValuesToList(clusters)) != 0 & (!is.null(anno()) |  !is.null(anno1()) | !is.null(anno2()) ) ){
         anno <- if (!is.null(anno())) anno()  else if (!is.null(anno1())) anno1() else anno2()
         id_col_check <- sapply(colnames(anno), FUN = function(x) sum('drug' %in% anno[[x]]))
@@ -3314,11 +3283,11 @@ ui <- shinydashboard::dashboardPage(
     })
     
     # ReactiveValues per tracciare lo stato di attivazione dei bottoni
-    button_states <- reactiveValues()
+    button_states <- shiny::reactiveValues()
     
     shiny::observeEvent(
       eventExpr = {
-        req(buttons()) # Assicurati che i bottoni siano disponibili
+        shiny::req(buttons()) # Assicurati che i bottoni siano disponibili
         list_of_buttons = NULL
         for(var in buttons()) {
           list_of_buttons <- append(list_of_buttons, input[[var]])
@@ -3375,8 +3344,8 @@ ui <- shinydashboard::dashboardPage(
       ignoreInit = TRUE
     )
     
-    observe({
-      req(buttons()) # Assicurati che i bottoni siano disponibili
+    shiny::observe({
+      shiny::req(buttons()) # Assicurati che i bottoni siano disponibili
       for (i in seq_along(buttons())) {
         button_states$activated[i] <- input[[buttons()[i]]]
       }
@@ -3512,34 +3481,34 @@ ui <- shinydashboard::dashboardPage(
     })
     
     ###
-    output$back2P1 <- renderUI({
+    output$back2P1 <- shiny::renderUI({
       if (length(omics_files()) >= 1 ){
-        actionButton('back2P1', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P1', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P1, {
+    shiny::observeEvent(input$back2P1, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "mat_sub_1")
     })
     
     ###
-    output$jump2P3 <- renderUI({
-      if (length(omics_files()) == 1 && length(reactiveValuesToList(proc_matrices)) != 0){
-        actionButton('jump2P3', label = 'Next', shiny::icon("paper-plane"),
+    output$jump2P3 <- shiny::renderUI({
+      if (length(omics_files()) == 1 && length(shiny::reactiveValuesToList(proc_matrices)) != 0){
+        shiny::actionButton('jump2P3', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
-      } else if (length(omics_files()) >= 1 && length(reactiveValuesToList(proc_matrices)) != 0 && isTruthy(input$intersect_btn)){
-        actionButton('jump2P3', label = 'Next', shiny::icon("paper-plane"),
+      } else if (length(omics_files()) >= 1 && length(shiny::reactiveValuesToList(proc_matrices)) != 0 && shiny::isTruthy(input$intersect_btn)){
+        shiny::actionButton('jump2P3', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$jump2P3, {
+    shiny::observeEvent(input$jump2P3, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "net_sub_1")
     })
@@ -3555,7 +3524,7 @@ ui <- shinydashboard::dashboardPage(
     gene_networks <- shiny::reactiveValues()
     
     count_net <- shiny::reactiveValues()
-    observe({
+    shiny::observe({
       if (length(shiny::reactiveValuesToList(intersected_omics_mat)$matrices) == 0){
         if (length(omics_files()) == 1){
           input_names <- names(shiny::reactiveValuesToList(proc_matrices))
@@ -3572,22 +3541,22 @@ ui <- shinydashboard::dashboardPage(
     })
     
     
-    output$omics_net_arguments <- renderUI({
+    output$omics_net_arguments <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(intersected_omics_mat)$matrices) == 0){
         if (length(omics_files()) == 1){
-          req(proc_matrices)
+          shiny::req(proc_matrices)
           mats <- shiny::reactiveValuesToList(proc_matrices)
         }else{
           return(NULL)
         }
       }else {
-        req(intersected_omics_mat)
+        shiny::req(intersected_omics_mat)
         mats <- shiny::reactiveValuesToList(intersected_omics_mat)$matrices
       }
       
       thetabs <- lapply(names(mats), function(x) {
         
-        omics_network_list[[paste0('generate_omics_net_', x)]] <- observeEvent(input[[paste0('generate_omics_net_', x)]], {
+        omics_network_list[[paste0('generate_omics_net_', x)]] <- shiny::observeEvent(input[[paste0('generate_omics_net_', x)]], {
           
           max_cores <- parallel::detectCores()
           
@@ -3597,7 +3566,7 @@ ui <- shinydashboard::dashboardPage(
           }
           if (input[[paste0('cpu_', x)]] == max_cores){
             shinyalert::shinyalert(title = 'Error', closeOnClickOutside = TRUE,
-                                   text = tagList('You have selected the maximum number of cores available.'),
+                                   text = ('You have selected the maximum number of cores available.'),
                                    type = 'error', html = TRUE
             )
             return(NULL)
@@ -3692,34 +3661,34 @@ ui <- shinydashboard::dashboardPage(
           
         })
         
-        tab <- tabPanel(x, 
-                        fluidRow(
+        tab <- shiny::tabPanel(x, 
+                      shiny::fluidRow(
                           shiny::column(width = 12, 
-                                        selectInput(
+                                        shiny::selectInput(
                                           inputId = paste0('omics_type_', x),
                                           label = "Select a omics type ",
                                           choices =  c("Genomics", "Epigenomics", "Transcriptomics", 'Proteomics'),
                                         ),
-                                        # selectInput(
+                                        # shiny::selectInput(
                                         #   inputId = paste0('inference_method_', x),
                                         #   label = "Select a network inference method",
                                         #   choices = list(
                                         #     "Association measures" = c("Pearson Correlation Coefficient", "Spearman Correlation Coefficient"),
                                         #     "Co-occurrence measures" = c("Fisher's exact test + post-hoc analysis", 'Other'))
                                         # ),
-                                        selectInput(
+                                        shiny::selectInput(
                                           inputId = paste0('correction_method_', x),
                                           label = "Select a network inference method",
                                           choices = c("bonferroni", 'fdr')
                                         ),
-                                        numericInput(
+                                        shiny::numericInput(
                                           inputId = paste0('cpu_', x),
                                           label = "Select the number of cores",
                                           min = 1, max = 200, value = 1
                                         ),
                                         shiny::conditionalPanel(
                                           condition = paste('input.', paste0('omics_type_', x), '== "Epigenomics"'),
-                                          sliderInput(
+                                          shiny::sliderInput(
                                             inputId = paste0('th_', x),
                                             label = HTML("Select a threshold to discretized &beta;-values"), min = 0, max = 1, value = 0.3
                                           )
@@ -3748,7 +3717,7 @@ ui <- shinydashboard::dashboardPage(
     drug_networks <- shiny::reactiveValues()
     
     d_count_net <- shiny::reactiveValues()
-    observe({
+    shiny::observe({
       input_names <- names(drug_files())
       for (x in input_names){
         d_count_net[[x]] <- 0
@@ -3756,14 +3725,14 @@ ui <- shinydashboard::dashboardPage(
     })  
     
     
-    output$drug_net_arguments <- renderUI({
+    output$drug_net_arguments <- shiny::renderUI({
       if (is.null(drug_files())){
         return(NULL)
       }else{ 
         
         drugtabs <- lapply(names(drug_files()), function(x) {
           
-          drugs_network_list[[paste0('generate_drug_net_', x)]] <- observeEvent(input[[paste0('generate_drug_net_', x)]], {
+          drugs_network_list[[paste0('generate_drug_net_', x)]] <- shiny::observeEvent(input[[paste0('generate_drug_net_', x)]], {
             
             shinyalert::shinyalert(
               title = "Wait",
@@ -3847,10 +3816,10 @@ ui <- shinydashboard::dashboardPage(
             
           })
           
-          tab <- tabPanel(x, 
-                          fluidRow(
+          tab <- shiny::tabPanel(x, 
+                        shiny::fluidRow(
                             shiny::column(width = 12, 
-                                          selectInput(
+                                          shiny::selectInput(
                                             inputId = paste0('drug_type_', x),
                                             label = "Select a drug network type ",
                                             #choices =  c("Mechanism of action", "SMILES", "Virtual Nodes"),
@@ -3858,12 +3827,12 @@ ui <- shinydashboard::dashboardPage(
                                           ),
                                           shiny::conditionalPanel(
                                             condition = paste0('input.drug_type_', x, '!="Virtual Nodes"'),
-                                            selectInput(
+                                            shiny::selectInput(
                                               inputId = paste0('distance_measure_', x),
                                               label = paste("Select a network inference method for ", x),
                                               choices = c("Levenshtein pairwise distance", "Hamming-Ipsen-Mikhailov distance", "Shortest Path")
                                             ),
-                                            numericInput(
+                                            shiny::numericInput(
                                               inputId = paste0('cores_', x),
                                               label = "Select the number of cores",
                                               min = 1, max = 200, value = 1
@@ -3872,8 +3841,8 @@ ui <- shinydashboard::dashboardPage(
                             )
                           ),
                           hr(),
-                          fluidRow(
-                            shiny::column(width = 6, actionButton(paste0('generate_drug_net_', x), "Generate network"))
+                          shiny::fluidRow(
+                            shiny::column(width = 6, shiny::actionButton(paste0('generate_drug_net_', x), "Generate network"))
                           )
           )
           return(tab)
@@ -3887,8 +3856,8 @@ ui <- shinydashboard::dashboardPage(
     ############## info boxes  #############
     
     output$omics_net_info <- shiny::renderUI({
-      if (length(reactiveValuesToList(gene_networks)) != 0){ 
-        gene_net <- reactiveValuesToList(gene_networks)
+      if (length(shiny::reactiveValuesToList(gene_networks)) != 0){ 
+        gene_net <- shiny::reactiveValuesToList(gene_networks)
         n_nodes <- sapply(gene_net, function(x) { length(base::union(x[[1]] ,x[[2]]))   })
         n_edges <- sapply(gene_net, nrow)
         
@@ -3902,8 +3871,8 @@ ui <- shinydashboard::dashboardPage(
     })
     
     output$drug_net_info <- shiny::renderUI({
-      if (length( reactiveValuesToList(drug_networks)) != 0){ 
-        drug_net <- reactiveValuesToList(drug_networks)
+      if (length( shiny::reactiveValuesToList(drug_networks)) != 0){ 
+        drug_net <- shiny::reactiveValuesToList(drug_networks)
         n_nodes <- sapply(drug_net, function(x) { length(base::union(x[[1]] ,x[[2]]))   })
         n_edges <- sapply(drug_net, nrow)
         
@@ -3966,34 +3935,34 @@ ui <- shinydashboard::dashboardPage(
     
     
     ###
-    output$back2P2 <- renderUI({
-      if (length(omics_files()) == 1 && length(reactiveValuesToList(proc_matrices)) != 0){
-        actionButton('back2P2', label = 'Back', shiny::icon("paper-plane"),
+    output$back2P2 <- shiny::renderUI({
+      if (length(omics_files()) == 1 && length(shiny::reactiveValuesToList(proc_matrices)) != 0){
+        shiny::actionButton('back2P2', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
-      } else if (length(omics_files()) >= 1 && length(reactiveValuesToList(proc_matrices)) != 0 && isTruthy(input$intersect_btn)){
-        actionButton('back2P2', label = 'Back', shiny::icon("paper-plane"),
+      } else if (length(omics_files()) >= 1 && length(shiny::reactiveValuesToList(proc_matrices)) != 0 && shiny::isTruthy(input$intersect_btn)){
+        shiny::actionButton('back2P2', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P2, {
+    shiny::observeEvent(input$back2P2, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "mat_sub_2")
     })
     
     ###
-    output$jump2P4 <- renderUI({
+    output$jump2P4 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(gene_networks)) == length(omics_files())){
-        actionButton('jump2P4', label = 'Next', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P4', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$jump2P4, {
+    shiny::observeEvent(input$jump2P4, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "net_sub_2")
     })
@@ -4010,7 +3979,7 @@ ui <- shinydashboard::dashboardPage(
     
     
     count_unet <- shiny::reactiveValues()
-    observe({
+    shiny::observe({
       input_names <- names(shiny::reactiveValuesToList(gene_networks))
       for (x in input_names){
         count_unet[[x]] <- 0
@@ -4054,7 +4023,7 @@ ui <- shinydashboard::dashboardPage(
           else
             fnet <- net[net$weight <= input[[paste0('omics_range', x)]][1] | net$weight >= input[[paste0('omics_range', x)]][2], ]
           
-          output[[paste0(x, "_spinner_weightDist")]] <- renderUI({
+          output[[paste0(x, "_spinner_weightDist")]] <- shiny::renderUI({
             shinycssloaders::withSpinner(plotly::plotlyOutput(paste0(x, "_weightDist")))
           })
           
@@ -4072,7 +4041,7 @@ ui <- shinydashboard::dashboardPage(
           })
           
           
-          output[[paste0(x, "_spinner_nodeDegreeDist")]] <- renderUI({
+          output[[paste0(x, "_spinner_nodeDegreeDist")]] <- shiny::renderUI({
             shinycssloaders::withSpinner(plotly::plotlyOutput(paste0(x, "_nodeDegreeDist")))
           })
           
@@ -4081,8 +4050,8 @@ ui <- shinydashboard::dashboardPage(
             fnet1 <- fnet
             fnet1$weight <- 1
             graph <- igraph::graph_from_data_frame(fnet1, directed = FALSE)
-            degree_table <- data.frame(Degree = igraph::degree(graph))
-            p <- plotly::ggplotly(ggplot2::ggplot(degree_table, ggplot2::aes(x = Degree)) + ggplot2::geom_histogram() +
+            degree_table <- data.frame('Degree' = igraph::degree(graph))
+            p <- plotly::ggplotly(ggplot2::ggplot(degree_table, ggplot2::aes(x = 'Degree')) + ggplot2::geom_histogram() +
                                     ggplot2::ggtitle('Nodes Degree Distribution') +
                                     ggplot2::ylab("Number of nodes") + ggplot2::xlab("Node degree") +
                                     ggplot2::theme(text = ggplot2::element_text(family="LM Roman 10"),
@@ -4103,13 +4072,13 @@ ui <- shinydashboard::dashboardPage(
         tab <- shiny::tabPanel(x,
                                shiny::fluidRow(
                                  shiny::column(width = 6,
-                                               sliderInput(inputId = paste0("omics_range", x), "Select range:",
+                                               shiny::sliderInput(inputId = paste0("omics_range", x), "Select range:",
                                                            min = min, max = max, value = c(min, max)),
                                                shiny::radioButtons(inputId = paste0("range_option", x), "Do you want to select the inner range?",
                                                                    choices = c(TRUE, FALSE), selected = TRUE)
                                  ),
                                  shiny::column(width = 6,
-                                               uiOutput(paste0(x, '_info')),
+                                               shiny::uiOutput(paste0(x, '_info')),
                                                shiny::tags$hr(style='border-top: 1px solid white;'),
                                                shiny::actionButton(inputId = paste0('button_', x), 'Show')
                                  )
@@ -4124,8 +4093,8 @@ ui <- shinydashboard::dashboardPage(
                                  )
                                ),
                                shiny::tags$hr(),
-                               fluidRow(
-                                 shiny::column(width = 12, actionButton(paste0('update_net_', x), 'Submit'), align = 'right')
+                               shiny::fluidRow(
+                                 shiny::column(width = 12, shiny::actionButton(paste0('update_net_', x), 'Submit'), align = 'right')
                                )
                                
         )
@@ -4200,47 +4169,47 @@ ui <- shinydashboard::dashboardPage(
     )
     
     ###
-    output$back2P3 <- renderUI({
+    output$back2P3 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(gene_networks)) == length(omics_files())){
-        actionButton('back2P3', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P3', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P3, {
+    shiny::observeEvent(input$back2P3, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "net_sub_1")
     })
     
     ###
-    output$jump2P5 <- renderUI({
+    output$jump2P5 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(filteredOmicsNetworks)) != 0){
-        actionButton('jump2P5', label = 'Go to RWR multiplex', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P5', label = 'Go to RWR multiplex', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$jump2P5, {
+    shiny::observeEvent(input$jump2P5, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "rwr_tab_2")
     })
     
     
     ###
-    output$jump2P1.2_from4 <- renderUI({
+    output$jump2P1.2_from4 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(filteredOmicsNetworks)) != 0){
-        actionButton('jump2P1.2_from4', label = 'Go to Network loading', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P1.2_from4', label = 'Go to Network loading', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$jump2P1.2_from4, {
+    shiny::observeEvent(input$jump2P1.2_from4, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "rwr_tab_1")
     })
@@ -4370,43 +4339,43 @@ ui <- shinydashboard::dashboardPage(
     # })
     
     ###
-    output$back2P1_from1.1 <- renderUI({
-      actionButton('back2P1_from1.1', label = 'Go to Data', shiny::icon("paper-plane"),
+    output$back2P1_from1.1 <- shiny::renderUI({
+      shiny::actionButton('back2P1_from1.1', label = 'Go to Data', shiny::icon("paper-plane"),
                    style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
     })
     
-    observeEvent(input$back2P1_from1.1, {
+    shiny::observeEvent(input$back2P1_from1.1, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "mat_sub_1")
     })
     
     ###
-    output$back2P4_from1.1 <- renderUI({
+    output$back2P4_from1.1 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(filteredOmicsNetworks)) == length(omics_files())){
-        actionButton('back2P4_from1.1', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P4_from1.1', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P4_from1.1, {
+    shiny::observeEvent(input$back2P4_from1.1, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "net_sub_2")
     })
     
     
     ###
-    output$jump2P5.1 <- renderUI({
+    output$jump2P5.1 <- shiny::renderUI({
       if (shiny::isTruthy(loaded_omics_net_list()) | shiny::isTruthy(loaded_drug_net_list()) | shiny::isTruthy(bnetwork()) ){
-        actionButton('jump2P5.1', label = 'Next', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P5.1', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$jump2P5.1, {
+    shiny::observeEvent(input$jump2P5.1, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "rwr_tab_2")
     })
@@ -4416,8 +4385,8 @@ ui <- shinydashboard::dashboardPage(
     #                               RWR: MULTIPLEX NETWORK (OUTPUT)                            #
     ############################################################################################
     
-    output$info_box_6 <- renderText({
-      HTML("<br/> <span style='font-weight:normal;'>
+    output$info_box_6 <- shiny::renderText({
+      shiny::HTML("<br/> <span style='font-weight:normal;'>
             <p align='justify'>
             In this section of the app, you can create a multiplex network,
             which is a multilayered network with as many layers as the number of networks inferred in the previous steps. </span> <br/>
@@ -4447,7 +4416,7 @@ ui <- shinydashboard::dashboardPage(
         multiplex <- multiplex_network()
         if (!is.null(multiplex)){
           multiplex_type <- ifelse(input$weightMultiplex == 'YES', 'Weighted', 'Unweighted')
-          n_layers <- multiplex %>%  dplyr::select(EdgeType) %>% unique(.) %>% nrow(.)
+          n_layers <- multiplex %>%  dplyr::select('EdgeType') %>% unique(.) %>% nrow(.)
           n_nodes <- base::union(multiplex$source, multiplex$target) %>% length(.)
           n_edges <- multiplex %>% nrow(.)
           shinydashboard::box(width = 12,
@@ -4470,7 +4439,7 @@ ui <- shinydashboard::dashboardPage(
         multiplex <- multiplex_drug_network()
         if (!is.null(multiplex)){
           multiplex_type <- ifelse(input$drug_weightMultiplex == 'YES', 'Weighted', 'Unweighted')
-          n_layers <- multiplex %>%  dplyr::select(EdgeType) %>% unique(.) %>% nrow(.)
+          n_layers <- multiplex %>%  dplyr::select('EdgeType') %>% unique(.) %>% nrow(.)
           n_nodes <- base::union(multiplex[[2]], multiplex[[3]]) %>% length(.)
           n_edges <- multiplex %>% nrow(.)
           shinydashboard::box(width = 12,
@@ -4486,43 +4455,43 @@ ui <- shinydashboard::dashboardPage(
     })
     
     ###
-    output$back2P4 <- renderUI({
+    output$back2P4 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(filteredOmicsNetworks)) == length(omics_files())){
-        actionButton('back2P4', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P4', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
-    output$back2P1.1 <- renderUI({
+    output$back2P1.1 <- shiny::renderUI({
       if (!is.null(loaded_omics_net_list()) | shiny::isTruthy(loaded_drug_net_list()) | shiny::isTruthy(bnetwork()) ){
-        actionButton('back2P1.1', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P1.1', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P4, {
+    shiny::observeEvent(input$back2P4, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "net_sub_2")
     })
     
-    observeEvent(input$back2P1.1, {
+    shiny::observeEvent(input$back2P1.1, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "rwr_tab_1")
     })
     
     ###
-    output$jump2P6 <- renderUI({
-      if (isTruthy(input$gen_multiplex_btn)){
-        actionButton('jump2P6', label = 'Next', shiny::icon("paper-plane"),
+    output$jump2P6 <- shiny::renderUI({
+      if (shiny::isTruthy(input$gen_multiplex_btn)){
+        shiny::actionButton('jump2P6', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")}else{
                        return(NULL)
                      }
     })
     
-    observeEvent(input$jump2P6, {
+    shiny::observeEvent(input$jump2P6, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "rwr_tab_3")
     })
@@ -4531,8 +4500,8 @@ ui <- shinydashboard::dashboardPage(
     #                                    RWR: PARAMETERS (OUTPUT)                              #
     ############################################################################################
     
-    output$info_box_7 <- renderText({
-      HTML("<br/> <span style='font-weight:normal;'>
+    output$info_box_7 <- shiny::renderText({
+      shiny::HTML("<br/> <span style='font-weight:normal;'>
             <p align='justify'>
             Here, you can integrate multi-omics network through the Random Walk with Restart (RWR) algorithm,
             that simulates the traversal of an imaginary particle, called random walker. <br/>
@@ -4618,7 +4587,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     #### Layer Transition matrix
-    observe({
+    shiny::observe({
       net_list <- if (!is.null(g_net_list())) g_net_list() else l_net_list()
       m <- shiny::reactive({
         L1 <- length(net_list)
@@ -4629,7 +4598,7 @@ ui <- shinydashboard::dashboardPage(
         return(mat)
       })
       output$omics_trans_mat <- shiny::renderUI({
-        div(
+        shiny::div(
           shinyMatrix::matrixInput(inputId = "editable_trans_mat", value = m(), class = "numeric")
         )
       })
@@ -4637,7 +4606,7 @@ ui <- shinydashboard::dashboardPage(
     
     ################# Drug parameters ################
     #### delta 2 --> cross-jumping probability per layer in Drugs multiplex
-    output$drug_delta_slider <- renderUI({
+    output$drug_delta_slider <- shiny::renderUI({
       if (length(loaded_drug_net_list()) == 0 & length(shiny::reactiveValuesToList(drug_networks)) == 0)
         return(NULL)
       shiny::sliderInput('drug_delta',
@@ -4646,7 +4615,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     #### Taus
-    output$tauDRUGS <- renderUI({
+    output$tauDRUGS <- shiny::renderUI({
       if (length(loaded_drug_net_list()) == 0 & length(shiny::reactiveValuesToList(drug_networks)) == 0){
         return(NULL)
       }else {
@@ -4654,7 +4623,7 @@ ui <- shinydashboard::dashboardPage(
         if (input$drug_tao_opt == 'Custumize restarting probabilities per layer'){
           numInput <- length(dnet)
           lapply(1:numInput, function(i) {
-            numericInput(
+            shiny::numericInput(
               inputId = paste0('drugs_tau', i),
               label = shiny::HTML("&tau;", i, "(", names(dnet)[i] ,")"),
               min = 0,
@@ -4668,7 +4637,7 @@ ui <- shinydashboard::dashboardPage(
       }
     })
     
-    drugs_tau_list <- reactive({
+    drugs_tau_list <- shiny::reactive({
       if (input$drug_tao_opt != 'Custumize restarting probabilities per layer'){
         return(NA)
       }else{
@@ -4682,10 +4651,10 @@ ui <- shinydashboard::dashboardPage(
     
     #### Layer Transition matrix
     
-    observe({
+    shiny::observe({
       if (!is.null(g_dnet_list()) | !is.null(l_dnet_list())) {
         net_list <- if (!is.null(g_dnet_list())) g_dnet_list() else l_dnet_list()
-        dm <- reactive({
+        dm <- shiny::reactive({
           L2 <- length(net_list)
           dmat <- matrix(1, ncol = L2, nrow = L2)
           dmat <- dmat/(L2-1)
@@ -4693,8 +4662,8 @@ ui <- shinydashboard::dashboardPage(
           colnames(dmat) <- rownames(dmat) <- names(net_list)
           return(dmat)
         })
-        output$drugs_trans_mat <- renderUI({
-          div(
+        output$drugs_trans_mat <- shiny::renderUI({
+          shiny::div(
             shinyMatrix::matrixInput(inputId = "editable_drugs_trans_mat", value = dm(), class = "numeric")
           )
         })
@@ -4702,10 +4671,10 @@ ui <- shinydashboard::dashboardPage(
     })
     
     #### Jump cross prob in drugs multiplex
-    output$drug_jump_neigh_opt <- renderUI({
+    output$drug_jump_neigh_opt <- shiny::renderUI({
       if (length(loaded_drug_net_list()) == 0 & length(shiny::reactiveValuesToList(drug_networks)) == 0)
         return(NULL)
-      output <- tagList()
+      output <- shiny::tagList()
       output[[1]] <-
         shiny::radioButtons('drug_jump_neigh', 'Connect nodes of different layers by neighborhood (drugs multiplex)', c('YES', 'NO'), selected = 'NO')
       output[[2]] <-
@@ -4721,32 +4690,32 @@ ui <- shinydashboard::dashboardPage(
     
     
     #####################
-    output$back2P5 <- renderUI({
+    output$back2P5 <- shiny::renderUI({
       
-      if (isTruthy(input$gen_multiplex_btn)){
-        actionButton('back2P5', label = 'Back', shiny::icon("paper-plane"),
+      if (shiny::isTruthy(input$gen_multiplex_btn)){
+        shiny::actionButton('back2P5', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P5, {
+    shiny::observeEvent(input$back2P5, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "rwr_tab_2")
     })
     
     ###
-    output$jump2P7 <- renderUI({
+    output$jump2P7 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(RWR_output)) != 0){
-        actionButton('jump2P7', label = 'Next', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P7', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$jump2P7, {
+    shiny::observeEvent(input$jump2P7, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "dr_tab_2")
     })
@@ -4756,7 +4725,7 @@ ui <- shinydashboard::dashboardPage(
     #                       DIMENSIONALITY REDUCTION: LOADING DATA (OUTPUT)                    #
     ############################################################################################
     
-    output$info_box_8 <- renderText({
+    output$info_box_8 <- shiny::renderText({
       shiny::HTML("<br/> <span style='font-weight:normal;'>
             <p align='justify'>
             You can start the pipeline here by uploading a similarity matrix, an embedded similarity matrix or 
@@ -4840,25 +4809,25 @@ ui <- shinydashboard::dashboardPage(
     
     
     
-    output$back2P1_from1.2 <- renderUI({
-        actionButton('back2P1_from1.2', label = 'Go to Data', shiny::icon("paper-plane"),
+    output$back2P1_from1.2 <- shiny::renderUI({
+        shiny::actionButton('back2P1_from1.2', label = 'Go to Data', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
     })
-    observeEvent(input$back2P1_from1.2, {
+    shiny::observeEvent(input$back2P1_from1.2, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "mat_sub_1")
     })
     
     ###
-    output$jump2P7_from1.2 <- renderUI({
+    output$jump2P7_from1.2 <- shiny::renderUI({
       if (length(loaded_simMat()) != 0 | length(loaded_simMat_Anno()) != 0){
-        actionButton('jump2P7_from1.2', label = 'Next', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P7_from1.2', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
-    observeEvent(input$jump2P7_from1.2, {
+    shiny::observeEvent(input$jump2P7_from1.2, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "dr_tab_2")
     })
@@ -4869,8 +4838,8 @@ ui <- shinydashboard::dashboardPage(
     #                            DIMENSIONALITY REDUCTION: DR (OUTPUT)                         #
     ############################################################################################
     
-    output$info_box_9 <- renderText({
-      HTML("<br/> <span style='font-weight:normal;'>
+    output$info_box_9 <- shiny::renderText({
+      shiny::HTML("<br/> <span style='font-weight:normal;'>
               <p align='justify'>
               In this section of the app, you can denoise and decrease the dimensionality of the RWR similarity matrix
               in order to facilitate further analyses. </span> <br/>
@@ -4913,9 +4882,9 @@ ui <- shinydashboard::dashboardPage(
     
     output$dr_opt <- shiny::renderUI({
       
-      output$emb_opt_box <- renderUI({
+      output$emb_opt_box <- shiny::renderUI({
         if (length(shiny::reactiveValuesToList(RWR_output)) != 0 | (input$example_simMat == 'NO' & length(loaded_simMat()) != 0 & input$simMat_type == 'Similarity matrix')){
-          output <- tagList()
+          output <- shiny::tagList()
           output[[1]] <-
             shiny::radioButtons(inputId = 'emb_opt',
                                 label = shiny::h4(shiny::span('Do you want to denoise the RWR-mat via embedding?', style = "font-weight: bold")),
@@ -4936,13 +4905,13 @@ ui <- shinydashboard::dashboardPage(
         }
       })
       
-      output$dr_opt_box <- renderUI({
+      output$dr_opt_box <- shiny::renderUI({
         if (length(shiny::reactiveValuesToList(RWR_output)) != 0 | (length(loaded_simMat()) != 0 & (
           (input$example_simMat == 'NO' & input$simMat_type != 'Other') | 
           (input$example_simMat == 'YES' & startsWith(input$select_simMat, 'E'))
         )
         )){
-          output <- tagList()
+          output <- shiny::tagList()
           output[[1]] <-
             shiny::selectInput(inputId = 'dr_method',
                                label = shiny::h4(shiny::span('Select a dimensionality reduction method', style = "font-weight: bold")),
@@ -4980,9 +4949,9 @@ ui <- shinydashboard::dashboardPage(
         }
       })
       
-      output$componentSelector <- renderUI({
+      output$componentSelector <- shiny::renderUI({
         if (length(loaded_simMat()) != 0 & (input$simMat_type == 'Other' | startsWith(input$select_simMat, 'U')) ){
-          output <- tagList()
+          output <- shiny::tagList()
           output[[1]] <-
             shiny::selectInput(inputId = 'select_c1', 
                                label = 'Select the first component', 
@@ -5018,7 +4987,7 @@ ui <- shinydashboard::dashboardPage(
       #shiny::isolate({
         if ( !is.null(anno()) |  !is.null(anno1()) | !is.null(anno2())) {
           anno <- if ( !is.null(anno()) ) anno() else if ( !is.null(anno1()) ) anno1() else anno2()
-          output <- tagList()
+          output <- shiny::tagList()
           output[[1]] <-
             shiny::selectInput(inputId ='dr_plot_color',
                                label = 'Select the color of the points',
@@ -5072,7 +5041,7 @@ ui <- shinydashboard::dashboardPage(
     
     #----------------------------------------------------------------------------
     output$dr_plot_box <- shiny::renderUI({
-      req(input$dr_btn)
+      shiny::req(input$dr_btn)
       shiny::isolate({
         if (length(shiny::reactiveValuesToList(dr_output)) == 0){
           return(NULL)
@@ -5158,7 +5127,7 @@ ui <- shinydashboard::dashboardPage(
           #---------------------------- NEW --------------------------------------
           shiny::observeEvent(input$update_dr_plot_btn, {
             
-            output$dr_plot_spinner <- renderUI({
+            output$dr_plot_spinner <- shiny::renderUI({
               shinycssloaders::withSpinner(visNetwork::visNetworkOutput('dr_plot1'))
             })
             
@@ -5286,7 +5255,7 @@ ui <- shinydashboard::dashboardPage(
           
           # listen to the brushing event and draw a
           # rect shape that mimics the brush
-          observe({
+          shiny::observe({
             brush <- plotly::event_data("plotly_brushing", source = 'dr_plot1')
             #print(paste('brush:', brush))
             
@@ -5321,8 +5290,8 @@ ui <- shinydashboard::dashboardPage(
           })
           
           # A reactive value that tracks the dimensions of the brush
-          brush <- reactiveVal()
-          observe({
+          brush <- shiny::reactiveVal()
+          shiny::observe({
             evt <- plotly::event_data(event = "plotly_relayout", source = 'dr_plot1')
             #print(paste('evt:', evt))
             
@@ -5340,7 +5309,7 @@ ui <- shinydashboard::dashboardPage(
           })
           
           # map the brush limits to a data selection
-          observe({
+          shiny::observe({
             # if brush isn't active, no selection is active
             if (is.null(brush())) {
               data_orig_list()$data_shared$selection(FALSE)
@@ -5359,7 +5328,7 @@ ui <- shinydashboard::dashboardPage(
           })
           
           # update the marker colors
-          observe({
+          shiny::observe({
             dat <- data_orig_list()$data_shared$data(withSelection = TRUE)
             color_select <- data_orig_list()$color_select
             color_base<- data_orig_list()$color_base
@@ -5436,9 +5405,9 @@ ui <- shinydashboard::dashboardPage(
     
     #### Create a density plot in the same tabBox oh the dr_plot
     output$density_opt <- shiny::renderUI({
-      req(input$dr_btn)
+      shiny::req(input$dr_btn)
       shiny::isolate({
-        observeEvent(list(anno(), anno1(), anno2()), {
+        shiny::observeEvent(list(anno(), anno1(), anno2()), {
           anno_table <- if (!is.null(anno())) anno() else if (!is.null(anno1())) anno1() else if (!is.null(anno2())) anno2() else NULL
           if (!is.null(anno_table)) {
             nodes <- c('gene', 'drug')
@@ -5454,7 +5423,7 @@ ui <- shinydashboard::dashboardPage(
             }
           }
         })
-        tagList(
+        shiny::tagList(
           shiny::selectInput(inputId = 'density_on_points',
                              label = shiny::h5(shiny::span('Which points do you want to perform the estimation on?', style = "font-weight: bold")),
                              choices = 'All', selected = 'All'),
@@ -5464,8 +5433,8 @@ ui <- shinydashboard::dashboardPage(
     })
     
     output$density_plot <- plotly::renderPlotly({
-      req(input$density_plot_btn)
-      isolate({
+      shiny::req(input$density_plot_btn)
+      shiny::isolate({
         if (length(shiny::reactiveValuesToList(dr_output)) == 0){
           return(NULL)
         } else { 
@@ -5623,42 +5592,42 @@ ui <- shinydashboard::dashboardPage(
     )
     
     ###
-    output$back2P6 <- renderUI({
+    output$back2P6 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(RWR_output)) != 0){
-        actionButton('back2P6', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P6', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P6, {
+    shiny::observeEvent(input$back2P6, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "rwr_tab_3")
     })
     
     ###
-    output$back2P1.2 <- renderUI({
-      actionButton('back2P1.2', label = 'Back', shiny::icon("paper-plane"),
+    output$back2P1.2 <- shiny::renderUI({
+      shiny::actionButton('back2P1.2', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
     })
     
-    observeEvent(input$back2P1.2, {
+    shiny::observeEvent(input$back2P1.2, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "dr_tab_1")
     })
     
     ###
-    output$jump2P8 <- renderUI({
+    output$jump2P8 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(dr_output)) != 0){
-        actionButton('jump2P8', label = 'Next', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P8', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$jump2P8, {
+    shiny::observeEvent(input$jump2P8, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "cl_tab")
     })
@@ -5669,8 +5638,8 @@ ui <- shinydashboard::dashboardPage(
     #                                     CLUSTERING (OUTPUT)                                  #
     ############################################################################################
     
-    output$info_box_10 <- renderText({
-      HTML("<br/> <span style='font-weight:normal;'>
+    output$info_box_10 <- shiny::renderText({
+      shiny::HTML("<br/> <span style='font-weight:normal;'>
             <p align='justify'>
             Here, you can conduct a clustering analysis on the dimensionality-reducted RWR
             similarity matrix. You can choose different clustering algorithms. </span> <br/>
@@ -5754,7 +5723,7 @@ ui <- shinydashboard::dashboardPage(
   
     ##### SHARED OBJ
     cl_data_orig_list <- shiny::reactive({
-      isolate({
+      shiny::isolate({
         
       if (length(shiny::reactiveValuesToList(clusters)$manual) != 0 ){
     
@@ -5781,10 +5750,10 @@ ui <- shinydashboard::dashboardPage(
     })
     
     output$cl_plot_box <- shiny::renderUI({
-      req(input$cl_btn)
+      shiny::req(input$cl_btn)
       shiny::isolate({
         if (length(shiny::reactiveValuesToList(clusters)) != 0){
-          param <- if (isTruthy(input[[paste0(input$cluster_method, '_par')]])) input[[paste0(input$cluster_method, '_par')]] else NULL
+          param <- if (shiny::isTruthy(input[[paste0(input$cluster_method, '_par')]])) input[[paste0(input$cluster_method, '_par')]] else NULL
           if (is.null(shiny::reactiveValuesToList(clusters)[[paste0(input$cluster_method, '_', param)]]$cluster)){
             return(NULL)
           }else{
@@ -5794,7 +5763,7 @@ ui <- shinydashboard::dashboardPage(
             clu_anno <- clusters[[paste0(input$cluster_method, '_', param)]]$cluster %>% dplyr::arrange(clust)
             
             output$cl_plot <- plotly::renderPlotly({
-              #isolate({
+              #shiny::isolate({
               cl_plot <- clu_anno %>% 
                 plotly::plot_ly(x = ~x, y = ~y, source = 'cl_plot',
                                 type = "scatter", color = ~clust,
@@ -5839,9 +5808,9 @@ ui <- shinydashboard::dashboardPage(
   
     manual_cluster <- shiny::reactiveVal()
     output$manual_cl_plot_box <- shiny::renderUI({
-      req(input$cl_btn)
+      shiny::req(input$cl_btn)
       if (showPlot()){
-      isolate({
+      shiny::isolate({
         
       if (length(shiny::reactiveValuesToList(clusters)$manual) != 0 ) {
         
@@ -5852,7 +5821,7 @@ ui <- shinydashboard::dashboardPage(
         
         output$manual_cl_plot <- plotly::renderPlotly({
           #if (showPlot()){
-          isolate({
+          shiny::isolate({
             manual_cl_plot <- clu_anno %>% 
               plotly::plot_ly(x = ~x, y = ~y, source = 'manual_cl_plot',
                               type = "scatter", color = 'dodgerblue3',
@@ -5908,7 +5877,7 @@ ui <- shinydashboard::dashboardPage(
       
         ######################## BRUSHING ################################
         
-        observe({
+        shiny::observe({
           brush <- plotly::event_data("plotly_brushing", source = 'manual_cl_plot')
           #print(paste('brush:', brush))
           
@@ -5943,8 +5912,8 @@ ui <- shinydashboard::dashboardPage(
         })
         
         # A reactive value that tracks the dimensions of the brush
-        brush <- reactiveVal()
-        observe({
+        brush <- shiny::reactiveVal()
+        shiny::observe({
           evt <- plotly::event_data(event = "plotly_relayout", source = 'manual_cl_plot')
           #print(paste('evt:', evt))
           
@@ -5963,7 +5932,7 @@ ui <- shinydashboard::dashboardPage(
         
         
         # map the brush limits to a data selection
-        observe({
+        shiny::observe({
           # if brush isn't active, no selection is active
           if (is.null(brush())) {
             cl_data_orig_list()$data_shared$selection(FALSE)
@@ -5982,7 +5951,7 @@ ui <- shinydashboard::dashboardPage(
         })
         
         # update the marker colors
-        observe({
+        shiny::observe({
           dat <- cl_data_orig_list()$data_shared$data(withSelection = TRUE)
           color_select <- cl_data_orig_list()$color_select
           color_base<- cl_data_orig_list()$color_base
@@ -6038,7 +6007,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     
-    observeEvent(input$cl_btn, {
+    shiny::observeEvent(input$cl_btn, {
       if (input$cluster_method != 'manual') {
         showPlot(FALSE) 
       } else {
@@ -6055,10 +6024,10 @@ ui <- shinydashboard::dashboardPage(
         tree <- shiny::reactiveValuesToList(clusters)$hclust_output 
         
         output$plotHclust <- shiny::renderPlot({
-          req(input$cl_btn)
+          shiny::req(input$cl_btn)
           
           shiny::isolate({
-            #if (!isTruthy(input$hclust_par)) {
+            #if (!shiny::isTruthy(input$hclust_par)) {
             if (is.null(shiny::reactiveValuesToList(clusters)[[paste0('hclust_', input$hclust_par)]]$num_clust)) {
               tree %>% plot(labels=FALSE, sub='', xlab='')
               
@@ -6124,7 +6093,7 @@ ui <- shinydashboard::dashboardPage(
     
     output$cluster_table_box <- shiny::renderUI({
       cl_method <- input$cluster_method
-      param <- if (isTruthy(input[[paste0(cl_method, '_par')]])) input[[paste0(cl_method, '_par')]] else NULL
+      param <- if (shiny::isTruthy(input[[paste0(cl_method, '_par')]])) input[[paste0(cl_method, '_par')]] else NULL
       if (!is.null(shiny::reactiveValuesToList(clusters)[[paste0(cl_method, '_', param)]]$cluster) ){
         
         output$cl_table <- DT::renderDT(server = FALSE, {
@@ -6201,7 +6170,7 @@ ui <- shinydashboard::dashboardPage(
     
     ############## info created cluster tables #############
     
-    output$info_created_cl <- renderUI({
+    output$info_created_cl <- shiny::renderUI({
       if (!is.null(shiny::reactiveValuesToList(clusters)) ) {
         cl_list <- shiny::reactiveValuesToList(clusters)
         
@@ -6265,31 +6234,31 @@ ui <- shinydashboard::dashboardPage(
     )
     
     ###
-    output$back2P7 <- renderUI({
+    output$back2P7 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(dr_output)) != 0){
-        actionButton('back2P7', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P7', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P7, {
+    shiny::observeEvent(input$back2P7, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "dr_tab_2")
     })
     
     ###
-    output$jump2P9 <- renderUI({
+    output$jump2P9 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(clusters)) != 0){
-        actionButton('jump2P9', label = 'Next', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P9', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$jump2P9, {
+    shiny::observeEvent(input$jump2P9, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "clupath_tab")
     })
@@ -6299,8 +6268,8 @@ ui <- shinydashboard::dashboardPage(
     #                        ENRICHMENT ANALYSIS: CLUSTER2PATHWAY (OUTPUT)                     #
     ############################################################################################
     
-    output$info_box_11 <- renderText({
-      HTML("<br/> <span style='font-weight:normal;'>
+    output$info_box_11 <- shiny::renderText({
+      shiny::HTML("<br/> <span style='font-weight:normal;'>
               <p align='justify'>
               Here, you can conduct the Enrichment Analysis (PEA) for a particular list of clusters obtained in the previous step. <br/>
               Then, you can perform the <b> Cluster2Pathway Analysis </b>, by filtering the PEA table based on one or more databases. 
@@ -6364,7 +6333,7 @@ ui <- shinydashboard::dashboardPage(
     
     output$TOPpathwayAnnotation <- plotly::renderPlotly({
       input$showOne
-      isolate({
+      shiny::isolate({
         #if (length(shiny::reactiveValuesToList(clusters)) == 0){
         #  return(NULL)
         #}else{
@@ -6395,7 +6364,7 @@ ui <- shinydashboard::dashboardPage(
     
     output$TOPtable <-  DT::renderDT(server = FALSE,{
       input$showOne
-      req(topPath())
+      shiny::req(topPath())
       DT::datatable(topPath()$top_enrich_path,
                     extensions = 'Buttons',
                     options = list(paging = TRUE,    ## paginate the output
@@ -6418,7 +6387,7 @@ ui <- shinydashboard::dashboardPage(
     })
     
     
-    output$info_created_pea <- renderUI({
+    output$info_created_pea <- shiny::renderUI({
       if (!is.null(shiny::reactiveValuesToList(gProfiler_res)) ) {
         pea_list <- shiny::reactiveValuesToList(gProfiler_res)
         
@@ -6468,31 +6437,31 @@ ui <- shinydashboard::dashboardPage(
     
     
     ###
-    output$back2P8 <- renderUI({
+    output$back2P8 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(clusters)) != 0){
-        actionButton('back2P8', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P8', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P8, {
+    shiny::observeEvent(input$back2P8, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "cl_tab")
     })
     
     ###
-    output$jump2P10 <- renderUI({
+    output$jump2P10 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(gProfiler_res)) != 0){
-        actionButton('jump2P10', label = 'Next', shiny::icon("paper-plane"),
+        shiny::actionButton('jump2P10', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$jump2P10, {
+    shiny::observeEvent(input$jump2P10, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "pathclu_tab")
     })
@@ -6504,8 +6473,8 @@ ui <- shinydashboard::dashboardPage(
     #                        ENRICHMENT ANALYSIS: PATHWAY2CLUSTERS (OUTPUT)                     #
     ############################################################################################
     
-    output$info_box_12 <- renderText({
-      HTML("<br/> <span style='font-weight:normal;'>
+    output$info_box_12 <- shiny::renderText({
+      shiny::HTML("<br/> <span style='font-weight:normal;'>
               <p align='justify'>
               After conducting the enrichment analysis,
               here you can verify the enrichment specificity of a particular pathway across all defined clusters. 
@@ -6530,11 +6499,11 @@ ui <- shinydashboard::dashboardPage(
     
     output$pathway_selector <- shiny::renderUI({
       input$path2clust
-      req(path_annotation())
+      shiny::req(path_annotation())
       if (is.null(path_annotation()))
         return(NULL)
-      isolate({
-        selectInput('pathway_selector',
+      shiny::isolate({
+        shiny::selectInput('pathway_selector',
                     'Select one pathway to highlight in the plot',
                     choices = sort(unique(path_annotation()$path_cluster$term_name))
         )
@@ -6546,7 +6515,7 @@ ui <- shinydashboard::dashboardPage(
       input$show
       if (length(shiny::reactiveValuesToList(clusters)) == 0) {
         return(NULL)}
-      isolate({
+      shiny::isolate({
         enriched_clusters <- path_annotation()$path_cluster %>% dplyr::filter(term_name == input$pathway_selector) %>% dplyr::pull(., query)
         annotation_table <- path_annotation()$gene_cluster %>% mutate(selected_pathway = ifelse(!(clust %in% enriched_clusters), 'FALSE', 'TRUE'))
         
@@ -6561,10 +6530,10 @@ ui <- shinydashboard::dashboardPage(
     
     
     output$Alltable <-  DT::renderDT(server = FALSE, {
-      req(input$show)
+      shiny::req(input$show)
       if (is.null(shiny::reactiveValuesToList(gProfiler_res) ))
         return(NULL)
-      isolate({
+      shiny::isolate({
         gprof_res <- shiny::reactiveValuesToList(gProfiler_res)[[input$select_peaTable2]]
         onedb <- dplyr::filter(gprof_res, source == input$source)
         DT::datatable(onedb,
@@ -6591,22 +6560,22 @@ ui <- shinydashboard::dashboardPage(
     
     
     ###
-    output$back2P9 <- renderUI({
+    output$back2P9 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(gProfiler_res)) != 0){
-        actionButton('back2P9', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P9', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P9, {
+    shiny::observeEvent(input$back2P9, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "clupath_tab")
     })
     
     ###
-    output$jump2P11 <- renderUI({
+    output$jump2P11 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(clusters)) != 0 & (!is.null(anno()) |  !is.null(anno1()) | !is.null(anno2()) ) ){
         anno <- if (!is.null(anno())) anno()  else if (!is.null(anno1())) anno1() else anno2()
         id_col_check <- sapply(colnames(anno), FUN = function(x) sum('drug' %in% anno[[x]]))
@@ -6617,7 +6586,7 @@ ui <- shinydashboard::dashboardPage(
         drugs_to_keep <- drugs[drugs %in%  colnames(dr_mat) ]
         
         if (length(drugs_to_keep) != 0) {
-          actionButton('jump2P11', label = 'Next', shiny::icon("paper-plane"),
+          shiny::actionButton('jump2P11', label = 'Next', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
         }
       }else{
@@ -6625,7 +6594,7 @@ ui <- shinydashboard::dashboardPage(
       }
     })
     
-    observeEvent(input$jump2P11, {
+    shiny::observeEvent(input$jump2P11, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "dd_tab")
     })
@@ -6636,8 +6605,8 @@ ui <- shinydashboard::dashboardPage(
     #                                  DRUG DISCOVERY (OUTPUT)                                #
     ############################################################################################
     
-    output$info_box_13 <- renderText({
-      HTML("<br/> <span style='font-weight:normal;'>
+    output$info_box_13 <- shiny::renderText({
+      shiny::HTML("<br/> <span style='font-weight:normal;'>
               <p align='justify'>
               Here, you can explore the neighborhood of drugs among the clusters generated with a specific clustering algorithm. </span> <br/>
               </p> <hr style='border-top: 1px solid white;'>
@@ -6673,9 +6642,9 @@ ui <- shinydashboard::dashboardPage(
     })
     
     
-    output$drug_cluster_selector <- renderUI({
+    output$drug_cluster_selector <- shiny::renderUI({
       input$drug_button
-      isolate({
+      shiny::isolate({
         if (length(drugs()) == 0 & length(shiny::reactiveValuesToList(clusters)) == 0){
           return(NULL)} 
         
@@ -6698,12 +6667,12 @@ ui <- shinydashboard::dashboardPage(
     output$drug_plot_box <- shiny::renderUI({
       input$show_drug
      
-      isolate({
+      shiny::isolate({
         if (length(shiny::reactiveValuesToList(clusters)) == 0 | length(drugs()) == 0){
           return(NULL)
         }else {
           output$drug_plot <- plotly::renderPlotly({
-            isolate({
+            shiny::isolate({
               
               clusters <- shiny::reactiveValuesToList(clusters)
               clu_anno <- clusters[[input$select_cluList2]]$cluster %>% arrange(clust)
@@ -6756,11 +6725,11 @@ ui <- shinydashboard::dashboardPage(
     
     output$drug_table <- DT::renderDT(server = FALSE, {
       input$show_drug
-      isolate({
+      shiny::isolate({
         if (is.null(shiny::reactiveValuesToList(clusters)) | length(drugs()) == 0) {
           return(NULL)
         } else{
-          req(input$cluster_selector)
+          shiny::req(input$cluster_selector)
           cluster <- shiny::reactiveValuesToList(clusters)[[input$select_cluList2]]$cluster %>% dplyr::mutate_if(is.factor, as.integer)
           
           if (input$approach == 'cluster'){
@@ -6816,12 +6785,12 @@ ui <- shinydashboard::dashboardPage(
     
     
     output$gene_table <- DT::renderDT(server = FALSE, {
-      req(input$show_drug)
-      isolate({
+      shiny::req(input$show_drug)
+      shiny::isolate({
         if (is.null(shiny::reactiveValuesToList(clusters)[[input$select_cluList2]]$cluster) & length(drugs()) == 0) {
           return(NULL)
         }else{
-          req(input$cluster_selector)
+          shiny::req(input$cluster_selector)
           cluster <- shiny::reactiveValuesToList(clusters)[[input$select_cluList2]]$cluster %>% dplyr::mutate_if(is.factor, as.integer)
           
           if (input$approach == 'cluster') {
@@ -6875,16 +6844,16 @@ ui <- shinydashboard::dashboardPage(
     })
     
     ###
-    output$back2P10 <- renderUI({
+    output$back2P10 <- shiny::renderUI({
       if (length(shiny::reactiveValuesToList(gProfiler_res)) != 0){
-        actionButton('back2P10', label = 'Back', shiny::icon("paper-plane"),
+        shiny::actionButton('back2P10', label = 'Back', shiny::icon("paper-plane"),
                      style="color: #fff; background-color: #337ab7; border-color: #2e6da4; padding:20px")
       }else{
         return(NULL)
       }
     })
     
-    observeEvent(input$back2P10, {
+    shiny::observeEvent(input$back2P10, {
       shinydashboard::updateTabItems(session, inputId = "tabs",
                                      selected = "pathclu_tab")
     })
