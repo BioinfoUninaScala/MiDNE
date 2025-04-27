@@ -236,52 +236,97 @@ netSummary <- function(network){
 }
 
 
+#' Pairwise comparisons after a chi-squared test for given probabilities (adapted from RVAideMemoire::chisq.theo.multcomp)
+#' 
+#' @description Performs pairwise comparisons after a global chi-squared test for given probabilities.
+#' 
+#' @param x a contigency table
+#' @param p theoretical proportions
+#' @param p.method	method for p-values correction. See help of p.adjust.
+#'
+#' @return a table with the results of the pairwise comparisons
+#' @export
+
+chisq_theo_multcomp <- function (x, p = rep(1/length(x), length(x)), p.method = "fdr") 
+{
+  if (!all.equal(sum(p), 1)) {
+    stop("sum of probabilities must be 1")
+  }
+  theo <- integer(length(x))
+  chi2 <- integer(length(x))
+  pval <- integer(length(x))
+  for (i in 1:length(x)) {
+    test <- suppressWarnings(stats::chisq.test(c(x[i], sum(x) - x[i]), p = c(p[i], 1 - p[i])))
+    theo[i] <- as.numeric(test$expected[1])
+    chi2[i] <- as.numeric(test$statistic)
+    pval[i] <- as.numeric(test$p.value)
+  }
+  p.adj <- stats::p.adjust(pval, method = p.method)
+  comp <- data.frame(observed = x, expected = theo, Chi = chi2, 
+                     `Pr(>Chi)` = p.adj, ` ` = psignif(p.adj), stringsAsFactors = FALSE, 
+                     check.names = FALSE)
+  call <- match.call()
+  dname.x <- if (length(call$x) == 1) {
+    call$x
+  }
+  else {
+    paste(call$x[1], "(", paste(call$x[-1], collapse = ","), 
+          ")", sep = "")
+  }
+  dname.p <- if (length(call$p) == 1) {
+    call$p
+  }
+  else {
+    paste(call$p[1], "(", paste(call$p[-1], collapse = ","), 
+          ")", sep = "")
+  }
+  dname <- paste(dname.x, " and ", dname.p, sep = "")
+  result <- list(method = "chi-squared tests", data.name = dname, 
+                 observed = x, expected = theo, p.adjust.method = p.method, 
+                 statistic = chi2, p.value2 = p.adj, p.value = comp)
+  class(result) <- "RV.multcomp"
+  return(result)
+}
 
 
-# ###################### old version
-# 
-# post_hoc_analysis <- function(cont_table, fisher_p, rows){
-#     post_hoc <- chisq.theo.multcomp(cont_table, p.method = "bonferroni")
-#     pval <- post_hoc$p.value[rows, 6]
-#     obs <- post_hoc$p.value$observed.Freq
-#     exp <- post_hoc$p.value$expected
-#     logFC <- ifelse(all(pval < 0.05), log2(mean(obs[rows])/exp[1]), 0)
-#     return(logFC)
-# }
-# 
-# fisher_test_cnv <- function(matrix, cpu, rows, file_name){
-#     cl <- snow::makeCluster(cpu)
-#     registerDoSNOW(cl)
-#     iterations <- nrow(matrix)
-#     pb <- utils::txtProgressBar(max = iterations, style = 3)
-#     progress <- function(n) utils::setTxtProgressBar(pb, n)
-#     opts <- list(progress = progress)
-# 
-#     output_list <- list()
-#     result <- foreach (i = 1:nrow(matrix),
-#                        .packages = c('tidyverse', 'RVAideMemoire','doSNOW', 'Matrix'),
-#                        .export = 'post_hoc_analysis',
-#                        .options.snow=opts)  %dopar% {
-#                            vector <- c(rep(NA, nrow(matrix)))
-#                            for (j in i:nrow(matrix)) {
-#                                cont_table <- table(matrix[i, ], matrix[j, ])
-#                                # Perform Fisher's exact test
-#                                fisher_p  <- fisher.test(cont_table)$p.value
-#                                vector[j] <- ifelse(fisher_p < 0.05, post_hoc_analysis(cont_table, fisher_p, rows), 0)
-#                            }
-#                            output_list[[i]] <- vector
-#                            
-#                        }
-#     close(pb)
-#     stopCluster(cl)
-# 
-#     res_mat <- do.call(rbind, result)
-#     #counter <- sum(res_mat[, nrow(matrix)+1])
-#     #res_mat <- res_mat[,-1]
-#     colnames(res_mat) <- rownames(res_mat) <- rownames(matrix)
-#     final_res_mat <- Matrix::forceSymmetric(res_mat)
-#     saveRDS(final_res_mat, paste0(file_name, '.RDS'))
-# 
-#     return(final_res_mat)
-# }
-# 
+
+#' Transform p-value significance in characters (adapted from RVAideMemoire)
+#' 
+#' @description transform p-value significance in characters.
+#' 
+#' @param p p-value
+#'
+#' @return a string
+#' @export
+
+psignif <- function(p) 
+{
+  result <- character(length(p))
+  for (i in 1:length(p)) {
+    if (p[i] != "NA") {
+      if (as.numeric(p[i]) >= 0.1) {
+        result[i] <- " "
+      }
+      else if (as.numeric(p[i]) < 0.1 & as.numeric(p[i]) >= 
+               0.05) {
+        result[i] <- "."
+      }
+      else if (as.numeric(p[i]) < 0.05 & as.numeric(p[i]) >= 
+               0.01) {
+        result[i] <- "*"
+      }
+      else if (as.numeric(p[i]) < 0.01 & as.numeric(p[i]) >= 
+               0.001) {
+        result[i] <- "**"
+      }
+      else if (as.numeric(p[i]) < 0.001) {
+        result[i] <- "***"
+      }
+    }
+    else {
+      result[i] <- " "
+    }
+  }
+  return(result)
+}
+
