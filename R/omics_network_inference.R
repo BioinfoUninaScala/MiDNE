@@ -6,6 +6,7 @@
 #' @param correction_method method for correcting the p-value of the statistical test (bonferroni or fdr).
 #' @param th a numeric value to binarize a DNA methylation matrix (expressed as beta-values).
 #' @param cpu number of cores to work in parallel.
+#' @param pth A numeric value, ranging from 0 and 1, that will be applied to the p-value of the Fisher's Exact Test and of post-hoc analysis.
 #' @return an undirected biological network, defined as a 3-columns table (source, dest, weight).
 #' @export 
 
@@ -15,7 +16,9 @@ omics_network_inference <- function(omics_matrix,
                                     #inference_method = NULL,
                                     correction_method = NULL, 
                                     th = NA, 
-                                    cpu = 1)
+                                    cpu = 1,
+                                    pth = 0.05
+                                    )
   {
   
   if (omics_type == 'Transcriptomics'){
@@ -29,11 +32,11 @@ omics_network_inference <- function(omics_matrix,
   } else if (omics_type == 'Epigenomics'){
     result <- gen_coDNAmethNet(omics_matrix = omics_matrix, 
                                correction_method = correction_method, 
-                               th = th, cpu = cpu)
+                               th = th, cpu = cpu, pth = pth)
   } else {
     result <- gen_coCNVnet(omics_matrix = omics_matrix, 
                            correction_method = correction_method, 
-                           cpu = cpu)
+                           cpu = cpu, pth = pth)
   }
   
   return(result)
