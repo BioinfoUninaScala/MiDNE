@@ -16,8 +16,8 @@ In R console, run
 library(devtools)
 install_github("BioinfoUninaScala/MiDNE", 
                build_vignettes=FALSE, 
-               repos=BiocManager::repositories(),
-               dependencies=TRUE, type="source")
+               dependencies=TRUE,
+               type="source")
 ```
 ----------
 
