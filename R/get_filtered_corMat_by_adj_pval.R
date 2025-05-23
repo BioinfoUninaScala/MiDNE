@@ -5,6 +5,7 @@
 #' @param cor_method The correlation method to use (e.g., "pearson", "spearman").
 #' @param adj_method The method used to correct the p-value (either "bonferroni" or "fdr").
 #' @param cpu The number of cores to use for parallel processing.
+#' @param pth A numeric value, ranging from 0 and 1, that will be applied to the p-value of Pearson Correlation test.
 #' @return A gene X gene correlation matrix, filtered by a corrected p-value lower than 0.05.
 #' @export
 
@@ -14,9 +15,9 @@ if (getRversion() >= "2.15.1") {
 
 get_filtered_corMat_by_adj_pval <- function(
     input_matrix,
-    cpu = 10, 
+    cpu = 1, 
     cor_method = 'spearman', 
-    adj_method = 'fdr'){
+    adj_method = 'fdr', pth = 0.05){
   
   if (!requireNamespace("snow", quietly = TRUE)) {
     stop("The 'snow' package is required but not installed.")
@@ -73,7 +74,7 @@ get_filtered_corMat_by_adj_pval <- function(
   final_padj_mat <- Matrix::forceSymmetric(padj_mat)
   colnames(final_padj_mat) <- rownames(final_padj_mat) <- rownames(matrix)
   
-  MASK <- ifelse(final_padj_mat < 0.05, TRUE, FALSE)
+  MASK <- ifelse(final_padj_mat < pth, TRUE, FALSE)
   
   message(paste('Constructing correlation matrix (method: ', cor_method, ') ...'))
   cor_mat <- stats::cor(t(input_matrix), method = cor_method)
