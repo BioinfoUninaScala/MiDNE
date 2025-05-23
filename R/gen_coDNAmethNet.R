@@ -23,12 +23,6 @@ gen_coDNAmethNet <- function(
   rownames(meth_Mat) <- rownames(methMat)
   colnames(meth_Mat) <- colnames(methMat)
   
-  cometh <- fisher_test_post_hoc(matrix = meth_Mat, cpu = cpu, correction_method = correction_method, pth = pth)
-  cometh1 <- as.matrix(cometh)
-  cometh2 <- ifelse(cometh1 == -Inf, 0, cometh1)
-  colnames(cometh2) <- rownames(cometh2) <- rownames(omics_matrix)
-  network <- get_adjList(cometh2)
-  
-  result <- network %>% dplyr::mutate_if(is.factor, as.character)
-  return(result)
+  network <- fisher_test_post_hoc(matrix = meth_Mat, cpu = cpu, correction_method = correction_method, pth = pth)
+  return(network)
 }

@@ -197,7 +197,7 @@ get_adjList <- function(adj_mat){
     dplyr::filter(value != 999) %>%
     dplyr::filter(value != 0) %>%
     dplyr::filter(Var1 != Var2) %>%
-    dplyr::as_tibble
+    dplyr::as_tibble()
   names(net_2) <- c('source', 'dest', 'weight')
   return(net_2)}
 
@@ -233,100 +233,5 @@ netSummary <- function(network){
                            'maxConnections'= degree[[1, 'n']]
   )
   return(netSummary_list)
-}
-
-
-#' Pairwise comparisons after a chi-squared test for given probabilities (adapted from RVAideMemoire::chisq.theo.multcomp)
-#' 
-#' @description Performs pairwise comparisons after a global chi-squared test for given probabilities.
-#' 
-#' @param x a contigency table
-#' @param p theoretical proportions
-#' @param p.method	method for p-values correction. See help of p.adjust.
-#'
-#' @return a table with the results of the pairwise comparisons
-#' @export
-
-chisq_theo_multcomp <- function (x, p = rep(1/length(x), length(x)), p.method = "fdr") 
-{
-  if (!all.equal(sum(p), 1)) {
-    stop("sum of probabilities must be 1")
-  }
-  theo <- integer(length(x))
-  chi2 <- integer(length(x))
-  pval <- integer(length(x))
-  for (i in 1:length(x)) {
-    test <- suppressWarnings(stats::chisq.test(c(x[i], sum(x) - x[i]), p = c(p[i], 1 - p[i])))
-    theo[i] <- as.numeric(test$expected[1])
-    chi2[i] <- as.numeric(test$statistic)
-    pval[i] <- as.numeric(test$p.value)
-  }
-  p.adj <- stats::p.adjust(pval, method = p.method)
-  comp <- data.frame(observed = x, expected = theo, Chi = chi2, 
-                     `Pr(>Chi)` = p.adj, ` ` = psignif(p.adj), stringsAsFactors = FALSE, 
-                     check.names = FALSE)
-  call <- match.call()
-  dname.x <- if (length(call$x) == 1) {
-    call$x
-  }
-  else {
-    paste(call$x[1], "(", paste(call$x[-1], collapse = ","), 
-          ")", sep = "")
-  }
-  dname.p <- if (length(call$p) == 1) {
-    call$p
-  }
-  else {
-    paste(call$p[1], "(", paste(call$p[-1], collapse = ","), 
-          ")", sep = "")
-  }
-  dname <- paste(dname.x, " and ", dname.p, sep = "")
-  result <- list(method = "chi-squared tests", data.name = dname, 
-                 observed = x, expected = theo, p.adjust.method = p.method, 
-                 statistic = chi2, p.value2 = p.adj, p.value = comp)
-  class(result) <- "RV.multcomp"
-  return(result)
-}
-
-
-
-#' Transform p-value significance in characters (adapted from RVAideMemoire)
-#' 
-#' @description transform p-value significance in characters.
-#' 
-#' @param p p-value
-#'
-#' @return a string
-#' @export
-
-psignif <- function(p) 
-{
-  result <- character(length(p))
-  for (i in 1:length(p)) {
-    if (p[i] != "NA") {
-      if (as.numeric(p[i]) >= 0.1) {
-        result[i] <- " "
-      }
-      else if (as.numeric(p[i]) < 0.1 & as.numeric(p[i]) >= 
-               0.05) {
-        result[i] <- "."
-      }
-      else if (as.numeric(p[i]) < 0.05 & as.numeric(p[i]) >= 
-               0.01) {
-        result[i] <- "*"
-      }
-      else if (as.numeric(p[i]) < 0.01 & as.numeric(p[i]) >= 
-               0.001) {
-        result[i] <- "**"
-      }
-      else if (as.numeric(p[i]) < 0.001) {
-        result[i] <- "***"
-      }
-    }
-    else {
-      result[i] <- " "
-    }
-  }
-  return(result)
 }
 

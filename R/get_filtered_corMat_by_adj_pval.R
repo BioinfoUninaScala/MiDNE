@@ -47,7 +47,7 @@ get_filtered_corMat_by_adj_pval <- function(
   output_list <- list()
   result <- foreach::foreach(i = 1:nrow(matrix), 
                     .options.snow=opts) %dopar% {
-                      vector <- c(rep(NA, nrow(matrix)))
+                      vector <- rep(NA, nrow(matrix))
                       for (j in i:nrow(matrix)){
                         x <- matrix[i,]
                         y <- matrix[j,]
@@ -69,18 +69,30 @@ get_filtered_corMat_by_adj_pval <- function(
   
   padj_mat <- matrix(0, nrow(matrix), nrow(matrix))
   padj_mat[upper.tri(padj_mat, diag=FALSE)] <- adj_pval_vec
+  rownames(padj_mat) <- colnames(padj_mat) <- rownames(matrix)
   
-  
-  final_padj_mat <- Matrix::forceSymmetric(padj_mat)
-  colnames(final_padj_mat) <- rownames(final_padj_mat) <- rownames(matrix)
-  
-  MASK <- ifelse(final_padj_mat < pth, TRUE, FALSE)
+  # final_padj_mat <- Matrix::forceSymmetric(padj_mat)
+  # colnames(final_padj_mat) <- rownames(final_padj_mat) <- rownames(matrix)
+  # 
+  # MASK <- ifelse(final_padj_mat < pth, TRUE, FALSE)
   
   message(paste('Constructing correlation matrix (method: ', cor_method, ') ...'))
   cor_mat <- stats::cor(t(input_matrix), method = cor_method)
+  rownames(cor_mat) <- colnames(cor_mat) <- rownames(matrix)
+  tri_idx <- which(upper.tri(cor_mat), arr.ind = TRUE)
+  
+  cor_network_df <- data.frame(
+    source = rownames(cor_mat)[tri_idx[, 1]],
+    dest   = colnames(cor_mat)[tri_idx[, 2]],
+    weight = cor_mat[tri_idx],
+    adj_pval = padj_mat[tri_idx]
+  )
   
   message(paste('Filtering correlation matrix by adjusted p-value matrix ...'))
-  filtered_corMat_by_padj <- base::replace(cor_mat, !MASK, 0)
-  return(filtered_corMat_by_padj)
+  # filtered_corMat_by_padj <- base::replace(cor_mat, !MASK, 0)
+  cor_network_df <- cor_network_df %>% 
+    dplyr::filter(adj_pval < pth)
+  
+  return(cor_network_df)
 }
 

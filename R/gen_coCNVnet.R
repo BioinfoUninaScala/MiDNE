@@ -29,16 +29,7 @@ gen_coCNVnet <- function(
   
   coamp <- fisher_test_post_hoc(matrix = amp_mat, cpu = cpu, correction_method,  pth = pth)
   codel <- fisher_test_post_hoc(matrix = del_mat, cpu = cpu, correction_method,  pth = pth)
-  net_matrix <- list('coamp' = coamp, 'codel' = codel)
+  network <- list('coamp' = coamp, 'codel' = codel)
   
-  result <- list()
-  for (mat_name in names(net_matrix)) {
-    res_mat <- as.matrix(net_matrix[[mat_name]])
-    network <- get_adjList(res_mat)
-    network <- network %>% dplyr::mutate_if(is.factor, as.character)
-    if (nrow(network) > 0){
-      result[[mat_name]] <- network
-    }
-  }
- return(result) 
+ return(network) 
 }

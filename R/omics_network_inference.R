@@ -24,11 +24,11 @@ omics_network_inference <- function(omics_matrix,
   if (omics_type == 'Transcriptomics'){
     result <- gen_coExpressionNet(omics_matrix = omics_matrix,
                                   correction_method = correction_method,
-                                  cpu = cpu)
+                                  cpu = cpu, pth = pth)
   } else if (omics_type == 'Proteomics'){
     result <- gen_coAbundanceNet(omics_matrix = omics_matrix,
                                  correction_method = correction_method,
-                                 cpu = cpu)
+                                 cpu = cpu, pth = pth)
   } else if (omics_type == 'Epigenomics'){
     result <- gen_coDNAmethNet(omics_matrix = omics_matrix, 
                                correction_method = correction_method, 

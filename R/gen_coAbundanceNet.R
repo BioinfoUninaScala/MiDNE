@@ -16,13 +16,12 @@ gen_coAbundanceNet <- function(
                                   pth = 0.05
                                   )
 {
-  net_matrix <- get_filtered_corMat_by_adj_pval(input_matrix = omics_matrix, 
+  network <- get_filtered_corMat_by_adj_pval(input_matrix = omics_matrix, 
                                                 cpu = cpu,
                                                 cor_method = 'spearman', 
                                                 adj_method = correction_method,
                                                 pth = pth
                                                 )
-  network <- get_adjList(net_matrix)
-  result <- network %>% dplyr::mutate_if(is.factor, as.character)
+  result <- network %>% tibble::as_tibble()
   return(result)
 }
