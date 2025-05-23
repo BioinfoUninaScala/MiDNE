@@ -337,9 +337,9 @@ isMultiplexHet <- function (x)
 ## Add missing nodes in some of the layers.
 add.missing.nodes <- function (Layers,Nr_Layers,NodeNames) {
   
-  add_vertices(Layers,
-               length(NodeNames[which(!NodeNames %in% V(Layers)$name)]),
-               name=NodeNames[which(!NodeNames %in%  V(Layers)$name)])
+  igraph::add_vertices(Layers,
+               length(NodeNames[which(!NodeNames %in%  igraph::V(Layers)$name)]),
+               name=NodeNames[which(!NodeNames %in%   igraph::V(Layers)$name)])
 }
 
 
@@ -354,13 +354,13 @@ create.multiplex <- function(LayersList,...)
   Number_of_Layers <- length(LayersList)
   SeqLayers <- seq(Number_of_Layers)
   
-  if (!all(sapply(SeqLayers, function(x) is.igraph(LayersList[[x]])))){
+  if (!all(sapply(SeqLayers, function(x) igraph::is.igraph(LayersList[[x]])))){
     stop("Not igraph objects")
   }
   
   ## We get a pool of nodes (Nodes in any of the layers.)
   Pool_of_Nodes <-
-    sort(unique(unlist(lapply(SeqLayers, function(x) V(LayersList[[x]])$name))))
+    sort(unique(unlist(lapply(SeqLayers, function(x) igraph::V(LayersList[[x]])$name))))
   
   if (is.numeric(Pool_of_Nodes)){
     Pool_of_Nodes <- sort(as.numeric(Pool_of_Nodes))
@@ -440,7 +440,7 @@ create.multiplexHet  <- function(MultiObject1, MultiObject2,
 get.bipartite.graph <- function(Names_Mul1, Names_Mul2, BipartiteNetwork,
                                 Number_Nodes_1,Number_Nodes_2){
   
-  Bipartite_matrix <- Matrix(data=0, nrow=Number_Nodes_1, ncol=Number_Nodes_2)
+  Bipartite_matrix <- Matrix::Matrix(data=0, nrow=Number_Nodes_1, ncol=Number_Nodes_2)
   Names_Mul1_order <- sort(Names_Mul1)
   Names_Mul2_order <- sort(Names_Mul2)
   rownames(Bipartite_matrix) <- Names_Mul1_order
@@ -487,7 +487,7 @@ get.transition.multiplex1.multiplex2 <-
            Number_Layers2, SupraBipartiteMatrix,lambda){
     
     TransitionMat_Multiplex1_Multiplex2 <-
-      Matrix(0, nrow=Number_Nodes_Multiplex1*Number_Layers1,
+      Matrix::Matrix(0, nrow=Number_Nodes_Multiplex1*Number_Layers1,
              ncol=Number_Nodes_Multiplex2*Number_Layers2,sparse = TRUE)
     
     colnames(TransitionMat_Multiplex1_Multiplex2) <-
@@ -512,7 +512,7 @@ get.transition.multiplex2.multiplex1 <-
            Number_Layers2,SupraBipartiteMatrix,lambda){
     
     TransitionMat_Multiplex2_Multiplex1 <-
-      Matrix(0,nrow=Number_Nodes_Multiplex2*Number_Layers2,
+      Matrix::Matrix(0,nrow=Number_Nodes_Multiplex2*Number_Layers2,
              ncol=Number_Nodes_Multiplex1*Number_Layers1,sparse = TRUE)
     
     colnames(TransitionMat_Multiplex2_Multiplex1) <-
@@ -537,7 +537,7 @@ get.transition.multiplex <-
            SupraBipartiteMatrix) {
     
     Transition_Multiplex_Network <-
-      Matrix(0, nrow=Number_Nodes*Number_Layers,
+      Matrix::Matrix(0, nrow=Number_Nodes*Number_Layers,
              ncol=Number_Nodes*Number_Layers,sparse = TRUE)
     
     rownames(Transition_Multiplex_Network) <- rownames(SupraAdjacencyMatrix)

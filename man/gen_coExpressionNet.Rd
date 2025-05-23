@@ -4,7 +4,12 @@
 \alias{gen_coExpressionNet}
 \title{Generate co-expression network}
 \usage{
-gen_coExpressionNet(omics_matrix, correction_method = NULL, cpu = 1)
+gen_coExpressionNet(
+  omics_matrix,
+  correction_method = NULL,
+  cpu = 1,
+  pth = 0.05
+)
 }
 \arguments{
 \item{omics_matrix}{A matrix of dimensions genes X samples representing transcriptomics data.}
@@ -12,6 +17,8 @@ gen_coExpressionNet(omics_matrix, correction_method = NULL, cpu = 1)
 \item{correction_method}{The method used to correct the p-value of the statistical test (either "bonferroni" or "fdr").}
 
 \item{cpu}{The number of cores to use for parallel processing.}
+
+\item{pth}{A numeric value, ranging from 0 and 1, that will be applied to the p-value of Pearson Correlation test.}
 }
 \value{
 An undirected co-expression network, represented as a 3-column table (source, dest, weight).

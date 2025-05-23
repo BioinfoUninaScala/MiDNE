@@ -9,7 +9,8 @@ omics_network_inference(
   omics_type = NULL,
   correction_method = NULL,
   th = NA,
-  cpu = 1
+  cpu = 1,
+  pth = 0.05
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ omics_network_inference(
 \item{th}{a numeric value to binarize a DNA methylation matrix (expressed as beta-values).}
 
 \item{cpu}{number of cores to work in parallel.}
+
+\item{pth}{A numeric value, ranging from 0 and 1, that will be applied to the p-value of the Fisher's Exact Test and of post-hoc analysis.}
 }
 \value{
 an undirected biological network, defined as a 3-columns table (source, dest, weight).

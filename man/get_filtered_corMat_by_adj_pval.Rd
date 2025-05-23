@@ -11,6 +11,8 @@
 \item{adj_method}{The method used to correct the p-value (either "bonferroni" or "fdr").}
 
 \item{cpu}{The number of cores to use for parallel processing.}
+
+\item{pth}{A numeric value, ranging from 0 and 1, that will be applied to the p-value of Pearson Correlation test.}
 }
 \value{
 A gene X gene correlation matrix, filtered by a corrected p-value lower than 0.05.
