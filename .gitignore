@@ -5,3 +5,8 @@
 inst/doc
 /doc/
 /Meta/
+GDCdata/
+MANIFEST.txt
+df.rds
+results.rds
+versions.yml

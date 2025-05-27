@@ -62,7 +62,7 @@ Imports:
     wordspace,
     zip
 Remotes: 
-Suggests: knitr, rmarkdown, qpdf
+Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
