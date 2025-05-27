@@ -21,6 +21,12 @@ install_github("BioinfoUninaScala/MiDNE",
 ```
 ----------
 
+### MiDNE shiny
+
+The MiDNE pipeline is also implemented as a user-friendly shiny app, available both in MoNETA package and as docker image (https://hub.docker.com/r/bioinfouninascala/midne). <br/>
+
+----------
+
 ## Code and data
 ### 📂 `R/` — Code Directory
 **0. Load example files and networks**
