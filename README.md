@@ -27,6 +27,22 @@ The MiDNE pipeline is also implemented as a user-friendly shiny app, available b
 
 ----------
 
+#### MiDNE docker image
+To pull the docker image, run in the terminal:
+```
+$ docker pull bioinfouninascala/midne
+```
+
+To run the docker image, map http port 3838 on the host port 8585:
+```
+$ docker run --rm -p 8585:3838 bioinfouninascala/midne
+```
+
+Finally, use v shiny in a browser by typing http://localhost:8585 (if you are on a local machine) or https://server_name:8585 (if you are on a server machine).
+<br/>
+
+----------
+
 ## Code and data
 ### 📂 `R/` — Code Directory
 **0. Load example files and networks**
