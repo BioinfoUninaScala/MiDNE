@@ -84,11 +84,55 @@ plot_traceback <- function(traceback_RES) {
   
   ggplot2::ggplot(f_res, aes(x = layer, y = proximity_signed, fill = layer)) +
     ggplot2::geom_bar(stat = "identity") +
-    ggplot2::facet_wrap(~ pair, scales = "free") +
+    ggplot2::facet_wrap(~ pair, scales = "free_y") +
     ggplot2::labs(x = "Layer", y = "Signed proximity", fill = "Layer",
                   title = "RWR proximity: direct vs. reverse transitions") +
     ggplot2::theme_bw() +
     ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
     ggplot2::geom_hline(yintercept = 0, color = "black")
 }
+
+
+
+#' Traceback a node-node association
+#'
+#' @name gen_traceback_net
+#' @param traceback_RES Output of 'traceback_link()'
+#' @return A network showing the links between the input nodes for each omics layer.
+#' @export
+
+gen_traceback_net <- function(traceback_RES){
+  
+  layers <- unique(traceback_RES$layer)
+  nlayers <- length(unique(traceback_RES$layer))
+  layer_colors <- RColorBrewer::brewer.pal(nlayers, 'Set2')
+  names(layer_colors) <- layers
+  
+  edges <- traceback_RES %>%
+    filter(proximity > 0) %>% 
+    mutate(
+      from = str_remove(source, "_.*$"),
+      to   = str_remove(target, "_.*$"),
+      width = proximity * 100,
+      color = layer_colors[as.character(layer)]  
+    ) %>%
+    select(from, to, width, color, layer)
+  
+  nodes <- unique(c(edges$from, edges$to)) %>%
+    tibble::tibble(id = .) %>%
+    mutate(label = id)
+  
+  
+  visNetwork::visNetwork(nodes, edges) %>%
+    visNetwork::visEdges(arrows = "to") %>%
+    visNetwork::visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+    visNetwork::visLegend(addEdges = data.frame(label = names(layer_colors),
+                                                color = layer_colors),
+              useGroups = FALSE) %>%
+    visNetwork::visPhysics(enabled = FALSE)  %>% 
+    visNetwork::visLayout(randomSeed = 42)
+  
+}
+
+
 

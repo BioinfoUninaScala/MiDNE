@@ -114,7 +114,6 @@ gen_sim_mat_MH <- function(network1, network2,                                  
     Layers_list[[i]] <- Layers
     i = i + 1
   }
-  
   ## In case the network is monoplex, we have to be aware of isolated nodes.
   IsolatedVertex1 = NULL
   if (Number_Layers1 == 1){
@@ -205,6 +204,7 @@ gen_sim_mat_MH <- function(network1, network2,                                  
   f_numberNodes <- length(f_Allnodes)
   
   message("Computing RWR for every network node ...")
+
   
   cl <- snow::makeCluster(cores)
   doSNOW::registerDoSNOW(cl)
@@ -233,7 +233,6 @@ gen_sim_mat_MH <- function(network1, network2,                                  
   close(pb)
   snow::stopCluster(cl)
 
-  
   
   ##############################################################################
   #               Generation of the output RWR_MH Similarity Matrix            #
@@ -352,9 +351,9 @@ add.missing.nodes <- function (Layers,Nr_Layers,NodeNames) {
 #create.multiplex.default <- function(LayersList,...)
 create.multiplex <- function(LayersList,...)
 {
-  
   Number_of_Layers <- length(LayersList)
   SeqLayers <- seq(Number_of_Layers)
+  names_of_Layers <- names(LayersList)
   
   if (!all(sapply(SeqLayers, function(x) igraph::is.igraph(LayersList[[x]])))){
     stop("Not igraph objects")
@@ -376,9 +375,12 @@ create.multiplex <- function(LayersList,...)
     lapply(LayersList, add.missing.nodes,Number_of_Layers,Pool_of_Nodes)
   
   
-  MultiplexObject <- c(Layer_List,list(Pool_of_Nodes=Pool_of_Nodes,
-                                       Number_of_Nodes_Multiplex=Number_of_Nodes,
-                                       Number_of_Layers=Number_of_Layers))
+  MultiplexObject <- c(Layer_List,
+                       list(Pool_of_Nodes=Pool_of_Nodes,
+                            Number_of_Nodes_Multiplex=Number_of_Nodes,
+                            Number_of_Layers=Number_of_Layers,
+                            Names_of_Layers= names_of_Layers
+                            ))
   
   class(MultiplexObject) <- "Multiplex"
   
@@ -415,9 +417,11 @@ create.multiplexHet  <- function(MultiObject1, MultiObject2,
   ## Multiplex graph features
   NumberNodes1 <- MultiObject1$Number_of_Nodes
   NumberLayer1 <- MultiObject1$Number_of_Layers
+  NamesLayers1 <- MultiObject1$Names_of_Layers
   
   NumberNodes2 <- MultiObject2$Number_of_Nodes
   NumberLayer2 <- MultiObject2$Number_of_Layers
+  NamesLayers2 <- MultiObject2$Names_of_Layers
   
   message("Generating bipartite matrix ...")
   Bipartite_Matrix <-
@@ -425,8 +429,9 @@ create.multiplexHet  <- function(MultiObject1, MultiObject2,
                         NumberNodes2)
   
   message("Expanding bipartite matrix to fit the multiplex network ...")
-  Supra_Bipartite_Matrix <- expand.bipartite.graph(NumberNodes1,NumberLayer1,
-                                                   NumberNodes2,NumberLayer2,Bipartite_Matrix)
+  Supra_Bipartite_Matrix <- expand.bipartite.graph(NumberNodes1,NumberLayer1,NamesLayers1,
+                                                   NumberNodes2,NumberLayer2,NamesLayers2,
+                                                   Bipartite_Matrix)
   
   Multiplex_HetObject <- list(Multiplex1 = MultiObject1,
                               Multiplex2 = MultiObject2,
@@ -459,14 +464,14 @@ get.bipartite.graph <- function(Names_Mul1, Names_Mul2, BipartiteNetwork,
 
 ## Fitting the bipartite graph to the multiplex networks.
 expand.bipartite.graph <-
-  function(Number_Nodes_1,Number_Layers_1,Number_Nodes_2,
-           Number_Layers_2,Bipartite_matrix){
-    
+  function(Number_Nodes_1,Number_Layers_1,Names_Layers_1,
+           Number_Nodes_2,Number_Layers_2,Names_Layers_2,
+           Bipartite_matrix){
     Supra_Bipartite_Matrix <-
       do.call(rbind, replicate(Number_Layers_1,Bipartite_matrix,simplify=FALSE))
     
     rownames(Supra_Bipartite_Matrix) <-
-      paste0(rownames(Bipartite_matrix), sep="_",rep(seq(Number_Layers_1),
+      paste0(rownames(Bipartite_matrix), sep="_", rep(Names_Layers_1, #seq(Number_Layers_1), #
                                                      each=Number_Nodes_1))
     
     
@@ -475,7 +480,7 @@ expand.bipartite.graph <-
                                simplify=FALSE))
     
     colnames(Supra_Bipartite_Matrix) <-
-      paste0(colnames(Bipartite_matrix), sep="_",rep(seq(Number_Layers_2),
+      paste0(colnames(Bipartite_matrix), sep="_",rep(Names_Layers_2, seq(Number_Layers_2), #
                                                      each=Number_Nodes_2))
     
     return(Supra_Bipartite_Matrix)
@@ -498,10 +503,10 @@ get.transition.multiplex1.multiplex2 <-
       rownames(SupraBipartiteMatrix)
     
     Col_Sum_Bipartite <-
-      Matrix::colSums (SupraBipartiteMatrix, na.rm = FALSE, dims = 1,
+      Matrix::colSums(SupraBipartiteMatrix, na.rm = FALSE, dims = 1,
                        sparseResult = FALSE)
     
-    m <- lambda * t(t(SupraBipartiteMatrix) / Col_Sum_Bipartite)
+    m <- lambda * Matrix::t(Matrix::t(SupraBipartiteMatrix) / Col_Sum_Bipartite)
     idx <- Col_Sum_Bipartite != 0
     TransitionMat_Multiplex1_Multiplex2[,idx] = m[,idx]
     
@@ -554,10 +559,10 @@ get.transition.multiplex <-
     
     idx <- Row_Sum_Bipartite != 0
     Transition_Multiplex_Network[,idx] <-
-      ((1-lambda)*t(t(SupraAdjacencyMatrix[,idx])/Col_Sum_Multiplex[idx]))
+      ((1-lambda)*Matrix::t(Matrix::t(SupraAdjacencyMatrix[,idx])/Col_Sum_Multiplex[idx]))
     
     Transition_Multiplex_Network[,!idx] <-
-      t(t(SupraAdjacencyMatrix[,!idx]) / Col_Sum_Multiplex[!idx])
+      Matrix::t(Matrix::t(SupraAdjacencyMatrix[,!idx]) / Col_Sum_Multiplex[!idx])
     
     return(Transition_Multiplex_Network)
   }
@@ -592,6 +597,7 @@ compute_transition_matrix <- function(x, lambda = 0.5, delta1=0.5, delta2=0.5,
   SupraBipartiteMatrix <- x$BipartiteNetwork
   
   message("Computing adjacency matrix of the first input network ...")
+  
   AdjMatrix_Multiplex1 <- compute_adjacency_matrix2(x$Multiplex1, delta1, cond_jump1, jump_mat_nodes_1)
   norm_AdjMatrix_Multiplex1 <- normalize.multiplex.adjacency(AdjMatrix_Multiplex1)
   
@@ -645,7 +651,6 @@ compute_adjacency_matrix2 <- function(x, delta = 0.5, cond_jump = NULL, jump_mat
     stop("Delta should be between 0 and 1")
   }
   
-  
   N <- x$Number_of_Nodes_Multiplex
   L <- x$Number_of_Layers
   
@@ -672,15 +677,16 @@ compute_adjacency_matrix2 <- function(x, delta = 0.5, cond_jump = NULL, jump_mat
     Idem_Matrix <- Matrix::Diagonal(N, x = 1)
   }
   
-  counter <- 0
-  Layers_List <- lapply(x[Layers_Names], function(x){
+  
+  # counter <- 0
+  Layers_List <- lapply(Layers_Names, function(layer){
     
-    counter <<- counter + 1;
-    if (igraph::is_weighted(x)) {
-      Adjacency_Layer <- igraph::as_adjacency_matrix(x, sparse = TRUE,
+    # counter <<- counter + 1;
+    if (igraph::is_weighted(x[[layer]])) {
+      Adjacency_Layer <- igraph::as_adjacency_matrix(x[[layer]], sparse = TRUE,
                                                      attr = "weight")
     } else {
-      Adjacency_Layer <- igraph::as_adjacency_matrix(x, sparse = TRUE)
+      Adjacency_Layer <- igraph::as_adjacency_matrix(x[[layer]], sparse = TRUE)
     }
     
     if (is.numeric(base::rownames(Adjacency_Layer))){
@@ -692,9 +698,9 @@ compute_adjacency_matrix2 <- function(x, delta = 0.5, cond_jump = NULL, jump_mat
     }
     
     base::colnames(Adjacency_Layer) <-
-      paste0(base::colnames(Adjacency_Layer), "_", counter)
+      paste0(base::colnames(Adjacency_Layer), "_", layer)
     base::rownames(Adjacency_Layer) <-
-      paste0(base::rownames(Adjacency_Layer), "_", counter)
+      paste0(base::rownames(Adjacency_Layer), "_", layer)
     Adjacency_Layer
   })
   
@@ -741,8 +747,7 @@ normalize.multiplex.adjacency <- function(x)
   if (!is(x,"dgCMatrix")){
     stop("Not a dgCMatrix object of Matrix package")
   }
-  
-  Adj_Matrix_Norm <- t(t(x)/(Matrix::colSums(x, na.rm = FALSE, dims = 1,
+  Adj_Matrix_Norm <- Matrix::t(Matrix::t(x)/(Matrix::colSums(x, na.rm = FALSE, dims = 1,
                                              sparseResult = FALSE)))
   
   return(Adj_Matrix_Norm)
@@ -752,13 +757,13 @@ normalize.multiplex.adjacency <- function(x)
 
 #### Compute seed scores
 
-get.seed.scoresMultiplex <- function(Seeds, Number_Layers, tau) {
-  
+get.seed.scoresMultiplex <- function(Seeds, Number_Layers, Names_Layers, tau) {
+
   Nr_Seeds <- length(Seeds)
   
   Seeds_Seeds_Scores <- rep(tau / Nr_Seeds, Nr_Seeds)
   Seed_Seeds_Layer_Labeled <-
-    paste0(rep(Seeds, Number_Layers), sep = "_", rep(seq(Number_Layers),
+    paste0(rep(Seeds, Number_Layers), sep = "_", rep(Names_Layers, #seq(Number_Layers),
                                                      length.out = Nr_Seeds * Number_Layers, each = Nr_Seeds))
   
   Seeds_Score <- data.frame(Seeds_ID = Seed_Seeds_Layer_Labeled,
@@ -821,8 +826,11 @@ Random.Walk.Restart.MultiplexHet.default <-
     
     NumberLayers1 <- MultiplexHet_Object$Multiplex1$Number_of_Layers
     NumberNodes1 <- MultiplexHet_Object$Multiplex1$Number_of_Nodes_Multiplex
+    NamesLayers1 <- MultiplexHet_Object$Multiplex1$Names_of_Layers
+    
     NumberLayers2 <- MultiplexHet_Object$Multiplex2$Number_of_Layers
     NumberNodes2 <- MultiplexHet_Object$Multiplex2$Number_of_Nodes_Multiplex
+    NamesLayers2 <- MultiplexHet_Object$Multiplex2$Names_of_Layers
     
     All_nodes_Multiplex1 <- MultiplexHet_Object$Multiplex1$Pool_of_Nodes
     All_nodes_Multiplex2 <- MultiplexHet_Object$Multiplex2$Pool_of_Nodes
@@ -868,15 +876,19 @@ Random.Walk.Restart.MultiplexHet.default <-
     ## We compute the scores for the different seeds.
     if (Multiplex1_Multiplex2_Seeds %in% All_nodes_Multiplex1){
       NumberLayers = NumberLayers1
+      NamesLayers = NamesLayers1
       tau = tau1
     } else {
       NumberLayers = NumberLayers2
+      NamesLayers = NamesLayers2
       tau = tau2
     }
     
     Seeds_Score <-
-      get.seed.scoresMultiplex(Multiplex1_Multiplex2_Seeds, NumberLayers, 
-                               tau)
+      get.seed.scoresMultiplex(Seeds = Multiplex1_Multiplex2_Seeds, 
+                               Number_Layers = NumberLayers,
+                               Names_Layers = NamesLayers,
+                               tau = tau)
     
     ## We define the prox_vector(The vector we will move after the first
     ## RWR iteration. We start from The seed. We have to take in account

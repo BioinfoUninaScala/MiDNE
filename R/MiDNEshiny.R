@@ -18,6 +18,7 @@
 #' @export
 #' 
 
+
 MiDNEshiny = function(MAXreq = 10000) {
   options(shiny.maxRequestSize = MAXreq * 1024^2)
   shiny::shinyApp(ui, server)
@@ -60,7 +61,8 @@ ui <- shinydashboard::dashboardPage(
                                 shinydashboard::menuItem("Enrichment Analysis", icon = shiny::icon("fingerprint"),
                                                          shinydashboard::menuItem("Cluster2Pathway", tabName = "clupath_tab"),
                                                          shinydashboard::menuItem("Pathway2Clusters", tabName = "pathclu_tab")),
-                                shinydashboard::menuItem("Drug Discovery", tabName = "dd_tab", icon = shiny::icon("capsules"))
+                                shinydashboard::menuItem("Drug Discovery", tabName = "dd_tab", icon = shiny::icon("capsules")),
+                                shinydashboard::menuItem("Interpretability", tabName = "traceback_tab", icon = shiny::icon("magnifying-glass"))
     )
   ),
   
@@ -1132,8 +1134,46 @@ ui <- shinydashboard::dashboardPage(
                                                         )
                                                       )
                                                       
-                              )
+                              ),
+      
+                              shinydashboard::tabItem(tabName = "traceback_tab",
+                                                      # shiny::fluidRow(
+                                                      #   shiny::column(width = 6,
+                                                      #                 shiny::uiOutput('back2P11'))
+                                                      # ),
+                                                      
+                                                      shiny::fluidRow(
+                                                        shiny::column(width = 6,
+                                                                      shiny::fluidRow(
+                                                                        shiny::column(width=12,
+                                                                                      shiny::hr(),
+                                                                                      shiny::uiOutput('traceback_box')
+                                                                                      
+                                                                        )
+                                                                      )
+                                                      
+                                                      ),
+                                                      shiny::column(width=6,
+                                                                    shiny::fluidRow(
+                                                                      shiny::column(width=12,
+                                                                                    shiny::hr(),
+                                                                                    shinydashboard::infoBox(
+                                                                                      title = shiny::h3(shiny::span('Information', style = "font-weight: bold")),
+                                                                                      value = shiny::uiOutput('info_box_14'),
+                                                                                      subtitle = NULL,
+                                                                                      icon = shiny::icon("info"), color = "aqua", width = NULL,
+                                                                                      fill = FALSE)
+                                                                      )
+                                                                    )
+                                                      )
+                              ),
                               
+                              shiny::fluidRow(
+                                shiny::column(width=12,
+                                              shiny::uiOutput('traceback_box_plt')
+                                )
+                              )
+          )              
       )
     ),
     
@@ -1141,7 +1181,7 @@ ui <- shinydashboard::dashboardPage(
   
 )  
   
-  server <- function(input, output, session) {
+server <- function(input, output, session) {
     
     ############################################################################################
     #                            DATA: LOADING DATA (INPUT)                       #
@@ -2275,11 +2315,12 @@ ui <- shinydashboard::dashboardPage(
             layer_transition = omics_trans_mat, 
             
             jump_neighborhood = ifelse(input$omics_jump_neigh == 'YES', TRUE, FALSE),  
-            weighted_multiplex = ifelse(input$omics_weight_jump_neigh == 'YES', TRUE, FALSE),
+            weighted_multiplex = ifelse(input$omics_weight_jump_neigh == 'YES', TRUE, FALSE), 
             
             cores = input$cores_rwr)
           
-          
+            RWR_output$rwr_simMat <- rwr_simMat
+            
         } else {
           
           Summary <- list(
@@ -2335,7 +2376,8 @@ ui <- shinydashboard::dashboardPage(
             #weighted_multiplex_2 = ifelse(input$drug_weight_jump_neigh == 'YES', TRUE, FALSE), 
             weighted_multiplex_2 = FALSE, 
             
-            aggregation_method = 'Sum', get_completeRWRmat = FALSE,
+            aggregation_method = 'Sum', 
+            get_completeRWRmat = TRUE,
             no_seed_nodes = virtual_nodes,
             cores = input$cores_rwr)
           
@@ -2343,12 +2385,14 @@ ui <- shinydashboard::dashboardPage(
           # 
           # nofk_rwr_simMat <- pre_rwr_simMat[!(rownames(pre_rwr_simMat) %in% virtual_nodes),]
           # rwr_simMat <-  t(t(nofk_rwr_simMat)/colSums(nofk_rwr_simMat))
-         
+          
+          
+          RWR_output$rwr_simMat <- rwr_simMat$RWRMH_sim_mat
+          RWR_output$wholerwr_simMat <- rwr_simMat$wholeRWRMH_sim_mat
         }
         
         progress$inc(0.8, detail = paste("Creating summary file!"))
         
-        RWR_output$rwr_simMat <- rwr_simMat
         RWR_output$Summary <- Summary
         
         shinyalert::shinyalert(title = 'Success', type = 'success',closeOnClickOutside = TRUE,
@@ -6864,4 +6908,102 @@ ui <- shinydashboard::dashboardPage(
                                      selected = "pathclu_tab")
     })
     
-  }
+    
+    
+    ############################################################################################
+    #                                  INTERPRETABILITY   (OUTPUT)                             #
+    ############################################################################################
+    
+    output$info_box_14 <- shiny::renderText({
+      shiny::HTML("
+              <br/> <span style='font-weight:normal;'>
+              <p align='justify'>
+              Here, you can select node IDs from the integrated model to retrieve the corresponding proximity measures at the single-omics level. </span> <br/>
+              ")
+    })
+    
+    # wholerwr_simMat <- readRDS('/DATA/SCRATCH/aurora/MiDNE/GBM/toy_RWR_MH_mat.RDS')
+    # print(wholerwr_simMat[1:5,1:5])
+    # 
+    
+    output$traceback_box <- shiny::renderUI({
+      if (!is.null(shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat)){
+    
+        shinydashboard::box(title = shiny::h2(shiny::span("Interpret integrated associations", style = "font-weight: bold")), 
+                            width = 12, 
+                            solidHeader = FALSE, status = 'primary',
+                            shiny::selectizeInput("sel_nodes",
+                                                  'Select nodes to traceback associations for',
+                                                  choices = colnames(shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat), 
+                                                  multiple = TRUE),
+                            shiny::tags$hr(),
+                            shiny::actionButton('traceback_btn', 'Submit')
+                            )
+      }
+    })
+    
+    selected_nodes <- shiny::reactive({
+      input$sel_nodes
+    }) 
+    
+    shiny::observeEvent(input$traceback_btn, {
+      if (!is.null(shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat & length(selected_nodes()) > 0 )){
+
+        extended_RWR <- shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat
+        
+        selected_nodes <- selected_nodes()
+        pairs <- combn(selected_nodes, 2, simplify = FALSE)
+        
+        trace_res <- reactive(
+          traceback_link(extended_RWR = extended_RWR,
+                                    links_list = pairs, 
+                                    reverse = TRUE, 
+                                    cpu = 1)
+          )
+        
+        output$traceback_dt <- DT::renderDT({
+          
+          DT::datatable(trace_res(),
+                        extensions = 'Buttons',
+                        options = list(paging = TRUE,
+                                       pageLength = 15,
+                                       scrollX = TRUE,
+                                       scrollY = TRUE,
+                                       autoWidth = TRUE,
+                                       dom = "Blfrtip",
+                                       buttons = list("copy", list(
+                                         extend = "collection",
+                                         buttons = c("csv", "excel"),
+                                         text = "Download"
+                                       )
+                                       )
+                        ),
+                        selection = 'multiple',
+                        filter = 'top',
+                        rownames = FALSE
+          )
+        })
+        
+        output$traceback_plot_net <- visNetwork::renderVisNetwork({
+          gen_traceback_net(traceback_RES = trace_res())
+        })
+        
+        
+        output$traceback_box_plt <- shiny::renderUI({
+          
+            shinydashboard::box(title = shiny::h2(shiny::span("", style = "font-weight: bold")), 
+                                width = 12, 
+                                solidHeader = FALSE, status = 'primary',
+                                visNetwork::visNetworkOutput(outputId = "traceback_plot_net"),
+                                shiny::tags$hr(),
+                                DT::DTOutput(outputId = 'traceback_dt')
+            )
+        })
+        
+      }else{
+        message('The extended RWR matrix is not present!')
+      }
+    })   
+    
+    
+}
