@@ -2015,30 +2015,28 @@ server <- function(input, output, session) {
     annotation1 <- shiny::reactiveVal(NULL)
     shiny::observeEvent(input$load_anno_button1, {
       shiny::req(input$anno_file1)
+      listFiles <- list()
       
       if (input$rwr_anno_example_opt == 'No'){
-        listFiles <- list()
         inFiles <- input$anno_file1
         if (is.null(inFiles)){
           return(NULL)
         } else {
           ext <- tools::file_ext(inFiles$name)
-          new_name <- 'annotation1'
           file <- switch(ext,
                          csv = vroom::vroom(inFiles$datapath, delim = ","),
                          RDS = readRDS(inFiles$datapath),
                          shiny::validate("Invalid file; Please upload a .csv or .RDS file")
           )
           if (is.data.frame(file)){
-            listFiles[[new_name]] <- file
+            listFiles[['annotation1']] <- file
           }else {
             shinyalert::shinyalert("Type Error", "Uploaded Data is not a dataframe",closeOnClickOutside = TRUE, type = "error")
             returnValue()
           }
         }
       } else {
-        file_path <- system.file("extdata", "annotation", "all_genes_drugs_annotation.RDS", package = "MiDNE")
-        listFiles[['annotation1']] <- readRDS(file_path)
+        listFiles[['annotation1']] <- loadAnnot(annot_type = 'gene_drug')
       }
       
       annotation1(listFiles)
@@ -2348,6 +2346,8 @@ server <- function(input, output, session) {
             'Transition layers matrix (omics network)' = omics_trans_mat,
             'Transition layers matrix (drugs network)' = drugs_trans_mat
           )
+      
+          browser()
           
           virtual_nodes <- drug_multiplex[stringr::str_detect(drug_multiplex[[3]], 'v_'), 3][[1]]
           rwr_simMat_list <- gen_sim_mat_MH(
@@ -2387,8 +2387,8 @@ server <- function(input, output, session) {
           # rwr_simMat <-  t(t(nofk_rwr_simMat)/colSums(nofk_rwr_simMat))
           
           
-          RWR_output$rwr_simMat <- rwr_simMat$RWRMH_sim_mat
-          RWR_output$wholerwr_simMat <- rwr_simMat$wholeRWRMH_sim_mat
+          RWR_output$rwr_simMat <- rwr_simMat_list$RWRMH_sim_mat
+          RWR_output$wholerwr_simMat <- rwr_simMat_list$wholeRWRMH_sim_mat
         }
         
         progress$inc(0.8, detail = paste("Creating summary file!"))
@@ -2521,24 +2521,24 @@ server <- function(input, output, session) {
     
     loaded_simMat_Anno <- shiny::reactiveVal(NULL)
     shiny::observeEvent(input$load_anno_button2, {
+      listFiles <- list()
       
       if (input$example_simMat_anno == 'NO'){
       
         shiny::req(input$anno_file2)
-        listFiles <- list()
         inFiles <- input$anno_file2
+        
         if (is.null(inFiles)){
           return(NULL)
         } else {
           ext <- tools::file_ext(inFiles$name)
-          new_name <- 'annotation2'
           file <- switch(ext,
                          csv = vroom::vroom(inFiles$datapath, delim = ","),
                          RDS = readRDS(inFiles$datapath),
                          shiny::validate("Invalid file; Please upload a .csv or .RDS file")
           )
           if (is.data.frame(file)){
-            listFiles[[new_name]] <- file
+            listFiles[['annotation2']] <- file
           }else {
             shinyalert::shinyalert("Type Error", "Uploaded Data is not a dataframe.", closeOnClickOutside = TRUE, type = "error")
             returnValue()
@@ -2546,12 +2546,10 @@ server <- function(input, output, session) {
         }
         loaded_simMat_Anno(listFiles)
       }else{
-        listFiles <- list()
-        file_path <- system.file("extdata", "annotation", "all_genes_drugs_annotation.RDS", package = "MiDNE")
-        file <- readRDS(file_path)
-        listFiles[['annotation2']] <- file
-        loaded_simMat_Anno(listFiles)
+        listFiles[['annotation2']] <- loadAnnot(annot_type = 'gene_drug')
       }
+      
+      loaded_simMat_Anno(listFiles)
     })
     
     shiny::observeEvent(input$load_anno_button2, {
@@ -2930,7 +2928,7 @@ server <- function(input, output, session) {
       if (!is.null(manual_cluster())) {
         selected_cluster <- manual_cluster() %>% 
           dplyr::mutate('clust' = rep(1, nrow(.))) %>% 
-          dplyr::select(-c('selected_'))
+          dplyr::select(-c(selected_))
         clusters$manual_cluster <- selected_cluster
         print(selected_cluster)
         print('added!!!')
@@ -3001,7 +2999,7 @@ server <- function(input, output, session) {
       param <- if (shiny::isTruthy(input[[paste0(input$cluster_method, '_par')]])) input[[paste0(input$cluster_method, '_par')]] else NULL
       if (!is.null(shiny::reactiveValuesToList(clusters)[[paste0(input$cluster_method, '_', param)]]$cluster)){
         cluster <- shiny::reactiveValuesToList(clusters)[[paste0(input$cluster_method, '_', param)]]$cluster
-        clu_anno <- cluster %>% dplyr::arrange('clust')
+        clu_anno <- cluster %>% dplyr::arrange(clust)
         
       } else if (!is.null(shiny::reactiveValuesToList(clusters)$manual_cluster)) {
         cluster <- shiny::reactiveValuesToList(clusters)$manual_cluster
@@ -3068,9 +3066,9 @@ server <- function(input, output, session) {
           
           enrich_res <- enrich_analysis$result %>%
             dplyr::select('query', 'term_name', 'term_size', 'query_size', 'intersection_size', 'source', 'p_value') %>%
-            dplyr::group_by('query') %>%
+            dplyr::group_by(query) %>%
             dplyr::mutate_at('query', as.integer) %>% 
-            dplyr::arrange('query')
+            dplyr::arrange(query)
           message('Done!')
           
           
@@ -3099,11 +3097,10 @@ server <- function(input, output, session) {
         if (is.null(input$anno_source) & is.null( shiny::reactiveValuesToList(gProfiler_res))){
           return(NULL)
         }else{
-          
           pea_table <- shiny::reactiveValuesToList(gProfiler_res)[[input$select_peaTable]]
-          top_enrich_path <- pea_table %>%
+          top_enrich_path <- pea_table %>% 
               dplyr::filter(source %in% input$anno_source) %>%
-              dplyr::slice(which.min('p_value')) %>% ungroup()
+              dplyr::slice(which.min(p_value)) %>% ungroup()
           
           if (input$select_peaTable != 'manual_cluster'){
             top_anno <- shiny::reactiveValuesToList(clusters)[[input$select_peaTable]]$cluster %>%
@@ -3150,16 +3147,16 @@ server <- function(input, output, session) {
         pea_table <- shiny::reactiveValuesToList(gProfiler_res)[[input$select_peaTable2]]
         cl_table <- shiny::reactiveValuesToList(clusters)[[input$select_peaTable2]]
         
-        if (input$select_peaTable != 'manual_cluster'){
+        if (input$select_peaTable2 != 'manual_cluster'){
           gene_cluster <- cl_table$cluster %>%
             dplyr::mutate_at('clust', as.integer) %>%
             dplyr::select('id', 'clust') %>% 
-            dplyr::arrange('clust')
+            dplyr::arrange(clust)
         }else{
           gene_cluster <- cl_table %>%
             dplyr::mutate_at('clust', as.integer) %>%
             dplyr::select('id', 'clust') %>%
-            dplyr::arrange('clust')
+            dplyr::arrange(clust)
         }
         
         path_cluster <- pea_table %>%
@@ -3200,7 +3197,6 @@ server <- function(input, output, session) {
     
     
     drugs <- shiny::eventReactive(input$drug_button, {
-      
       #if (is.null( multiplex_drug_network()) | is.null(loaded_simMat_Anno()$annotation2) ) {
       #  return(NULL)
       #}else{ 
@@ -5393,7 +5389,7 @@ server <- function(input, output, session) {
           output$selected_data <- DT::renderDT({
             if (length(shiny::reactiveValuesToList(dr_output)) != 0){
               dat <- data_orig_list()$data_shared$data(withSelection = TRUE)
-              filtered_tab <- rstatix::filter(dat, 'selected_')
+              filtered_tab <- rstatix::filter(dat, selected_)
               
               DT::datatable(filtered_tab,
                             extensions = 'Buttons',
@@ -5816,7 +5812,7 @@ server <- function(input, output, session) {
               #shiny::isolate({
               cl_plot <- clu_anno %>% 
                 plotly::plot_ly(x = ~x, y = ~y, source = 'cl_plot',
-                                type = "scatter", color = 'clust',
+                                type = "scatter", color = ~clust,
                                 mode = "markers", 
                                 marker = list(size = 5)
                 ) %>%
@@ -5863,7 +5859,6 @@ server <- function(input, output, session) {
       shiny::isolate({
         
       if (length(shiny::reactiveValuesToList(clusters)$manual) != 0 ) {
-        
         var_x <- 'x'
         var_y <- 'y'
         
@@ -6013,10 +6008,10 @@ server <- function(input, output, session) {
         
         # display the selected data
         output$cl_selected_data <- DT::renderDT({
-          
+
             dat <- cl_data_orig_list()$data_shared$data(withSelection = TRUE)
             
-            filtered_tab <- rstatix::filter(dat, 'selected_')
+            filtered_tab <- rstatix::filter(dat, selected_)
             manual_cluster(filtered_tab)
             
             print(filtered_tab)
@@ -6145,7 +6140,7 @@ server <- function(input, output, session) {
       cl_method <- input$cluster_method
       param <- if (shiny::isTruthy(input[[paste0(cl_method, '_par')]])) input[[paste0(cl_method, '_par')]] else NULL
       if (!is.null(shiny::reactiveValuesToList(clusters)[[paste0(cl_method, '_', param)]]$cluster) ){
-        
+
         output$cl_table <- DT::renderDT(server = FALSE, {
           input$cl_btn
           shiny::isolate({
@@ -6566,7 +6561,7 @@ server <- function(input, output, session) {
       if (length(shiny::reactiveValuesToList(clusters)) == 0) {
         return(NULL)}
       shiny::isolate({
-        enriched_clusters <- path_annotation()$path_cluster %>% dplyr::filter('term_name' == input$pathway_selector) %>% dplyr::pull(., 'query')
+        enriched_clusters <- path_annotation()$path_cluster %>% dplyr::filter(term_name == input$pathway_selector) %>% dplyr::pull(., 'query')
         annotation_table <- path_annotation()$gene_cluster %>% dplyr::mutate(selected_pathway = ifelse(!(clust %in% enriched_clusters), 'FALSE', 'TRUE'))
         
         clusters <- shiny::reactiveValuesToList(clusters)
@@ -6694,6 +6689,7 @@ server <- function(input, output, session) {
     
     output$drug_cluster_selector <- shiny::renderUI({
       input$drug_button
+      
       shiny::isolate({
         if (length(drugs()) == 0 & length(shiny::reactiveValuesToList(clusters)) == 0){
           return(NULL)} 
@@ -6705,10 +6701,10 @@ server <- function(input, output, session) {
         } else {
           drug_cluster <- shiny::reactiveValuesToList(clusters)[[input$select_cluList2]]$cluster %>% 
             dplyr::mutate_if(is.factor, as.numeric) %>%
-            dplyr::filter(id %in% drugs()) %>% dplyr::select('clust') %>% unique(.) %>% sort(.)
+            dplyr::filter(id %in% drugs()) %>% dplyr::pull('clust') %>% unique(.) %>% sort(.)
           shiny::selectInput('cluster_selector',
                              'Select one cluster to highlight in the plot',
-                             choices = drug_cluster[[1]], selected = NULL)
+                             choices = drug_cluster, selected = NULL)
         }
       })
     })
@@ -6921,20 +6917,15 @@ server <- function(input, output, session) {
               Here, you can select node IDs from the integrated model to retrieve the corresponding proximity measures at the single-omics level. </span> <br/>
               ")
     })
-    
-    # wholerwr_simMat <- readRDS('/DATA/SCRATCH/aurora/MiDNE/GBM/toy_RWR_MH_mat.RDS')
-    # print(wholerwr_simMat[1:5,1:5])
-    # 
-    
+
     output$traceback_box <- shiny::renderUI({
       if (!is.null(shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat)){
-    
         shinydashboard::box(title = shiny::h2(shiny::span("Interpret integrated associations", style = "font-weight: bold")), 
                             width = 12, 
                             solidHeader = FALSE, status = 'primary',
                             shiny::selectizeInput("sel_nodes",
                                                   'Select nodes to traceback associations for',
-                                                  choices = colnames(shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat), 
+                                                  choices = colnames(shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat),
                                                   multiple = TRUE),
                             shiny::tags$hr(),
                             shiny::actionButton('traceback_btn', 'Submit')
@@ -6947,10 +6938,10 @@ server <- function(input, output, session) {
     }) 
     
     shiny::observeEvent(input$traceback_btn, {
-      if (!is.null(shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat & length(selected_nodes()) > 0 )){
+      if (!is.null(shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat) & length(selected_nodes()) > 0 ){
 
         extended_RWR <- shiny::reactiveValuesToList(RWR_output)$wholerwr_simMat
-        
+
         selected_nodes <- selected_nodes()
         pairs <- combn(selected_nodes, 2, simplify = FALSE)
         
