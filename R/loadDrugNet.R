@@ -19,7 +19,7 @@ loadDrugNet <- function(net_type = 'vn') {
   # Load the appropriate drug table
   if (net_type == 'vn') {
     drug_path <- system.file("extdata", "networks/pharmacological/FDAdrugs_net.csv", package = "MiDNE")
-    drug_net <- readr::read_delim(file = drug_path, delim = ',' )
+    drug_net <- readr::read_delim(file = drug_path, delim = ',', show_col_types = FALSE)
   }
   
   return(drug_net)
