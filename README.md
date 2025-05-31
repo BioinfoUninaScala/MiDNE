@@ -23,9 +23,14 @@ install_github("BioinfoUninaScala/MiDNE",
 
 ### MiDNE shiny
 
-The MiDNE pipeline is also implemented as a user-friendly shiny app, available both in MoNETA package and as docker image (https://hub.docker.com/r/bioinfouninascala/midne). <br/>
+The MiDNE pipeline is also implemented as a user-friendly shiny app, available both in MiDNE package and as docker image (https://hub.docker.com/r/bioinfouninascala/midne). <br/>
 
-----------
+#### MiDNE function
+In R, you can run:
+```r
+library(MiDNE)
+MiDNEshiny()
+```
 
 #### MiDNE docker image
 To pull the docker image, run in the terminal:
@@ -38,7 +43,7 @@ To run the docker image, map http port 3838 on the host port 8585:
 $ docker run --rm -p 8585:3838 bioinfouninascala/midne
 ```
 
-Finally, use v shiny in a browser by typing http://localhost:8585 (if you are on a local machine) or https://server_name:8585 (if you are on a server machine).
+Finally, use MiDNE shiny in a browser by typing http://localhost:8585 (if you are on a local machine) or https://server_name:8585 (if you are on a server machine).
 <br/>
 
 ----------
