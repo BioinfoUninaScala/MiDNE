@@ -5794,13 +5794,13 @@ server <- function(input, output, session) {
     })
     
     ############## plot cluster in 2D #############
-  
+    
     ##### SHARED OBJ
     cl_data_orig_list <- shiny::reactive({
       shiny::isolate({
         
-      if (length(shiny::reactiveValuesToList(clusters)$manual) != 0 ){
-    
+        if (length(shiny::reactiveValuesToList(clusters)$manual) != 0 ){
+          
           clusters <- shiny::reactiveValuesToList(clusters)
           clu_anno <- clusters$manual$cluster
           
@@ -5815,12 +5815,12 @@ server <- function(input, output, session) {
                       'var_y' = var_y,
                       'color_base' = color_base,
                       'color_select' = color_select))
+          
+        }else{
+          return(NULL)
+        }
         
-      }else{
-        return(NULL)
-      }
-      
-    })
+      })
     })
     
     output$cl_plot_box <- shiny::renderUI({
@@ -5863,11 +5863,41 @@ server <- function(input, output, session) {
               
               cl_plot <- cl_plot %>%
                 plotly::ggplotly(source = "cl_plot") %>%
-                plotly::event_register("plotly_brushing") %>%
-                plotly::event_register("plotly_relayout") %>%
-                plotly::event_register("plotly_restyle")
+                event_register(event = "plotly_selected") %>%
+                highlight(on = "plotly_selected", off = "plotly_doubleclick", color = "red", persistent = FALSE)           
               
               to_update(TRUE)
+              
+              ### add selection 
+              
+              observeEvent(event_data("plotly_selected", source = "cl_plot"),{
+                
+                dt <- plotly::event_data("plotly_selected", source = 'cl_plot')
+                if(is.null(dt)){return(NULL)} else  dt <- as.data.frame(dt)
+                clu_anno <- clusters[[paste0(input$cluster_method, '_', param)]]$cluster %>% dplyr::arrange(clust)
+                dt1 <- dt %>% left_join(., clu_anno, by = c("x" = "x", "y" = "y")) %>% dplyr::select(id,x,y, clust)
+                
+                dt2 <- DT::datatable(dt1,
+                                     extensions = 'Buttons',
+                                     options = list(dom = "Blfrtip",
+                                                    buttons = list("copy",
+                                                                   list(extend = 'csv',   filename =  paste("MiDNE", input$cluster_method, 'table',sep = "_")),
+                                                                   list(extend = 'excel', filename =  paste("MiDNE", input$cluster_method, 'table',sep = "_"))
+                                                    ),
+                                                    paging = TRUE,
+                                                    pageLength = 10,
+                                                    scrollX = TRUE,
+                                                    scrollY = TRUE,
+                                                    autoWidth = TRUE
+                                     ),
+                                     selection = 'multiple',
+                                     filter = 'top',
+                                     rownames = FALSE
+                )
+                
+                output$cl_selected_data <- DT::renderDT({dt2})
+                
+              })
               
               return(cl_plot)
               #})
@@ -5878,7 +5908,6 @@ server <- function(input, output, session) {
         }
       })
     })
-    
   
     manual_cluster <- shiny::reactiveVal()
     output$manual_cl_plot_box <- shiny::renderUI({
@@ -5936,9 +5965,8 @@ server <- function(input, output, session) {
             
             manual_cl_plot <- manual_cl_plot %>%
               plotly::ggplotly(source = "manual_cl_plot") %>%
-              plotly::event_register("plotly_brushing") %>%
-              plotly::event_register("plotly_relayout") %>%
-              plotly::event_register("plotly_restyle")
+              event_register(event = "plotly_selected") %>%
+              highlight(on = "plotly_selected", off = "plotly_doubleclick", color = "red", persistent = FALSE)      
             
             to_update(TRUE)
             
@@ -5948,121 +5976,121 @@ server <- function(input, output, session) {
         })
         
       
-        ######################## BRUSHING ################################
-        
-        shiny::observe({
-          brush <- plotly::event_data("plotly_brushing", source = 'manual_cl_plot')
-          #print(paste('brush:', brush))
-          
-          # if the brush is undefined, remove all shapes and exit
-          if (is.null(brush)) {
-            plotly::plotlyProxy("manual_cl_plot", session) %>%
-              plotly::plotlyProxyInvoke("relayout", list(shapes = NULL))
-            return()
-          }
-          
-          # mimc the brush as a rect shape
-          brush_rect <- list(
-            type = "rect",
-            x0 = brush$x[1],
-            x1 = brush$x[2],
-            y0 = brush$y[1],
-            y1 = brush$y[2],
-            fillcolor = NA,
-            line = list(
-              color = "black",
-              dash = "dot",
-              width = 1
-            )
-          )
-          #print(paste('brush_rect:', brush_rect))
-          
-          # draw the rect shape and turn off brush coloring
-          # imposed by plotly.js
-          plotly::plotlyProxy("manual_cl_plot", session) %>%
-            plotly::plotlyProxyInvoke("relayout", list(shapes = list(brush_rect))) %>%
-            plotly::plotlyProxyInvoke("restyle", "selectedpoints", list(list()))
-        })
-        
-        # A reactive value that tracks the dimensions of the brush
-        brush <- shiny::reactiveVal()
-        shiny::observe({
-          evt <- plotly::event_data(event = "plotly_relayout", source = 'manual_cl_plot')
-          #print(paste('evt:', evt))
-          
-          val <- if (!is.null(evt$shapes)) {
-            evt$shapes
-          } else if (!is.null(evt[["shapes[0].x0"]])) {
-            list(
-              x0 = evt[["shapes[0].x0"]],
-              x1 = evt[["shapes[0].x1"]],
-              y0 = evt[["shapes[0].y0"]],
-              y1 = evt[["shapes[0].y1"]]
-            )
-          }
-          brush(val)
-        })
-        
-        
-        # map the brush limits to a data selection
-        shiny::observe({
-          # if brush isn't active, no selection is active
-          if (is.null(brush())) {
-            cl_data_orig_list()$data_shared$selection(FALSE)
-            return()
-          }
-          
-          data_orig <- cl_data_orig_list()$data_shared$origData()
-          var_x <- cl_data_orig_list()$var_x
-          var_y <- cl_data_orig_list()$var_y
-          
-          selection <- data.table::between(data_orig[[var_x]], brush()$x0, brush()$x1) &
-            data.table::between(data_orig[[var_y]], brush()$y0, brush()$y1)
-          #print(paste('selection:', selection))
-          
-          cl_data_orig_list()$data_shared$selection(selection)
-        })
-        
-        # update the marker colors
-        shiny::observe({
-          dat <- cl_data_orig_list()$data_shared$data(withSelection = TRUE)
-          color_select <- cl_data_orig_list()$color_select
-          color_base<- cl_data_orig_list()$color_base
-          
-          color <- dplyr::if_else(dat$selected_, color_select, color_base)
-          plotly::plotlyProxy(outputId = "manual_cl_plot", session) %>%
-            plotly::plotlyProxyInvoke("restyle", "marker.color", list(color), 0)
-        })
-        
-        # display the selected data
-        output$cl_selected_data <- DT::renderDT({
-
-            dat <- cl_data_orig_list()$data_shared$data(withSelection = TRUE)
-            
-            filtered_tab <- rstatix::filter(dat, selected_)
-            manual_cluster(filtered_tab)
-            
-            print(filtered_tab)
-            
-            DT::datatable(filtered_tab,
-                          extensions = 'Buttons',
-                          options = list(dom = "Blfrtip",
-                                         buttons = list("copy",
-                                                        list(extend = 'csv',   filename =  paste("MiDNE", input$cluster_method, 'table',sep = "_")),
-                                                        list(extend = 'excel', filename =  paste("MiDNE", input$cluster_method, 'table',sep = "_"))
-                                         ),
-                                         paging = TRUE,
-                                         pageLength = 10,
-                                         scrollX = TRUE,
-                                         scrollY = TRUE,
-                                         autoWidth = TRUE
-                          ),
-                          selection = 'multiple',
-                          filter = 'top',
-                          rownames = FALSE
-            )
-            
-        })
+        # ######################## BRUSHING ################################
+        # 
+        # shiny::observe({
+        #   brush <- plotly::event_data("plotly_brushing", source = 'manual_cl_plot')
+        #   #print(paste('brush:', brush))
+        #   
+        #   # if the brush is undefined, remove all shapes and exit
+        #   if (is.null(brush)) {
+        #     plotly::plotlyProxy("manual_cl_plot", session) %>%
+        #       plotly::plotlyProxyInvoke("relayout", list(shapes = NULL))
+        #     return()
+        #   }
+        #   
+        #   # mimc the brush as a rect shape
+        #   brush_rect <- list(
+        #     type = "rect",
+        #     x0 = brush$x[1],
+        #     x1 = brush$x[2],
+        #     y0 = brush$y[1],
+        #     y1 = brush$y[2],
+        #     fillcolor = NA,
+        #     line = list(
+        #       color = "black",
+        #       dash = "dot",
+        #       width = 1
+        #     )
+        #   )
+        #   #print(paste('brush_rect:', brush_rect))
+        #   
+        #   # draw the rect shape and turn off brush coloring
+        #   # imposed by plotly.js
+        #   plotly::plotlyProxy("manual_cl_plot", session) %>%
+        #     plotly::plotlyProxyInvoke("relayout", list(shapes = list(brush_rect))) %>%
+        #     plotly::plotlyProxyInvoke("restyle", "selectedpoints", list(list()))
+        # })
+        # 
+        # # A reactive value that tracks the dimensions of the brush
+        # brush <- shiny::reactiveVal()
+        # shiny::observe({
+        #   evt <- plotly::event_data(event = "plotly_relayout", source = 'manual_cl_plot')
+        #   #print(paste('evt:', evt))
+        #   
+        #   val <- if (!is.null(evt$shapes)) {
+        #     evt$shapes
+        #   } else if (!is.null(evt[["shapes[0].x0"]])) {
+        #     list(
+        #       x0 = evt[["shapes[0].x0"]],
+        #       x1 = evt[["shapes[0].x1"]],
+        #       y0 = evt[["shapes[0].y0"]],
+        #       y1 = evt[["shapes[0].y1"]]
+        #     )
+        #   }
+        #   brush(val)
+        # })
+        # 
+        # 
+        # # map the brush limits to a data selection
+        # shiny::observe({
+        #   # if brush isn't active, no selection is active
+        #   if (is.null(brush())) {
+        #     cl_data_orig_list()$data_shared$selection(FALSE)
+        #     return()
+        #   }
+        #   
+        #   data_orig <- cl_data_orig_list()$data_shared$origData()
+        #   var_x <- cl_data_orig_list()$var_x
+        #   var_y <- cl_data_orig_list()$var_y
+        #   
+        #   selection <- data.table::between(data_orig[[var_x]], brush()$x0, brush()$x1) &
+        #     data.table::between(data_orig[[var_y]], brush()$y0, brush()$y1)
+        #   #print(paste('selection:', selection))
+        #   
+        #   cl_data_orig_list()$data_shared$selection(selection)
+        # })
+        # 
+        # # update the marker colors
+        # shiny::observe({
+        #   dat <- cl_data_orig_list()$data_shared$data(withSelection = TRUE)
+        #   color_select <- cl_data_orig_list()$color_select
+        #   color_base<- cl_data_orig_list()$color_base
+        #   
+        #   color <- dplyr::if_else(dat$selected_, color_select, color_base)
+        #   plotly::plotlyProxy(outputId = "manual_cl_plot", session) %>%
+        #     plotly::plotlyProxyInvoke("restyle", "marker.color", list(color), 0)
+        # })
+        # 
+        # # display the selected data
+        # output$cl_selected_data <- DT::renderDT({
+        # 
+        #     dat <- cl_data_orig_list()$data_shared$data(withSelection = TRUE)
+        #     
+        #     filtered_tab <- rstatix::filter(dat, selected_)
+        #     manual_cluster(filtered_tab)
+        #     
+        #     print(filtered_tab)
+        #     
+        #     DT::datatable(filtered_tab,
+        #                   extensions = 'Buttons',
+        #                   options = list(dom = "Blfrtip",
+        #                                  buttons = list("copy",
+        #                                                 list(extend = 'csv',   filename =  paste("MiDNE", input$cluster_method, 'table',sep = "_")),
+        #                                                 list(extend = 'excel', filename =  paste("MiDNE", input$cluster_method, 'table',sep = "_"))
+        #                                  ),
+        #                                  paging = TRUE,
+        #                                  pageLength = 10,
+        #                                  scrollX = TRUE,
+        #                                  scrollY = TRUE,
+        #                                  autoWidth = TRUE
+        #                   ),
+        #                   selection = 'multiple',
+        #                   filter = 'top',
+        #                   rownames = FALSE
+        #     )
+        #     
+        # })
         
         return(
           
