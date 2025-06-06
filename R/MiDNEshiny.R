@@ -1191,7 +1191,7 @@ server <- function(input, output, session) {
       shiny::HTML("<br/> <span style='font-weight:normal;'>
             <p align='justify'>
             Welcome to the MiDNE Shiny app, an R package for network-based multi-omics and drug data integration.<br/>
-            You can start the pipeline by uploading omics matrices and drug files on the following page,
+            You can start MiDNE pipeline by uploading omics matrices and drug files on the following page,
             or click one of the two <b>buttons</b> in the top left-hand corner to proceed. </span> <br/>
             </p>
             <hr style='border-top: 1px solid white;'>
