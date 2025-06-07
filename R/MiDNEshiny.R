@@ -1204,7 +1204,7 @@ server <- function(input, output, session) {
 
             <b>Use Example Dataset</b>: <br/>  <span style='font-weight:normal;'>
              <p align='justify'>
-            Alternatively, you can upload the example dataset consisting of four omic matrices of BRCA patients,
+            Alternatively, you can upload the example dataset consisting of four omic matrices of TCGA-BRCA patients,
             including transcriptomics, proteomics, epigenomics, and SCNVs data. </span> </span>
             </p>
             <hr style='border-top: 1px solid white;'>
