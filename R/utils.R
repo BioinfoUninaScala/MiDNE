@@ -4,6 +4,7 @@
 
 
 # get_adj_list <- function(adj_mat, th){
+#
 #    # -------------------------------------------------------------------------
 #    #  This function outputs an adjacency list given an adjacency matrix and
 #    #  a double as cut-off.
