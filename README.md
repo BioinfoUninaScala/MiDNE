@@ -132,7 +132,7 @@ This tool is currently in beta. It is still under active development and may con
 By using this beta version, you acknowledge and agree that:
 The tool is provided "as is", without warranties of any kind.
 Performance, accuracy, and stability may vary.
-Feedback is welcome and encouraged to help improve the final release
+Feedback is welcome and encouraged to help improve the final release.
 
 ## Contacts
 If you have any questions or comments, please feel free to email Aurora Brandi (aurora.brandi@unina.it).
