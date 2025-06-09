@@ -40,7 +40,7 @@ $ docker pull bioinfouninascala/midne
 
 To run the docker image, map http port 3838 on the host port 8585:
 ```
-$ docker run --rm -p 8585:3838 bioinfouninascala/midne
+$ docker run --pull always --rm -p 8585:3838 bioinfouninascala/midne
 ```
 
 Finally, use MiDNE shiny in a browser by typing http://localhost:8585 (if you are on a local machine) or https://server_name:8585 (if you are on a server machine).
