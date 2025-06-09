@@ -127,6 +127,13 @@ MiDNE includes functions to load example datasets used as a case study, based on
 
 ---
 
+### :loudspeaker::collision: Disclaimer 
+This tool is currently in beta. It is still under active development and may contain bugs, errors, or incomplete features. We recommend using it with caution, especially in critical or production environments.
+By using this beta version, you acknowledge and agree that:
+The tool is provided "as is", without warranties of any kind.
+Performance, accuracy, and stability may vary.
+Feedback is welcome and encouraged to help improve the final release
+
 ## Contacts
 If you have any questions or comments, please feel free to email Aurora Brandi (aurora.brandi@unina.it).
 
